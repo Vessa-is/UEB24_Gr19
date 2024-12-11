@@ -79,14 +79,7 @@ footer {
     font-size: 14px;
     font-family: Arial,sans-serif;
 }
-@keyframes gradient-animation {
-0% {
-background-position: 0% 50%;
-}
-100% {
-background-position: 100% 50%;
-}
-}
+
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
