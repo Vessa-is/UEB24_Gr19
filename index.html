@@ -8,21 +8,92 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-       
-     
+        .section {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        background: url("images/home.jpg") no-repeat;
+        background-position: center; 
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #473524;
+      }
+      .content {
+        text-align: left;
+        max-width: 600px;
+        padding: 20px;
+      }
+      .content h1 {
+        font-size: 4rem;
+        line-height: 1.2;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        font-family: "Georgia", serif;
+        font-style: italic;
+        position: absolute;
+      top: 20%;
+      left: 10%;
+      max-width: 600px;
+      }
+      .content p {
+        font-size: 1.2rem;
+        margin-bottom: 50px;
+        line-height: 1.6;
+        position: absolute;
+      bottom: 20%;
+      right: 10%;
+      text-align: right;
+      max-width: 400px;
+      }
+      .content button {
+        padding: 15px 30px;
+        font-size: 1rem;
+        color: #fff;
+        background-color: #96887d;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        margin-top: 10px;
+      }
+      .content button:hover {
+        background-color: #6f6154;
+      }
+      .content button:focus {
+        outline: none;
+      }
+      .description {
+        position: absolute;
+        bottom: 20%;
+        right: 10%;
+        text-align: right;
+        max-width: 400px;
+      }
        
     </style>
 </head>
 <body>  
     <header>
-        <div>
-            <img src="images/l" alt="">
-        </div>
-      <div id="banner">
-        <img src="images/home.jpg" alt="">
-      </div>
-      
-    </header>  
+        <nav>
+          <div class="logo-cont">
+            <div class="logo">
+              <a href="#">
+                <img src="images/banner.png" alt="logo" title="Radiant Touch" />
+              </a>
+            </div>
+          </div>
+          <div id="navi">
+            <ul>
+              <li><a href="#">Ballina</a></li>
+              <li><a href="#">Shërbimet</a></li>
+              <li><a href="#">Galeria</a></li>
+              <li><a href="#">Kontakti</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>  
     <footer>
         <div class="footer-container">
             <div class="footer-section">
