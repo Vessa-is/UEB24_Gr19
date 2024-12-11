@@ -15,17 +15,37 @@
     
     .contact-container {
         display: flex;
+        flex-wrap: nowrap;
         align-items: flex-start;
         justify-content: space-between;
         padding: 40px;
-        background-color: #f9f5e8;
         gap: 20px;
-    }.contact-image img {
-    width: 500px;
-    height: auto;
+    }
+    .contact-image img  {
+    max-width: 100%;
+    height: 600px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+.contact-form{
+    flex: 1;
+    max-width: 50%;
+    background-color: #fff8e6;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex; /* Kërkohet për të shtrirë përmbajtjen */
+    flex-direction: column;
+    justify-content: space-between;
+}
+.contact-image {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    
 .contact-text {
     margin-left: 20px;
     background-color: #fff8e6;
@@ -37,14 +57,11 @@
     font-family: 'Georgia', serif;
     margin-bottom: 15px;
 }
-
-
 .contact-text p {
     color: #555; 
     font-size: 16px;
     line-height: 1.6;
-}
-    
+}    
 .container {
     max-width: 600px;
             margin: 50px auto;
@@ -139,45 +156,7 @@
         background-color: #e0d9c8;
         border-color: #8b6e3c;
     }
-    .contact-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f9f5e8;
-    padding: 40px;
-    }
-
-    .contact-image img {
-    max-width: 80%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .contact-image {
-    flex: 1;
-    margin-right: 20px;
-    }
-
-    .contact-text {
-    flex: 1;
-    padding: 20px;
-    background-color: #fff8e6;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .contact-text h2 {
-    font-family: 'Georgia', serif;
-    color: #8b6e3c;
-    margin-bottom: 20px;
-    }
-
-    .contact-text p {
-    color: #555;
-    line-height: 1.6;
-    font-size: 16px;
-    }
+    
     .checkbox-container {
     display: flex;
     align-items: center; 
@@ -194,9 +173,6 @@
         <div class="contact-image">
             <img src="images/kontakti.jpg" alt="Contact Image">
         </div>
-       
-    </div>
-    <div class ="container">
         <div class="contact-form">
             <h2>Na Kontaktoni</h2>
             <form>
@@ -217,7 +193,7 @@
                
                 <button type="submit">Dergo mesazhin</button>
             </form>
-        </div>
+        </div></div>
         <div class="follow-us">
             <h3>Na ndiqni:</h3>
             <div class="social-links">
