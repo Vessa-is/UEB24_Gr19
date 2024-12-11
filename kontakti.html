@@ -5,7 +5,236 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakti-Radiant Touch</title>
 </head>
-<body>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f5e8;
+        margin: 0;
+        padding: 0;
+    }
     
+    .contact-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: #f9f5e8;
+    }.contact-image img {
+    max-width: 400px; /* Madhësia maksimale e imazhit */
+    width: 100%;
+    height: auto;
+    border-radius: 10px; /* Këndet e rrumbullakosura */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.contact-text {
+    margin-left: 20px; /* Hapësirë nga ana e majtë e imazhit */
+    background-color: #fff8e6; /* Ngjyra e sfondit për tekstin */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}.contact-text h2 {
+    color: #8b6e3c; /* Ngjyra e artë */
+    font-family: 'Georgia', serif;
+    margin-bottom: 15px;
+}
+
+/* Stilimi për paragrafin */
+.contact-text p {
+    color: #555; /* Tekst me ngjyrë gri të lehtë */
+    font-size: 16px;
+    line-height: 1.6;
+}
+    
+.container {
+    max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f5e8;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    
+    h2 {
+        font-family: 'Georgia', serif;
+        color: #8b6e3c;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    label {
+        font-weight: bold;
+        color: #555;
+    }
+    
+    input, textarea {
+        font-size: 14px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #faf8f2;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    textarea {
+        height: 150px;
+        resize: vertical;
+    }
+    
+    button {
+        background-color: #8b6e3c;
+        color: white;
+        border: none;
+        padding: 10px ;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    
+    button:hover {
+        background-color: #735c30;
+    }
+    
+    .follow-us {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+    }
+    .social-links a {
+    font-size: 50px; /* Increases icon size */
+    color: #8b6e3c; /* Set icon color */
+}
+.social-links a:hover {
+    color: #735c30; /* Change color on hover */
+}
+    
+    .social-icon {
+        display: inline-block;
+        text-align: center;
+        width: 150px;
+        height: 150px;
+        line-height: 80px;
+        background-color: #faf8f2;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 36px;
+        font-weight: bold;
+        color: #8b6e3c;
+        text-align: center;
+        text-decoration: none;
+    }
+    
+    .social-icon:hover {
+        background-color: #e0d9c8;
+        border-color: #8b6e3c;
+    }
+    .contact-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9f5e8;
+    padding: 40px;
+    }
+
+    .contact-image img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-image {
+    flex: 1;
+    margin-right: 20px;
+    }
+
+    .contact-text {
+    flex: 1;
+    padding: 20px;
+    background-color: #fff8e6;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-text h2 {
+    font-family: 'Georgia', serif;
+    color: #8b6e3c;
+    margin-bottom: 20px;
+    }
+
+    .contact-text p {
+    color: #555;
+    line-height: 1.6;
+    font-size: 16px;
+    }
+    .checkbox-container {
+    display: flex;
+    align-items: center; 
+    gap: 10px; 
+    }
+
+.checkbox-container input {
+    width: 16px;
+    height: 16px;}
+
+</style>
+<body>
+    <div class="contact-container">
+        <div class="contact-image">
+            <img src="kontakti.jpg" alt="Contact Image">
+        </div>
+        <div class="contact-text">
+            <h2>NA KONTAKTONI</h2>
+            <p>Për t’u interesuar lidhur me format e bashkëpunimit, <br>pyetje lidhur me shërbimet ose produktet dhe punën tonë në përgjithësi,<br> ju lutemi mos hezitoni të na kontaktoni.</p>
+        </div>
+    </div>
+    <div class ="container">
+        <div class="contact-form">
+            <h2>Na Kontaktoni</h2>
+            <form>
+                <label for="name">Emri dhe Mbiemri:</label>
+                <input type="text" id="name" placeholder="Emri dhe Mbiemri">
+                
+                <label for="email">Email-i:</label>
+                <input type="email" id="email" placeholder="Email-i">
+                
+                <label for="phone">Telefoni:</label>
+                <input type="tel" id="phone" placeholder="Telefoni">
+            
+                <label for="message">Mesazhi:</label>
+                <textarea id="message" placeholder="Mesazhi"></textarea>
+            <div class="checkbox-container"> 
+                <input type="checkbox" name="emri" id="up">
+                <label for="updates">Sign me up for email updates</label></div>
+               
+                <button type="submit">Dergo mesazhin</button>
+            </form>
+        </div>
+        <div class="follow-us">
+            <h3>Na ndiqni:</h3>
+            <div class="social-links">
+               <a href="#" > <ion-icon name="logo-instagram"></ion-icon></a>
+               <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+               <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+               <a href="#"><ion-icon name="logo-youtube"></ion-icon></a>
+                <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+                <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script></a>
+
+             
+            </div>
+        </div>
+
+    </div>
 </body>
 </html>

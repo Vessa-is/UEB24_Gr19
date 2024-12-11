@@ -1,0 +1,169 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body,html{
+    overflow-x: hidden;
+}
+footer {
+    width: 100%;
+    background: #96887D;
+    background-size: 200% auto;
+    color: #fff;
+    padding: 50px 20px;
+    font-size: 14px;
+    font-family: Arial,sans-serif;
+}
+@keyframes gradient-animation {
+0% {
+background-position: 0% 50%;
+}
+100% {
+background-position: 100% 50%;
+}
+}
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+.logo1 {
+    width: 120px;
+margin-bottom: 30px;
+height: auto;
+
+}
+.footer-section{
+
+    text-align: center;
+    flex: 1;
+    min-width: 250px;
+    margin:20px 10px;
+}
+.footer-section h3{
+    font-size: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+.footer-section h3::after{
+    content: '';
+    width: 50px;
+    height: 2px;
+    background-color: #fff;
+    position: absolute;
+    left: 50%;
+    bottom: -5px;
+    transform: translateX(-50%);
+}
+.footer-section p {
+   margin-bottom: 20px;
+}
+.footer-section ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+.footer-section ul li{
+    margin-bottom: 10px;
+}
+.footer-section ul li a{
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease,transform 0.3s ease;
+}
+.footer-section ul li a:hover{
+    color: #6F4F47;
+    transform:scale(1.1) ;
+}
+.icons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+    justify-content: center;
+}
+.icons a{
+    width: 40px;
+    height: 40px;
+    background-color: #fff;
+    color: #4c3b36;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: all 0.3s ease , transform 0.3s ease; 
+}
+.icons a:hover{
+    background-color: #6F4F47;
+    color: #fff;
+    transform: rotate(10deg) scale(1.1);
+}
+.newsletter form {
+display: flex;
+flex-direction: column;
+gap: 15px;
+align-items: center;
+}
+
+.newsletter-input {
+display: flex;
+align-items: center;
+border-bottom: 2px solid #fff;
+padding: 5px 10px;
+width: 100%;
+max-width: 300px;
+transition: border-color 0.3s ease;
+}
+
+
+.newsletter-input i {
+color: #4c3b36;
+font-size: 18px;
+margin-right: 10px;
+}
+
+.newsletter-input input {
+flex: 1;
+border: none;
+outline: none;
+background: none;
+font-size: 14px;
+color: #fff;
+}
+
+.newsletter-input input::placeholder {
+color: #b3b3b3;
+}
+
+.newsletter-input button {
+background: none;
+border: none;
+color: #fff;
+cursor: pointer;
+font-size: 16px;
+transition: color 0.3s ease, transform 0.3s ease;
+}
+.newsletter-input button:hover{
+color: #6F4F47;
+}
+
+.newsletter-input button:hover i {
+color: #6F4F47;
+transform:  translateY(-3px) scale(1.1);
+}
+
+.footer-bottom{
+    text-align: center;
+    margin-top: 30px;
+    border-top: 2px solid #fff;
+    width: 80%;
+    margin: 30px auto 0 auto;
+    padding-top: 20px;
+    font-size: 14px;
+}
+.footer-bottom span {
+    color: #6F4F47; 
+}
