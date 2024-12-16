@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kontakti-Radiant Touch</title>
+    <link rel="icon" href="images/logo1.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <style>
     body {
@@ -15,36 +18,50 @@
     
     .contact-container {
         display: flex;
-        align-items: center;
+        flex-wrap: nowrap;
+        align-items: flex-start;
         justify-content: space-between;
-        padding: 20px;
-        background-color: #f9f5e8;
-    }.contact-image img {
-    max-width: 400px; /* Madhësia maksimale e imazhit */
-    width: 100%;
-    height: auto;
-    border-radius: 10px; /* Këndet e rrumbullakosura */
+        padding: 40px;
+        gap: 20px;
+    }
+    .contact-image img  {
+    max-width: 100%;
+    height: 700px;
+    border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+.contact-form{
+    flex: 1;
+    max-width: 50%;
+    padding: 20px;
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+}
+.contact-image {
+    flex: 1;
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    
 .contact-text {
-    margin-left: 20px; /* Hapësirë nga ana e majtë e imazhit */
-    background-color: #fff8e6; /* Ngjyra e sfondit për tekstin */
+    margin-left: 20px;
+    background-color: #fff8e6;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }.contact-text h2 {
-    color: #8b6e3c; /* Ngjyra e artë */
+    color: #8b6e3c;
     font-family: 'Georgia', serif;
     margin-bottom: 15px;
 }
-
-/* Stilimi për paragrafin */
 .contact-text p {
-    color: #555; /* Tekst me ngjyrë gri të lehtë */
+    color: #555; 
     font-size: 16px;
     line-height: 1.6;
-}
-    
+}    
 .container {
     max-width: 600px;
             margin: 50px auto;
@@ -64,7 +81,7 @@
     form {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 20px;
     }
     
     label {
@@ -112,11 +129,11 @@
         gap: 30px;
     }
     .social-links a {
-    font-size: 50px; /* Increases icon size */
-    color: #8b6e3c; /* Set icon color */
+    font-size: 50px; 
+    color: #8b6e3c; 
 }
 .social-links a:hover {
-    color: #735c30; /* Change color on hover */
+    color: #735c30; 
 }
     
     .social-icon {
@@ -139,45 +156,7 @@
         background-color: #e0d9c8;
         border-color: #8b6e3c;
     }
-    .contact-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #f9f5e8;
-    padding: 40px;
-    }
-
-    .contact-image img {
-    max-width: 80%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .contact-image {
-    flex: 1;
-    margin-right: 20px;
-    }
-
-    .contact-text {
-    flex: 1;
-    padding: 20px;
-    background-color: #fff8e6;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .contact-text h2 {
-    font-family: 'Georgia', serif;
-    color: #8b6e3c;
-    margin-bottom: 20px;
-    }
-
-    .contact-text p {
-    color: #555;
-    line-height: 1.6;
-    font-size: 16px;
-    }
+    
     .checkbox-container {
     display: flex;
     align-items: center; 
@@ -192,14 +171,8 @@
 <body>
     <div class="contact-container">
         <div class="contact-image">
-            <img src="kontakti.jpg" alt="Contact Image">
+            <img src="images/kontakti.jpg" alt="Contact Image">
         </div>
-        <div class="contact-text">
-            <h2>NA KONTAKTONI</h2>
-            <p>Për t’u interesuar lidhur me format e bashkëpunimit, <br>pyetje lidhur me shërbimet ose produktet dhe punën tonë në përgjithësi,<br> ju lutemi mos hezitoni të na kontaktoni.</p>
-        </div>
-    </div>
-    <div class ="container">
         <div class="contact-form">
             <h2>Na Kontaktoni</h2>
             <form>
@@ -220,21 +193,83 @@
                
                 <button type="submit">Dergo mesazhin</button>
             </form>
-        </div>
+        </div></div>
         <div class="follow-us">
             <h3>Na ndiqni:</h3>
             <div class="social-links">
-               <a href="#" > <ion-icon name="logo-instagram"></ion-icon></a>
-               <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
-               <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
-               <a href="#"><ion-icon name="logo-youtube"></ion-icon></a>
-                <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-                <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script></a>
-
-             
+            
+                    <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="icon"><i class="fab fa-tiktok"></i></a>
             </div>
+        </div></div>
+ <div class="contact-text">
+            <h2>NA KONTAKTONI</h2>
+            <p>Për të rezervuar një termin apo për të mësuar më shumë rreth gamës së 
+                shërbimeve tona të ofruara, ne jemi këtu për t'ju ndihmuar të arrini 
+                pamjen që dëshironi. Ofruesit tanë të trajnuar me përvojë janë të 
+                specializuar në trajtime të ndryshme si: prerje dhe stilim flokësh, 
+                trajtime rigjeneruese për flokët, kujdes profesional për lëkurën, 
+                trajtime estetike për fytyrën, si dhe dizajne të personalizuara për 
+                thonjtë. Në sallonin tonë, ne përdorim produkte cilësore për të 
+                garantuar rezultate të shkëlqyera dhe për të ruajtur shëndetin tuaj 
+                estetik. Gjithashtu, ne ofrojmë këshilla të personalizuara për t'ju 
+                ndihmuar të kujdeseni për bukurinë tuaj edhe jashtë sallonit. Për çdo 
+                pyetje lidhur me shërbimet tona, produktet që përdorim, apo për të mësuar
+                 më shumë rreth ofertave dhe paketave speciale që ofrojmë, mos hezitoni
+                  të na kontaktoni. Stafi ynë është gjithmonë i gatshëm për t'ju asistuar
+                   dhe për t'ju siguruar një eksperiencë relaksuese dhe profesionale. 
+                   Bukuria juaj është prioriteti ynë!</p>
         </div>
-
-    </div>
+        <footer>
+        
+            <div class="footer-container">
+                <div class="footer-section">
+                    <img src="images/logofooter1.png" class="logo1" >
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, beatae praesentium ut minus voluptate repellat nam esse, ab, sequi eaque fugit. Vel temporibus odio ea sequi mollitia ipsam, tenetur sed?</p>
+                
+                </div>
+                <div class="footer-section">
+                    <h3>Kategorite</h3>
+                    <ul>
+                        <li><a href="#">BALLINA</a></li>
+                        <li><a href="#">SHERBIMET</a></li>
+                        <li><a href="#">GALERIA</a></li>
+                        <li><a href="#">PER NE</a></li>
+                        <li><a href="#">KONTAKTI</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Kontakti</h3>
+                    <p>Prishtine , Kosove</p>
+                    <p>+383 44 222 222</p> 
+                    <p><a href="mailto:info@radianttouch.com"  style="color: #fff; text-decoration: none;"></a>info@radianttouch.com</p>  
+                </div>
+                <div class="footer-section newsletter">
+                    <h3>Abonohu</h3>
+                    <form action="#">
+                        <div class="newsletter-input">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="Enter your email">
+                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                        <div class="icons">
+                            <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+        
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="footer-bottom">
+                    &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
+    
+                </div>
+    
+            
+        </footer>
+    
 </body>
 </html>
