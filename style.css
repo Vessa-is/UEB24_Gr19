@@ -152,12 +152,6 @@ z-index: 1;
   margin-bottom: 48px;
   position: relative;
 }
-.heading:hover {
-  color: #8d6e63;
-  transform: scale(1.05);
-  transition: all 0.3s ease-in-out;
-}
-
 
 .heading span {
   color: #d4a373;
