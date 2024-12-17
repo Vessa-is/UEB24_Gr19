@@ -75,7 +75,7 @@ section {
 }
 
 .about {
-  background: url(https://i.pinimg.com/474x/d1/82/65/d18265aa42c7aac7a08c76b92c561373.jpg) no-repeat;
+  background: url(images/aboutimgbck.jpg) no-repeat;
   background-position:center ;
   padding: 5rem 0;
   position: relative;
@@ -152,12 +152,6 @@ z-index: 1;
   margin-bottom: 48px;
   position: relative;
 }
-.heading:hover {
-  color: #8d6e63;
-  transform: scale(1.05);
-  transition: all 0.3s ease-in-out;
-}
-
 
 .heading span {
   color: #d4a373;

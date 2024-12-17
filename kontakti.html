@@ -48,32 +48,27 @@
     
 .contact-text {
     margin-left: 20px;
-    background-color: #fff8e6;
+    text-align: center;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }.contact-text h2 {
-    color: #8b6e3c;
+    color: #96887d;
     font-family: 'Georgia', serif;
     margin-bottom: 15px;
 }
 .contact-text p {
-    color: #555; 
+    color: #96887d;
     font-size: 16px;
     line-height: 1.6;
 }    
-.container {
+    .container {
     max-width: 600px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #f9f5e8;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     
     h2 {
         font-family: 'Georgia', serif;
-        color: #8b6e3c;
+        color: #96887d;
         text-align: center;
         margin-bottom: 20px;
     }
@@ -86,7 +81,7 @@
     
     label {
         font-weight: bold;
-        color: #555;
+        color: #96887d;
     }
     
     input, textarea {
@@ -103,9 +98,9 @@
         height: 150px;
         resize: vertical;
     }
-    
+
     button {
-        background-color: #8b6e3c;
+        background-color: #96887d;
         color: white;
         border: none;
         padding: 10px ;
@@ -115,25 +110,33 @@
     }
     
     button:hover {
-        background-color: #735c30;
+        background-color: #d6c1ac;
     }
     
     .follow-us {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 10px;
+        padding-bottom: 20px;
+        color: #96887d;
     }
+    .follow-us h3 {
+    color: #96887d;
+    font-family: 'Georgia', serif;
+    margin-bottom: 10px;
+    }
+
     
     .social-links {
         display: flex;
         justify-content: center;
-        gap: 30px;
+        gap: 60px;
     }
     .social-links a {
-    font-size: 50px; 
-    color: #8b6e3c; 
+    font-size: 40px; 
+    color: #96887d; 
 }
 .social-links a:hover {
-    color: #735c30; 
+    color: #d6c1ac; 
 }
     
     .social-icon {
@@ -147,14 +150,14 @@
         border-radius: 5px;
         font-size: 36px;
         font-weight: bold;
-        color: #8b6e3c;
+        color: #473524;
         text-align: center;
         text-decoration: none;
     }
     
     .social-icon:hover {
         background-color: #e0d9c8;
-        border-color: #8b6e3c;
+        border-color: #473524;
     }
     
     .checkbox-container {
@@ -163,12 +166,117 @@
     gap: 10px; 
     }
 
-.checkbox-container input {
+    .checkbox-container input {
     width: 16px;
     height: 16px;}
 
+    .Orari {
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    }
+
+    .Orari h3 {
+    color: #96887d;
+    font-family: 'Georgia', serif;
+    margin-bottom: 10px;
+    }
+    .Orari ul {
+    list-style: none;
+    padding: 0;
+    color: #473524;
+    }
+    .Orari li {
+    margin: 5px 0;
+    }
+
+    .lokacioni-dyqanit {
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.lokacioni-dyqanit h3 {
+    color: #96887d;
+    font-family: 'Georgia', serif;
+    margin-bottom: 20px;
+}
+
+.locations-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 0px;
+    flex-wrap: wrap;
+}
+
+.location {
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+    padding: 15px;
+    background-color: #faf8f2;
+    border: 1px solid #e0d9c8;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.location:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.location-number {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #96887d;
+    margin-bottom: 10px;
+}
+
+.location p {
+    margin: 10px 0;
+    color: #473524;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.map-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #96887d;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.map-link:hover {
+    color: #d6c1ac;
+    text-decoration: underline;
+}
 </style>
 <body>
+    <header>
+        <nav>
+          <div class="logo-cont">
+            <div class="logo">
+              <a href="#">
+                <img src="images/banner.png" alt="logo" title="Radiant Touch" />
+              </a>
+            </div>
+          </div>
+          <div id="navi">
+            <ul>
+              <li><a href="#">Ballina</a></li>
+              <li><a href="#">Shërbimet</a></li>
+              <li><a href="#">Galeria</a></li>
+              <li><a href="#">Kontakti</a></li>
+            </ul>
+          </div>
+        </nav>
+      </header> 
     <div class="contact-container">
         <div class="contact-image">
             <img src="images/kontakti.jpg" alt="Contact Image">
@@ -177,13 +285,13 @@
             <h2>Na Kontaktoni</h2>
             <form>
                 <label for="name">Emri dhe Mbiemri:</label>
-                <input type="text" id="name" placeholder="Emri dhe Mbiemri">
+                <input type="text" id="name" placeholder="Emri dhe Mbiemri" required>
                 
                 <label for="email">Email-i:</label>
-                <input type="email" id="email" placeholder="Email-i">
+                <input type="email" id="email" placeholder="Email-i" required>
                 
                 <label for="phone">Telefoni:</label>
-                <input type="tel" id="phone" placeholder="Telefoni">
+                <input type="tel" id="phone" placeholder="Telefoni" required>
             
                 <label for="message">Mesazhi:</label>
                 <textarea id="message" placeholder="Mesazhi"></textarea>
@@ -194,18 +302,68 @@
                 <button type="submit">Dergo mesazhin</button>
             </form>
         </div></div>
-        <div class="follow-us">
-            <h3>Na ndiqni:</h3>
-            <div class="social-links">
-            
-                    <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="icon"><i class="fab fa-tiktok"></i></a>
+        </div>
+       
+<div class="lokacioni-dyqanit">
+    <h3>Vendndodhjet e Dyqaneve Tona</h3>
+    <div class="locations-wrapper">
+        <div class="location">
+            <span class="location-number">1</span>
+            <p><strong>Prishtinë:</strong> Rruga B, Nr. 45</p>
+            <a href="https://goo.gl/maps/example1" target="_blank" class="map-link">Shiko në hartë</a>
+            <div class="Orari">
+                <h3>Orari i Punës</h3>
+                <ul>
+                    <li>E Hënë - E Premte: 09:00 - 18:00</li>
+                    <li>E Shtunë: 10:00 - 16:00</li>
+                    <li>E Diel: Mbyllur</li>
+                </ul>
             </div>
-        </div></div>
+        </div>
+        <div class="location">
+            <span class="location-number">2</span>
+            <p><strong>Prizren:</strong> Sheshi Shatërvan, Nr. 10</p>
+            <a href="https://goo.gl/maps/example2" target="_blank" class="map-link">Shiko në hartë</a>
+            <div class="Orari">
+                <h3>Orari i Punës</h3>
+                <ul>
+                    <li>E Hënë - E Premte: 09:00 - 18:00</li>
+                    <li>E Shtunë: 10:00 - 16:00</li>
+                    <li>E Diel: Mbyllur</li>
+                </ul>
+            </div>
+        </div>
+        <div class="location">
+            <span class="location-number">3</span>
+            <p><strong>Ferizaj:</strong> Rruga e Re, Kompleksi "X"</p>
+            <a href="https://goo.gl/maps/example3" target="_blank" class="map-link">Shiko në hartë</a>
+            <div class="Orari">
+                <h3>Orari i Punës</h3>
+                <ul>
+                    <li>E Hënë - E Premte: 09:00 - 18:00</li>
+                    <li>E Shtunë: 10:00 - 16:00</li>
+                    <li>E Diel: Mbyllur</li>
+                </ul>
+            </div>
+        </div>
+        <div class="location">
+            <span class="location-number">4</span>
+            <p><strong>Mitrovicë:</strong> Rruga Adem Jashari, Nr. 20</p>
+            <a href="https://goo.gl/maps/example4" target="_blank" class="map-link">Shiko në hartë</a>
+            <div class="Orari">
+                <h3>Orari i Punës</h3>
+                <ul>
+                    <li>E Hënë - E Premte: 09:00 - 18:00</li>
+                    <li>E Shtunë: 10:00 - 16:00</li>
+                    <li>E Diel: Mbyllur</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
  <div class="contact-text">
-            <h2>NA KONTAKTONI</h2>
+            <h2>Na Kontaktoni</h2>
             <p>Për të rezervuar një termin apo për të mësuar më shumë rreth gamës së 
                 shërbimeve tona të ofruara, ne jemi këtu për t'ju ndihmuar të arrini 
                 pamjen që dëshironi. Ofruesit tanë të trajnuar me përvojë janë të 
@@ -221,6 +379,17 @@
                   të na kontaktoni. Stafi ynë është gjithmonë i gatshëm për t'ju asistuar
                    dhe për t'ju siguruar një eksperiencë relaksuese dhe profesionale. 
                    Bukuria juaj është prioriteti ynë!</p>
+        </div>
+        <div class="follow-us">
+            <h3>Na ndiqni:</h3>
+            <div class="social-links">
+            
+                    <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="icon"><i class="fab fa-tiktok"></i></a>
+                    
+            </div>
         </div>
         <footer>
         
