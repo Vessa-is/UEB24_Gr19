@@ -48,10 +48,8 @@
     
 .contact-text {
     margin-left: 20px;
-    background-color: #fff8e6;
+    text-align: center;
     padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }.contact-text h2 {
     color: #96887d;
     font-family: 'Georgia', serif;
@@ -62,13 +60,10 @@
     font-size: 16px;
     line-height: 1.6;
 }    
-.container {
+    .container {
     max-width: 600px;
             margin: 50px auto;
             padding: 20px;
-            background-color: #f9f5e8;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     
     h2 {
@@ -121,6 +116,7 @@
     .follow-us {
         text-align: center;
         margin-top: 10px;
+        padding-bottom: 20px;
         color: #96887d;
     }
     .follow-us h3 {
@@ -170,10 +166,96 @@
     gap: 10px; 
     }
 
-.checkbox-container input {
+    .checkbox-container input {
     width: 16px;
     height: 16px;}
 
+    .Orari {
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    }
+
+    .Orari h3 {
+    color: #96887d;
+    font-family: 'Georgia', serif;
+    margin-bottom: 10px;
+    }
+    .Orari ul {
+    list-style: none;
+    padding: 0;
+    color: #473524;
+    }
+    .Orari li {
+    margin: 5px 0;
+    }
+
+    .lokacioni-dyqanit {
+    padding: 20px;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.lokacioni-dyqanit h3 {
+    color: #96887d;
+    font-family: 'Georgia', serif;
+    margin-bottom: 20px;
+}
+
+.locations-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 0px;
+    flex-wrap: wrap;
+}
+
+.location {
+    flex: 1;
+    min-width: 150px;
+    max-width: 200px;
+    padding: 15px;
+    background-color: #faf8f2;
+    border: 1px solid #e0d9c8;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.location:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+.location-number {
+    display: block;
+    font-size: 24px;
+    font-weight: bold;
+    color: #96887d;
+    margin-bottom: 10px;
+}
+
+.location p {
+    margin: 10px 0;
+    color: #473524;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.map-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #96887d;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.map-link:hover {
+    color: #d6c1ac;
+    text-decoration: underline;
+}
 </style>
 <body>
     <header>
@@ -218,20 +300,70 @@
                 <label for="updates">Sign me up for email updates</label></div>
                
                 <button type="submit">Dergo mesazhin</button>
-            </form><div class="follow-us">
-                <h3>Na ndiqni:</h3>
-                <div class="social-links">
-                
-                        <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="icon"><i class="fab fa-tiktok"></i></a>
-                </div>
-            </div>
+            </form>
         </div></div>
         </div>
+       
+<div class="lokacioni-dyqanit">
+    <h3>Vendndodhjet e Dyqaneve Tona</h3>
+    <div class="locations-wrapper">
+        <div class="location">
+            <span class="location-number">1</span>
+            <p><strong>Prishtinë:</strong> Rruga B, Nr. 45</p>
+            <a href="https://goo.gl/maps/example1" target="_blank" class="map-link">Shiko në hartë</a>
+            <div class="Orari">
+                <h3>Orari i Punës</h3>
+                <ul>
+                    <li>E Hënë - E Premte: 09:00 - 18:00</li>
+                    <li>E Shtunë: 10:00 - 16:00</li>
+                    <li>E Diel: Mbyllur</li>
+                </ul>
+            </div>
+        </div>
+        <div class="location">
+            <span class="location-number">2</span>
+            <p><strong>Prizren:</strong> Sheshi Shatërvan, Nr. 10</p>
+            <a href="https://goo.gl/maps/example2" target="_blank" class="map-link">Shiko në hartë</a>
+            <div class="Orari">
+                <h3>Orari i Punës</h3>
+                <ul>
+                    <li>E Hënë - E Premte: 09:00 - 18:00</li>
+                    <li>E Shtunë: 10:00 - 16:00</li>
+                    <li>E Diel: Mbyllur</li>
+                </ul>
+            </div>
+        </div>
+        <div class="location">
+            <span class="location-number">3</span>
+            <p><strong>Ferizaj:</strong> Rruga e Re, Kompleksi "X"</p>
+            <a href="https://goo.gl/maps/example3" target="_blank" class="map-link">Shiko në hartë</a>
+            <div class="Orari">
+                <h3>Orari i Punës</h3>
+                <ul>
+                    <li>E Hënë - E Premte: 09:00 - 18:00</li>
+                    <li>E Shtunë: 10:00 - 16:00</li>
+                    <li>E Diel: Mbyllur</li>
+                </ul>
+            </div>
+        </div>
+        <div class="location">
+            <span class="location-number">4</span>
+            <p><strong>Mitrovicë:</strong> Rruga Adem Jashari, Nr. 20</p>
+            <a href="https://goo.gl/maps/example4" target="_blank" class="map-link">Shiko në hartë</a>
+            <div class="Orari">
+                <h3>Orari i Punës</h3>
+                <ul>
+                    <li>E Hënë - E Premte: 09:00 - 18:00</li>
+                    <li>E Shtunë: 10:00 - 16:00</li>
+                    <li>E Diel: Mbyllur</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
  <div class="contact-text">
-            <h2>NA KONTAKTONI</h2>
+            <h2>Na Kontaktoni</h2>
             <p>Për të rezervuar një termin apo për të mësuar më shumë rreth gamës së 
                 shërbimeve tona të ofruara, ne jemi këtu për t'ju ndihmuar të arrini 
                 pamjen që dëshironi. Ofruesit tanë të trajnuar me përvojë janë të 
@@ -247,6 +379,17 @@
                   të na kontaktoni. Stafi ynë është gjithmonë i gatshëm për t'ju asistuar
                    dhe për t'ju siguruar një eksperiencë relaksuese dhe profesionale. 
                    Bukuria juaj është prioriteti ynë!</p>
+        </div>
+        <div class="follow-us">
+            <h3>Na ndiqni:</h3>
+            <div class="social-links">
+            
+                    <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="icon"><i class="fab fa-tiktok"></i></a>
+                    
+            </div>
         </div>
         <footer>
         
