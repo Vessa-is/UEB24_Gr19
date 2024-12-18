@@ -122,6 +122,27 @@
     <td>90 min.<i class="fas fa-clock"></i></td>
     <td>35 €</td>
 </tr>
+<tr>
+    <td>Tattoo me fije japoneze / microblading (2 seanca)</td>
+    <td>120 min.<i class="fas fa-clock"></i></td>
+    <td>99 €</td>
+</tr>
+<tr>
+    <td>Depilim të fytyrës</td>
+    <td>15 min.<i class="fas fa-clock"></i></td>
+    <td>4 €</td>
+</tr>
+<tr>
+    <td>Frizura për femra</td>
+    <td>30 min.<i class="fas fa-clock"></i></td>
+    <td>15 €-30 €</td>
+</tr>
+<tr>
+    <td>Rregullim për nuse</td>
+    <td>120 min.<i class="fas fa-clock"></i></td>
+    <td>75 €</td>
+</tr>
+
     </tbody>
 </table>
       </section>
@@ -169,5 +190,18 @@
                 &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
             </div>
     </footer>
+    <a href="#next-section" class="scroll-to-next">
+        <div class="arrow"></div>
+    </a>
+
+    <!-- Shtimi i JavaScript direkt në HTML -->
+    <script>
+        document.querySelector('.scroll-to-next').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#next-section').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    </script>
 </body>
 </html>
