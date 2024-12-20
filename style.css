@@ -403,7 +403,14 @@ transform:  translateY(-3px) scale(1.1);
 #scrollToTop:hover {
   background-color: #555;
 }
-audio {
-  width: 300px;
-  margin-top: 20px;
+.audio-container {
+  position: fixed;
+      bottom: 10px;
+      left: 10px;
+      z-index: 9999; 
+      width: 300px;
+}
+audio{
+  width: 100%;
+  outline: none;
 }
