@@ -9,33 +9,43 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-            .services-container {
-    display: flex;
-    gap: 20px;
-}
+            body {
+            margin: 0;
+            padding: 0;
+        }
 
-.left-column,
-.right-column {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
+        .services-container {
+            display: flex;
+            justify-content: space-between; 
+            gap: 20px;
+            width: 100%; 
+            max-width: 100%; 
+            padding: 0;
+        }
 
-.service-item {
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
+        .left-column, .right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
 
-.service-item img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
+        .service-item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .service-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -86,11 +96,27 @@
                 <a href="#">READ MORE</a>
             </div>
             <div class="service-item">
-                <img src="c:\Users\DELL\Downloads\another-service.jpg" alt="Trajtimi i flokëve">
-                <h3>Trajtimi i flokëve</h3>
-                <p>Ofrojmë trajtime rigjeneruese që i japin flokëve forcë, shkëlqim dhe jetë të re.</p>
+                <img src="c:\Users\DELL\Downloads\download (2).jpg" alt="Grimi">
+                <h3>Grimi</h3>
+                <p>Grimi është shërbimi që ofron aplikimin e produkteve kozmetike për të krijuar një pamje të përshtatshme për ngjarje të ndryshme.</p>
                 <a href="#">READ MORE</a>
             </div>
+            <div class="service-item">
+                <img src="c:\Users\DELL\OneDrive\Desktop\rregullimi i vetullave.jpg" alt="Rregullimi i vetullave">
+                <h3>Rregullimi i vetullave</h3>
+                <p>Rregullimi i vetullave përfshin pastrimin dhe formimin e vetullave për të krijuar një pamje të kuruar dhe simetrike, duke hequr qimet e tepërta dhe theksuar shprehjen natyrale të fytyrës.</p>
+                <a href="#">READ MORE</a>
+            </div>
+            </div>
+            <div class="middle-column">
+                <div class="service-item">
+                    
+                        <img src="c:\Users\DELL\Downloads\download (2).jpg" alt="Grimi">
+                        <h3>Grimi</h3>
+                        <p>Grimi është shërbimi që ofron aplikimin e produkteve kozmetike për të krijuar një pamje të përshtatshme për ngjarje të ndryshme.</p>
+                        <a href="#">READ MORE</a>
+                    </div>
+                </div>
             </div>
         </section>
     </section>
