@@ -79,6 +79,7 @@ section {
   background-position:center ;
   padding: 5rem 0;
   position: relative;
+  z-index: 1;
 }
 .about::before {
 content: "";
