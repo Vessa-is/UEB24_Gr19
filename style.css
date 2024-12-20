@@ -99,6 +99,7 @@ z-index: 1;
   gap: 48px;
   position: relative;
   z-index: 2;
+
 }
 
 .about .about-container .about-image {
@@ -267,12 +268,13 @@ height: auto;
     font-size: 20px;
     margin-bottom: 20px;
     position: relative;
+    
 }
 .footer-section h3::after{
     content: '';
     width: 50px;
     height: 2px;
-    background-color: #fff;
+    background-color:  #6F4F47;
     position: absolute;
     left: 50%;
     bottom: -5px;
@@ -291,11 +293,9 @@ height: auto;
 .footer-section ul li a{
     color: #fff;
     text-decoration: none;
-    transition: color 0.3s ease,transform 0.3s ease;
 }
 .footer-section ul li a:hover{
     color: #6F4F47;
-    transform:scale(1.1) ;
 }
 .icons {
     display: flex;
