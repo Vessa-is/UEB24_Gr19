@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
 }
   body {
     font-family: Arial, sans-serif;
@@ -243,7 +244,6 @@ footer {
     font-size: 14px;
     font-family: Arial,sans-serif;
 }
-
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -251,6 +251,7 @@ footer {
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 20px;
+    align-items: center;
 }
 .logo1 {
     width: 120px;
@@ -263,7 +264,7 @@ height: auto;
     text-align: center;
     flex: 1;
     min-width: 250px;
-    margin:20px 10px;
+    margin: 10px 0;
 }
 .footer-section h3{
     font-size: 20px;
@@ -329,11 +330,14 @@ height: auto;
     color: #fff;
     transform: rotate(10deg) scale(1.1);
 }
+.footer-section.newsletter {
+  text-align: left;
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+}
 .newsletter form {
-display: flex;
-flex-direction: column;
-gap: 15px;
-align-items: center;
+margin-top: 10px;
 }
 
 .newsletter-input {
