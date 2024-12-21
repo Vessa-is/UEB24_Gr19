@@ -275,7 +275,7 @@ height: auto;
     content: '';
     width: 50px;
     height: 2px;
-    background-color:  #6F4F47;
+    background-color:  #fff;
     position: absolute;
     left: 50%;
     bottom: -5px;
@@ -299,9 +299,12 @@ height: auto;
 .footer-section ul li a{
     color: #fff;
     text-decoration: none;
+  
 }
 .footer-section ul li a:hover{
-    color: #6F4F47;
+    color: #fff;
+    font-weight: bold;
+    border-radius: 5px;
 }
 .icons {
     display: flex;
@@ -372,11 +375,11 @@ font-size: 16px;
 transition: color 0.3s ease, transform 0.3s ease;
 }
 .newsletter-input button:hover{
-color: #6F4F47;
+color: #4c3b36;
 }
 
 .newsletter-input button:hover i {
-color: #6F4F47;
+color: #4c3b36;
 transform:  translateY(-3px) scale(1.1);
 }
 
@@ -390,7 +393,8 @@ transform:  translateY(-3px) scale(1.1);
     font-size: 14px;
 }
 .footer-bottom span {
-    color: #6F4F47; 
+    color: #4c3b36; 
+    font-weight: bold;
 }
 
 #scrollToTop {
@@ -406,7 +410,8 @@ transform:  translateY(-3px) scale(1.1);
   z-index: 1000;
 }
 #scrollToTop:hover {
-  background-color: #555;
+  background-color: #fff;
+  color: #4c3b36;
 }
 .audio-container {
   position: fixed;
