@@ -284,6 +284,11 @@ height: auto;
 .footer-section p {
    margin-bottom: 20px;
 }
+.footer-section p i{
+  font-size: 18px;
+  margin-right: 10px;
+  
+}
 .footer-section ul {
     list-style: none;
     margin-bottom: 20px;
