@@ -201,8 +201,8 @@ h2 {
 .services {
   display: flex;
   justify-content: center;
-  gap: 20px; /* Adds spacing between items */
-  flex-wrap: wrap; /* Ensures responsiveness */
+  gap: 20px; 
+  flex-wrap: wrap; 
 }
 
 .service-item {
@@ -210,8 +210,8 @@ h2 {
   border-radius: 10px;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
   padding: 15px;
-  flex: 0 1 calc(30% - 20px); /* Flexible width for 3 items with gaps */
-  max-width: 300px; /* Controls the maximum size */
+  flex: 0 1 calc(30% - 20px); 
+  max-width: 300px; 
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
