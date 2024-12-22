@@ -11,7 +11,7 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #f9f5e8;
+        background-color:#f4e4d4;
         margin: 0;
         padding: 0;
     }
@@ -51,12 +51,13 @@
     text-align: center;
     padding: 20px;
 }.contact-text h2 {
-    color: #96887d;
+    color: #6d4c3d;
     font-family: 'Georgia', serif;
+    font-style: italic;
     margin-bottom: 15px;
 }
 .contact-text p {
-    color: #96887d;
+    color: #6d4c3d;
     font-size: 16px;
     line-height: 1.6;
 }    
@@ -68,7 +69,8 @@
     
     h2 {
         font-family: 'Georgia', serif;
-        color: #96887d;
+        font-style: italic;
+        color: #6d4c3d;
         text-align: center;
         margin-bottom: 20px;
     }
@@ -81,7 +83,7 @@
     
     label {
         font-weight: bold;
-        color: #96887d;
+        color: #6d4c3d;
     }
     
     input, textarea {
@@ -100,7 +102,7 @@
     }
 
     button {
-        background-color: #96887d;
+        background-color: #6d4c3d;
         color: white;
         border: none;
         padding: 10px ;
@@ -120,52 +122,11 @@
         color: #96887d;
     }
     .follow-us h3 {
-    color: #96887d;
+    color: #6d4c3d;
+    font-style: italic;
     font-family: 'Georgia', serif;
     margin-bottom: 10px;
-    }
-
-    
-    .social-links {
-        display: flex;
-        justify-content: center;
-        gap: 60px;
-    }
-    .social-links a {
-    font-size: 40px; 
-    color: #96887d; 
-}
-.social-links a:hover {
-    color: #d6c1ac; 
-}
-    
-    .social-icon {
-        display: inline-block;
-        text-align: center;
-        width: 150px;
-        height: 150px;
-        line-height: 80px;
-        background-color: #faf8f2;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 36px;
-        font-weight: bold;
-        color: #473524;
-        text-align: center;
-        text-decoration: none;
-    }
-    
-    .social-icon:hover {
-        background-color: #e0d9c8;
-        border-color: #473524;
-    }
-    
-    .checkbox-container {
-    display: flex;
-    align-items: center; 
-    gap: 10px; 
-    }
-
+    }    
     .checkbox-container input {
     width: 16px;
     height: 16px;}
@@ -177,7 +138,8 @@
     }
 
     .location .Orari h3 {
-    color: #96887d;
+    color: #6d4c3d;
+    font-style: italic;
     font-family: 'Georgia', serif;
     text-decoration: underline;
     margin-bottom: 10px;
@@ -185,7 +147,7 @@
     .location .Orari ul {
     list-style: none;
     padding: 0;
-    color: #473524;
+    color: #6d4c3d;
     }
     .location .Orari li {
     margin: 5px 0;
@@ -193,12 +155,14 @@
 
     .lokacioni-dyqanit {
     padding: 20px;
+    margin: 5px;
     margin-top: 30px;
     text-align: center;
+    
 }
 
-.lokacioni-dyqanit h3 {
-    color:whitesmoke;
+.lokacioni-dyqanit h2 {
+    color:#6d4c3d;
     font-style: italic;
     font-family: 'Georgia', serif;
     margin-bottom: 20px;
@@ -207,15 +171,16 @@
 .locations-wrapper {
     display: flex;
     justify-content: space-between;
-    gap: 0px;
+    gap: 2px;
     flex-wrap: wrap;
 }
 
 .location {
     flex: 1;
     min-width: 150px;
-    max-width: 200px;
-    padding: 15px;
+    max-width: 250px;
+    padding: 10px;
+    margin: 0 5px;
     background-color: #faf8f2;
     border: 1px solid #e0d9c8;
     border-radius: 10px;
@@ -233,13 +198,13 @@
     display: block;
     font-size: 24px;
     font-weight: bold;
-    color: #96887d;
+    color: #6d4c3d;
     margin-bottom: 10px;
 }
 
 .location p {
     margin: 10px 0;
-    color: #473524;
+    color: #6d4c3d;
     font-size: 14px;
     line-height: 1.5;
 }
@@ -248,7 +213,7 @@
     display: inline-block;
     margin-top: 10px;
     font-size: 14px;
-    color: #96887d;
+    color: #6d4c3d;
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s;
@@ -258,9 +223,66 @@
     color: #d6c1ac;
     text-decoration: underline;
 }
-.highlight{
-    background-color:#96887d;
+.feedback-section {
+    background-color: #faf8f2;
+    border: 1px solid #e0d9c8;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
+
+.feedback-section h3 {
+    color: #6d4c3d;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.social-media-dropdown label,
+.visit-options label {
+    font-size: 16px;
+    color: #6d4c3d;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#social-media {
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #faf8f2;
+    color: #6d4c3d;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+.visit-options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.visit-options label {
+    display: inline-block;
+    font-size: 16px;
+    color: #6d4c3d;
+    cursor: pointer;
+}
+
+.visit-options input[type="radio"] {
+    margin-right: 5px;
+    transform: scale(1.2);
+    accent-color: #6d4c3d;
+}
+
 </style>
 <body>
     <header>
@@ -268,7 +290,7 @@
           <div class="logo-cont">
             <div class="logo">
               <a href="#">
-                <img src="images/banner.png" alt="logo" title="Radiant Touch" />
+                <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
               </a>
             </div>
           </div>
@@ -277,6 +299,7 @@
               <li><a href="#">Ballina</a></li>
               <li><a href="#">Shërbimet</a></li>
               <li><a href="#">Galeria</a></li>
+              <li><a href="#">Për ne</a></li>
               <li><a href="#">Kontakti</a></li>
             </ul>
           </div>
@@ -308,9 +331,31 @@
             </form>
         </div></div>
         </div>
-       
+        <div class="feedback-section">
+            <h3>Si ke dëgjuar për ne?</h3>
+            <div class="social-media-dropdown">
+                <label for="social-media">Zgjedh një opsion:</label>
+                <select id="social-media" name="social-media">
+                    <option value="google">Google</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="friend">Shoqe/Familjarë</option>
+                    <option value="other">Tjetër</option>
+                </select>
+            </div>
+        
+            <h3>A do të vizitonit përsëri?</h3>
+            <div class="visit-options">
+                <label><input type="radio" name="visit-again" value="Yes"> Po</label>
+                <label><input type="radio" name="visit-again" value="No"> Jo</label>
+                <label><input type="radio" name="visit-again" value="Maybe"> Ndoshta</label>
+            </div>
+        
+        
+            </div>
+        </div>
 <div class="lokacioni-dyqanit">
-    <h3><span class="highlight">Vendndodhjet e Dyqaneve Tona</span></h3>
+    <h2>Vendndodhjet e Dyqaneve Tona</h2>
     <div class="locations-wrapper">
         <div class="location">
             <span class="location-number">1</span>
@@ -405,42 +450,44 @@
                     
             </div>
         </div>
+
         <footer>
         
             <div class="footer-container">
                 <div class="footer-section">
-                    <img src="images/logofooter1.png" class="logo1" >
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, beatae praesentium ut minus voluptate repellat nam esse, ab, sequi eaque fugit. Vel temporibus odio ea sequi mollitia ipsam, tenetur sed?</p>
-                
+                    <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" >
+                    <p>Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do ditë.</p>
                 </div>
                 <div class="footer-section">
-                    <h3>Kategorite</h3>
+                    <h3>Kategorit&euml;</h3>
                     <ul>
-                        <li><a href="#">BALLINA</a></li>
-                        <li><a href="#">SHERBIMET</a></li>
-                        <li><a href="#">GALERIA</a></li>
-                        <li><a href="#">PER NE</a></li>
-                        <li><a href="#">KONTAKTI</a></li>
+                        <li><a href="#home">BALLINA</a></li>
+                        <li><a href="#Sherbimet">SHERBIMET</a></li>
+                        <li><a href="#Galeria">GALERIA</a></li>
+                        <li><a href="#Perne">PER NE</a></li>
+                        <li><a href="#Kontakti">KONTAKTI</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Kontakti</h3>
-                    <p>Prishtine , Kosove</p>
-                    <p>+383 44 222 222</p> 
-                    <p><a href="mailto:info@radianttouch.com"  style="color: #fff; text-decoration: none;"></a>info@radianttouch.com</p>  
+                    <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps?q=Prishtine+Kosove" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;">Prishtinë, Kosovë</a></p>
+                    <p> <i class="fas fa-phone"></i> <a href="tel:+38344222222" style="color: #fff; text-decoration: none;">+383 44 222 222</a></p> 
+                    <p><i class="fas fa-envelope"></i><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
+                </div>
+    
                 </div>
                 <div class="footer-section newsletter">
-                    <h3>Abonohu</h3>
-                    <form action="#">
+                    <h3>Abonohuni</h3>
+                    <form action="#" method="POST">
                         <div class="newsletter-input">
                             <i class="fas fa-envelope"></i>
-                            <input type="email" placeholder="Enter your email">
-                            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                            <input type="email" placeholder="Shkruani email-in tuaj" required>
+                            <button type="submit" aria-label="Dërgo email"><i class="fas fa-paper-plane"></i></button>
                         </div>
                         <div class="icons">
-                            <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a>
         
                         </div>
                     </form>
@@ -450,8 +497,7 @@
                     &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
     
                 </div>
-    
-            
+                <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
         </footer>
     
 </body>

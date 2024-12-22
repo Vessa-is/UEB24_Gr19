@@ -6,13 +6,15 @@
     <title>Radiant Touch</title>
     <link rel="icon" href="images/logo1.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="style.css">
     <style>
         .section {
         position: relative;
         width: 100%;
         height: 100vh;
-        background: url("images/home3e.jpg") no-repeat;
+        background: url("images/foto2.jpg") no-repeat;
         background-position: center; 
         background-size: cover;
         display: flex;
@@ -34,15 +36,16 @@
         font-style: italic;
         position: absolute;
       top: 20%;
-      left: 10%;
+      left: 5%;
       max-width: 600px;
+      text-shadow: 3px 3px 10px #F2E8DE;
       }
       .content p {
         font-size: 1.2rem;
         margin-bottom: 50px;
         line-height: 1.6;
         position: absolute;
-      bottom: 20%;
+      bottom: 10%;
       right: 10%;
       text-align: right;
       max-width: 400px;
@@ -75,7 +78,7 @@
         position: relative;
       width: 100%;
       height: 100vh;
-      background-image: url('images/rezervimii2.jpg'); 
+      background-image: url('images/rez2.jpg'); 
       background-size: cover;
       background-position: center;
       display: flex;
@@ -119,7 +122,6 @@
   position: relative;
   width: 100%;
   height: 100vh; 
-  background-color: #96887d;
   overflow: hidden;
 }
 
@@ -128,12 +130,51 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%); 
-  width: 80%;
+  width: 100%;
   height: auto; 
   object-fit: contain;
-  border: 5px double white; 
-  border-radius: 15px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+.overlay-text {
+  position: absolute;
+  top: 0.5%; 
+  left: 50%;
+  transform: translate(-50%,0);
+  text-align: center;
+  color: #e2cccc;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.8);
+  z-index: 100;
+  font-family: "Playfair Display", serif;
+  pointer-events: none; 
+
+  background: rgba(132, 121, 121, 0.4); 
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.overlay-text h1 {
+  font-size: 2rem; 
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.overlay-text p {
+  font-size: 1rem; 
+  font-weight: 300;
+  letter-spacing: 0.5px;
+}
+
+.container_index1::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+  pointer-events: none;
 }
     </style>
 </head>
@@ -144,17 +185,18 @@
         <nav>
           <div class="logo-cont">
             <div class="logo">
-              <a href="#">
-                <img src="images/banner.png" alt="logo" title="Radiant Touch" />
+              <a href="#home">
+                <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
               </a>
             </div>
           </div>
           <div id="navi">
             <ul>
-              <li><a href="#">Ballina</a></li>
-              <li><a href="#">Shërbimet</a></li>
-              <li><a href="#">Galeria</a></li>
-              <li><a href="#">Kontakti</a></li>
+              <li><a href="#home">Ballina</a></li>
+              <li><a href="#sherbimet">Shërbimet</a></li>
+              <li><a href="#galeria">Galeria</a></li>
+              <li><a href="#perne">Për ne</a></li>
+              <li><a href="#kontakti">Kontakti</a></li>
             </ul>
           </div>
         </nav>
@@ -164,7 +206,7 @@
           <div class="content">
             <h1>
               Where beauty <br />
-              meets confidence. </span>
+              meets confidence </span>
             </h1>
             <div class="description">
             <p>
@@ -175,7 +217,7 @@
         </div>
       </section>
 
-      <section id="about" class="about">
+      <section id="perne" class="about">
         <h1 class="heading"> <span>Rreth </span> nesh</h1>
 
         <div class="about-container">
@@ -187,34 +229,43 @@
             <h3>Radiant Touch</h3>
             <hr>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio veritatis doloremque tempore qui magnam corporis, assumenda dolorem beatae totam adipisci eligendi dolores, necessitatibus excepturi ea et vitae sit nobis? Mollitia?
+              Radiant Touch është një sallon bukurie që ofron shërbime të specializuara për kujdesin e flokëve, qerpikëve dhe vetullave. Me një ekip profesionistësh të përkushtuar dhe produkte të cilësisë së lartë, ne synojmë të nxjerrim në pah bukurinë tuaj natyrale dhe t'ju ofrojmë një përvojë relaksuese e luksoze. Vizitoni sallonin tonë dhe përjetoni kujdesin e merituar!
             </p>
             <a href="#" class="about-button">Lexo me shume</a>
           </div>
         </div>
     </section>
     <div class="container_index1">
+      <div class="overlay-text">
+        <h1>Welcome to Radiant Touch</h1>
+        <p>Where beauty meets confidence</p>
+      </div>
       <video autoplay muted loop>
         <source
-          src="videos/video1.mp4"
+          src="videos/videoo3.mp4"
           type="video/mp4"
         />
       </video>
       </div>
+      <div class="audio-container">
+      <audio controls autoplay loop muted>
+        <source src="audios/audio1.mp3" type="audio/mp3">
+      </audio>
+    </div>
       <div class="container">
-        <h2>SHERBIMET TONA</h2>
+        <h2>SH&Euml;RBIMET TONA</h2>
         <div class="services">
             <div class="service-item">
                 <img src="images/sherbimiflok.jpeg" alt="Products + Accessories">
-                <p>PRODUCTS + ACCESSORIES</p>
+                <p>STILIM DHE TRAJTIME PËR FLOKË</p>
             </div>
             <div class="service-item">
                 <img src="images/sherbim2.jpg" alt="Book Next Experience">
-                <p>BOOK NEXT EXPERIENCE</p>
+                <p>APLIKIM QERPIKËSH</p>
             </div>
             <div class="service-item">
                 <img src="images/sherbim3.jpg" alt="Hair Extensions">
-                <p>HAIR EXTENSIONS</p>
+                <p>STILIM DHE LAMINIM I VETULLAVE</p>
             </div>
         </div>
     </div>
@@ -230,38 +281,39 @@
         
         <div class="footer-container">
             <div class="footer-section">
-                <img src="images/logofooter1.png" class="logo1" >
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, beatae praesentium ut minus voluptate repellat nam esse, ab, sequi eaque fugit. Vel temporibus odio ea sequi mollitia ipsam, tenetur sed?</p>
-            
+                <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" >
+                <p>Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do ditë.</p>
             </div>
             <div class="footer-section">
-                <h3>Kategorite</h3>
+                <h3>Kategorit&euml;</h3>
                 <ul>
-                    <li><a href="#">BALLINA</a></li>
-                    <li><a href="#">SHERBIMET</a></li>
-                    <li><a href="#">GALERIA</a></li>
-                    <li><a href="#">PER NE</a></li>
-                    <li><a href="#">KONTAKTI</a></li>
+                    <li><a href="#home">BALLINA</a></li>
+                    <li><a href="#sherbimet">SHERBIMET</a></li>
+                    <li><a href="#galeria">GALERIA</a></li>
+                    <li><a href="#perne">PER NE</a></li>
+                    <li><a href="#kontakti">KONTAKTI</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Kontakti</h3>
-                <p>Prishtine , Kosove</p>
-                <p>+383 44 222 222</p> 
-                <p><a href="mailto:info@radianttouch.com"  style="color: #fff; text-decoration: none;"></a>info@radianttouch.com</p>  
+                <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps?q=Prishtine+Kosove" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;">Prishtinë, Kosovë</a></p>
+                <p> <i class="fas fa-phone"></i> <a href="tel:+38344222222" style="color: #fff; text-decoration: none;">+383 44 222 222</a></p> 
+                <p><i class="fas fa-envelope"></i><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
+            </div>
+
             </div>
             <div class="footer-section newsletter">
                 <h3>Abonohuni</h3>
-                <form action="#">
+                <form action="#" method="POST">
                     <div class="newsletter-input">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Enter your email">
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                        <input type="email" placeholder="Shkruani email-in tuaj" required>
+                        <button type="submit" aria-label="Dërgo email"><i class="fas fa-paper-plane"></i></button>
                     </div>
                     <div class="icons">
-                        <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a>
     
                     </div>
                 </form>
@@ -271,6 +323,7 @@
                 &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
 
             </div>
+            <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
     </footer>
 </body>
 </html>
