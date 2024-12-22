@@ -3,81 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shërbimet-Radiant Touch</title>
+    <title>Galeria-Radiant Touch</title>
     <link rel="icon" href="images/logo1.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-  
-        .services-table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse; 
-            font-family: Arial, sans-serif;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color:#f4e4d4;
+        margin: 0;
+        padding: 0;
+    }
+    .services-table {
+            width: 90%;
+            margin: 30px auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 8px;
+            overflow: hidden;
             background-color: #fff;
-          
         }
-        .services-table th, .services-table td {
-            border: 1px solid #ddd; 
-            padding: 12px; 
-            text-align: center;
-        }
+
         .services-table th {
-            background-color: #e6e4e1;
-            color: #5a4a3c;
+            background-color: #6d4c3d;
+            color: #fff;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            padding: 15px;
             text-transform: uppercase;
         }
+
+        .services-table td {
+            font-size: 14px;
+            color: #4b4b4b;
+            padding: 15px;
+            text-align: center;
+        }
+
         .services-table tr:nth-child(even) {
-            background-color: #cfc3c0;
+            background-color: #fdf3e8;
         }
+
         .services-table tr:hover {
-            background-color: #f1e9dd;
+            background-color: #f9d3b4;
+            transform: scale(1.01);
+            transition: all 0.3s ease;
         }
-        .highlight {
-            background-color: #9e765d; 
+
+        .services-table button {
+            background-color: #6d4c3d;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
         }
+
+        .services-table button:hover {
+            background-color: #8b5e4c;
+        }
+
         h1 {
             text-align: center;
-            margin-top: 0;
             color: #6d4c3d;
+            margin-top: 0 px;
+            font-size: 24px;
         }
-        h2 {
-            color: #6d4c3d; 
-        }
-       
-    </style>
-</head>
-<body>
 
+        footer {
+            background-color: #6d4c3d;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer .footer-container {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 10px 30px;
+        }
+
+        footer .footer-section {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        footer ul li a {
+            text-decoration: none;
+            color: white;
+            font-size: 14px;
+        }
+
+        footer ul li a:hover {
+            text-decoration: underline;
+        }
+
+        footer .newsletter input {
+            padding: 10px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+        }
+
+        footer .newsletter button {
+            background-color: #8b5e4c;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        footer .newsletter button:hover {
+            background-color: #9e765d;
+        }
+    </style>
+<body>
     <header>
         <nav>
-            <div class="logo-cont">
-                <div class="logo">
-                    <a href="#">
-                        <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
-                    </a>
-                </div>
+          <div class="logo-cont">
+            <div class="logo">
+              <a href="#">
+                <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
+              </a>
             </div>
-            <div id="navi">
-                <ul>
-                    <li><a href="#">Ballina</a></li>
-                    <li><a href="#">Shërbimet</a></li>
-                    <li><a href="#">Galeria</a></li>
-                    <li><a href="#">Kontakti</a></li>
-                </ul>
-            </div>
+          </div>
+          <div id="navi">
+            <ul>
+              <li><a href="#">Ballina</a></li>
+              <li><a href="#">Shërbimet</a></li>
+              <li><a href="#">Galeria</a></li>
+              <li><a href="#">Për ne</a></li>
+              <li><a href="#">Kontakti</a></li>
+            </ul>
+          </div>
         </nav>
-    </header> 
+      </header> 
 
     <section>
-        <h1>Sherbimet</h1>
+        <h1>Shërbimet</h1>
         <table class="services-table" cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
                     <th>SHËRBIMI</th>
                     <th>KOHA</th>
                     <th>ÇMIMI</th>
+                    <th>REZERVO</th>
                 </tr>
             </thead>
             <tbody>
@@ -85,68 +166,44 @@
                     <td>Prerje e flokëve</td>
                     <td>30 min.<i class="fas fa-clock"></i></td>
                     <td>6 €</td>
+                    <td><button>Rezervo Tani</button></td>
                 </tr>
                 <tr>
                     <td>Fenirim i flokëve</td>
                     <td>15 min.<i class="fas fa-clock"></i></td>
-                    <td>5 €</td>   
+                    <td>5 €</td>  
+                    <td><button>Rezervo Tani</button></td>
                 </tr>
                 <tr>
                     <td>Shatir i flokëve</td>
                     <td>180 min.<i class="fas fa-clock"></i></td>
                     <td>15 €-200 €</td>
+                    <td><button>Rezervo Tani</button></td>
                 </tr>
                 <tr>
                     <td>Larje e flokëve</td>
                     <td>10 min.<i class="fas fa-clock"></i></td>
                     <td>2 €</td>
+                    <td><button>Rezervo Tani</button></td>
                 </tr>
                 <tr>
                     <td>Grim</td>
                     <td>30 min.<i class="fas fa-clock"></i></td>
                     <td>15 €-30 €</td>
+                    <td><button>Rezervo Tani</button></td>
                 </tr>
                 <tr>
                     <td>Rregullimi i vetullave</td>
                     <td>15 min.<i class="fas fa-clock"></i></td>
                     <td>3 €</td>
+                    <td><button>Rezervo Tani</button></td>
                 </tr>
-                <tr>
-                    <td>Çerpikë Classic</td>
-                    <td>90 min.<i class="fas fa-clock"></i></td>
-                    <td>25 €</td>
-                </tr>
-                <tr>
-                    <td>Çerpikë Volume</td>
-                    <td>90 min.<i class="fas fa-clock"></i></td>
-                    <td>35 €</td>
-                </tr>
-                <tr>
-                    <td>Tattoo me fije japoneze / microblading (2 seanca)</td>
-                    <td>120 min.<i class="fas fa-clock"></i></td>
-                    <td>99 €</td>
-                </tr>
-                <tr>
-                    <td>Depilim të fytyrës</td>
-                    <td>15 min.<i class="fas fa-clock"></i></td>
-                    <td>4 €</td>
-                </tr>
-                <tr>
-                    <td>Frizura për femra</td>
-                    <td>30 min.<i class="fas fa-clock"></i></td>
-                    <td>15 €-30 €</td>
-                </tr>
-                <tr>
-                    <td>Rregullim për nuse</td>
-                    <td>120 min.<i class="fas fa-clock"></i></td>
-                    <td>75 €</td>
-                </tr>
+                
             </tbody>
         </table>
-
-        <button id="highlightButton">Thekso Shërbimin e Parë</button>
     </section>
 
+ 
     <footer>
         <div class="footer-container">
             <div class="footer-section">
@@ -165,9 +222,9 @@
             </div>
             <div class="footer-section">
                 <h3>Kontakti</h3>
-                <p>Prishtine, Kosove</p>
+                <p>Prishtine , Kosove</p>
                 <p>+383 44 222 222</p> 
-                <p><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
+                <p><a href="mailto:info@radianttouch.com"  style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
             </div>
             <div class="footer-section newsletter">
                 <h3>Abonohu</h3>
@@ -185,17 +242,15 @@
                 </form>
             </div>     
             <div class="footer-bottom">
-                &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
+                &copy; 2024 <span>Radiant Touch</span>. Të gjitha të drejtat janë të rezervuara.
             </div>
         </div>
-    </footer>
 
     <script>
-      
-        document.getElementById('highlightButton').addEventListener('click', function() {
-            var firstRow = document.querySelector('.services-table tbody tr:first-child');
-            firstRow.classList.toggle('highlight');
+        document.querySelectorAll('.services-table button').forEach(button => {
+            button.addEventListener('click', () => {
+                alert('Shërbimi juaj është rezervuar!');
+            });
         });
     </script>
 </body>
-</html>
