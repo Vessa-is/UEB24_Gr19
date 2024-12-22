@@ -32,6 +32,9 @@
         .services-table tr:hover {
             background-color: #f1e9dd;
         }
+        .highlight {
+            background-color: #ffeb3b; /* Ngjyrë e verdhë për theksim */
+        }
         h1 {
             text-align: center;
             margin-top: 20px;
@@ -40,23 +43,18 @@
         h2 {
             color: #6d5b4b; 
         }
-
         footer {
             background-color: #96887d;
             color: #fff;
             padding: 20px 0;
             text-align: center;
         }
-
-        
-
     </style>
 </head>
 <body>
 
     <header>
         <nav>
-
             <div class="logo-cont">
                 <div class="logo">
                     <a href="#">
@@ -72,30 +70,12 @@
                     <li><a href="#">Kontakti</a></li>
                 </ul>
             </div>
-
-          <div class="logo-cont">
-            <div class="logo">
-              <a href="#">
-                <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
-              </a>
-            </div>
-          </div>
-          <div id="navi">
-            <ul>
-              <li><a href="#">Ballina</a></li>
-              <li><a href="#">Shërbimet</a></li>
-              <li><a href="#">Galeria</a></li>
-              <li><a href="#">Për ne</a></li>
-              <li><a href="#">Kontakti</a></li>
-            </ul>
-          </div>
-
         </nav>
     </header> 
 
     <section>
         <h1>Ballina/Sherbimet</h1>
-        <table class="services-table" cellspacing="0" cellpadding="0"> <!-- Rregullimi i cellspacing dhe cellpadding -->
+        <table class="services-table" cellspacing="0" cellpadding="0">
             <thead>
                 <tr>
                     <th>SHËRBIMI</th>
@@ -166,78 +146,59 @@
                 </tr>
             </tbody>
         </table>
+
+        <button id="highlightButton">Thekso Shërbimin e Parë</button>
     </section>
 
-      <footer>
-        
+    <footer>
         <div class="footer-container">
             <div class="footer-section">
-
                 <img src="images/logofooter1.png" class="logo1">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, beatae praesentium ut minus voluptate repellat nam esse, ab, sequi eaque fugit. Vel temporibus odio ea sequi mollitia ipsam, tenetur sed?</p>
-
-                <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" >
-                <p>Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do ditë.</p>
-
             </div>
             <div class="footer-section">
-                <h3>Kategorit&euml;</h3>
+                <h3>Kategorite</h3>
                 <ul>
-                    <li><a href="#home">BALLINA</a></li>
-                    <li><a href="#Sherbimet">SHERBIMET</a></li>
-                    <li><a href="#Galeria">GALERIA</a></li>
-                    <li><a href="#Perne">PER NE</a></li>
-                    <li><a href="#Kontakti">KONTAKTI</a></li>
+                    <li><a href="#">BALLINA</a></li>
+                    <li><a href="#">SHERBIMET</a></li>
+                    <li><a href="#">GALERIA</a></li>
+                    <li><a href="#">PER NE</a></li>
+                    <li><a href="#">KONTAKTI</a></li>
                 </ul>
             </div>
             <div class="footer-section">
                 <h3>Kontakti</h3>
-
                 <p>Prishtine, Kosove</p>
                 <p>+383 44 222 222</p> 
                 <p><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
-
-                <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps?q=Prishtine+Kosove" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;">Prishtinë, Kosovë</a></p>
-                <p> <i class="fas fa-phone"></i> <a href="tel:+38344222222" style="color: #fff; text-decoration: none;">+383 44 222 222</a></p> 
-                <p><i class="fas fa-envelope"></i><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
-            </div>
-
-
             </div>
             <div class="footer-section newsletter">
-                <h3>Abonohuni</h3>
-                <form action="#" method="POST">
+                <h3>Abonohu</h3>
+                <form action="#">
                     <div class="newsletter-input">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Shkruani email-in tuaj" required>
-                        <button type="submit" aria-label="Dërgo email"><i class="fas fa-paper-plane"></i></button>
+                        <input type="email" placeholder="Enter your email">
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </div>
                     <div class="icons">
-
                         <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
-
-                        <a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a>
-    
-
                     </div>
                 </form>
-            </div>
-            
+            </div>     
             <div class="footer-bottom">
                 &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
-
             </div>
-
         </div>
     </footer>
 
-
-            <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
-    </footer>
-
+    <script>
+        // JavaScript për të theksuar shërbimin e parë
+        document.getElementById('highlightButton').addEventListener('click', function() {
+            var firstRow = document.querySelector('.services-table tbody tr:first-child');
+            firstRow.classList.toggle('highlight');
+        });
+    </script>
 </body>
 </html>
