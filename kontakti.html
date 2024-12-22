@@ -53,6 +53,7 @@
 }.contact-text h2 {
     color: #6d4c3d;
     font-family: 'Georgia', serif;
+    font-style: italic;
     margin-bottom: 15px;
 }
 .contact-text p {
@@ -68,6 +69,7 @@
     
     h2 {
         font-family: 'Georgia', serif;
+        font-style: italic;
         color: #6d4c3d;
         text-align: center;
         margin-bottom: 20px;
@@ -121,6 +123,7 @@
     }
     .follow-us h3 {
     color: #6d4c3d;
+    font-style: italic;
     font-family: 'Georgia', serif;
     margin-bottom: 10px;
     }    
@@ -136,6 +139,7 @@
 
     .location .Orari h3 {
     color: #6d4c3d;
+    font-style: italic;
     font-family: 'Georgia', serif;
     text-decoration: underline;
     margin-bottom: 10px;
@@ -157,8 +161,8 @@
     
 }
 
-.lokacioni-dyqanit h3 {
-    color:whitesmoke;
+.lokacioni-dyqanit h2 {
+    color:#6d4c3d;
     font-style: italic;
     font-family: 'Georgia', serif;
     margin-bottom: 20px;
@@ -219,9 +223,66 @@
     color: #d6c1ac;
     text-decoration: underline;
 }
-.highlight{
-    background-color:#6d4c3d;
+.feedback-section {
+    background-color: #faf8f2;
+    border: 1px solid #e0d9c8;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 600px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
+
+.feedback-section h3 {
+    color: #6d4c3d;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+.social-media-dropdown label,
+.visit-options label {
+    font-size: 16px;
+    color: #6d4c3d;
+    display: block;
+    margin-bottom: 10px;
+}
+
+#social-media {
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #faf8f2;
+    color: #6d4c3d;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+}
+
+.visit-options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.visit-options label {
+    display: inline-block;
+    font-size: 16px;
+    color: #6d4c3d;
+    cursor: pointer;
+}
+
+.visit-options input[type="radio"] {
+    margin-right: 5px;
+    transform: scale(1.2);
+    accent-color: #6d4c3d;
+}
+
 </style>
 <body>
     <header>
@@ -270,9 +331,31 @@
             </form>
         </div></div>
         </div>
-       
+        <div class="feedback-section">
+            <h3>Si ke dëgjuar për ne?</h3>
+            <div class="social-media-dropdown">
+                <label for="social-media">Zgjedh një opsion:</label>
+                <select id="social-media" name="social-media">
+                    <option value="google">Google</option>
+                    <option value="facebook">Facebook</option>
+                    <option value="instagram">Instagram</option>
+                    <option value="friend">Shoqe/Familjarë</option>
+                    <option value="other">Tjetër</option>
+                </select>
+            </div>
+        
+            <h3>A do të vizitonit përsëri?</h3>
+            <div class="visit-options">
+                <label><input type="radio" name="visit-again" value="Yes"> Po</label>
+                <label><input type="radio" name="visit-again" value="No"> Jo</label>
+                <label><input type="radio" name="visit-again" value="Maybe"> Ndoshta</label>
+            </div>
+        
+        
+            </div>
+        </div>
 <div class="lokacioni-dyqanit">
-    <h3><span class="highlight">Vendndodhjet e Dyqaneve Tona</span></h3>
+    <h2>Vendndodhjet e Dyqaneve Tona</h2>
     <div class="locations-wrapper">
         <div class="location">
             <span class="location-number">1</span>
