@@ -60,6 +60,7 @@
         color: #4b4b4b;
         padding: 15px;
         text-align: center;
+        border: 1px solid #f3e5d8;
       }
 
       .services-table tr:nth-child(even) {
@@ -67,8 +68,9 @@
       }
 
       .services-table tr:hover {
-        background-color: #f9d3b4;
+        background-color: #decfbc;
         transform: scale(1.01);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         transition: all 0.3s ease;
       }
 
@@ -78,21 +80,25 @@
         padding: 8px 12px;
         border: none;
         cursor: pointer;
-        border-radius: 4px;
+        border-radius: 20px;
         font-size: 14px;
         transition: background-color 0.3s ease;
+        font-weight: bold;
+        font-weight: bold;
       }
 
       .services-table button:hover {
         background-color: #8b5e4c;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
       }
 
       h1 {
         text-align: center;
         color: #6d4c3d;
         margin-top: 0;
-        font-size: 24px;
-        padding-top: 30px;
+        font-size: 40px;
+        padding-top: 20px;
+        padding-bottom: 10px;
       }
       .services {
         text-align: center;
@@ -132,10 +138,13 @@
       }
 
       .slide-content {
-        padding: 20px;
+        padding: 30px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .slide-content h2 {
+        padding-bottom: 20px;
       }
 
       .carousel-button {
@@ -162,7 +171,6 @@
       .carousel-button.next {
         right: 10px;
       }
-
     </style>
   </head>
   <body>
@@ -187,10 +195,9 @@
       </nav>
     </header>
 
-
     <section class="sherbimet">
       <h1>Shërbimet tona</h1>
-      <table class="services-table">
+      <table class="services-table"  style="border: 3px solid #6d4c3d">
         <thead>
           <tr>
             <th>SHËRBIMI</th>
@@ -277,7 +284,7 @@
             <li class="carousel-slide">
               <img src="images/flok1.jpeg" alt="Foto shërëbimi për flok" />
               <div class="slide-content">
-                <h2>Shërëbime të ndryshme flokësh</h2>
+                <h2>Shërbime të ndryshme flokësh</h2>
                 <p>
                   Ofrojmë një gamë të gjerë shërëbimesh për flokë, nga prerjet
                   moderne dhe stilimet elegante deri te ngjyrimet profesionale.
@@ -290,7 +297,7 @@
             <li class="carousel-slide">
               <img src="images/qerpik.jpeg" alt="Foto shërëbimi për qerpikë" />
               <div class="slide-content">
-                <h2>Shërëbime të ndryshme për qerpikë</h2>
+                <h2>Shërbime të ndryshme për qerpikë</h2>
                 <p>
                   Ofrojmë shërëbime të specializuara për qerpikë, duke përfshirë
                   qerpike clssic dhe volume. Theksoni bukurinë natyrale të syve
@@ -303,7 +310,7 @@
             <li class="carousel-slide">
               <img src="images/vetlla2.jpeg" alt="Foto shërëbimi për vetulla" />
               <div class="slide-content">
-                <h2>Shërëbime të ndryshme për vetulla</h2>
+                <h2>Shërbime të ndryshme për vetulla</h2>
                 <p>
                   Ofrojmë shërëbime profesionale për formësimin dhe kujdesin e
                   vetullave tuaja. Nga stilimet natyrale deri te definimet
@@ -319,52 +326,86 @@
       </div>
     </section>
     <footer>
-        
-        <div class="footer-container">
-            <div class="footer-section">
-                <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" >
-                <p>Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do ditë.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Kategorit&euml;</h3>
-                <ul>
-                    <li><a href="#home">BALLINA</a></li>
-                    <li><a href="#Sherbimet">SHERBIMET</a></li>
-                    <li><a href="#Galeria">GALERIA</a></li>
-                    <li><a href="#Perne">PER NE</a></li>
-                    <li><a href="#Kontakti">KONTAKTI</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Kontakti</h3>
-                <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps?q=Prishtine+Kosove" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;">Prishtinë, Kosovë</a></p>
-                <p> <i class="fas fa-phone"></i> <a href="tel:+38344222222" style="color: #fff; text-decoration: none;">+383 44 222 222</a></p> 
-                <p><i class="fas fa-envelope"></i><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
-            </div>
+      <div class="footer-container">
+        <div class="footer-section">
+          <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" />
+          <p>
+            Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe
+            vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do
+            ditë.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Kategorit&euml;</h3>
+          <ul>
+            <li><a href="#home">BALLINA</a></li>
+            <li><a href="#Sherbimet">SHERBIMET</a></li>
+            <li><a href="#Galeria">GALERIA</a></li>
+            <li><a href="#Perne">PER NE</a></li>
+            <li><a href="#Kontakti">KONTAKTI</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Kontakti</h3>
+          <p>
+            <i class="fas fa-map-marker-alt"></i>
+            <a
+              href="https://www.google.com/maps?q=Prishtine+Kosove"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="color: #fff; text-decoration: none"
+              >Prishtinë, Kosovë</a
+            >
+          </p>
+          <p>
+            <i class="fas fa-phone"></i>
+            <a
+              href="tel:+38344222222"
+              style="color: #fff; text-decoration: none"
+              >+383 44 222 222</a
+            >
+          </p>
+          <p>
+            <i class="fas fa-envelope"></i
+            ><a
+              href="mailto:info@radianttouch.com"
+              style="color: #fff; text-decoration: none"
+              >info@radianttouch.com</a
+            >
+          </p>
+        </div>
+      </div>
+      <div class="footer-section newsletter">
+        <h3>Abonohuni</h3>
+        <form action="#" method="POST">
+          <div class="newsletter-input">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Shkruani email-in tuaj" required />
+            <button type="submit" aria-label="Dërgo email">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+          <div class="icons">
+            <a href="#" class="icon" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="icon" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" class="icon" aria-label="Twitter"
+              ><i class="fab fa-twitter"></i
+            ></a>
+          </div>
+        </form>
+      </div>
 
-            </div>
-            <div class="footer-section newsletter">
-                <h3>Abonohuni</h3>
-                <form action="#" method="POST">
-                    <div class="newsletter-input">
-                        <i class="fas fa-envelope"></i>
-                        <input type="email" placeholder="Shkruani email-in tuaj" required>
-                        <button type="submit" aria-label="Dërgo email"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                    <div class="icons">
-                        <a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a>
-    
-                    </div>
-                </form>
-            </div>
-            
-            <div class="footer-bottom">
-                &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
-
-            </div>
-            <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
+      <div class="footer-bottom">
+        &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të
+        rezervuara.
+      </div>
+      <button id="scrollToTop" title="Kthehu lart">
+        <i class="fas fa-arrow-up"></i>
+      </button>
     </footer>
 
     <script>
