@@ -7,31 +7,21 @@
     <link rel="icon" href="images/logo1.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4e4d4;
+            margin: 0;
+            padding: 0;
+        }
 
-</head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color:#f4e4d4;
-        margin: 0;
-        padding: 0;
-    }
-    .services-table {
+        .services-table {
             width: 90%;
             margin: 30px auto;
             border-collapse: collapse;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             border-radius: 8px;
             overflow: hidden;
-
-    <style>
-        .services-table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse; 
-            font-family: Arial, sans-serif;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-
             background-color: #fff;
         }
 
@@ -79,12 +69,9 @@
         h1 {
             text-align: center;
             color: #6d4c3d;
-
-            margin-top: 0 px;
+            margin-top: 0;
             font-size: 24px;
-
             padding-top: 30px;
-
         }
 
         footer {
@@ -141,7 +128,13 @@
         footer .newsletter button:hover {
             background-color: #9e765d;
         }
+
+        .footer-bottom {
+            margin-top: 20px;
+            font-size: 12px;
+        }
     </style>
+</head>
 <body>
     <header>
         <nav>
@@ -162,15 +155,11 @@
             </ul>
           </div>
         </nav>
-      </header> 
+    </header> 
 
     <section>
-
-        <h1>Shërbimet</h1>
-
         <h1>Shërbimet tona</h1>
-
-        <table class="services-table" cellspacing="0" cellpadding="0">
+        <table class="services-table">
             <thead>
                 <tr>
                     <th>SHËRBIMI</th>
@@ -182,50 +171,48 @@
             <tbody>
                 <tr>
                     <td>Prerje e flokëve</td>
-                    <td>30 min.<i class="fas fa-clock"></i></td>
+                    <td>30 min. <i class="fas fa-clock"></i></td>
                     <td>6 €</td>
                     <td><button>Rezervo Tani</button></td>
                 </tr>
                 <tr>
                     <td>Fenirim i flokëve</td>
-                    <td>15 min.<i class="fas fa-clock"></i></td>
+                    <td>15 min. <i class="fas fa-clock"></i></td>
                     <td>5 €</td>  
                     <td><button>Rezervo Tani</button></td>
                 </tr>
                 <tr>
                     <td>Shatir i flokëve</td>
-                    <td>180 min.<i class="fas fa-clock"></i></td>
+                    <td>180 min. <i class="fas fa-clock"></i></td>
                     <td>15 €-200 €</td>
                     <td><button>Rezervo Tani</button></td>
                 </tr>
                 <tr>
                     <td>Larje e flokëve</td>
-                    <td>10 min.<i class="fas fa-clock"></i></td>
+                    <td>10 min. <i class="fas fa-clock"></i></td>
                     <td>2 €</td>
                     <td><button>Rezervo Tani</button></td>
                 </tr>
                 <tr>
                     <td>Grim</td>
-                    <td>30 min.<i class="fas fa-clock"></i></td>
+                    <td>30 min. <i class="fas fa-clock"></i></td>
                     <td>15 €-30 €</td>
                     <td><button>Rezervo Tani</button></td>
                 </tr>
                 <tr>
                     <td>Rregullimi i vetullave</td>
-                    <td>15 min.<i class="fas fa-clock"></i></td>
+                    <td>15 min. <i class="fas fa-clock"></i></td>
                     <td>3 €</td>
                     <td><button>Rezervo Tani</button></td>
                 </tr>
-                
             </tbody>
         </table>
     </section>
 
- 
     <footer>
         <div class="footer-container">
             <div class="footer-section">
-                <img src="images/logoo2.png" class="logo1">
+                <img src="images/logoo2.png" class="logo1" alt="logo">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, beatae praesentium ut minus voluptate repellat nam esse, ab, sequi eaque fugit. Vel temporibus odio ea sequi mollitia ipsam, tenetur sed?</p>
             </div>
             <div class="footer-section">
@@ -240,15 +227,14 @@
             </div>
             <div class="footer-section">
                 <h3>Kontakti</h3>
-                <p>Prishtine , Kosove</p>
+                <p>Prishtine, Kosove</p>
                 <p>+383 44 222 222</p> 
-                <p><a href="mailto:info@radianttouch.com"  style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
+                <p><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
             </div>
             <div class="footer-section newsletter">
                 <h3>Abonohu</h3>
                 <form action="#">
                     <div class="newsletter-input">
-                        <i class="fas fa-envelope"></i>
                         <input type="email" placeholder="Enter your email">
                         <button type="submit"><i class="fas fa-paper-plane"></i></button>
                     </div>
@@ -263,6 +249,7 @@
                 &copy; 2024 <span>Radiant Touch</span>. Të gjitha të drejtat janë të rezervuara.
             </div>
         </div>
+    </footer>
 
     <script>
         document.querySelectorAll('.services-table button').forEach(button => {
@@ -272,3 +259,4 @@
         });
     </script>
 </body>
+</html>
