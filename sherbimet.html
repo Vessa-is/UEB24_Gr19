@@ -164,65 +164,6 @@
         right: 10px;
       }
 
-      footer {
-        background-color: #6d4c3d;
-        color: white;
-        padding: 20px;
-        text-align: center;
-      }
-
-      footer .footer-container {
-        display: flex;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: 20px;
-        padding: 10px 30px;
-      }
-
-      footer .footer-section {
-        flex: 1;
-        min-width: 200px;
-      }
-
-      footer ul {
-        list-style: none;
-        padding: 0;
-      }
-
-      footer ul li a {
-        text-decoration: none;
-        color: white;
-        font-size: 14px;
-      }
-
-      footer ul li a:hover {
-        text-decoration: underline;
-      }
-
-      footer .newsletter input {
-        padding: 10px;
-        margin-right: 10px;
-        border: none;
-        border-radius: 4px;
-      }
-
-      footer .newsletter button {
-        background-color: #8b5e4c;
-        color: white;
-        border: none;
-        padding: 10px 15px;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-
-      footer .newsletter button:hover {
-        background-color: #9e765d;
-      }
-
-      .footer-bottom {
-        margin-top: 20px;
-        font-size: 12px;
-      }
     </style>
   </head>
   <body>
@@ -377,6 +318,54 @@
         <button class="carousel-button next">&#10095;</button>
       </div>
     </section>
+    <footer>
+        
+        <div class="footer-container">
+            <div class="footer-section">
+                <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" >
+                <p>Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do ditë.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Kategorit&euml;</h3>
+                <ul>
+                    <li><a href="#home">BALLINA</a></li>
+                    <li><a href="#Sherbimet">SHERBIMET</a></li>
+                    <li><a href="#Galeria">GALERIA</a></li>
+                    <li><a href="#Perne">PER NE</a></li>
+                    <li><a href="#Kontakti">KONTAKTI</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Kontakti</h3>
+                <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps?q=Prishtine+Kosove" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;">Prishtinë, Kosovë</a></p>
+                <p> <i class="fas fa-phone"></i> <a href="tel:+38344222222" style="color: #fff; text-decoration: none;">+383 44 222 222</a></p> 
+                <p><i class="fas fa-envelope"></i><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
+            </div>
+
+            </div>
+            <div class="footer-section newsletter">
+                <h3>Abonohuni</h3>
+                <form action="#" method="POST">
+                    <div class="newsletter-input">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" placeholder="Shkruani email-in tuaj" required>
+                        <button type="submit" aria-label="Dërgo email"><i class="fas fa-paper-plane"></i></button>
+                    </div>
+                    <div class="icons">
+                        <a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a>
+    
+                    </div>
+                </form>
+            </div>
+            
+            <div class="footer-bottom">
+                &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
+
+            </div>
+            <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
+    </footer>
 
     <script>
       const track = document.querySelector(".carousel-track");
