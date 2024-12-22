@@ -1,309 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galeria-Radiant Touch</title>
-    <link rel="icon" href="images/logo1.png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/logo1.png" />
+    <title>Shërbimet-Radiant Touch</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4e4d4;
-            margin: 0;
-            padding: 0;
-        }
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        background-color: #f4e4d4;
+      }
+      .sherbimet {
+        font-family: Arial, sans-serif;
+        background-color: #f4e4d4;
+        margin: 0;
+        padding: 0;
+      }
 
-        .services-table {
-            width: 90%;
-            margin: 30px auto;
-            border-collapse: collapse;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #fff;
-        }
+      h1,
+      h2,
+      p {
+        margin: 0;
+        padding: 0;
+        line-height: normal;
+      }
 
-        .services-table th {
-            background-color: #6d4c3d;
-            color: #fff;
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            padding: 15px;
-            text-transform: uppercase;
-        }
+      .sherbimet {
+        margin-bottom: -1px;
+      }
 
-        .services-table td {
-            font-size: 14px;
-            color: #4b4b4b;
-            padding: 15px;
-            text-align: center;
-        }
+      .services-table {
+        width: 90%;
+        margin: 30px auto;
+        border-collapse: collapse;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border-radius: 8px;
+        overflow: hidden;
+        background-color: #fff;
+      }
 
-        .services-table tr:nth-child(even) {
-            background-color: #fdf3e8;
-        }
+      .services-table th {
+        background-color: #6d4c3d;
+        color: #fff;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        padding: 15px;
+        text-transform: uppercase;
+      }
 
-        .services-table tr:hover {
-            background-color: #f9d3b4;
-            transform: scale(1.01);
-            transition: all 0.3s ease;
-        }
+      .services-table td {
+        font-size: 14px;
+        color: #4b4b4b;
+        padding: 15px;
+        text-align: center;
+      }
 
-        .services-table button {
-            background-color: #6d4c3d;
-            color: white;
-            padding: 8px 12px;
-            border: none;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
-        }
+      .services-table tr:nth-child(even) {
+        background-color: #fdf3e8;
+      }
 
-        .services-table button:hover {
-            background-color: #8b5e4c;
-        }
+      .services-table tr:hover {
+        background-color: #f9d3b4;
+        transform: scale(1.01);
+        transition: all 0.3s ease;
+      }
 
-        h1 {
-            text-align: center;
-            color: #6d4c3d;
-            margin-top: 0;
-            font-size: 24px;
-            padding-top: 30px;
-        }
+      .services-table button {
+        background-color: #6d4c3d;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: background-color 0.3s ease;
+      }
 
-        footer {
-            background-color: #6d4c3d;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
+      .services-table button:hover {
+        background-color: #8b5e4c;
+      }
 
-        footer .footer-container {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-            padding: 10px 30px;
-        }
-
-        footer .footer-section {
-            flex: 1;
-            min-width: 200px;
-        }
-
-        footer ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        footer ul li a {
-            text-decoration: none;
-            color: white;
-            font-size: 14px;
-        }
-
-        footer ul li a:hover {
-            text-decoration: underline;
-        }
-
-        footer .newsletter input {
-            padding: 10px;
-            margin-right: 10px;
-            border: none;
-            border-radius: 4px;
-        }
-
-        footer .newsletter button {
-            background-color: #8b5e4c;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        footer .newsletter button:hover {
-            background-color: #9e765d;
-        }
-
-        .footer-bottom {
-            margin-top: 20px;
-            font-size: 12px;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <nav>
-          <div class="logo-cont">
-            <div class="logo">
-              <a href="#">
-                <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
-              </a>
-            </div>
-          </div>
-          <div id="navi">
-            <ul>
-              <li><a href="#">Ballina</a></li>
-              <li><a href="#">Shërbimet</a></li>
-              <li><a href="#">Galeria</a></li>
-              <li><a href="#">Për ne</a></li>
-              <li><a href="#">Kontakti</a></li>
-            </ul>
-          </div>
-        </nav>
-    </header> 
-
-    <section>
-        <h1>Shërbimet tona</h1>
-        <table class="services-table">
-            <thead>
-                <tr>
-                    <th>SHËRBIMI</th>
-                    <th>KOHA</th>
-                    <th>ÇMIMI</th>
-                    <th>REZERVO</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Prerje e flokëve</td>
-                    <td>30 min. <i class="fas fa-clock"></i></td>
-                    <td>6 €</td>
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-                <tr>
-                    <td>Fenirim i flokëve</td>
-                    <td>15 min. <i class="fas fa-clock"></i></td>
-                    <td>5 €</td>  
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-                <tr>
-                    <td>Shatir i flokëve</td>
-                    <td>180 min. <i class="fas fa-clock"></i></td>
-                    <td>15 €-200 €</td>
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-                <tr>
-                    <td>Larje e flokëve</td>
-                    <td>10 min. <i class="fas fa-clock"></i></td>
-                    <td>2 €</td>
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-                <tr>
-                    <td>Grim</td>
-                    <td>30 min. <i class="fas fa-clock"></i></td>
-                    <td>15 €-30 €</td>
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-                <tr>
-                    <td>Rregullimi i vetullave</td>
-                    <td>15 min. <i class="fas fa-clock"></i></td>
-                    <td>3 €</td>
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-                <tr>
-                    <td>Çerpikë Volume</td>
-                    <td>90 min.</td>
-                    <td>35 €</td>
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-                <tr>
-                    <td>Tattoo me fije japoneze / microblading (2 seanca)</td>
-                    <td>120 min.<i class="fas fa-clock"></i></td>
-                    <td>99 €</td>
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-                <tr>
-                    <td>Depilim të fytyrës</td>
-                    <td>15 min.<i class="fas fa-clock"></i></td>
-                    <td>4 €</td>
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-                <tr>
-                    <td>Frizura për femra</td>
-                    <td>30 min.<i class="fas fa-clock"></i></td>
-                    <td>15 €-30 €</td>
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-                <tr>
-                    <td>Rregullim për nuse</td>
-                    <td>120 min.<i class="fas fa-clock"></i></td>
-                    <td>75 €</td>
-                    <td><button>Rezervo Tani</button></td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-    <section class="services">
-        <h1>Çfarë ofron Radiant Touch?</h1>
-        <div class="carousel">
-          <div class="carousel-track-container">
-            <ul class="carousel-track">
-              <li class="carousel-slide">
-                <img src="images/flok1.jpeg" alt="Foto shërëbimi për flok">
-                <div class="slide-content">
-                  <h2>Shërëbime të ndryshme flokësh</h2>
-                  <p>Ofrojmë një gamë të gjerë shërëbimesh për flokë, nga prerjet moderne dhe stilimet elegante deri te ngjyrimet profesionale. Kujdesemi për shëndetin dhe bukurinë e flokëve tuaj me produkte cilësore dhe teknika të avancuara.</p>
-                </div>
-              </li>
-              
-              <li class="carousel-slide">
-                <img src="images/qerpik.jpeg" alt="Foto shërëbimi për qerpikë">
-                <div class="slide-content">
-                  <h2>Shërëbime të ndryshme për qerpikë</h2>
-                  <p>Ofrojmë shërëbime të specializuara për qerpikë, duke përfshirë  qerpike clssic dhe volume. Theksoni bukurinë natyrale të syve tuaj me stilime të personalizuara dhe produkte cilësore për një pamje magjepsëse.</p>
-                </div>
-              </li>
-              
-              <li class="carousel-slide">
-                <img src="images/vetlla2.jpeg" alt="Foto shërëbimi për vetulla">
-                <div class="slide-content">
-                  <h2>Shërëbime të ndryshme për vetulla</h2>
-                  <p>Ofrojmë shërëbime profesionale për formësimin dhe kujdesin e vetullave tuaja. Nga stilimet natyrale deri te definimet precize, sigurojmë pamjen perfekte duke përdorur teknika dhe produkte cilësore.</p>
-                </div>
-              </li>
-            </ul>
-          </div>
-          <button class="carousel-button prev">&#10094;</button>
-          <button class="carousel-button next">&#10095;</button>
-        </div>
-      </section>
-      
-      <style>
+      h1 {
+        text-align: center;
+        color: #6d4c3d;
+        margin-top: 0;
+        font-size: 24px;
+        padding-top: 30px;
+      }
       .services {
         text-align: center;
         padding: 50px 20px;
         background-color: #f4e4d4;
       }
-      
+
       .carousel {
         position: relative;
         width: 80%;
         margin: 0 auto;
         overflow: hidden;
       }
-      
+
       .carousel-track-container {
         position: relative;
         overflow: hidden;
       }
-      
+
       .carousel-track {
         display: flex;
         transition: transform 0.5s ease-in-out;
       }
-      
+
       .carousel-slide {
         min-width: 100%;
         text-align: center;
         transition: opacity 0.5s ease-in-out;
       }
-      
+
       .carousel-slide img {
         width: 300px;
         height: auto;
@@ -311,14 +131,14 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         margin-bottom: 20px;
       }
-      
+
       .slide-content {
         padding: 20px;
         background-color: #fff;
         border-radius: 8px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
-      
+
       .carousel-button {
         position: absolute;
         top: 50%;
@@ -331,50 +151,259 @@
         border-radius: 50%;
         font-size: 18px;
       }
-      
+
       .carousel-button:hover {
         background-color: #8b5e4c;
       }
-      
+
       .carousel-button.prev {
         left: 10px;
       }
-      
+
       .carousel-button.next {
         right: 10px;
       }
-      </style>
-      
-      <script>
-      const track = document.querySelector('.carousel-track');
+
+      footer {
+        background-color: #6d4c3d;
+        color: white;
+        padding: 20px;
+        text-align: center;
+      }
+
+      footer .footer-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 20px;
+        padding: 10px 30px;
+      }
+
+      footer .footer-section {
+        flex: 1;
+        min-width: 200px;
+      }
+
+      footer ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      footer ul li a {
+        text-decoration: none;
+        color: white;
+        font-size: 14px;
+      }
+
+      footer ul li a:hover {
+        text-decoration: underline;
+      }
+
+      footer .newsletter input {
+        padding: 10px;
+        margin-right: 10px;
+        border: none;
+        border-radius: 4px;
+      }
+
+      footer .newsletter button {
+        background-color: #8b5e4c;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      footer .newsletter button:hover {
+        background-color: #9e765d;
+      }
+
+      .footer-bottom {
+        margin-top: 20px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo-cont">
+          <div class="logo">
+            <a href="#">
+              <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
+            </a>
+          </div>
+        </div>
+        <div id="navi">
+          <ul>
+            <li><a href="#">Ballina</a></li>
+            <li><a href="#">Shërbimet</a></li>
+            <li><a href="#">Galeria</a></li>
+            <li><a href="#">Për ne</a></li>
+            <li><a href="#">Kontakti</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <section class="sherbimet">
+      <h1>Shërbimet tona</h1>
+      <table class="services-table">
+        <thead>
+          <tr>
+            <th>SHËRBIMI</th>
+            <th>KOHA</th>
+            <th>ÇMIMI</th>
+            <th>REZERVO</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Prerje e flokëve</td>
+            <td>30 min. <i class="fas fa-clock"></i></td>
+            <td>6 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+          <tr>
+            <td>Fenirim i flokëve</td>
+            <td>15 min. <i class="fas fa-clock"></i></td>
+            <td>5 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+          <tr>
+            <td>Shatir i flokëve</td>
+            <td>180 min. <i class="fas fa-clock"></i></td>
+            <td>15 €-200 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+          <tr>
+            <td>Larje e flokëve</td>
+            <td>10 min. <i class="fas fa-clock"></i></td>
+            <td>2 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+          <tr>
+            <td>Grim</td>
+            <td>30 min. <i class="fas fa-clock"></i></td>
+            <td>15 €-30 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+          <tr>
+            <td>Rregullimi i vetullave</td>
+            <td>15 min. <i class="fas fa-clock"></i></td>
+            <td>3 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+          <tr>
+            <td>Çerpikë Volume</td>
+            <td>90 min.</td>
+            <td>35 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+          <tr>
+            <td>Tattoo me fije japoneze / microblading (2 seanca)</td>
+            <td>120 min.<i class="fas fa-clock"></i></td>
+            <td>99 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+          <tr>
+            <td>Depilim të fytyrës</td>
+            <td>15 min.<i class="fas fa-clock"></i></td>
+            <td>4 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+          <tr>
+            <td>Frizura për femra</td>
+            <td>30 min.<i class="fas fa-clock"></i></td>
+            <td>15 €-30 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+          <tr>
+            <td>Rregullim për nuse</td>
+            <td>120 min.<i class="fas fa-clock"></i></td>
+            <td>75 €</td>
+            <td><button>Rezervo Tani</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="services">
+      <h1>Çfarë ofron Radiant Touch?</h1>
+      <div class="carousel">
+        <div class="carousel-track-container">
+          <ul class="carousel-track">
+            <li class="carousel-slide">
+              <img src="images/flok1.jpeg" alt="Foto shërëbimi për flok" />
+              <div class="slide-content">
+                <h2>Shërëbime të ndryshme flokësh</h2>
+                <p>
+                  Ofrojmë një gamë të gjerë shërëbimesh për flokë, nga prerjet
+                  moderne dhe stilimet elegante deri te ngjyrimet profesionale.
+                  Kujdesemi për shëndetin dhe bukurinë e flokëve tuaj me
+                  produkte cilësore dhe teknika të avancuara.
+                </p>
+              </div>
+            </li>
+
+            <li class="carousel-slide">
+              <img src="images/qerpik.jpeg" alt="Foto shërëbimi për qerpikë" />
+              <div class="slide-content">
+                <h2>Shërëbime të ndryshme për qerpikë</h2>
+                <p>
+                  Ofrojmë shërëbime të specializuara për qerpikë, duke përfshirë
+                  qerpike clssic dhe volume. Theksoni bukurinë natyrale të syve
+                  tuaj me stilime të personalizuara dhe produkte cilësore për
+                  një pamje magjepsëse.
+                </p>
+              </div>
+            </li>
+
+            <li class="carousel-slide">
+              <img src="images/vetlla2.jpeg" alt="Foto shërëbimi për vetulla" />
+              <div class="slide-content">
+                <h2>Shërëbime të ndryshme për vetulla</h2>
+                <p>
+                  Ofrojmë shërëbime profesionale për formësimin dhe kujdesin e
+                  vetullave tuaja. Nga stilimet natyrale deri te definimet
+                  precize, sigurojmë pamjen perfekte duke përdorur teknika dhe
+                  produkte cilësore.
+                </p>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <button class="carousel-button prev">&#10094;</button>
+        <button class="carousel-button next">&#10095;</button>
+      </div>
+    </section>
+
+    <script>
+      const track = document.querySelector(".carousel-track");
       const slides = Array.from(track.children);
-      const nextButton = document.querySelector('.carousel-button.next');
-      const prevButton = document.querySelector('.carousel-button.prev');
-      
+      const nextButton = document.querySelector(".carousel-button.next");
+      const prevButton = document.querySelector(".carousel-button.prev");
+
       let currentIndex = 0;
-      
+
       function updateSlides() {
         track.style.transform = `translateX(-${currentIndex * 100}%)`;
       }
-      
-      nextButton.addEventListener('click', () => {
+
+      nextButton.addEventListener("click", () => {
         currentIndex = (currentIndex + 1) % slides.length;
         updateSlides();
       });
-      
-      prevButton.addEventListener('click', () => {
+
+      prevButton.addEventListener("click", () => {
         currentIndex = (currentIndex - 1 + slides.length) % slides.length;
         updateSlides();
       });
-      document.querySelectorAll('.services-table button').forEach(button => {
-            button.addEventListener('click', () => {
-                alert('Shërbimi juaj është rezervuar!');
-            });
+      document.querySelectorAll(".services-table button").forEach((button) => {
+        button.addEventListener("click", () => {
+          alert("Shërbimi juaj është rezervuar!");
         });
-    
-      </script>
-      
-       
-    
-</body>
+      });
+    </script>
+  </body>
 </html>
