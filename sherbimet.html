@@ -8,43 +8,43 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
-        .services-table{
+        .services-table {
             width: 80%;
             margin: 20px auto;
-            border-collapse: collapse;
-            font-family:Arial, sans-serif;
+            border-collapse: collapse; /* Rregullimi i borders */
+            font-family: Arial, sans-serif;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             background-color: #fff;
         }
-            .services-table th, .services-table td{
-                border: 1px solid #ddd;
-                padding:12px;
-                text-align: center;
-            }
-            .servives-table th{
-                background-color:#e6e4e1;
-                color:#5a4a3c;
-                text-transform: uppercase;
-            }
-        .services-table tr:nth-child(even){
-            background-color:#cfc3c0 ;
+        .services-table th, .services-table td {
+            border: 1px solid #ddd; /* Rregullimi i borders */
+            padding: 12px; /* Rregullimi i cell padding */
+            text-align: center;
         }
-        .services-table tr:hover{
-            background-color:#f1e9dd;
+        .services-table th {
+            background-color: #e6e4e1;
+            color: #5a4a3c;
+            text-transform: uppercase;
         }
-        h1{
-            text-align:center;
-            margin-top:20px;
-            color:#6d5b4b;
+        .services-table tr:nth-child(even) {
+            background-color: #cfc3c0;
+        }
+        .services-table tr:hover {
+            background-color: #f1e9dd;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #6d5b4b;
         }
         h2 {
             color: #6d5b4b; 
         }
-        footer{
-            background-color:#96887d;
+        footer {
+            background-color: #96887d;
             color: #fff;
-            padding:20px 0;
-            text-align:center;
+            padding: 20px 0;
+            text-align: center;
         }
     </style>
 </head>
@@ -52,107 +52,104 @@
 
     <header>
         <nav>
-          <div class="logo-cont">
-            <div class="logo">
-              <a href="#">
-                <img src="images/banner.png" alt="logo" title="Radiant Touch" />
-              </a>
+            <div class="logo-cont">
+                <div class="logo">
+                    <a href="#">
+                        <img src="images/banner.png" alt="logo" title="Radiant Touch" />
+                    </a>
+                </div>
             </div>
-          </div>
-          <div id="navi">
-            <ul>
-              <li><a href="#">Ballina</a></li>
-              <li><a href="#">Shërbimet</a></li>
-              <li><a href="#">Galeria</a></li>
-              <li><a href="#">Kontakti</a></li>
-            </ul>
-          </div>
+            <div id="navi">
+                <ul>
+                    <li><a href="#">Ballina</a></li>
+                    <li><a href="#">Shërbimet</a></li>
+                    <li><a href="#">Galeria</a></li>
+                    <li><a href="#">Kontakti</a></li>
+                </ul>
+            </div>
         </nav>
-      </header> 
-      <section>
-        
-    <h1>Ballina/Sherbimet</h1>
-   
-    <table class="services-table">
-        <thead>
-            <tr>
-                <th>SHËRBIMI</th>
-                <th>KOHA</th>
-                <th>ÇMIMI</th>
-            </tr>
-        </thead>
-   
-    <tbody>
-<tr>
-    <td>Prerje e flokëve</td>
-    <td>30 min.<i class="fas fa-clock"></i></td>
-    <td>6 €</td>
-</tr>
-    <tr><td>Fenirim i flokëve</td>
-        <td>15 min.<i class="fas fa-clock"></i></td>
-        <td>5 €</td>   
-</tr>
-<tr>
-    <td>Shatir i flokëve</td>
-    <td></i>180 min.<i class="fas fa-clock"></i></td>
-    <td>15 €-200 € </td>
-</tr>
-<tr>
-    <td>Larje e flokëve</td>
-    <td>10 min.<i class="fas fa-clock"></i></td>
-    <td>2 €</td>
-</tr>
-<tr>
-    <td>Grim</td>
-    <td>30 min.<i class="fas fa-clock"></i></td>
-    <td>15 €-30 €</td>
-</tr>
-<tr>
-    <td>Rregullimi i vetullave</td>
-    <td>15 min.<i class="fas fa-clock"></i></td>
-    <td>3 €</td>
-</tr>
-<tr>
-    <td>Çerpikë Classic</td>
-    <td>90 min.<i class="fas fa-clock"></i></td>
-    <td>25 €</td>
-</tr>
-<tr>
-    <td>Çerpikë Volume</td>
-    <td>90 min.<i class="fas fa-clock"></i></td>
-    <td>35 €</td>
-</tr>
-<tr>
-    <td>Tattoo me fije japoneze / microblading (2 seanca)</td>
-    <td>120 min.<i class="fas fa-clock"></i></td>
-    <td>99 €</td>
-</tr>
-<tr>
-    <td>Depilim të fytyrës</td>
-    <td>15 min.<i class="fas fa-clock"></i></td>
-    <td>4 €</td>
-</tr>
-<tr>
-    <td>Frizura për femra</td>
-    <td>30 min.<i class="fas fa-clock"></i></td>
-    <td>15 €-30 €</td>
-</tr>
-<tr>
-    <td>Rregullim për nuse</td>
-    <td>120 min.<i class="fas fa-clock"></i></td>
-    <td>75 €</td>
-</tr>
+    </header> 
 
-    </tbody>
-</table>
-      </section>
+    <section>
+        <h1>Ballina/Sherbimet</h1>
+        <table class="services-table" cellspacing="0" cellpadding="0"> <!-- Rregullimi i cellspacing dhe cellpadding -->
+            <thead>
+                <tr>
+                    <th>SHËRBIMI</th>
+                    <th>KOHA</th>
+                    <th>ÇMIMI</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Prerje e flokëve</td>
+                    <td>30 min.<i class="fas fa-clock"></i></td>
+                    <td>6 €</td>
+                </tr>
+                <tr>
+                    <td>Fenirim i flokëve</td>
+                    <td>15 min.<i class="fas fa-clock"></i></td>
+                    <td>5 €</td>   
+                </tr>
+                <tr>
+                    <td>Shatir i flokëve</td>
+                    <td>180 min.<i class="fas fa-clock"></i></td>
+                    <td>15 €-200 €</td>
+                </tr>
+                <tr>
+                    <td>Larje e flokëve</td>
+                    <td>10 min.<i class="fas fa-clock"></i></td>
+                    <td>2 €</td>
+                </tr>
+                <tr>
+                    <td>Grim</td>
+                    <td>30 min.<i class="fas fa-clock"></i></td>
+                    <td>15 €-30 €</td>
+                </tr>
+                <tr>
+                    <td>Rregullimi i vetullave</td>
+                    <td>15 min.<i class="fas fa-clock"></i></td>
+                    <td>3 €</td>
+                </tr>
+                <tr>
+                    <td>Çerpikë Classic</td>
+                    <td>90 min.<i class="fas fa-clock"></i></td>
+                    <td>25 €</td>
+                </tr>
+                <tr>
+                    <td>Çerpikë Volume</td>
+                    <td>90 min.<i class="fas fa-clock"></i></td>
+                    <td>35 €</td>
+                </tr>
+                <tr>
+                    <td>Tattoo me fije japoneze / microblading (2 seanca)</td>
+                    <td>120 min.<i class="fas fa-clock"></i></td>
+                    <td>99 €</td>
+                </tr>
+                <tr>
+                    <td>Depilim të fytyrës</td>
+                    <td>15 min.<i class="fas fa-clock"></i></td>
+                    <td>4 €</td>
+                </tr>
+                <tr>
+                    <td>Frizura për femra</td>
+                    <td>30 min.<i class="fas fa-clock"></i></td>
+                    <td>15 €-30 €</td>
+                </tr>
+                <tr>
+                    <td>Rregullim për nuse</td>
+                    <td>120 min.<i class="fas fa-clock"></i></td>
+                    <td>75 €</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
     <footer>
         <div class="footer-container">
             <div class="footer-section">
-                <img src="images/logofooter1.png" class="logo1" >
+                <img src="images/logofooter1.png" class="logo1">
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, beatae praesentium ut minus voluptate repellat nam esse, ab, sequi eaque fugit. Vel temporibus odio ea sequi mollitia ipsam, tenetur sed?</p>
-            
             </div>
             <div class="footer-section">
                 <h3>Kategorite</h3>
@@ -166,9 +163,9 @@
             </div>
             <div class="footer-section">
                 <h3>Kontakti</h3>
-                <p>Prishtine , Kosove</p>
+                <p>Prishtine, Kosove</p>
                 <p>+383 44 222 222</p> 
-                <p><a href="mailto:info@radianttouch.com"  style="color: #fff; text-decoration: none;"></a>info@radianttouch.com</p>  
+                <p><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
             </div>
             <div class="footer-section newsletter">
                 <h3>Abonohu</h3>
@@ -182,16 +179,14 @@
                         <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
-    
                     </div>
                 </form>
             </div>     
             <div class="footer-bottom">
                 &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
             </div>
+        </div>
     </footer>
-  
 
-    </script>
 </body>
 </html>
