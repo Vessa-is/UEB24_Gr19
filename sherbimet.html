@@ -245,25 +245,26 @@
           <div class="carousel-track-container">
             <ul class="carousel-track">
               <li class="carousel-slide">
-                <img src="images/flok1.jpeg" alt="Foto shërbimi për flok">
+                <img src="images/flok1.jpeg" alt="Foto shërëbimi për flok">
                 <div class="slide-content">
-                  <h2>Shërbime të ndryshme flokësh</h2>
-                  <p>Ofrojmë një gamë të gjerë shërbimesh për flokë, nga prerjet moderne dhe stilimet elegante deri te ngjyrimet profesionale. Kujdesemi për shëndetin dhe bukurinë e flokëve tuaj me produkte cilësore dhe teknika të avancuara.</p>
+                  <h2>Shërëbime të ndryshme flokësh</h2>
+                  <p>Ofrojmë një gamë të gjerë shërëbimesh për flokë, nga prerjet moderne dhe stilimet elegante deri te ngjyrimet profesionale. Kujdesemi për shëndetin dhe bukurinë e flokëve tuaj me produkte cilësore dhe teknika të avancuara.</p>
                 </div>
               </li>
               
               <li class="carousel-slide">
-                <img src="images/qerpik.jpeg" alt="Foto shërbimi për qerpikë">
+                <img src="images/qerpik.jpeg" alt="Foto shërëbimi për qerpikë">
                 <div class="slide-content">
-                  <h2>Shërbime të ndryshme për qerpikë</h2>
-                  <p>Ofrojmë shërbime të specializuara për qerpikë, duke përfshirë  qerpike clssic dhe volume. Theksoni bukurinë natyrale të syve tuaj me stilime të personalizuara dhe produkte cilësore për një pamje magjepsëse.</p>
+                  <h2>Shërëbime të ndryshme për qerpikë</h2>
+                  <p>Ofrojmë shërëbime të specializuara për qerpikë, duke përfshirë  qerpike clssic dhe volume. Theksoni bukurinë natyrale të syve tuaj me stilime të personalizuara dhe produkte cilësore për një pamje magjepsëse.</p>
                 </div>
               </li>
+              
               <li class="carousel-slide">
-                <img src="images/vetlla2.jpeg" alt="Foto shërbimi për vetulla">
+                <img src="images/vetlla2.jpeg" alt="Foto shërëbimi për vetulla">
                 <div class="slide-content">
-                  <h2>Shërbime të ndryshme për vetulla</h2>
-                  <p>Ofrojmë shërbime profesionale për formësimin dhe kujdesin e vetullave tuaja. Nga stilimet natyrale deri te definimet precize, sigurojmë pamjen perfekte duke përdorur teknika dhe produkte cilësore.</p>
+                  <h2>Shërëbime të ndryshme për vetulla</h2>
+                  <p>Ofrojmë shërëbime profesionale për formësimin dhe kujdesin e vetullave tuaja. Nga stilimet natyrale deri te definimet precize, sigurojmë pamjen perfekte duke përdorur teknika dhe produkte cilësore.</p>
                 </div>
               </li>
             </ul>
@@ -272,54 +273,108 @@
           <button class="carousel-button next">&#10095;</button>
         </div>
       </section>
-    <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <img src="images/logoo2.png" class="logo1" alt="logo">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, beatae praesentium ut minus voluptate repellat nam esse, ab, sequi eaque fugit. Vel temporibus odio ea sequi mollitia ipsam, tenetur sed?</p>
-            </div>
-            <div class="footer-section">
-                <h3>Kategorite</h3>
-                <ul>
-                    <li><a href="#">BALLINA</a></li>
-                    <li><a href="#">SHERBIMET</a></li>
-                    <li><a href="#">GALERIA</a></li>
-                    <li><a href="#">PER NE</a></li>
-                    <li><a href="#">KONTAKTI</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Kontakti</h3>
-                <p>Prishtine, Kosove</p>
-                <p>+383 44 222 222</p> 
-                <p><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
-            </div>
-            <div class="footer-section newsletter">
-                <h3>Abonohu</h3>
-                <form action="#">
-                    <div class="newsletter-input">
-                        <input type="email" placeholder="Enter your email">
-                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                    <div class="icons">
-                        <a href="#" class="icon"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="icon"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </form>
-            </div>     
-            <div class="footer-bottom">
-                &copy; 2024 <span>Radiant Touch</span>. Të gjitha të drejtat janë të rezervuara.
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        document.querySelectorAll('.services-table button').forEach(button => {
+      
+      <style>
+      .services {
+        text-align: center;
+        padding: 50px 20px;
+        background-color: #f4e4d4;
+      }
+      
+      .carousel {
+        position: relative;
+        width: 80%;
+        margin: 0 auto;
+        overflow: hidden;
+      }
+      
+      .carousel-track-container {
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .carousel-track {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+      }
+      
+      .carousel-slide {
+        min-width: 100%;
+        text-align: center;
+        transition: opacity 0.5s ease-in-out;
+      }
+      
+      .carousel-slide img {
+        width: 300px;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-bottom: 20px;
+      }
+      
+      .slide-content {
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      
+      .carousel-button {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: #6d4c3d;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 50%;
+        font-size: 18px;
+      }
+      
+      .carousel-button:hover {
+        background-color: #8b5e4c;
+      }
+      
+      .carousel-button.prev {
+        left: 10px;
+      }
+      
+      .carousel-button.next {
+        right: 10px;
+      }
+      </style>
+      
+      <script>
+      const track = document.querySelector('.carousel-track');
+      const slides = Array.from(track.children);
+      const nextButton = document.querySelector('.carousel-button.next');
+      const prevButton = document.querySelector('.carousel-button.prev');
+      
+      let currentIndex = 0;
+      
+      function updateSlides() {
+        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+      
+      nextButton.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateSlides();
+      });
+      
+      prevButton.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        updateSlides();
+      });
+      document.querySelectorAll('.services-table button').forEach(button => {
             button.addEventListener('click', () => {
                 alert('Shërbimi juaj është rezervuar!');
             });
         });
-    </script>
+    
+      </script>
+      
+       
+    
 </body>
 </html>
