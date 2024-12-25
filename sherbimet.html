@@ -171,6 +171,46 @@
       .carousel-button.next {
         right: 10px;
       }
+      button.book-btn {
+            background-color: #6d4c3d;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+        button.book-btn:hover {
+            background-color: #9e765d;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fff;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .modal-header, .modal-footer {
+            padding: 10px;
+            color: white;
+            background-color: #6d4c3d;
+            text-align: center;
+        }
+        .modal-body {
+            margin: 20px 0;
+        }
     </style>
   </head>
   <body>
@@ -374,6 +414,7 @@
           </p>
         </div>
       </div>
+      
       <div class="footer-section newsletter">
         <h3>Abonohuni</h3>
         <form action="#" method="POST">
@@ -397,16 +438,7 @@
           </div>
         </form>
       </div>
-
-      <div class="footer-bottom">
-        &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të
-        rezervuara.
-      </div>
-      <button id="scrollToTop" title="Kthehu lart">
-        <i class="fas fa-arrow-up"></i>
-      </button>
-    </footer>
-
+   
     <script>
       const track = document.querySelector(".carousel-track");
       const slides = Array.from(track.children);
@@ -433,6 +465,25 @@
           alert("Shërbimi juaj është rezervuar!");
         });
       });
+      function openModal(service) {
+            document.getElementById('serviceName').textContent = `Shërëbimi: ${service}`;
+            document.getElementById('bookingModal').style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('bookingModal').style.display = 'none';
+        }
+
+        function confirmBooking() {
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            if (date && time) {
+                alert(`Termini u rezervua me sukses për datën ${date} në orën ${time}`);
+                closeModal();
+            } else {
+                alert('Ju lutem plotësoni të gjitha fushat.');
+            }
+        }
     </script>
   </body>
 </html>
