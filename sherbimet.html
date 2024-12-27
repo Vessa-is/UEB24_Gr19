@@ -84,7 +84,6 @@
         font-size: 14px;
         transition: background-color 0.3s ease;
         font-weight: bold;
-        font-weight: bold;
       }
 
       .services-table button:hover {
@@ -106,111 +105,73 @@
         background-color: #f4e4d4;
       }
 
-      .carousel {
-        position: relative;
-        width: 80%;
-        margin: 0 auto;
-        overflow: hidden;
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: rgba(0, 0, 0, 0.4);
       }
 
-      .carousel-track-container {
-        position: relative;
-        overflow: hidden;
-      }
-
-      .carousel-track {
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-      }
-
-      .carousel-slide {
-        min-width: 100%;
-        text-align: center;
-        transition: opacity 0.5s ease-in-out;
-      }
-
-      .carousel-slide img {
-        width: 300px;
-        height: auto;
-        border-radius: 10px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        margin-bottom: 20px;
-      }
-
-      .slide-content {
-        padding: 30px;
+      .modal-content {
         background-color: #fff;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-      .slide-content h2 {
-        padding-bottom: 20px;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        border-radius: 10px;
       }
 
-      .carousel-button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background-color: #6d4c3d;
-        color: white;
-        border: none;
-        cursor: pointer;
+      .modal-header,
+      .modal-footer {
         padding: 10px;
-        border-radius: 50%;
-        font-size: 18px;
+        color: white;
+        background-color: #6d4c3d;
+        text-align: center;
+        border-radius: 10px 10px 0 0;
       }
 
-      .carousel-button:hover {
+      .modal-body {
+        margin: 20px 0;
+        text-align: center;
+      }
+
+      .modal-footer {
+        border-radius: 0 0 10px 10px;
+      }
+
+      .modal-footer button {
+        padding: 10px 15px;
+        margin: 5px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #6d4c3d;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .modal-footer button:hover {
         background-color: #8b5e4c;
       }
 
-      .carousel-button.prev {
-        left: 10px;
-      }
-
-      .carousel-button.next {
-        right: 10px;
-      }
       button.book-btn {
-            background-color: #6d4c3d;
-            color: white;
-            padding: 5px 10px;
-            border: none;
-            cursor: pointer;
-        }
-        button.book-btn:hover {
-            background-color: #9e765d;
-        }
+        background-color: #6d4c3d;
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+      }
 
-        /* Modal styles */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-        }
-        .modal-content {
-            background-color: #fff;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 50%;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-        .modal-header, .modal-footer {
-            padding: 10px;
-            color: white;
-            background-color: #6d4c3d;
-            text-align: center;
-        }
-        .modal-body {
-            margin: 20px 0;
-        }
+      button.book-btn:hover {
+        background-color: #9e765d;
+      }
     </style>
   </head>
   <body>
@@ -237,7 +198,7 @@
 
     <section class="sherbimet">
       <h1>Shërbimet tona</h1>
-      <table class="services-table"  style="border: 3px solid #6d4c3d">
+      <table class="services-table" style="border: 3px solid #6d4c3d">
         <thead>
           <tr>
             <th>SHËRBIMI</th>
@@ -251,128 +212,95 @@
             <td>Prerje e flokëve</td>
             <td>30 min. <i class="fas fa-clock"></i></td>
             <td>6 €</td>
-            <td><button>Rezervo Tani</button></td>
+            <td><button onclick="openModal('Prerje e flokëve')">Rezervo Tani</button></td>
           </tr>
           <tr>
             <td>Fenirim i flokëve</td>
             <td>15 min. <i class="fas fa-clock"></i></td>
             <td>5 €</td>
-            <td><button>Rezervo Tani</button></td>
+            <td><button onclick="openModal('Fenirim i flokëve')">Rezervo Tani</button></td>
           </tr>
-          <tr>
-            <td>Shatir i flokëve</td>
-            <td>180 min. <i class="fas fa-clock"></i></td>
-            <td>15 €-200 €</td>
-            <td><button>Rezervo Tani</button></td>
-          </tr>
-          <tr>
-            <td>Larje e flokëve</td>
-            <td>10 min. <i class="fas fa-clock"></i></td>
-            <td>2 €</td>
-            <td><button>Rezervo Tani</button></td>
-          </tr>
-          <tr>
-            <td>Grim</td>
-            <td>30 min. <i class="fas fa-clock"></i></td>
-            <td>15 €-30 €</td>
-            <td><button>Rezervo Tani</button></td>
-          </tr>
-          <tr>
-            <td>Rregullimi i vetullave</td>
-            <td>15 min. <i class="fas fa-clock"></i></td>
-            <td>3 €</td>
-            <td><button>Rezervo Tani</button></td>
-          </tr>
-          <tr>
-            <td>Çerpikë Volume</td>
-            <td>90 min.</td>
-            <td>35 €</td>
-            <td><button>Rezervo Tani</button></td>
-          </tr>
-          <tr>
-            <td>Tattoo me fije japoneze / microblading (2 seanca)</td>
-            <td>120 min.<i class="fas fa-clock"></i></td>
+          <td>Shatir i flokëve</td>
+          <td>180 min. <i class="fas fa-clock"></i></td>
+          <td>15 €-200 €</td>
+          <td><button onclick="openModal('Prerje e flokëve')">Rezervo Tani</button></td>
+        </tr>
+        <tr>
+          <td>Larje e flokëve</td>
+          <td>10 min. <i class="fas fa-clock"></i></td>
+          <td>2 €</td>
+          <td><button onclick="openModal('Larje e flokëve')">Rezervo Tani</button></td>
+        </tr>
+        <tr>
+          <td>Grim</td>
+          <td>30 min. <i class="fas fa-clock"></i></td>
+          <td>15 €-30 €</td>
+          <td><button onclick="openModal('Grim')">Rezervo Tani</button></td>
+        </tr>
+        <tr>
+          <td>Rregullimi i vetullave</td>
+          <td>15 min. <i class="fas fa-clock"></i></td>
+          <td>3 €</td>
+          <td><button onclick="openModal('Rregullimi i vetullave')">Rezervo Tani</button></td>
+        </tr>
+        <tr>
+          <td>Çerpikë Volume</td>
+          <td>90 min.</td>
+          <td>35 €</td>
+          <td><button onclick="openModal('Çerpikë Volume')">Rezervo Tani</button></td>
+        </tr>
+        <tr>
+          <td>Tattoo me fije japoneze / microblading (2 seanca)</td>
+          <td>120 min.<i class="fas fa-clock"></i></td>
             <td>99 €</td>
-            <td><button>Rezervo Tani</button></td>
-          </tr>
-          <tr>
+            <td><button onclick="openModal('Tattoo me fije japoneze / microblading (2 seanca)')">Rezervo Tani</button></td>
+        </tr>
+        <tr>
             <td>Depilim të fytyrës</td>
             <td>15 min.<i class="fas fa-clock"></i></td>
             <td>4 €</td>
-            <td><button>Rezervo Tani</button></td>
-          </tr>
-          <tr>
+            <td><button onclick="openModal('Depilim të fytyrës')">Rezervo Tani</button></td>
+        </tr>
+        <tr>
             <td>Frizura për femra</td>
             <td>30 min.<i class="fas fa-clock"></i></td>
             <td>15 €-30 €</td>
-            <td><button>Rezervo Tani</button></td>
-          </tr>
-          <tr>
+            <td><button onclick="openModal('Frizura për femra')">Rezervo Tani</button></td>
+        </tr>
+        <tr>
             <td>Rregullim për nuse</td>
             <td>120 min.<i class="fas fa-clock"></i></td>
             <td>75 €</td>
-            <td><button>Rezervo Tani</button></td>
-          </tr>
+            <td><button onclick="openModal('Rregullim për nuse')">Rezervo Tani</button></td>
+        </tr>
         </tbody>
       </table>
     </section>
-    <section class="services">
-      <h1>Çfarë ofron Radiant Touch?</h1>
-      <div class="carousel">
-        <div class="carousel-track-container">
-          <ul class="carousel-track">
-            <li class="carousel-slide">
-              <img src="images/flok1.jpeg" alt="Foto shërëbimi për flok" />
-              <div class="slide-content">
-                <h2>Shërbime të ndryshme flokësh</h2>
-                <p>
-                  Ofrojmë një gamë të gjerë shërëbimesh për flokë, nga prerjet
-                  moderne dhe stilimet elegante deri te ngjyrimet profesionale.
-                  Kujdesemi për shëndetin dhe bukurinë e flokëve tuaj me
-                  produkte cilësore dhe teknika të avancuara.
-                </p>
-              </div>
-            </li>
 
-            <li class="carousel-slide">
-              <img src="images/qerpik.jpeg" alt="Foto shërëbimi për qerpikë" />
-              <div class="slide-content">
-                <h2>Shërbime të ndryshme për qerpikë</h2>
-                <p>
-                  Ofrojmë shërëbime të specializuara për qerpikë, duke përfshirë
-                  qerpike clssic dhe volume. Theksoni bukurinë natyrale të syve
-                  tuaj me stilime të personalizuara dhe produkte cilësore për
-                  një pamje magjepsëse.
-                </p>
-              </div>
-            </li>
-
-            <li class="carousel-slide">
-              <img src="images/vetlla2.jpeg" alt="Foto shërëbimi për vetulla" />
-              <div class="slide-content">
-                <h2>Shërbime të ndryshme për vetulla</h2>
-                <p>
-                  Ofrojmë shërëbime profesionale për formësimin dhe kujdesin e
-                  vetullave tuaja. Nga stilimet natyrale deri te definimet
-                  precize, sigurojmë pamjen perfekte duke përdorur teknika dhe
-                  produkte cilësore.
-                </p>
-              </div>
-            </li>
-          </ul>
+    <div id="bookingModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">Rezervimi i Shërbimit</div>
+        <div class="modal-body">
+          <p id="serviceName"></p>
+          <label for="date">Zgjidhni Datën:</label>
+          <input type="date" id="date" required /><br /><br />
+          <label for="time">Zgjidhni Orën:</label>
+          <input type="time" id="time" required />
         </div>
-        <button class="carousel-button prev">&#10094;</button>
-        <button class="carousel-button next">&#10095;</button>
+        <div class="modal-footer">
+          <button onclick="confirmBooking()">Konfirmo</button>
+          <button onclick="closeModal()">Mbyll</button>
+        </div>
       </div>
-    </section>
+    </div>
+
     <footer>
       <div class="footer-container">
         <div class="footer-section">
           <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" />
           <p>
             Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe
-            vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do
-            ditë.
+            vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur çdo ditë.
           </p>
         </div>
         <div class="footer-section">
@@ -399,22 +327,20 @@
           </p>
           <p>
             <i class="fas fa-phone"></i>
-            <a
-              href="tel:+38344222222"
-              style="color: #fff; text-decoration: none"
-              >+383 44 222 222</a >
+            <a href="tel:+38344222222" style="color: #fff; text-decoration: none"
+              >+383 44 222 222</a
+            >
           </p>
           <p>
             <i class="fas fa-envelope"></i
             ><a
               href="mailto:info@radianttouch.com"
               style="color: #fff; text-decoration: none"
-              >info@radianttouch.com
-              </a>
+              >info@radianttouch.com</a
+            >
           </p>
         </div>
       </div>
-      
       <div class="footer-section newsletter">
         <h3>Abonohuni</h3>
         <form action="#" method="POST">
@@ -438,52 +364,36 @@
           </div>
         </form>
       </div>
-   
+
+      <div class="footer-bottom">
+        &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të
+        rezervuara.
+      </div>
+      <button id="scrollToTop" title="Kthehu lart">
+        <i class="fas fa-arrow-up"></i>
+      </button>
+    </footer>
+
     <script>
-      const track = document.querySelector(".carousel-track");
-      const slides = Array.from(track.children);
-      const nextButton = document.querySelector(".carousel-button.next");
-      const prevButton = document.querySelector(".carousel-button.prev");
-
-      let currentIndex = 0;
-
-      function updateSlides() {
-        track.style.transform = `translateX(-${currentIndex * 100}%)`;
+      function openModal(service) {
+        document.getElementById("serviceName").textContent = `Shërbimi: ${service}`;
+        document.getElementById("bookingModal").style.display = "block";
       }
 
-      nextButton.addEventListener("click", () => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateSlides();
-      });
+      function closeModal() {
+        document.getElementById("bookingModal").style.display = "none";
+      }
 
-      prevButton.addEventListener("click", () => {
-        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-        updateSlides();
-      });
-      document.querySelectorAll(".services-table button").forEach((button) => {
-        button.addEventListener("click", () => {
-          alert("Shërbimi juaj është rezervuar!");
-        });
-      });
-      function openModal(service) {
-            document.getElementById('serviceName').textContent = `Shërëbimi: ${service}`;
-            document.getElementById('bookingModal').style.display = 'block';
+      function confirmBooking() {
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+        if (date && time) {
+          alert(`Termini u rezervua me sukses për datën ${date} në orën ${time}`);
+          closeModal();
+        } else {
+          alert("Ju lutem plotësoni të gjitha fushat.");
         }
-
-        function closeModal() {
-            document.getElementById('bookingModal').style.display = 'none';
-        }
-
-        function confirmBooking() {
-            const date = document.getElementById('date').value;
-            const time = document.getElementById('time').value;
-            if (date && time) {
-                alert(`Termini u rezervua me sukses për datën ${date} në orën ${time}`);
-                closeModal();
-            } else {
-                alert('Ju lutem plotësoni të gjitha fushat.');
-            }
-        }
+      }
     </script>
   </body>
 </html>
