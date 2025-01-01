@@ -44,6 +44,8 @@ else if (index <0 ){
 
 function prevSlide () {
 
+    slideIndex--;
+    showSlide(slideIndex);
 }
 
 function nextSlide () {

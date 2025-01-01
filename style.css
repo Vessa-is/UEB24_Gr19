@@ -447,3 +447,11 @@ audio{
 img.displaySlide {
   display: block;
 }
+
+
+.prev  .next {
+  align-items: center;
+  size: 30px;
+
+
+}
