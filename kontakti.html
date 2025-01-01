@@ -148,6 +148,7 @@
     list-style: none;
     padding: 0;
     color: #6d4c3d;
+    list-style-type: circle;
     }
     .location .Orari li {
     margin: 5px 0;
@@ -193,7 +194,6 @@
     transform: translateY(-5px);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
-
 .location-number {
     display: block;
     font-size: 24px;
@@ -286,19 +286,54 @@
 
 </style>
 <script>
-    // Butoni "Kthehu lart"
-    const scrollToTopButton = document.getElementById('scrollToTop');
-    window.onscroll = () => {
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-            scrollToTopButton.style.display = "block";
-        } else {
-            scrollToTopButton.style.display = "none";
-        }
-    };
+    function validateName(name) {
+    if (!name || name.length < 3) {
+        throw "Emri duhet të ketë të paktën 3 karaktere.";
+    }
+    return true;
+} return true;
+function validatePhone(phone) {
+    const phoneRegex = /^\+?\d{9,15}$/;
+    if (!phoneRegex.test(phone)) {
+        throw "Numri i telefonit është i pavlefshëm.";
+    }
+    return true;
+}
+    const contactForm = document.querySelector('.contact-form form');
+    contactForm.addEventListener('submit', (event) => {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const message = document.getElementById('message').value.trim();
 
-    scrollToTopButton.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        if (!name || !email || !phone || !message) {
+            alert("Ju lutem plotësoni të gjitha fushat!");
+            event.preventDefault();
+        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert("Ju lutem shkruani një email të vlefshëm!");
+            event.preventDefault();
+        }
     });
+    const locations = [
+        { city: "Prishtinë", address: "Rruga B, Royal Mall", open: true },
+        { city: "Prizren", address: "ABI Carshia, Nr. 10", open: true },
+        { city: "Ferizaj", address: "Ferizaj Mall", open: true },
+        { city: "Mitrovicë", address: "Rruga Adem Jashari, Nr. 20", open: false }
+    ];
+
+    const openLocations = locations.filter(location => location.open);    
+    const openCities = openLocations.map(location => location.city);
+    const totalOpen = openLocations.reduce((count, location) => count + 1, 0);
+    const feedbackSection = document.querySelector('.feedback-section');
+    const summary = document.createElement('p');
+    summary.textContent = `Lokacionet e hapura: ${openCities.join(', ')}. Gjithsej: ${totalOpen}`;
+    feedbackSection.appendChild(summary)
+
+
+</script>
+
+
+  
 <body>
     <header>
         <nav>
