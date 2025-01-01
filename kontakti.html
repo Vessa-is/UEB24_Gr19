@@ -194,7 +194,6 @@
     transform: translateY(-5px);
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
-
 .location-number {
     display: block;
     font-size: 24px;
@@ -287,20 +286,19 @@
 
 </style>
 <script>
-   
-    const scrollToTopButton = document.getElementById('scrollToTop');
-    window.onscroll = () => {
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-            scrollToTopButton.style.display = "block";
-        } else {
-            scrollToTopButton.style.display = "none";
-        }
-    };
-
-    scrollToTopButton.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
+    function validateName(name) {
+    if (!name || name.length < 3) {
+        throw "Emri duhet të ketë të paktën 3 karaktere.";
+    }
+    return true;
+} return true;
+function validatePhone(phone) {
+    const phoneRegex = /^\+?\d{9,15}$/;
+    if (!phoneRegex.test(phone)) {
+        throw "Numri i telefonit është i pavlefshëm.";
+    }
+    return true;
+}
     const contactForm = document.querySelector('.contact-form form');
     contactForm.addEventListener('submit', (event) => {
         const name = document.getElementById('name').value.trim();
@@ -314,9 +312,6 @@
         } else if (!/^\S+@\S+\.\S+$/.test(email)) {
             alert("Ju lutem shkruani një email të vlefshëm!");
             event.preventDefault();
-        } else if (!/^\+?\d{9,15}$/.test(phone)) {
-            alert("Ju lutem shkruani një numër telefoni të vlefshëm!");
-            event.preventDefault();
         }
     });
     const locations = [
@@ -326,19 +321,15 @@
         { city: "Mitrovicë", address: "Rruga Adem Jashari, Nr. 20", open: false }
     ];
 
-    const openLocations = locations.filter(location => location.open);
-
-    
+    const openLocations = locations.filter(location => location.open);    
     const openCities = openLocations.map(location => location.city);
-
-    
     const totalOpen = openLocations.reduce((count, location) => count + 1, 0);
-
-  
     const feedbackSection = document.querySelector('.feedback-section');
     const summary = document.createElement('p');
     summary.textContent = `Lokacionet e hapura: ${openCities.join(', ')}. Gjithsej: ${totalOpen}`;
     feedbackSection.appendChild(summary)
+
+
 </script>
 
 
