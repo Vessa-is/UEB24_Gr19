@@ -286,7 +286,7 @@
 
 </style>
 <script>
-    // Butoni "Kthehu lart"
+
     const scrollToTopButton = document.getElementById('scrollToTop');
     window.onscroll = () => {
         if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
@@ -300,7 +300,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // Validimi i Formës së Kontaktit
     const contactForm = document.querySelector('.contact-form form');
     contactForm.addEventListener('submit', (event) => {
         const name = document.getElementById('name').value.trim();
