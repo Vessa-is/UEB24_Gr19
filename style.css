@@ -430,16 +430,20 @@ audio{
 }
 
 
-
 .slider {
   position: relative;
   width: 100%;
-  margin:auto;
+  margin: auto;
   overflow: hidden;
 }
 
-.slider img{
-width:100%;
-display: none;
+.slider img {
+  width: 50%;
+  display: none;
+  height :500px;
+  margin-left: 20em;
+}
 
+img.displaySlide {
+  display: block;
 }
