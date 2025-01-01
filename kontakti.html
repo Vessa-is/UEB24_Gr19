@@ -299,6 +299,30 @@
     scrollToTopButton.addEventListener('click', () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
+
+    // Validimi i Formës së Kontaktit
+    const contactForm = document.querySelector('.contact-form form');
+    contactForm.addEventListener('submit', (event) => {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        if (!name || !email || !phone || !message) {
+            alert("Ju lutem plotësoni të gjitha fushat!");
+            event.preventDefault();
+        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+            alert("Ju lutem shkruani një email të vlefshëm!");
+            event.preventDefault();
+        } else if (!/^\+?\d{9,15}$/.test(phone)) {
+            alert("Ju lutem shkruani një numër telefoni të vlefshëm!");
+            event.preventDefault();
+        }
+    });
+</script>
+
+
+  
 <body>
     <header>
         <nav>
