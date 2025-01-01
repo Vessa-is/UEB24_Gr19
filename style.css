@@ -435,6 +435,7 @@ audio{
   grid-template-columns: repeat(4, 1fr);
   gap: 10px;
   width: 80%;
+  text-align: center;
   
 }
 
@@ -460,6 +461,16 @@ audio{
   transform: scale(1.1);
 }
 
-#gallerypage {
-  background: radial-gradient(center = white, brown);
+#galleryheading {
+ 
+  text-decoration: dotted;
+  text-shadow: #6F4F47;
+  color: #4c3b36;
+ margin-left: 135px;
+margin-top: 100px;
+
+}
+
+#galleryheading:hover {
+  color: #8d6e63;
 }
