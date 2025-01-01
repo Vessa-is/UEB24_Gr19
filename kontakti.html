@@ -287,7 +287,7 @@
 
 </style>
 <script>
-
+   
     const scrollToTopButton = document.getElementById('scrollToTop');
     window.onscroll = () => {
         if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
@@ -319,6 +319,26 @@
             event.preventDefault();
         }
     });
+    const locations = [
+        { city: "Prishtinë", address: "Rruga B, Royal Mall", open: true },
+        { city: "Prizren", address: "ABI Carshia, Nr. 10", open: true },
+        { city: "Ferizaj", address: "Ferizaj Mall", open: true },
+        { city: "Mitrovicë", address: "Rruga Adem Jashari, Nr. 20", open: false }
+    ];
+
+    const openLocations = locations.filter(location => location.open);
+
+    
+    const openCities = openLocations.map(location => location.city);
+
+    
+    const totalOpen = openLocations.reduce((count, location) => count + 1, 0);
+
+  
+    const feedbackSection = document.querySelector('.feedback-section');
+    const summary = document.createElement('p');
+    summary.textContent = `Lokacionet e hapura: ${openCities.join(', ')}. Gjithsej: ${totalOpen}`;
+    feedbackSection.appendChild(summary)
 </script>
 
 
