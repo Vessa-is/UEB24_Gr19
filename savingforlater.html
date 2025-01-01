@@ -1,0 +1,151 @@
+<div id ="gallerypage" >
+    <div class="textleft"> Portofolio<br> jone </div>
+  <div class = "textright"> Radiant <br>Touch <br>Gallery </div>
+  <div class="slider"> 
+  <div class="slides">
+    <img class="slide" src="images/flok1.jpeg" alt="image number 1">
+    <img class="slide" src="images/frizura.jpg" alt="image number 2">
+    <img class="slide" src="images/foto1.jpg" alt="image number 3">
+    <img class="slide" src="images/qerpik.jpeg" alt="image number 1">
+    <img class="slide" src="images/foto2.jpg" alt="image number 2">
+    <img class="slide" src="images/gallery.jpg" alt="image number 3">
+    <img class="slide" src="images/micro.jpg" alt="image number 3">
+    <img class="slide" src="images/vetlla1.jpeg" alt="image number 8">
+    <img class="slide" src="images/vetlla2.jpeg" alt="image number 9">
+    <img class="slide" src="images/shatiri.jpg" alt="image number 9">
+    <img class="slide" src="images/gil.jpg" alt="image number 9">
+    <img class="slide" src="images/nuse.jpg" alt="image number 9">
+  </div>
+  
+  </div>
+  
+  <button class="prev" onclick="prevSlide()">&#10094</button>
+  <button class="next" onclick="nextSlide()">&#10095</button>
+  
+  </div>
+
+/* slider {
+    position: relative;
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+  }
+  
+  .slider img {
+    width: 50%;
+    display: none;
+    height :500px;
+    margin-left: 20em;
+  }
+  
+  img.displaySlide {
+    display: block;
+  }
+  
+  button.prev, button.next {
+  position:absolute;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 20%;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  }
+  
+  
+  button.prev:hover, button.next:hover {
+    background-color: tan; 
+    color: black; 
+  }
+  
+  button.prev {
+    left: 15px;
+  }
+  
+  button.next {
+    right: 15px;
+  }
+  
+  #gallerypage{
+    background: radial-gradient(white, #f4e4d4);
+  }
+  
+  
+  .textleft, .textright {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgb(95, 48, 17); 
+    font-size: 40px; 
+    font-family: Arial, sans-serif; 
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.7); 
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
+  .textleft {
+    left: 20px;
+    max-width: 20%; 
+  }
+  
+  .textright {
+    right: 20px;
+    max-width: 20%; 
+  } */
+
+
+  //Image Slider 
+
+
+const slides = document.querySelectorAll (".slides img");
+let slideIndex = 0;
+let intervalId = null; 
+
+//Initialize slider
+
+document.addEventListener("DOMContentLoaded", initializeSlider);
+
+
+function  initializeSlider (){
+    
+    if( slides.length > 0) {
+
+        slides [slideIndex].classList.add("displaySlide");
+ intervalId = setInterval( nextSlide, 5000 );
+
+    }
+
+}
+
+function showSlide (index) {
+
+if(index >= slides.length) {
+    
+    slideIndex=0;
+
+}
+
+else if (index <0 ){
+    slideIndex = slides.length -1 ;
+    
+
+}
+
+    slides.forEach (
+       slide => {slide.classList.remove ("displaySlide")});
+       slides[slideIndex].classList.add("displaySlide");
+
+
+}
+
+function prevSlide () {
+
+    slideIndex--;
+    showSlide(slideIndex);
+}
+
+function nextSlide () {
+slideIndex++;
+showSlide(slideIndex);
+}
