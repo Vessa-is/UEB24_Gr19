@@ -285,8 +285,20 @@
 }
 
 </style>
+<script>
+    // Butoni "Kthehu lart"
+    const scrollToTopButton = document.getElementById('scrollToTop');
+    window.onscroll = () => {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            scrollToTopButton.style.display = "block";
+        } else {
+            scrollToTopButton.style.display = "none";
+        }
+    };
 
-  
+    scrollToTopButton.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 <body>
     <header>
         <nav>
@@ -363,8 +375,8 @@
         <div class="location">
             <span class="location-number">1</span>
             <address>
-            <p><strong>Prishtinë:</strong> Rruga B, Nr. 45</p>
-             <a href="https://goo.gl/maps/example" target="_blank" class="map-link">Shiko në hartë</a>
+            <p><strong>Prishtinë:</strong> Rruga B,Royal Mall</p>
+             <a href="https://www.google.com/maps/place/Royal+Mall/@42.6538179,21.1747672,17z/data=!4m14!1m7!3m6!1s0x13549edaa73c5815:0x8ce096f362fa06bb!2sRoyal+Mall!8m2!3d42.6538179!4d21.1773421!16s%2Fg%2F11g9g_n6b1!3m5!1s0x13549edaa73c5815:0x8ce096f362fa06bb!8m2!3d42.6538179!4d21.1773421!16s%2Fg%2F11g9g_n6b1?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
               
             <div class="Orari">
@@ -379,7 +391,7 @@
         <div class="location">
             <address>
             <span class="location-number">2</span>
-            <p><strong>Prizren:</strong> Sheshi Shatërvan, Nr. 10</p><a href="https://goo.gl/maps/example" target="_blank" class="map-link">Shiko në hartë</a>
+            <p><strong>Prizren:</strong> ABI Carshia, Nr. 10</p><a href="https://www.google.com/maps/place/ABI+%C3%87arshia/@42.2180145,20.7242061,17.35z/data=!4m6!3m5!1s0x1353957e9046af55:0x9b12caa8bed3c878!8m2!3d42.2173705!4d20.7256931!16s%2Fg%2F11gtyt8zy2?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
             
             <div class="Orari">
@@ -394,8 +406,8 @@
         <div class="location">
             <span class="location-number">3</span>
             <address>
-            <p><strong>Ferizaj:</strong> Rruga e Re, Kompleksi "X"</p>
-            <a href="https://goo.gl/maps/example" target="_blank" class="map-link">Shiko në hartë</a>
+            <p><strong>Ferizaj:</strong> Ferizaj Mall</p>
+            <a href="https://www.google.com/maps/place/Ferizaj+Mall/@42.3842742,21.1675289,17z/data=!3m1!4b1!4m6!3m5!1s0x13547fbefc06e153:0x2a5ab8e4815e007e!8m2!3d42.3842742!4d21.1675289!16s%2Fg%2F11vqpd2347?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
             <div class="Orari">
                 <h3>Orari i Punës</h3>
@@ -410,7 +422,7 @@
             <span class="location-number">4</span>
             <address>
             <p><strong>Mitrovicë:</strong> Rruga Adem Jashari, Nr. 20</p>
-            <a href="https://goo.gl/maps/example" target="_blank" class="map-link">Shiko në hartë</a>
+            <a href="https://www.google.com/maps/place/Adem+Jashari/@42.8882602,20.8671181,17z/data=!3m1!4b1!4m6!3m5!1s0x13534512ddeaaaab:0x5f90836c8070656c!8m2!3d42.8882602!4d20.869693!16s%2Fg%2F11sskrf43v?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
             <div class="Orari">
                 <h3>Orari i Punës</h3>
