@@ -482,12 +482,76 @@ margin-top: 100px;
 }
 
 #aboutusheader {
+  font-size: 2em;
+  margin-bottom: 20px;
   font-family: group19;
-  text-align: center;
 }
 
 
-#bodyofaboutus {
-  background: radial-gradient(ellipse, white, #f4e4d4)
-  
+#aboutuspagebody {
+
+  margin:0px;
+  padding:0px;
+  box-sizing: border-box;
+
+}
+
+.aboutuspage {
+  width: 100%;
+  min-height:100vh;
+  background: radial-gradient(white, #f4e4d4)
+
+
+}
+
+.aboutussection {
+  width: 80%;
+  display: block;
+  margin: auto;
+  padding-top: 100px;
+  clear: both;
+
+
+}
+
+.contentsection {
+  float: left;
+  width: 50%;
+
+}
+
+.imagesection {
+  float: right;
+  width: 0.5%;
+  margin-left: 10px;
+
+}
+
+.imagesection img {
+width:100;
+height: auto;
+border-radius: 10px;
+}
+
+.contentsection .aboutustitle {
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-size: 28px;
+
+}
+
+.contentsection .aboutuscontent  .aboutush3 {
+
+  margin: 20px;
+  color:#4c3b36;
+  font-size: 20px;
+
+
+}
+
+.contentsection .aboutuscontent .aboutusparagraph {
+  margin-top: 10px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size : 15px;
+  line-height: 1.5;
 }
