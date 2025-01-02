@@ -478,7 +478,6 @@ margin-top: 100px;
 @font-face {
   font-family: "group19";
   src: url(Calligraffitti-Regular.ttf);
-  font-size: 20px;
 }
 
 #aboutusheader {
@@ -500,26 +499,31 @@ margin-top: 100px;
 }
 
 .aboutussection {
-  width: 80%; 
+  width: 70%;
+  display: block;
   margin: auto;
   padding-top: 100px;
-  clear: both; 
+}
+
+.flexcontainer {
+  display: flex; /* Use flexbox layout */
+  justify-content: space-between; /* Add spacing between items */
+  align-items: center; /* Align items vertically */
+  gap: 20px; /* Optional: Add spacing between elements */
 }
 
 .contentsection {
-  float: left;
-  width: 40%; 
-  margin-right: 4%; 
+  flex: 1; /* Allow content to take up remaining space */
 }
 
 .imagesection {
-  float: left;
-  width: 40%; 
+  flex-shrink: 0; /* Prevent image from shrinking */
+  max-width: 20%; /* Limit the width of the image */
 }
 
 .imagesection img {
-  width: 100%;
-  height: auto;
+  width: 150px;
+  height: 150px;
   border-radius: 10px;
 }
 
@@ -540,11 +544,4 @@ margin-top: 100px;
   font-family: 'Times New Roman', Times, serif;
   font-size: 15px;
   line-height: 1.5;
-}
-
-
-.clearfix::after {
-  content: "";
-  clear: both;
-  display: table;
 }
