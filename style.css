@@ -188,13 +188,15 @@ z-index: 1;
   opacity: 0.6;
 }
 
-/* Stili për seksionin e shërbimeve */
+
 .container {
   text-align: center;
   margin: 50px auto;
   font-family: 'Arial', sans-serif;
   color: #333;
   background-color: #fff;
+  position: relative;
+
 }
 
 .container h2 {
@@ -203,7 +205,7 @@ z-index: 1;
   margin-bottom: 20px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
-  color: #8B5E3C; /* Ngjyra sipas imazhit */
+  color: #8B5E3C; 
 }
 
 .services {
@@ -241,6 +243,32 @@ z-index: 1;
   text-transform: none;
   margin: 0;
 }
+
+.container .main-btn {
+  position: absolute;
+  right: 20px; 
+  bottom: -40px; 
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #8B5E3C; 
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none; 
+  transition: background-color 0.3s;
+}
+
+.container .main-btn i {
+  margin-left: 8px; 
+}
+
+.container .main-btn:hover {
+  background-color: #70492E; 
+}
+
 
 
 footer {
