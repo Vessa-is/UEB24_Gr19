@@ -151,6 +151,10 @@ section {
   background-color: #4f3d30; 
 }
 
+.about-button:focus {
+  outline: 2px solid #a42727; 
+}
+
 
 .container {
   text-align: center;
