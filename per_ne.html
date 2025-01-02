@@ -6,6 +6,7 @@
     <title>Për ne-Radiant Touch</title>
     <link rel="icon" href="images/logo1.png" />
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -76,6 +77,17 @@
 
             </div>
             <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
+            <script>
+              const scrollToTopButton = document.getElementById("scrollToTop");
+
+window.onscroll = () => {
+    scrollToTopButton.style.display = window.scrollY > 300 ? "block" : "none";
+};
+
+scrollToTopButton.onclick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+};
+            </script>
     </footer>
 </body>
 </html>

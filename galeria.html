@@ -95,8 +95,19 @@
 
       </div>
       <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
+      <script>
+        const scrollToTopButton = document.getElementById("scrollToTop");
+
+window.onscroll = () => {
+scrollToTopButton.style.display = window.scrollY > 300 ? "block" : "none";
+};
+
+scrollToTopButton.onclick = () => {
+window.scrollTo({ top: 0, behavior: "smooth" });
+};
+      </script>
 </footer>
 
-<script  src="javascript.js"></script>
+
 </body>
 </html>
