@@ -488,5 +488,6 @@ margin-top: 100px;
 
 
 #bodyofaboutus {
-  background: radial-gradient()
+  background: radial-gradient(ellipse, white, #f4e4d4)
+  
 }
