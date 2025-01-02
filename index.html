@@ -8,6 +8,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <script src="javascript.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
     <link rel="stylesheet" href="style.css">
     <style>
@@ -329,15 +331,18 @@
             </div>
             <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
             <script>
-              const scrollToTopButton = document.getElementById("scrollToTop");
+              $(document).ready(function() {
+                $(window).scroll(function() {
+                  if ($(this).scrollTop() > 600) {
+                    $("#scrollToTop").fadeIn(); 
+                  }else {
+                    $("#scrollToTop").fadeOut(); 
+                  }});
+                  $("#scrollToTop").click(function() {
+                    $("html, body").animate({ scrollTop: 0 }, 600); 
+                  });
+                });
 
-window.onscroll = () => {
-    scrollToTopButton.style.display = window.scrollY > 300 ? "block" : "none";
-};
-
-scrollToTopButton.onclick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-};
             </script>
     </footer>
   
