@@ -474,3 +474,19 @@ margin-top: 100px;
 #galleryheading:hover {
   color: #8d6e63;
 }
+
+@font-face {
+  font-family:"group19";
+  src: url(Calligraffitti-Regular.ttf);
+  font-size: 20px;
+}
+
+#aboutusheader {
+  font-family: group19;
+  text-align: center;
+}
+
+
+#bodyofaboutus {
+  background: radial-gradient()
+}
