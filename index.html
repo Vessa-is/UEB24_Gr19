@@ -8,6 +8,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <script src="javascript.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
     <link rel="stylesheet" href="style.css">
     <style>
@@ -232,9 +234,15 @@
             <p>
               Radiant Touch është një sallon bukurie që ofron shërbime të specializuara për kujdesin e flokëve, qerpikëve dhe vetullave. Me një ekip profesionistësh të përkushtuar dhe produkte të cilësisë së lartë, ne synojmë të nxjerrim në pah bukurinë tuaj natyrale dhe t'ju ofrojmë një përvojë relaksuese e luksoze. Vizitoni sallonin tonë dhe përjetoni kujdesin e merituar!
             </p>
-            <a href="#" class="about-button">Lexo me shume</a>
+            <a href="per_ne.html" class="about-button">Lexo më shumë</a>
           </div>
         </div>
+        <script>
+          $(document).ready(function() {
+              $(".about-content h3").css("color", "#664f3e");    
+          });
+      </script>
+      
     </section>
     <div class="container_index1">
       <div class="overlay-text">
@@ -248,28 +256,32 @@
         />
       </video>
       </div>
+    
       <div class="audio-container">
       <audio controls autoplay loop muted>
         <source src="audios/audio1.mp3" type="audio/mp3">
       </audio>
     </div>
-      <div class="container">
-        <h2>SH&Euml;RBIMET TONA</h2>
-        <div class="services">
-            <div class="service-item">
-                <img src="images/sherbimiflok.jpeg" alt="Products + Accessories">
-                <p>STILIM DHE TRAJTIME PËR FLOKË</p>
-            </div>
-            <div class="service-item">
-                <img src="images/sherbim2.jpg" alt="Book Next Experience">
-                <p>APLIKIM QERPIKËSH</p>
-            </div>
-            <div class="service-item">
-                <img src="images/sherbim3.jpg" alt="Hair Extensions">
-                <p>STILIM DHE LAMINIM I VETULLAVE</p>
-            </div>
-        </div>
-    </div>
+    <section class="container">
+      <h2>SHËRBIMET TONA</h2>
+      <div class="services">
+          <div class="service-item">
+              <img src="images/sherbimiflok.jpeg" alt="Stilim dhe trajtime për flokë">
+              <p>STILIM DHE TRAJTIME PËR FLOKË</p>
+          </div>
+          <div class="service-item">
+              <img src="images/sherbim2.jpg" alt="Aplikim qerpikësh">
+              <p>APLIKIM QERPIKËSH</p>
+          </div>
+          <div class="service-item">
+              <img src="images/kontakti.jpg" alt="Stilim dhe laminim i vetullave">
+              <p>STILIM DHE LAMINIM I VETULLAVE</p>
+          </div>
+      </div>
+      <a href="galeria.html" class="main-btn">Shiko Galerinë <i class="fas fa-arrow-right"></i></a>
+  </section>
+  
+  
     <section class="kontenti2">
       <div class="rezervimi">
       <h1>Rezervo Online</h1>
@@ -277,13 +289,24 @@
       <a href="#" class="btn">Rezervo</a>
     </div>
 </section>
+<script>
+  $(document).ready(function() {
+   
+    $(".btn").hover(function() {
+      $(this).css("background-color", "#6f6154");  
+    }, function() {
+      $(this).css("background-color", "#96887d");  
+    });
+  });
+</script>
+
       
     <footer>
         
         <div class="footer-container">
             <div class="footer-section">
                 <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" >
-                <p>Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do ditë.</p>
+                <p>Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe vetullat. </br>Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do ditë.</p>
             </div>
             <div class="footer-section">
                 <h3>Kategorit&euml;</h3>
@@ -303,6 +326,7 @@
             </div>
 
             </div>
+            <hr style="width: 90%;  margin: 10px auto; ">
             <div class="footer-section newsletter">
                 <h3>Abonohuni</h3>
                 <form action="#" method="POST">
@@ -326,15 +350,18 @@
             </div>
             <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
             <script>
-              const scrollToTopButton = document.getElementById("scrollToTop");
+              $(document).ready(function() {
+                $(window).scroll(function() {
+                  if ($(this).scrollTop() > 600) {
+                    $("#scrollToTop").fadeIn(); 
+                  }else {
+                    $("#scrollToTop").fadeOut(); 
+                  }});
+                  $("#scrollToTop").click(function() {
+                    $("html, body").animate({ scrollTop: 0 }, 600); 
+                  });
+                });
 
-window.onscroll = () => {
-    scrollToTopButton.style.display = window.scrollY > 300 ? "block" : "none";
-};
-
-scrollToTopButton.onclick = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-};
             </script>
     </footer>
   
