@@ -481,18 +481,75 @@ margin-top: 100px;
 }
 
 @font-face {
-  font-family:"group19";
+  font-family: "group19";
   src: url(Calligraffitti-Regular.ttf);
   font-size: 20px;
 }
 
 #aboutusheader {
+  font-size: 2em;
+  margin-bottom: 20px;
   font-family: group19;
-  text-align: center;
+}
+
+#aboutuspagebody {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.aboutuspage {
+  width: 100%;
+  min-height: 100vh;
+  background: radial-gradient(white, #f4e4d4);
+}
+
+.aboutussection {
+  width: 80%; 
+  margin: auto;
+  padding-top: 100px;
+  clear: both; 
+}
+
+.contentsection {
+  float: left;
+  width: 40%; 
+  margin-right: 4%; 
+}
+
+.imagesection {
+  float: left;
+  width: 40%; 
+}
+
+.imagesection img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.contentsection .aboutustitle {
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-size: 28px;
+}
+
+.contentsection .aboutuscontent .aboutush3 {
+  margin: 20px;
+  color: #4c3b36;
+  font-size: 20px;
+}
+
+.contentsection .aboutuscontent .aboutusparagraph {
+  margin-top: 10px;
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 15px;
+  line-height: 1.5;
 }
 
 
-#bodyofaboutus {
-  background: radial-gradient(ellipse, white, #f4e4d4)
-  
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
