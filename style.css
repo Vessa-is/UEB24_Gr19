@@ -555,3 +555,26 @@ margin-top: 100px;
   font-size: 15px;
   line-height: 1.5;
 }
+
+
+.aboutusparagraph {
+  color:#4b392c;
+  font-family: group19;
+}
+
+#aboutusgreeting {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#h3lokacioni {
+
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+
+}
+
+#aboutuslokacioni {
+  color:#4b392c;
+  font-family: group19;
+  font-style: oblique;
+
+}

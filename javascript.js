@@ -21,7 +21,7 @@ switch (true) {
     case(currentHour >= 18 && currentHour < 24 ) :
 
 
-    greeting.textContent = " Mirembrema ";
+    greeting.textContent = " Mirembrema! ";
     break;
  
     default :
