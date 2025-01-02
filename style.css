@@ -486,9 +486,10 @@ margin-top: 100px;
 }
 
 #aboutusheader {
-  font-size: 2em;
+  font-size: 4em;
   margin-bottom: 20px;
   font-family: group19;
+  text-align: center;
 }
 
 #aboutuspagebody {
@@ -497,10 +498,10 @@ margin-top: 100px;
   box-sizing: border-box;
 }
 
-.aboutuspage {
+#aboutuspage {
   width: 100%;
   min-height: 100vh;
-  background: radial-gradient(white, #f4e4d4);
+  background : radial-gradient(white, #f4e4d4);
 }
 
 .aboutussection {
@@ -511,24 +512,24 @@ margin-top: 100px;
 }
 
 .flexcontainer {
-  display: flex; /* Use flexbox layout */
-  justify-content: space-between; /* Add spacing between items */
-  align-items: center; /* Align items vertically */
-  gap: 20px; /* Optional: Add spacing between elements */
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  gap: 20px; 
 }
 
 .contentsection {
-  flex: 1; /* Allow content to take up remaining space */
+  flex: 1; 
 }
 
 .imagesection {
-  flex-shrink: 0; /* Prevent image from shrinking */
-  max-width: 20%; /* Limit the width of the image */
+  flex-shrink: 0; 
+  max-width: 20%; 
 }
 
 .imagesection img {
-  width: 150px;
-  height: 150px;
+  width: 200px;
+  height: 200px;
   border-radius: 10px;
 }
 

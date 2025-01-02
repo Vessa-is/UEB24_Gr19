@@ -1,6 +1,6 @@
 
 const currentHour = new Date().getHours();
-let greeting = document.getElementById("greetingparagraph");
+let greeting = document.getElementById("aboutusgreeting");
 
 switch (true) {
 
@@ -18,7 +18,7 @@ switch (true) {
     break;
 
 
-    case(currentHour >= 18& currentHour <24 ) :
+    case(currentHour >= 18 && currentHour < 24 ) :
 
 
     greeting.textContent = " Mirembrema ";
