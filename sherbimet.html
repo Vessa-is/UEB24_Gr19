@@ -186,11 +186,11 @@
         </div>
         <div id="navi">
           <ul>
-            <li><a href="#">Ballina</a></li>
-            <li><a href="#">Shërbimet</a></li>
-            <li><a href="#">Galeria</a></li>
-            <li><a href="#">Për ne</a></li>
-            <li><a href="#">Kontakti</a></li>
+            <li><a href="index.html">Ballina</a></li>
+            <li><a href="sherbimet.html">Shërbimet</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="per_ne.html">Për ne</a></li>
+            <li><a href="kontakti.html">Kontakti</a></li>
           </ul>
         </div>
       </nav>
@@ -306,11 +306,11 @@
         <div class="footer-section">
           <h3>Kategorit&euml;</h3>
           <ul>
-            <li><a href="#home">BALLINA</a></li>
-            <li><a href="#Sherbimet">SHERBIMET</a></li>
-            <li><a href="#Galeria">GALERIA</a></li>
-            <li><a href="#Perne">PER NE</a></li>
-            <li><a href="#Kontakti">KONTAKTI</a></li>
+            <li><a href="index.html">BALLINA</a></li>
+            <li><a href="sherbimet.html">SHERBIMET</a></li>
+            <li><a href="galeria.html">GALERIA</a></li>
+            <li><a href="per_ne.html">PER NE</a></li>
+            <li><a href="kontakti.html">KONTAKTI</a></li>
           </ul>
         </div>
         <div class="footer-section">
@@ -371,6 +371,17 @@
       </div>
       <button id="scrollToTop" title="Kthehu lart">
         <i class="fas fa-arrow-up"></i>
+        <script>
+          const scrollToTopButton = document.getElementById("scrollToTop");
+
+window.onscroll = () => {
+scrollToTopButton.style.display = window.scrollY > 300 ? "block" : "none";
+};
+
+scrollToTopButton.onclick = () => {
+window.scrollTo({ top: 0, behavior: "smooth" });
+};
+        </script>
       </button>
     </footer>
 

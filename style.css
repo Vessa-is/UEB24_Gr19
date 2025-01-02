@@ -7,11 +7,13 @@
   body {
     font-family: Arial, sans-serif;
   }
+  
   header {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   .logo-cont {
     width: 100%;
     background-color: #664f3e;
@@ -243,12 +245,15 @@ footer {
     padding: 20px 0;
     font-size: 14px;
     font-family: Arial,sans-serif;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
 .footer-container {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: space-between;
     gap: 20px;
     align-items: center;
@@ -263,7 +268,7 @@ height: auto;
 
     text-align: center;
     flex: 1;
-    min-width: 250px;
+    min-width: 0;
     margin: 10px 0;
 }
 .footer-section h3{
