@@ -4,21 +4,21 @@ let greeting = document.getElementById("greetingparagraph");
 
 switch (true) {
 
-    case(ncurrentHour >= 5 && currentHour <= 12 ) :
+    case(currentHour >= 5 && currentHour < 12 ) :
 
     greeting.textContent = " Mirmengjesi! ";
     break;
 
 
 
-    case(ncurrentHour >= 12 && currentHour <= 18 ) :
+    case(currentHour >= 12 && currentHour < 18 ) :
 
 
     greeting.textContent = " Miredita! ";
     break;
 
 
-    case(ncurrentHour >= 18& currentHour <=24 ) :
+    case(currentHour >= 18& currentHour <24 ) :
 
 
     greeting.textContent = " Mirembrema ";
@@ -29,3 +29,6 @@ switch (true) {
     break;
 
 }
+
+
+console.log("JavaScript is working!");
