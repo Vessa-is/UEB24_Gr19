@@ -446,23 +446,23 @@ audio{
   outline: none;
 }
 
-
+section {
+  background-color: #fff;
+}
 .galeria {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 20px;
   width: 80%;
   text-align: center;
+  padding:40px;
+  margin: 0 auto;
   
 }
 
 .gallery-item {
   position: relative;
   overflow: hidden;
-  background:  black;
-  left: 100px;
-
-
 }
 
 .gallery-item img {
@@ -473,24 +473,15 @@ audio{
 
 }
 
-.gallery-item:hover img {
-
-  transform: scale(1.1);
-}
-
 #galleryheading {
- 
-  text-decoration: dotted;
-  text-shadow: #6F4F47;
-  color: #4c3b36;
- margin-left: 135px;
-margin-top: 100px;
+  text-align: center;
+  font-size: 40px;
+  color: #6F4F47;
+  padding: 20px;
 
 }
 
-#galleryheading:hover {
-  color: #8d6e63;
-}
+
 
 @font-face {
   font-family: "group19";
@@ -611,7 +602,7 @@ margin-bottom: 20px;
 
 .ulaboutus, li {
   color:#4b392c;
-  font-family: group19;
+  font-family: Arial, sans-serif;
   font-style: oblique;
  
 
