@@ -37,8 +37,9 @@
       transition: color 0.3s;
     }
     
-    
-    
+    .login button:hover {
+      color: #decfbc; 
+    }
     
     
   
@@ -70,6 +71,7 @@
     position: relative;
     transition: all 0.3s;
     text-align: center;
+    font-style: normal;
   }
   nav ul li a:hover {
     color: #fff;
@@ -326,6 +328,7 @@ margin-right: 10px;
 }
 .footer-section ul li{
   margin-bottom: 10px;
+  font-style: normal;
 }
 .footer-section ul li a{
   color: #fff;
@@ -472,7 +475,11 @@ audio{
 
 section {
   background-color: #fff;
+
 }
+
+/*gallery*/
+
 .galeria {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -494,7 +501,12 @@ section {
   height: 100%;
   object-fit: cover;
   transform: transform 0.3s ease;
+  overflow: hidden;
 
+}
+
+.gallery-item:hover {
+  transform: scale(1.1);
 }
 
 #galleryheading {
@@ -505,8 +517,7 @@ section {
 
 }
 
-
-
+/*about us page */
 
 @font-face {
   font-family: "group19";
@@ -518,6 +529,7 @@ section {
   margin-bottom: 20px;
   font-family: group19;
   text-align: center;
+  color: #664f3e;
 }
 
 #aboutuspagebody {
@@ -529,8 +541,7 @@ section {
 #aboutuspage {
   width: 100%;
   min-height: 100vh;
-  background : radial-gradient(white, #f4e4d4);
-  background : radial-gradient(white, #f4e4d4);
+  
 }
 
 .aboutussection {
@@ -564,25 +575,23 @@ section {
 }
 
 .contentsection .aboutustitle {
-  text-transform: uppercase;
-  text-transform: uppercase;
   text-decoration: underline;
   font-size: 28px;
-  margin-bottom: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-family: 'Arial', sans-serif;
+  color: #664f3e;
 }
 
 .contentsection .aboutuscontent .aboutush3 {
-  margin: 20px;
-  margin: 20px;
+  margin: 15px;
   color: #4c3b36;
   font-size: 20px;
+  font-family: 'Arial', sans-serif;
 }
 
 .contentsection .aboutuscontent .aboutusparagraph {
   margin-top: 10px;
-  font-family: 'Times New Roman', Times, serif;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Arial', sans-serif;
   font-size: 15px;
   line-height: 1.5;
 }
@@ -590,31 +599,36 @@ section {
 
 .aboutusparagraph {
   color:#4b392c;
-  font-family: group19;
-  font-family: group19;
+  font-family: 'Arial', sans-serif;
 }
 
 #aboutusgreeting {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  color: #4f3d30;
 }
 
 #h3lokacioni {
 
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Arial', sans-serif;;
   text-decoration: underline;
-  margin-top: 30px;
-  margin-top: 30px;
+  margin-top: 80px;
 margin-bottom: 20px;
+text-align: left;
+margin-left: 10px;
+color: #664f3e;
+font-size: 25px;
+
 }
 
 #aboutuslokacioni  {
   color:#4b392c;
-  font-family: group19;
-  font-family: group19;
+  font-family: 'Arial', sans-serif;
   font-style: oblique;
   margin-bottom: 80px;
+  text-align: left;
+  margin-left: 10px;
+  
 
 }
 
@@ -628,20 +642,17 @@ margin-bottom: 20px;
 
 
 #qellimet{
-  text-transform: uppercase;
-  text-transform: uppercase;
+  color: #664f3e;
   text-decoration: underline;
-  font-size: 28px;
-  margin-bottom: 20px;
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 25px;
+  margin-bottom: 18px;
+  font-family: 'Arial', sans-serif;
 
 }
 
 .ulaboutus, li {
   color:#4b392c;
-  font-family: Arial, sans-serif;
-  font-family: Arial, sans-serif;
+  font-family: 'Arial', sans-serif;
   font-style: oblique;
   align-items: center;
   text-align: center;
@@ -683,58 +694,67 @@ margin-bottom: 20px;
   
 }
 
-.team{
-
-  padding: 50px 0;
-  height: 100vh;
-  box-sizing: border-box;
-
+.team {
+padding: 50px 0;
+height: auto;
+box-sizing: border-box;
 }
 
-.ourteamcontainer{
-  width:80%;
+.ourteamcontainer {
+  width: 80%;
   margin: 50px auto;
+
 
 }
 
 .teamrow {
-  position:relative;
-  width:100%;
+  position: relative;
+  width: 100%;
   box-sizing: border-box;
+}
 
+.teamrow::after {
+  content: "";
+  display: block;
+  clear: both; 
 }
 
 .teamrow h3{
   color:#664f3e;
-   text-align: center;
-  margin:0;
-  padding: 0;
   font-weight: 700;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 25px;
-
-
+  text-decoration: underline;
+  text-align: center;
 }
+
 .teamrow p{
-  margin: 20px,0,0;
- color: #4b392d;
- padding-left: 20px;
- border-left: 5px solid #664f3e;
+  color:#4b392d;
+  border-left:5px #4b392d solid ;
+  font-size: 18px;
+  padding-left: 5px;
+
 }
 
+.mgt50px {
+  margin-top: 50px;
+}
 .teamrow .teamcolumn {
   margin: 0 10px;
   position: relative;
-  width : calc(25% - 20px);
-  min-height: 250px;
-  background:white ;
+  width:calc(25% - 20px);
+  background:white;
   float: left;
   box-sizing: border-box;
-}
- 
 
 }
 
+.teamrow .teamcolumn .imgbox{
+  position: relative;
 
-.mgt50px{
-  margin-top: 50px;
+}
+
+.teamrow .teamcolumn .imgbox img{
+  width:100%;
+  
 }
