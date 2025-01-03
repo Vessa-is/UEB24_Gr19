@@ -452,7 +452,11 @@ audio{
 
 section {
   background-color: #fff;
+
 }
+
+/*gallery*/
+
 .galeria {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -474,7 +478,12 @@ section {
   height: 100%;
   object-fit: cover;
   transform: transform 0.3s ease;
+  overflow: hidden;
 
+}
+
+.gallery-item:hover {
+  transform: scale(1.1);
 }
 
 #galleryheading {
@@ -485,7 +494,7 @@ section {
 
 }
 
-
+/*about us page */
 
 @font-face {
   font-family: "group19";
@@ -497,6 +506,7 @@ section {
   margin-bottom: 20px;
   font-family: group19;
   text-align: center;
+  color: #664f3e;
 }
 
 #aboutuspagebody {
@@ -542,21 +552,23 @@ section {
 }
 
 .contentsection .aboutustitle {
-  text-transform: uppercase;
   text-decoration: underline;
   font-size: 28px;
   margin-bottom: 15px;
+  font-family: 'Arial', sans-serif;
+  color: #664f3e;
 }
 
 .contentsection .aboutuscontent .aboutush3 {
   margin: 15px;
   color: #4c3b36;
   font-size: 20px;
+  font-family: 'Arial', sans-serif;
 }
 
 .contentsection .aboutuscontent .aboutusparagraph {
   margin-top: 10px;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Arial', sans-serif;
   font-size: 15px;
   line-height: 1.5;
 }
@@ -564,26 +576,31 @@ section {
 
 .aboutusparagraph {
   color:#4b392c;
-  font-family: group19;
+  font-family: 'Arial', sans-serif;
 }
 
 #aboutusgreeting {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  color: #4f3d30;
 }
 
 #h3lokacioni {
 
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Arial', sans-serif;;
   text-decoration: underline;
   margin-top: 80px;
 margin-bottom: 20px;
 text-align: left;
 margin-left: 10px;
+color: #664f3e;
+font-size: 25px;
+
 }
 
 #aboutuslokacioni  {
   color:#4b392c;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Arial', sans-serif;
   font-style: oblique;
   margin-bottom: 80px;
   text-align: left;
@@ -602,16 +619,17 @@ margin-left: 10px;
 
 
 #qellimet{
-  text-transform: uppercase;
+  color: #664f3e;
   text-decoration: underline;
-  font-size: 18px;
+  font-size: 25px;
   margin-bottom: 18px;
+  font-family: 'Arial', sans-serif;
 
 }
 
 .ulaboutus, li {
   color:#4b392c;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Arial', sans-serif;
   font-style: oblique;
   align-items: center;
   text-align: center;
@@ -633,11 +651,12 @@ margin-left: 10px;
 
 .produktettona h3{
   text-align: left;
-  text-transform: uppercase;
+  color: #664f3e;
   text-decoration: underline;
-  font-size: 18px;
+  font-size: 25px;
   margin-bottom: 18px;
   margin-left: 10px;
+  font-family: 'Arial', sans-serif;
 
 }
 
@@ -648,6 +667,7 @@ margin-left: 10px;
   font-size: 15px;
   margin-bottom: 80px;
   margin-left: 18px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: 'Arial', sans-serif;
   
 }
+
