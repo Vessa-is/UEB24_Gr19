@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/logo1.png" />
     <title>Shërbimet-Radiant Touch</title>
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="style.css" />
 
     <style>
@@ -96,7 +94,7 @@
             </a>
           </div>
           <div class="login">
-            <a href="login.html"><button id="loginBtn" >
+            <a href="login.html"><button id="loginBtn" aria-label="Login" >
                 <i class="fa fa-user"></i>
               </button></a>
           </div>
@@ -114,25 +112,81 @@
     </header>
     <div class="container">
         <h1>Create Account</h1>
-        <form>
-          <label for="first-name">First Name</label>
-          <input type="text" id="first-name" name="first-name" placeholder="First Name" required>
+        <form id="create-account-form" novalidate>
+            <label for="first-name">First Name</label>
+            <input type="text" id="first-name" name="first-name" placeholder="First Name" >
+            
     
-          <label for="last-name">Last Name</label>
-          <input type="text" id="last-name" name="last-name" placeholder="Last Name" required>
+            <label for="last-name">Last Name</label>
+            <input type="text" id="last-name" name="last-name" placeholder="Last Name" >
+            
     
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="Email" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Email" >
+            
     
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" placeholder="Password" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Password" >
+            
     
-          <button type="submit">Create New Account</button>
+            <button type="submit">Create New Account</button>
         </form>
         <div class="back-link">
-          <a href="login.html">Return to Login</a>
+            <a href="login.html">Return to Login</a>
         </div>
-      </div>
+    </div>
+    
+   
+    
+    <script>
+        document.getElementById('create-account-form').addEventListener('submit', function (e) {
+          e.preventDefault(); 
+      
+          const firstName = document.getElementById('first-name').value.trim();
+          const lastName = document.getElementById('last-name').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const password = document.getElementById('password').value.trim();
+      
+          try {
+            validateFields(firstName, lastName, email, password);
+            const account = createAccount(firstName, lastName, email, password);
+            alert(`Llogaria u krijua me sukses më: ${account.creationDate.toLocaleString()}`);
+          } catch (error) {
+            alert(`Gabim: ${error.message}`);
+          }
+        });
+      
+        function validateFields(firstName, lastName, email, password) {
+          if (!firstName || !lastName || !email || !password) {
+            throw new Error('Të gjitha fushat janë të detyrueshme.');
+          }
+      
+          if (!/^[a-zA-Z\s]+$/.test(firstName) || !/^[a-zA-Z\s]+$/.test(lastName)) {
+            throw new Error('Emri dhe mbiemri duhet të përmbajnë vetëm shkronja.');
+          }
+      
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(email)) {
+            throw new Error('Ju lutem jepni një adresë email-i të vlefshme.');
+          }
+      
+          if (password.length < 6) {
+            throw new Error('Fjalëkalimi duhet të jetë të paktën 6 karaktere.');
+          }
+        }
+      
+        function createAccount(firstName, lastName, email, password) {
+          const creationDate = new Date();
+          return {
+            firstName,
+            lastName,
+            email,
+            password, 
+            creationDate,
+          };
+        }
+      </script>
+      
    
     <footer>
       <div class="footer-container">

@@ -37,9 +37,8 @@
       transition: color 0.3s;
     }
     
-    .login button:hover {
-      color: #decfbc; 
-    }
+    
+    
     
     
   
@@ -71,7 +70,6 @@
     position: relative;
     transition: all 0.3s;
     text-align: center;
-    font-style: normal;
   }
   nav ul li a:hover {
     color: #fff;
@@ -328,7 +326,6 @@ margin-right: 10px;
 }
 .footer-section ul li{
   margin-bottom: 10px;
-  font-style: normal;
 }
 .footer-section ul li a{
   color: #fff;
@@ -475,11 +472,7 @@ audio{
 
 section {
   background-color: #fff;
-
 }
-
-/*gallery*/
-
 .galeria {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -501,12 +494,7 @@ section {
   height: 100%;
   object-fit: cover;
   transform: transform 0.3s ease;
-  overflow: hidden;
 
-}
-
-.gallery-item:hover {
-  transform: scale(1.1);
 }
 
 #galleryheading {
@@ -517,7 +505,8 @@ section {
 
 }
 
-/*about us page */
+
+
 
 @font-face {
   font-family: "group19";
@@ -529,7 +518,6 @@ section {
   margin-bottom: 20px;
   font-family: group19;
   text-align: center;
-  color: #664f3e;
 }
 
 #aboutuspagebody {
@@ -541,7 +529,8 @@ section {
 #aboutuspage {
   width: 100%;
   min-height: 100vh;
-  
+  background : radial-gradient(white, #f4e4d4);
+  background : radial-gradient(white, #f4e4d4);
 }
 
 .aboutussection {
@@ -575,23 +564,25 @@ section {
 }
 
 .contentsection .aboutustitle {
+  text-transform: uppercase;
+  text-transform: uppercase;
   text-decoration: underline;
   font-size: 28px;
-  margin-bottom: 15px;
-  font-family: 'Arial', sans-serif;
-  color: #664f3e;
+  margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .contentsection .aboutuscontent .aboutush3 {
-  margin: 15px;
+  margin: 20px;
+  margin: 20px;
   color: #4c3b36;
   font-size: 20px;
-  font-family: 'Arial', sans-serif;
 }
 
 .contentsection .aboutuscontent .aboutusparagraph {
   margin-top: 10px;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 15px;
   line-height: 1.5;
 }
@@ -599,36 +590,31 @@ section {
 
 .aboutusparagraph {
   color:#4b392c;
-  font-family: 'Arial', sans-serif;
+  font-family: group19;
+  font-family: group19;
 }
 
 #aboutusgreeting {
-  font-family: 'Arial', sans-serif;
-  font-size: 18px;
-  color: #4f3d30;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #h3lokacioni {
 
-  font-family: 'Arial', sans-serif;;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-decoration: underline;
-  margin-top: 80px;
+  margin-top: 30px;
+  margin-top: 30px;
 margin-bottom: 20px;
-text-align: left;
-margin-left: 10px;
-color: #664f3e;
-font-size: 25px;
-
 }
 
 #aboutuslokacioni  {
   color:#4b392c;
-  font-family: 'Arial', sans-serif;
+  font-family: group19;
+  font-family: group19;
   font-style: oblique;
   margin-bottom: 80px;
-  text-align: left;
-  margin-left: 10px;
-  
 
 }
 
@@ -642,17 +628,20 @@ font-size: 25px;
 
 
 #qellimet{
-  color: #664f3e;
+  text-transform: uppercase;
+  text-transform: uppercase;
   text-decoration: underline;
-  font-size: 25px;
-  margin-bottom: 18px;
-  font-family: 'Arial', sans-serif;
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-size: 28px;
+  margin-bottom: 20px;
 
 }
 
 .ulaboutus, li {
   color:#4b392c;
-  font-family: 'Arial', sans-serif;
+  font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
   font-style: oblique;
   align-items: center;
   text-align: center;
@@ -741,6 +730,10 @@ font-size: 25px;
   float: left;
   box-sizing: border-box;
 }
+ 
+
+}
+
 
 .mgt50px{
   margin-top: 50px;
