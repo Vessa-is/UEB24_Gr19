@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="images/logo1.png" />
+    <title>Shërbimet-Radiant Touch</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+       body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f4eb;
+      margin: 0;
+      padding: 0;
+     
+    }
+    .container {
+      max-width: 700px;
+      margin: 50px auto;
+      background-color:#f9f4eb;
+      padding: 20px;
+      border-style: 2px solid #7a6c59;
+      border: 1px solid #dcdcdc;
+    }
+
+    h1 {
+      font-size: 30px;
+      text-align: center;
+      color: #664f3e;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-size: 15px;
+      margin-bottom: 5px;
+      color: #7a6c59;
+    }
+
+    input {
+      padding: 10px;
+      font-size: 1rem;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      
+      background-color: #f9f4eb;
+    }
+
+    button {
+      padding: 10px;
+      font-size: 1rem;
+      background-color: #664f3e;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #664f3e;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    .back-link a {
+      color: #7a6c59;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="logo-cont">
+          <div class="logo">
+            <a href="#">
+              <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
+            </a>
+          </div>
+          <div class="login">
+            <a href="login.html"><button id="loginBtn" >
+                <i class="fa fa-user"></i>
+              </button></a>
+          </div>
+        </div>
+        <div id="navi">
+          <ul>
+            <li><a href="index.html">Ballina</a></li>
+            <li><a href="sherbimet.html">Shërbimet</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="per_ne.html">Për ne</a></li>
+            <li><a href="kontakti.html">Kontakti</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <div class="container">
+        <h1>Create Account</h1>
+        <form>
+          <label for="first-name">First Name</label>
+          <input type="text" id="first-name" name="first-name" placeholder="First Name" required>
+    
+          <label for="last-name">Last Name</label>
+          <input type="text" id="last-name" name="last-name" placeholder="Last Name" required>
+    
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="Email" required>
+    
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" placeholder="Password" required>
+    
+          <button type="submit">Create New Account</button>
+        </form>
+        <div class="back-link">
+          <a href="login.html">Return to Login</a>
+        </div>
+      </div>
+   
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" />
+          <p>
+            Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe
+            vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur çdo ditë.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h3>Kategorit&euml;</h3>
+          <ul>
+            <li><a href="index.html">BALLINA</a></li>
+            <li><a href="sherbimet.html">SHERBIMET</a></li>
+            <li><a href="galeria.html">GALERIA</a></li>
+            <li><a href="per_ne.html">PER NE</a></li>
+            <li><a href="kontakti.html">KONTAKTI</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Kontakti</h3>
+          <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps?q=Prishtine+Kosove" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;"><abbr style="text-decoration: none;" title="Republic of Kosovo">Prishtine,Kosovë</abbr></a></p>
+          <p>
+            <i class="fas fa-phone"></i>
+            <a href="tel:+38344222222" style="color: #fff; text-decoration: none"
+              >+383 44 222 222</a
+            >
+          </p>
+          <p>
+            <i class="fas fa-envelope"></i
+            ><a
+              href="mailto:info@radianttouch.com"
+              style="color: #fff; text-decoration: none"
+              >info@radianttouch.com</a
+            >
+          </p>
+        </div>
+      </div>
+      <hr style="width: 90%;  margin: 10px auto; ">
+      <div class="footer-section newsletter">
+        <h3>Abonohuni</h3>
+        <form action="#" method="POST">
+          <div class="newsletter-input">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Shkruani email-in tuaj" required />
+            <button type="submit" aria-label="Dërgo email">
+              <i class="fas fa-paper-plane"></i>
+            </button>
+          </div>
+          <div class="icons">
+            <a href="#" class="icon" aria-label="Facebook"
+              ><i class="fab fa-facebook-f"></i
+            ></a>
+            <a href="#" class="icon" aria-label="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a href="#" class="icon" aria-label="Twitter"
+              ><i class="fab fa-twitter"></i
+            ></a>
+          </div>
+        </form>
+      </div>
+
+      <div class="footer-bottom">
+        &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të
+        rezervuara.
+      </div>
+    </footer>
+  </body>
+</html>
