@@ -71,6 +71,7 @@
     position: relative;
     transition: all 0.3s;
     text-align: center;
+    font-style: normal;
   }
   nav ul li a:hover {
     color: #fff;
@@ -327,6 +328,7 @@ margin-right: 10px;
 }
 .footer-section ul li{
   margin-bottom: 10px;
+  font-style: normal;
 }
 .footer-section ul li a{
   color: #fff;
