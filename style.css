@@ -138,6 +138,10 @@ section {
   line-height: 1.8;
   margin-bottom: 1.5rem;
 }
+.about-content p {
+  word-wrap: break-word;
+}
+
 
 .about-button {
   display: inline-block;
@@ -155,7 +159,7 @@ section {
 }
 
 .about-button:focus {
-  outline: 2px solid #a42727; 
+  outline: 2px dashed #b0b0b0; 
 }
 
 
