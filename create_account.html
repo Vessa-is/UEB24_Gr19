@@ -151,6 +151,7 @@
     validateFields(firstName, lastName, email, password);
     const account = createAccount(firstName, lastName, email, password);
     alert(`Llogaria u krijua me sukses më: ${account.creationDate.toLocaleString()}`);
+    window.location.href = "login.html";
   } catch (error) {
     alert(`Gabim: ${error.message}`);
   }
