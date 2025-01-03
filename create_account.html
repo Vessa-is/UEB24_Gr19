@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/logo1.png" />
-    <title>Shërbimet-Radiant Touch</title>
+    <title>Create-Radiant Touch</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="style.css" />
@@ -104,7 +104,7 @@
             <li><a href="index.html">Ballina</a></li>
             <li><a href="sherbimet.html">Shërbimet</a></li>
             <li><a href="galeria.html">Galeria</a></li>
-            <li><a href="per_ne.html">Për ne</a></li>
+            <li><a href="per_ne.html">Rreth nesh</a></li>
             <li><a href="kontakti.html">Kontakti</a></li>
           </ul>
         </div>
@@ -140,51 +140,53 @@
     
     <script>
         document.getElementById('create-account-form').addEventListener('submit', function (e) {
-          e.preventDefault(); 
-      
-          const firstName = document.getElementById('first-name').value.trim();
-          const lastName = document.getElementById('last-name').value.trim();
-          const email = document.getElementById('email').value.trim();
-          const password = document.getElementById('password').value.trim();
-      
-          try {
-            validateFields(firstName, lastName, email, password);
-            const account = createAccount(firstName, lastName, email, password);
-            alert(`Llogaria u krijua me sukses më: ${account.creationDate.toLocaleString()}`);
-          } catch (error) {
-            alert(`Gabim: ${error.message}`);
-          }
-        });
-      
-        function validateFields(firstName, lastName, email, password) {
-          if (!firstName || !lastName || !email || !password) {
-            throw new Error('Të gjitha fushat janë të detyrueshme.');
-          }
-      
-          if (!/^[a-zA-Z\s]+$/.test(firstName) || !/^[a-zA-Z\s]+$/.test(lastName)) {
-            throw new Error('Emri dhe mbiemri duhet të përmbajnë vetëm shkronja.');
-          }
-      
-          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-          if (!emailRegex.test(email)) {
-            throw new Error('Ju lutem jepni një adresë email-i të vlefshme.');
-          }
-      
-          if (password.length < 6) {
-            throw new Error('Fjalëkalimi duhet të jetë të paktën 6 karaktere.');
-          }
-        }
-      
-        function createAccount(firstName, lastName, email, password) {
-          const creationDate = new Date();
-          return {
-            firstName,
-            lastName,
-            email,
-            password, 
-            creationDate,
-          };
-        }
+  e.preventDefault(); 
+
+  const firstName = document.getElementById('first-name').value.trim();
+  const lastName = document.getElementById('last-name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+
+  try {
+    validateFields(firstName, lastName, email, password);
+    const account = createAccount(firstName, lastName, email, password);
+    alert(`Llogaria u krijua me sukses më: ${account.creationDate.toLocaleString()}`);
+    window.location.href = "login.html";
+  } catch (error) {
+    alert(`Gabim: ${error.message}`);
+  }
+});
+
+function validateFields(firstName, lastName, email, password) {
+  if (!firstName || !lastName || !email || !password) {
+    throw new Error('Të gjitha fushat janë të detyrueshme.');
+  }
+
+  if (!/^[a-zA-Z\s]+$/.test(firstName) || !/^[a-zA-Z\s]+$/.test(lastName)) {
+    throw new Error('Emri dhe mbiemri duhet të përmbajnë vetëm shkronja.');
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    throw new Error('Ju lutem jepni një adresë email-i të vlefshme.');
+  }
+
+  if (password.length < 6) {
+    throw new Error('Fjalëkalimi duhet të jetë të paktën 6 karaktere.');
+  }
+}
+
+function createAccount(firstName, lastName, email, password) {
+  const creationDate = new Date();
+  return {
+    firstName,
+    lastName,
+    email,
+    password, 
+    creationDate,
+  };
+}
+
       </script>
       
    
