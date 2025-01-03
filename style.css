@@ -694,3 +694,48 @@ font-size: 25px;
   
 }
 
+.team{
+
+  padding: 50px 0;
+  height: 100vh;
+  box-sizing: border-box;
+
+}
+
+.ourteamcontainer{
+  width:80%;
+  margin: 50px auto;
+
+}
+
+.teamrow {
+  position:relative;
+  width:100%;
+  box-sizing: border-box;
+
+}
+
+.teamrow h3{
+  color:#664f3e
+  text-align: center;
+  margin:0;
+  padding: 0;
+  font-weight: 700;
+  font-size: 25px;
+
+
+}
+.teamrow p{
+  margin: 20px,0,0;
+ color: #4b392d;
+ padding-left: 20px;
+ border-left: 5px solid #664f3e;
+}
+
+.teamrow .teamcolumn {
+  margin: 0 10px;
+  position: absolute;
+  width: 25%;
+  min-height: 250px;
+  background:white ;
+}
