@@ -50,6 +50,7 @@
     padding: 10px 20px;
     position: relative;
     transition: all 0.3s;
+    text-align: center;
   }
   nav ul li a:hover {
     color: #fff;
@@ -70,6 +71,8 @@
   nav ul li a:hover::after {
     width: 100%;
   }
+
+
 body,html{
     overflow-x: hidden;
 }
@@ -135,6 +138,10 @@ section {
   line-height: 1.8;
   margin-bottom: 1.5rem;
 }
+.about-content p {
+  word-wrap: break-word;
+}
+
 
 .about-button {
   display: inline-block;
@@ -152,7 +159,7 @@ section {
 }
 
 .about-button:focus {
-  outline: 2px solid #a42727; 
+  outline: 2px dashed #b0b0b0; 
 }
 
 
@@ -443,23 +450,23 @@ audio{
   outline: none;
 }
 
-
+section {
+  background-color: #fff;
+}
 .galeria {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 20px;
   width: 80%;
   text-align: center;
+  padding:40px;
+  margin: 0 auto;
   
 }
 
 .gallery-item {
   position: relative;
   overflow: hidden;
-  background:  black;
-  left: 100px;
-
-
 }
 
 .gallery-item img {
@@ -470,24 +477,15 @@ audio{
 
 }
 
-.gallery-item:hover img {
-
-  transform: scale(1.1);
-}
-
 #galleryheading {
- 
-  text-decoration: dotted;
-  text-shadow: #6F4F47;
-  color: #4c3b36;
- margin-left: 135px;
-margin-top: 100px;
+  text-align: center;
+  font-size: 40px;
+  color: #6F4F47;
+  padding: 20px;
 
 }
 
-#galleryheading:hover {
-  color: #8d6e63;
-}
+
 
 @font-face {
   font-family: "group19";
@@ -580,6 +578,7 @@ margin-top: 100px;
   margin-top: 80px;
 margin-bottom: 20px;
 text-align: left;
+margin-left: 10px;
 }
 
 #aboutuslokacioni  {
@@ -588,6 +587,7 @@ text-align: left;
   font-style: oblique;
   margin-bottom: 80px;
   text-align: left;
+  margin-left: 10px;
   
 
 }
@@ -605,7 +605,7 @@ text-align: left;
   text-transform: uppercase;
   text-decoration: underline;
   font-size: 18px;
-  margin-bottom: 5px;
+  margin-bottom: 18px;
 
 }
 
@@ -631,3 +631,23 @@ text-align: left;
   background:radial-gradient(white,#f4e4d4 )
 }
 
+.produktettona h3{
+  text-align: left;
+  text-transform: uppercase;
+  text-decoration: underline;
+  font-size: 18px;
+  margin-bottom: 18px;
+  margin-left: 10px;
+
+}
+
+.produktettona p{
+  text-align: left;
+  font-style: oblique;
+  color: #4b392c;
+  font-size: 15px;
+  margin-bottom: 80px;
+  margin-left: 18px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  
+}
