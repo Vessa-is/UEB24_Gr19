@@ -510,7 +510,7 @@ margin-top: 100px;
 #aboutuspage {
   width: 100%;
   min-height: 100vh;
-  background : radial-gradient(white, #f4e4d4);
+  
 }
 
 .aboutussection {
@@ -547,11 +547,11 @@ margin-top: 100px;
   text-transform: uppercase;
   text-decoration: underline;
   font-size: 28px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 
 .contentsection .aboutuscontent .aboutush3 {
-  margin: 20px;
+  margin: 15px;
   color: #4c3b36;
   font-size: 20px;
 }
@@ -577,15 +577,18 @@ margin-top: 100px;
 
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-decoration: underline;
-  margin-top: 30px;
+  margin-top: 80px;
 margin-bottom: 20px;
+text-align: left;
 }
 
 #aboutuslokacioni  {
   color:#4b392c;
-  font-family: group19;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-style: oblique;
   margin-bottom: 80px;
+  text-align: left;
+  
 
 }
 
@@ -601,16 +604,30 @@ margin-bottom: 20px;
 #qellimet{
   text-transform: uppercase;
   text-decoration: underline;
-  font-size: 28px;
-  margin-bottom: 20px;
+  font-size: 18px;
+  margin-bottom: 5px;
 
 }
 
 .ulaboutus, li {
   color:#4b392c;
-  font-family: group19;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-style: oblique;
- 
+  align-items: center;
+  text-align: center;
+  list-style-position: inside;
 
+}
+
+.qellimetcontainer {
+  
+  margin-left: 20px;
+  text-align: center;
+
+
+}
+
+#aboutusbody{
+  background:radial-gradient(white,#f4e4d4 )
 }
 
