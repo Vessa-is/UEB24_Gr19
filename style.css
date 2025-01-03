@@ -14,15 +14,35 @@
     align-items: center;
   }
 
-  .logo-cont {
-    width: 100%;
-    background-color: #664f3e;
-    padding: 2px 0;
-  }
-  .logo {
-    display: flex;
-    justify-content: center;
-  }
+    .logo-cont {
+      display: flex;
+      justify-content: space-between; 
+      align-items: center;
+      width: 100%;
+      background-color: #664f3e;
+      padding: 0 10px; 
+    }
+  
+    .login {
+      margin-left: auto;
+    }
+    
+    .login button {
+      background: none;
+      border: none;
+      color: #decfbc;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 20px;
+      transition: color 0.3s;
+    }
+    
+    .login button:hover {
+      color: #decfbc; 
+    }
+    
+    
+  
   .logo img {
     height: 130px;
     width: 370px;
@@ -72,6 +92,7 @@
     width: 100%;
   }
 
+  
 
 body,html{
     overflow-x: hidden;
