@@ -40,7 +40,6 @@
     
     
     
-    
   
   .logo img {
     height: 130px;
@@ -284,6 +283,7 @@ footer {
   gap: 20px;
   align-items: flex-start;
 }
+
 .logo1 {
   width: 120px;
 margin-bottom: 30px;
@@ -507,7 +507,6 @@ section {
 
 
 
-
 @font-face {
   font-family: "group19";
   src: url(Calligraffitti-Regular.ttf);
@@ -529,7 +528,6 @@ section {
 #aboutuspage {
   width: 100%;
   min-height: 100vh;
-  background : radial-gradient(white, #f4e4d4);
   background : radial-gradient(white, #f4e4d4);
 }
 
@@ -565,15 +563,12 @@ section {
 
 .contentsection .aboutustitle {
   text-transform: uppercase;
-  text-transform: uppercase;
   text-decoration: underline;
   font-size: 28px;
-  margin-bottom: 20px;
   margin-bottom: 20px;
 }
 
 .contentsection .aboutuscontent .aboutush3 {
-  margin: 20px;
   margin: 20px;
   color: #4c3b36;
   font-size: 20px;
@@ -581,7 +576,6 @@ section {
 
 .contentsection .aboutuscontent .aboutusparagraph {
   margin-top: 10px;
-  font-family: 'Times New Roman', Times, serif;
   font-family: 'Times New Roman', Times, serif;
   font-size: 15px;
   line-height: 1.5;
@@ -591,27 +585,22 @@ section {
 .aboutusparagraph {
   color:#4b392c;
   font-family: group19;
-  font-family: group19;
 }
 
 #aboutusgreeting {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #h3lokacioni {
 
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-decoration: underline;
-  margin-top: 30px;
   margin-top: 30px;
 margin-bottom: 20px;
 }
 
 #aboutuslokacioni  {
   color:#4b392c;
-  font-family: group19;
   font-family: group19;
   font-style: oblique;
   margin-bottom: 80px;
@@ -629,10 +618,7 @@ margin-bottom: 20px;
 
 #qellimet{
   text-transform: uppercase;
-  text-transform: uppercase;
   text-decoration: underline;
-  font-size: 28px;
-  margin-bottom: 20px;
   font-size: 28px;
   margin-bottom: 20px;
 
@@ -641,11 +627,8 @@ margin-bottom: 20px;
 .ulaboutus, li {
   color:#4b392c;
   font-family: Arial, sans-serif;
-  font-family: Arial, sans-serif;
   font-style: oblique;
-  align-items: center;
-  text-align: center;
-  list-style-position: inside;
+ 
 
 }
 
@@ -730,10 +713,6 @@ margin-bottom: 20px;
   float: left;
   box-sizing: border-box;
 }
- 
-
-}
-
 
 .mgt50px{
   margin-top: 50px;
