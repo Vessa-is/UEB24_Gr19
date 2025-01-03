@@ -50,6 +50,7 @@
     padding: 10px 20px;
     position: relative;
     transition: all 0.3s;
+    text-align: center;
   }
   nav ul li a:hover {
     color: #fff;
@@ -70,6 +71,8 @@
   nav ul li a:hover::after {
     width: 100%;
   }
+
+
 body,html{
     overflow-x: hidden;
 }
