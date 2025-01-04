@@ -756,5 +756,11 @@ box-sizing: border-box;
 
 .teamrow .teamcolumn .imgbox img{
   width:100%;
-  
+  height: 275px;
+  transition: 0.5s;
 }
+
+.teamrow .teamcolumn:hover .imgbox img{
+ transform: scale(1.1);
+}
+
