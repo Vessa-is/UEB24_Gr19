@@ -65,7 +65,7 @@
     text-decoration: none;
     color: white;
     font-weight: bold;
-    font-size: 1.2rem;
+    font-size: 17px;
     text-transform: uppercase;
     padding: 10px 20px;
     position: relative;
@@ -223,6 +223,8 @@ section {
   height: auto;
   display: block;
   margin-bottom: 10px;
+  border-radius: 10px;
+  border: 3px solid #ccc;
 }
 
 .service-item p {
@@ -297,6 +299,7 @@ height: auto;
   flex: 1;
   min-width: 0;
   margin: 10px 0;
+  
 }
 .footer-section h3{
   font-size: 20px;
@@ -307,7 +310,6 @@ height: auto;
 .footer-section h3::after{
   content: '';
   width: 50px;
-  height: 2px;
   background-color:  #fff;
   position: absolute;
   left: 50%;
@@ -372,13 +374,7 @@ flex-direction: column;
 align-items: center;
 min-width:250px ;
 }
-@media (max-width: 768px) {
-.footer-container {
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-}
-}
+
 .newsletter form {
 margin-top: 10px;
 }
