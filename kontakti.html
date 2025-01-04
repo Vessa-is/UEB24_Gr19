@@ -310,7 +310,7 @@ cursor: pointer;
                 <label for="message">Mesazhi:</label>
                 <textarea id="message" placeholder="Mesazhi"></textarea>
             <div class="checkbox-container"> 
-                <input type="checkbox" name="emri" id="up">
+                <input type="checkbox" name="updates" id="up">
                 <label for="updates">Sign me up for email updates</label></div>
                
                 <button type="submit">Dergo mesazhin</button>
@@ -512,12 +512,38 @@ cursor: pointer;
         }
       
         if (valid) {
-          alert("Mesazhi u dërgua me sukses!");
-          this.reset(); 
+        
+            const formData = {
+                name: nameField.value,
+                email: emailField.value,
+                phone: phoneField.value,
+                message: document.getElementById("message").value,
+                updates: document.getElementById("up").checked
+            };
+
+            
+            const validEntries = Object.entries(formData).filter(([key, value]) => value);
+
+            
+            const transformedData = validEntries.map(([key, value]) => {
+                return { field: key, value: value };
+            });
+
+           
+            const summary = transformedData.reduce((acc, { field, value }) => {
+                return acc + `${field}: ${value}\n`;
+            }, "Form Data:\n");
+
+     
+            console.log(summary);
+            alert("Mesazhi u dërgua me sukses!");
+
+            
+            this.reset();
         }
-      });
-      
-      function displayWarning(field, message) {
+    });
+
+    function displayWarning(field, message) {
         const warning = document.createElement("div");
         warning.textContent = message;
         warning.className = "warning";
@@ -525,5 +551,5 @@ cursor: pointer;
         warning.style.fontSize = "12px";
         warning.style.marginTop = "5px";
         field.parentNode.insertBefore(warning, field.nextSibling);
-      }
+    }
       </script>
