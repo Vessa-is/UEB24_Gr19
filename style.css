@@ -487,10 +487,10 @@ section {
   
 }
 
-
 .gallery-item {
   position: relative;
   overflow: hidden;
+  height: 200px;
 }
 
 .gallery-item img {
@@ -502,7 +502,7 @@ section {
 
 }
 
-.gallery-item:hover {
+.gallery-item:hover img {
   transform: scale(1.1);
 }
 
