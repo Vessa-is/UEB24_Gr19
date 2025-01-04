@@ -501,10 +501,32 @@ cursor: pointer;
           valid = false;
         }
       
-        if (!emailField.value.trim() || !/\S+@\S+\.\S+/.test(emailField.value)) {
-          displayWarning(emailField, warnings.email);
-          valid = false;
+        if (!emailField.value.trim()) {
+    displayWarning(emailField, warnings.email);
+    valid = false;
+} else {
+    let email = emailField.value.trim();
+    let atFound = false;
+    let dotFound = false;
+
+    
+    for (let i = 0; i < email.length; i++) {
+        let char = email[i];
+
+        if (char === '@') {
+            atFound = true;
+        } else if (atFound && char === '.') {
+            dotFound = true;
+            break;
         }
+    }
+
+    if (!atFound || !dotFound) {
+        displayWarning(emailField, warnings.email);
+        valid = false;
+    }
+}
+
       
         if (!phoneField.value.trim() || !/^\+?\d{9,15}$/.test(phoneField.value)) {
           displayWarning(phoneField, warnings.phone);
