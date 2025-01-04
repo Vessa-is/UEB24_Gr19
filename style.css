@@ -487,6 +487,7 @@ section {
   
 }
 
+
 .gallery-item {
   position: relative;
   overflow: hidden;
@@ -531,6 +532,7 @@ section {
 #aboutuspagebody {
   margin: 0px;
   padding: 0px;
+  background-color: #f4e4d4;
   box-sizing: border-box;
 }
 
@@ -665,7 +667,7 @@ font-size: 25px;
 }
 
 #aboutusbody{
-  background:radial-gradient(white,#f4e4d4 );
+  background:#f4e4d4;
 }
 
 .produktettona h3{
