@@ -8,282 +8,6 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color:#f4e4d4;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .contact-container {
-        display: flex;
-        flex-wrap: nowrap;
-        align-items: flex-start;
-        justify-content: space-between;
-        padding: 40px;
-        gap: 20px;
-    }
-    .contact-image img  {
-    max-width: 100%;
-    height: 700px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-.contact-form{
-    flex: 1;
-    max-width: 50%;
-    padding: 20px;
-    display: flex; 
-    flex-direction: column;
-    justify-content: space-between;
-}
-.contact-image {
-    flex: 1;
-    max-width: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    }
-    
-.contact-text {
-    margin-left: 20px;
-    text-align: center;
-    padding: 20px;
-}.contact-text h2 {
-    color: #6d4c3d;
-    font-family: 'Georgia', serif;
-    font-style: italic;
-    margin-bottom: 15px;
-}
-.contact-text p {
-    color: #6d4c3d;
-    font-size: 16px;
-    line-height: 1.6;
-}    
-    .container {
-    max-width: 600px;
-            margin: 50px auto;
-            padding: 20px;
-        }
-    
-    h2 {
-        font-family: 'Georgia', serif;
-        font-style: italic;
-        color: #6d4c3d;
-        text-align: center;
-        margin-bottom: 20px;
-    }
-    
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-    }
-    
-    label {
-        font-weight: bold;
-        color: #6d4c3d;
-    }
-    
-    input, textarea {
-        font-size: 14px;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #faf8f2;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    
-    textarea {
-        height: 150px;
-        resize: vertical;
-    }
-
-    button {
-        background-color: #6d4c3d;
-        color: white;
-        border: none;
-        padding: 10px ;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-    button:hover {
-        background-color: #d6c1ac;
-    }
-    
-    .follow-us {
-        text-align: center;
-        margin-top: 10px;
-        padding-bottom: 20px;
-        color: #96887d;
-    }
-    .follow-us h3 {
-    color: #6d4c3d;
-    font-style: italic;
-    font-family: 'Georgia', serif;
-    margin-bottom: 10px;
-    }    
-    .checkbox-container input {
-    width: 16px;
-    height: 16px;}
-
-    .location .Orari {
-    padding: 20px;
-    margin-top: 20px;
-    text-align: center;
-    }
-
-    .location .Orari h3 {
-    color: #6d4c3d;
-    font-style: italic;
-    font-family: 'Georgia', serif;
-    text-decoration: underline;
-    margin-bottom: 10px;
-    }
-    .location .Orari ul {
-    list-style: none;
-    padding: 0;
-    color: #6d4c3d;
-    list-style-type: circle;
-    }
-    .location .Orari li {
-    margin: 5px 0;
-    }
-
-    .lokacioni-dyqanit {
-    padding: 20px;
-    margin: 5px;
-    margin-top: 30px;
-    text-align: center;
-    
-}
-
-.lokacioni-dyqanit h2 {
-    color:#6d4c3d;
-    font-style: italic;
-    font-family: 'Georgia', serif;
-    margin-bottom: 20px;
-}
-
-.locations-wrapper {
-    display: flex;
-    justify-content: space-between;
-    gap: 2px;
-    flex-wrap: wrap;
-}
-
-.location {
-    flex: 1;
-    min-width: 150px;
-    max-width: 250px;
-    padding: 10px;
-    margin: 0 5px;
-    background-color: #faf8f2;
-    border: 1px solid #e0d9c8;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.location:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-}
-.location-number {
-    display: block;
-    font-size: 24px;
-    font-weight: bold;
-    color: #6d4c3d;
-    margin-bottom: 10px;
-}
-
-.location p {
-    margin: 10px 0;
-    color: #6d4c3d;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.map-link {
-    display: inline-block;
-    margin-top: 10px;
-    font-size: 14px;
-    color: #6d4c3d;
-    text-decoration: none;
-    font-weight: bold;
-    transition: color 0.3s;
-}
-
-.map-link:hover {
-    color: #d6c1ac;
-    text-decoration: underline;
-}
-.feedback-section {
-    background-color: #faf8f2;
-    border: 1px solid #e0d9c8;
-    border-radius: 10px;
-    padding: 20px;
-    margin: 20px auto;
-    max-width: 600px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.feedback-section h3 {
-    color: #6d4c3d;
-    font-family: 'Georgia', serif;
-    font-style: italic;
-    margin-bottom: 15px;
-    padding-top: 20px;
-}
-
-.social-media-dropdown label,
-.visit-options label {
-    font-size: 16px;
-    color: #6d4c3d;
-    display: block;
-    margin-bottom: 10px;
-}
-
-#social-media {
-    font-size: 14px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #faf8f2;
-    color: #6d4c3d;
-    width: 100%;
-    max-width: 300px;
-    margin: 0 auto;
-    display: block;
-    text-align: center;
-}
-
-.visit-options {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 15px;
-}
-
-.visit-options label {
-    display: inline-block;
-    font-size: 16px;
-    color: #6d4c3d;
-    cursor: pointer;
-}
-
-.visit-options input[type="radio"] {
-    margin-right: 5px;
-    transform: scale(1.2);
-    accent-color: #6d4c3d;
-}
-
-</style>
 <script>
     function validateName(name) {
     if (!name || name.length < 3) {
@@ -422,7 +146,7 @@ function validatePhone(phone) {
             <div class="Orari">
                 <h3>Orari i Punës</h3>
                 <ul>
-                    <li>E Hënë - E Premte: 09:00 - 18:00</li>
+                    <li>E Hënë - E Premte: 08:30 - 18:00</li>
                     <li>E Shtunë: 10:00 - 16:00</li>
                     <li>E Diel: Mbyllur</li>
                 </ul>
@@ -452,8 +176,8 @@ function validatePhone(phone) {
             <div class="Orari">
                 <h3>Orari i Punës</h3>
                 <ul>
-                    <li>E Hënë - E Premte: 09:00 - 18:00</li>
-                    <li>E Shtunë: 10:00 - 16:00</li>
+                    <li>E Hënë - E Premte: 08:00 - 17:00</li>
+                    <li>E Shtunë: 09:00 - 14:00</li>
                     <li>E Diel: Mbyllur</li>
                 </ul>
             </div>
@@ -507,6 +231,7 @@ function validatePhone(phone) {
                         <li><a href="index.html">BALLINA</a></li>
                         <li><a href="sherbimet.html">SHERBIMET</a></li>
                         <li><a href="galeria.html">GALERIA</a></li>
+                        <li><a href="Produktet.html">PRODUKTET</a></li>
                         <li><a href="per_ne.html">RRETH NESH</a></li>
                         <li><a href="kontakti.html">KONTAKTI</a></li>
                     </ul>
@@ -538,7 +263,7 @@ function validatePhone(phone) {
                 </div>
                 
                 <div class="footer-bottom">
-                    &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
+                    &copy; 2024 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
     
                 </div>        
         </footer>
