@@ -8,6 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <style>
     body {
   font-family: Arial, sans-serif;
@@ -15,7 +16,6 @@
   margin: 0;
   padding: 0;
 }
-
 .contact-container {
   display: flex;
   flex-wrap: nowrap;
@@ -135,7 +135,6 @@ padding: 20px;
 margin-top: 20px;
 text-align: center;
 }
-
 .location .Orari h3 {
 color: #6d4c3d;
 font-style: italic;
@@ -152,7 +151,6 @@ list-style-type: circle;
 .location .Orari li {
 margin: 5px 0;
 }
-
 .lokacioni-dyqanit {
 padding: 20px;
 margin: 5px;
@@ -160,21 +158,18 @@ margin-top: 30px;
 text-align: center;
 
 }
-
 .lokacioni-dyqanit h2 {
 color:#6d4c3d;
 font-style: italic;
 font-family: 'Georgia', serif;
 margin-bottom: 20px;
 }
-
 .locations-wrapper {
 display: flex;
 justify-content: space-between;
 gap: 2px;
 flex-wrap: wrap;
 }
-
 .location {
 flex: 1;
 min-width: 150px;
@@ -188,7 +183,6 @@ text-align: center;
 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 transition: transform 0.3s, box-shadow 0.3s;
 }
-
 .location:hover {
 transform: translateY(-5px);
 box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
@@ -200,14 +194,12 @@ font-weight: bold;
 color: #6d4c3d;
 margin-bottom: 10px;
 }
-
 .location p {
 margin: 10px 0;
 color: #6d4c3d;
 font-size: 14px;
 line-height: 1.5;
 }
-
 .map-link {
 display: inline-block;
 margin-top: 10px;
@@ -232,7 +224,6 @@ max-width: 600px;
 box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 text-align: center;
 }
-
 .feedback-section h3 {
 color: #6d4c3d;
 font-family: 'Georgia', serif;
@@ -240,7 +231,6 @@ font-style: italic;
 margin-bottom: 15px;
 padding-top: 20px;
 }
-
 .social-media-dropdown label,
 .visit-options label {
 font-size: 16px;
@@ -262,76 +252,19 @@ margin: 0 auto;
 display: block;
 text-align: center;
 }
-
 .visit-options {
 display: flex;
 justify-content: center;
 gap: 15px;
 margin-top: 15px;
 }
-
 .visit-options label {
 display: inline-block;
 font-size: 16px;
 color: #6d4c3d;
 cursor: pointer;
 }
-
-.visit-options input[type="radio"] {
-margin-right: 5px;
-transform: scale(1.2);
-accent-color: #6d4c3d;
-}
 </style>
-<script>
-    function validateName(name) {
-    if (!name || name.length < 3) {
-        throw "Emri duhet të ketë të paktën 3 karaktere.";
-    }
-    return true;
-} return true;
-function validatePhone(phone) {
-    const phoneRegex = /^\+?\d{9,15}$/;
-    if (!phoneRegex.test(phone)) {
-        throw "Numri i telefonit është i pavlefshëm.";
-    }
-    return true;
-}
-    const contactForm = document.querySelector('.contact-form form');
-    contactForm.addEventListener('submit', (event) => {
-        const name = document.getElementById('name').value.trim();
-        const email = document.getElementById('email').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const message = document.getElementById('message').value.trim();
-
-        if (!name || !email || !phone || !message) {
-            alert("Ju lutem plotësoni të gjitha fushat!");
-            event.preventDefault();
-        } else if (!/^\S+@\S+\.\S+$/.test(email)) {
-            alert("Ju lutem shkruani një email të vlefshëm!");
-            event.preventDefault();
-        }
-    });
-    const locations = [
-        { city: "Prishtinë", address: "Rruga B, Royal Mall", open: true },
-        { city: "Prizren", address: "ABI Carshia, Nr. 10", open: true },
-        { city: "Ferizaj", address: "Ferizaj Mall", open: true },
-        { city: "Mitrovicë", address: "Rruga Adem Jashari, Nr. 20", open: false }
-    ];
-
-    const openLocations = locations.filter(location => location.open);    
-    const openCities = openLocations.map(location => location.city);
-    const totalOpen = openLocations.reduce((count, location) => count + 1, 0);
-    const feedbackSection = document.querySelector('.feedback-section');
-    const summary = document.createElement('p');
-    summary.textContent = `Lokacionet e hapura: ${openCities.join(', ')}. Gjithsej: ${totalOpen}`;
-    feedbackSection.appendChild(summary)
-
-
-</script>
-
-
-  
 <body>
     <header>
         <nav>
@@ -365,15 +298,14 @@ function validatePhone(phone) {
         </div>
         <div class="contact-form">
             <h2>Na Kontaktoni</h2>
-            <form>
+            <form id="contactForm">
                 <label for="name">Emri dhe Mbiemri:</label>
-                <input type="text" id="name" placeholder="Emri dhe Mbiemri" required>
-                
+                <input type="text" id="name" placeholder=" Emri dhe Mbiemri" required>
                 <label for="email">Email-i:</label>
-                <input type="email" id="email" placeholder="Email-i" required>
+                <input type="text" id="email" placeholder="Email-i" required>
                 
                 <label for="phone">Telefoni:</label>
-                <input type="tel" id="phone" placeholder="Telefoni" required>
+                <input type="text" id="phone" placeholder="Telefoni" required>
             
                 <label for="message">Mesazhi:</label>
                 <textarea id="message" placeholder="Mesazhi"></textarea>
@@ -544,3 +476,54 @@ function validatePhone(phone) {
         </footer>
     </body>
     </html>
+    <script>
+    document.getElementById("contactForm").addEventListener("submit", function (event) {
+        event.preventDefault(); 
+      
+        let valid = true;
+        const nameField = document.getElementById("name");
+        const emailField = document.getElementById("email");
+        const phoneField = document.getElementById("phone");
+      
+    
+        let warnings = {
+          name: "Ju lutem shkruani emrin dhe mbiemrin.",
+          email: "Email-i nuk është në format të saktë.",
+          phone: "Numri i telefonit është i pavlefshëm.",
+        };
+      
+    
+        document.querySelectorAll(".warning").forEach((w) => w.remove());
+      
+
+        if (!nameField.value.trim()) {
+          displayWarning(nameField, warnings.name);
+          valid = false;
+        }
+      
+        if (!emailField.value.trim() || !/\S+@\S+\.\S+/.test(emailField.value)) {
+          displayWarning(emailField, warnings.email);
+          valid = false;
+        }
+      
+        if (!phoneField.value.trim() || !/^\+?\d{9,15}$/.test(phoneField.value)) {
+          displayWarning(phoneField, warnings.phone);
+          valid = false;
+        }
+      
+        if (valid) {
+          alert("Mesazhi u dërgua me sukses!");
+          this.reset(); 
+        }
+      });
+      
+      function displayWarning(field, message) {
+        const warning = document.createElement("div");
+        warning.textContent = message;
+        warning.className = "warning";
+        warning.style.color = "red";
+        warning.style.fontSize = "12px";
+        warning.style.marginTop = "5px";
+        field.parentNode.insertBefore(warning, field.nextSibling);
+      }
+      </script>
