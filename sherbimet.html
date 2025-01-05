@@ -319,74 +319,9 @@
       </video>
     </section>
     
-    <style>
-      /* Seksioni për reklamën */
-      .video-ad {
-        position: relative;
-        height: 400px;
-        background: url('path-to-placeholder.jpg') center center / cover no-repeat;
-        background-attachment: fixed;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-      }
-    
-      /* Video në background */
-      .video-ad::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        background: rgba(0, 0, 0, 0.5); /* Mban tekstin të dukshëm mbi video */
-      }
-    
-      .video-ad video {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        min-width: 100%;
-        min-height: 100%;
-        z-index: -2;
-        object-fit: cover;
-        filter: brightness(0.7);
-      }
-    
-      /* Përmbajtja mbi reklamën */
-      .ad-content h2 {
-        font-size: 36px;
-        margin-bottom: 10px;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-      }
-    
-      .ad-content p {
-        font-size: 20px;
-        margin-bottom: 20px;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-      }
-    
-      .ad-content button {
-        padding: 10px 20px;
-        font-size: 18px;
-        color: white;
-        background-color: #6d4c3d;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-    
-      .ad-content button:hover {
-        background-color: #8b5e4c;
-      }
-    </style>
-    
+
+   
+      
     <div id="bookingModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">Rezervimi i Shërbimit</div>
