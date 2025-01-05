@@ -1,105 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rreth nesh-Radiant Touch</title>
-    <link rel="icon" href="images/logo1.png" />
-    <link rel="stylesheet" href="style.css">
+    <title>Produktet-Radiant Touch</title>
+    <link rel="icon" href="images/logo1.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body> 
-    <header>
-        <nav>
-          <div class="logo-cont">
-            <div class="logo">
-              <a href="#">
-                <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
-              </a>
-            </div>
-            <div class="login">
+<style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+.product-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    width: 100vw;
+    height: 60vh; 
+    background: linear-gradient(to right, #f7f7f7, #e3e3e3);
+}
+
+.text-container {
+    position: relative;
+    width: 100vw; 
+    height: 100%; 
+    background: url("images/produktebanner.webp") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    color: #473524;
+    padding:  20px; }
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    height: 100%; 
+    text-align: center; 
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.text-content h1, .text-content h2 {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.text-content h1 {
+    font-size: 1.7em; 
+    font-weight: bold;
+}
+
+.text-content h2 {
+    font-size: 1.2em; 
+    margin-bottom: 10px;
+}
+
+.button-container {
+    margin-top: 20px 0;
+}
+
+.button-container a {
+    text-decoration: none;
+    background-color: #7c5b43;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.button-container a:hover {
+    background-color: #473524;
+}
+
+</style>
+<body>
+  <header>
+      <nav>
+        <div class="logo-cont">
+          <div class="logo">
+            <a href="#">
+              <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
+            </a>
+          </div>
+          <div class="login">
               <a href="login.html"><button id="loginBtn" >
-                <i class="fa fa-user"></i>
-              </button></a>
-            </div>
+                  <i class="fa fa-user"></i>
+                </button></a>
+              </div>
+        </div>
+        <div id="navi">
+          <ul>
+            <li><a href="index.html">Ballina</a></li>
+            <li><a href="sherbimet.html">Shërbimet</a></li>
+            <li><a href="galeria.html">Galeria</a></li>
+            <li><a href="Produktet.html">Produktet</a></li>
+            <li><a href="per_ne.html">Rreth nesh</a></li>
+            <li><a href="kontakti.html">Kontakti</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header> 
+    <section class="product-section">
+      <div class="text-container">
+          <div class="text-content">
+              <h1>Flokë të Shëndetshëm dhe Plot Shkëlqim</h1>
+              <h2><strong>Kerastase: Kujdesi që Flokët Tuaj e Meritojnë.</strong></h2>
+              <div class="button-container">
+                  <a href="#">Blej Tani</a>
+              </div>
           </div>
-          <div id="navi">
-            <ul>
-              <li><a href="index.html">Ballina</a></li>
-              <li><a href="sherbimet.html">Shërbimet</a></li>
-              <li><a href="galeria.html">Galeria</a></li>
-              <li><a href="per_ne.html">Rreth nesh</a></li>
-              <li><a href="kontakti.html">Kontakti</a></li>
-            </ul>
-          </div>
-        </nav>
-      </header> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<footer>
+      </div>
+  </section>
+  
+      
+          <footer>
         
-    <div class="footer-container">
-        <div class="footer-section">
-            <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" >
-            <p>Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do ditë.</p>
-        </div>
-        <div class="footer-section">
-            <h3>Kategorit&euml;</h3>
-            <ul>
-              <li><a href="index.html">BALLINA</a></li>
-              <li><a href="sherbimet.html">SHERBIMET</a></li>
-              <li><a href="galeria.html">GALERIA</a></li>
-              <li><a href="per_ne.html">RRETH NESH</a></li>
-              <li><a href="kontakti.html">KONTAKTI</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Kontakti</h3>
-            <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps?q=Prishtine+Kosove" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;"><abbr style="text-decoration: none;" title="Republic of Kosovo">Prishtine,Kosovë</abbr></a></p>
-            <p> <i class="fas fa-phone"></i> <a href="tel:+38344222222" style="color: #fff; text-decoration: none;">+383 44 222 222</a></p> 
-            <p><i class="fas fa-envelope"></i><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
-        </div>
-
-        </div>
-        <hr style="width: 90%;  margin: 10px auto; ">
-        <div class="footer-section newsletter">
-            <h3>Abonohuni</h3>
-            <form action="#" method="POST">
-                <div class="newsletter-input">
-                    <i class="fas fa-envelope"></i>
-                    <input type="email" placeholder="Shkruani email-in tuaj" required>
-                    <button type="submit" aria-label="Dërgo email"><i class="fas fa-paper-plane"></i></button>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" >
+                    <p>Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur &ccedil;do ditë.</p>
                 </div>
-                <div class="icons">
-                    <a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a>
-
+                <div class="footer-section">
+                    <h3>Kategorit&euml;</h3>
+                    <ul>
+                        <li><a href="index.html">BALLINA</a></li>
+                        <li><a href="sherbimet.html">SHERBIMET</a></li>
+                        <li><a href="galeria.html">GALERIA</a></li>
+                        <li><a href="Produktet.html">PRODUKTET</a></li>
+                        <li><a href="per_ne.html">RRETH NESH</a></li>
+                        <li><a href="kontakti.html">KONTAKTI</a></li>
+                    </ul>
                 </div>
-            </form>
-        </div>
+                <div class="footer-section">
+                    <h3>Kontakti</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps?q=Prishtine+Kosove" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;"><abbr style="text-decoration: none;" title="Republic of Kosovo">Prishtine,Kosovë</abbr></a></p>
+                    <p> <i class="fas fa-phone"></i> <a href="tel:+38344222222" style="color: #fff; text-decoration: none;">+383 44 222 222</a></p> 
+                    <p><i class="fas fa-envelope"></i><a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a></p>  
+                </div>
+    
+                </div>
+                <hr style="width: 90%;  margin: 10px auto; ">
+                <div class="footer-section newsletter">
+                    <h3>Abonohuni</h3>
+                    <form action="#" method="POST">
+                        <div class="newsletter-input">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" placeholder="Shkruani email-in tuaj" required>
+                            <button type="submit" aria-label="Dërgo email"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                        <div class="icons">
+                            <a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a>
         
-        <div class="footer-bottom">
-            &copy; 2024 <span> Radiant Touch </span>. Të gjitha të drejtat janë të rezervuara.
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="footer-bottom">
+                    &copy; 2024 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
+    
+                </div>        
+        </footer>
+    </body>
+      
+     
 
-        </div>
-</footer>
-
-<script src="javascript.js"></script>
-
-</body>
-</html>
+    
