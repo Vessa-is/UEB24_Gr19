@@ -305,12 +305,23 @@
           <td><button onclick="openModal('Hidratim intensiv për flokë')">Rezervo Tani</button></td>
         </tr>
         <tr>
-          <td>Trajtim kundër rënies së flokëve</td>
-          <td>50 min.<i class="fas fa-clock"></i></td>
-          <td> €</td>
-          <td><button onclick="openModal('Trajtim kundër rënies së flokëve')">Rezervo Tani</button></td>
+          <td>Trajtim anti-akne për fytyrë</td>
+          <td>80 min.<i class="fas fa-clock"></i></td>
+          <td>40 €</td>
+          <td><button onclick="openModal('Trajtim anti-akne për fytyrë')">Rezervo Tani</button></td>
         </tr>
-       
+        <tr>
+          <td>Laminim i vetullave</td>
+          <td>30 min.<i class="fas fa-clock"></i></td>
+          <td>10 €</td>
+          <td><button onclick="openModal('Laminim i vetullave')">Rezervo Tani</button></td>
+        </tr>
+        <tr>
+          <td>Balayage për flokë</td>
+          <td>150 min.<i class="fas fa-clock"></i></td>
+          <td>120 €</td>
+          <td><button onclick="openModal('Balayage për flokë')">Rezervo Tani</button></td>
+        </tr>
         </tbody>
       </table>
     </section>
@@ -320,15 +331,67 @@
         <p>Rezervoni tani dhe përfitoni 20% zbritje në shërbimet tona.</p>
         <button onclick="location.href='sherbimet.html'">Rezervo Tani</button>
       </div>
-      <video autoplay muted loop playsinline>
-        <source src="videos/videoo3.mp4" type="video/mp4" />
-        Shfletuesi juaj nuk e mbështet këtë video.
-      </video>
+    
     </section>
     
-
+    <style>
    
-      
+      .video-ad {
+        position: relative;
+        height: 400px;
+        background: url('path-to-placeholder.jpg') center center / cover no-repeat;
+        background-attachment: fixed;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+      }
+    
+     
+    
+      .video-ad video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -2;
+        object-fit: cover;
+        filter: brightness(0.7);
+      }
+    
+      /* Përmbajtja mbi reklamën */
+      .ad-content h2 {
+        font-size: 36px;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+      }
+    
+      .ad-content p {
+        font-size: 20px;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+      }
+    
+      .ad-content button {
+        padding: 10px 20px;
+        font-size: 18px;
+        color: white;
+        background-color: #6d4c3d;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+    
+      .ad-content button:hover {
+        background-color: #8b5e4c;
+      }
+    </style>
+    
     <div id="bookingModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">Rezervimi i Shërbimit</div>
@@ -397,15 +460,9 @@
             </button>
           </div>
           <div class="icons">
-            <a href="#" class="icon" aria-label="Facebook"
-              ><i class="fab fa-facebook-f"></i
-            ></a>
-            <a href="#" class="icon" aria-label="Instagram"
-              ><i class="fab fa-instagram"></i
-            ></a>
-            <a href="#" class="icon" aria-label="Twitter"
-              ><i class="fab fa-twitter"></i
-            ></a>
+            <a href="https://www.facebook.com" class="icon"  aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com" class="icon" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.twitter.com" class="icon" aria-label="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
           </div>
         </form>
       </div>
@@ -436,6 +493,8 @@
           alert("Ju lutem plotësoni të gjitha fushat.");
         }
       }
+
+
       function openModal(service,callback) {
   document.getElementById("serviceName").textContent = `Shërbimi: ${service}`;
   const modal = document.getElementById("bookingModal");
@@ -458,6 +517,7 @@ document.querySelectorAll(".rezervo-btn").forEach(button => {
     openModal(serviceName, onModalClose);
   });
 });
+
     </script>
   </body>
 </html>
