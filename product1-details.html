@@ -8,8 +8,47 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
-
-
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .container {
+        display: flex;
+        align-items: flex-start;
+      }
+      .product-image {
+        max-width: 300px;
+        border-radius: 8px;
+      }
+      .details {
+        margin-left: 20px;
+      }
+      form {
+        margin-top: 20px;
+      }
+      .form-group {
+        margin-bottom: 10px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      .form-group input, select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      .warning {
+        color: red;
+        display: none;
+      }
+      .success {
+        color: green;
+        display: none;
+      }
+    </style>
 
 
 
@@ -52,10 +91,10 @@
 
   <body>
     <div class="container">
-      <img src="product-image.jpg" alt="Product Image" class="product-image">
+      <img src="images/produkt3.webp" alt="Product Image" class="product-image">
       <div class="details">
         <h1>BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR.</h1>
-        <p>cmimi: $20</p>
+        <p>Cmimi: $20</p>
         <p>Ne Stok: <span id="stock">15</span></p>
   
         <form id="purchase-form">
@@ -160,9 +199,33 @@
         </div>        
 </footer>
 
-</html>
+<script>
+    const form = document.getElementById('purchase-form');
+    const stockElement = document.getElementById('stock');
+    const warningElement = document.getElementById('warning');
+    const successElement = document.getElementById('success');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+      const stock = parseInt(stockElement.textContent, 10);
+      const quantity = parseInt(document.getElementById('quantity').value, 10);
+
+      if (quantity > stock) {
+        warningElement.style.display = 'block';
+        successElement.style.display = 'none';
+      } else {
+        warningElement.style.display = 'none';
+        successElement.style.display = 'block';
+      }
+    });
+  </script>
 
 
 
 
 </body>
+</html>
+
+
+
+
