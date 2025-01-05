@@ -180,6 +180,75 @@
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
   pointer-events: none;
 }
+.product-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+    width: 100vw;
+    height: 60vh; 
+    background: linear-gradient(to right, #f7f7f7, #e3e3e3);
+}
+
+.text-container {
+    position: relative;
+    width: 100vw; 
+    height: 100%; 
+    background: url("images/produktebanner.webp") no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: flex-end; 
+    align-items: center;
+    color: #473524;
+    padding:  20px; }
+
+.text-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    height: 100%; 
+    text-align: center; 
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.text-content h1, .text-content h2 {
+    margin: 0;
+    padding: 10px 0;
+}
+
+.text-content h1 {
+    font-size: 1.7em; 
+    font-weight: bold;
+}
+
+.text-content h2 {
+    font-size: 1.2em; 
+    margin-bottom: 10px;
+}
+
+.button-container {
+    margin-top: 20px 0;
+}
+
+.button-container a {
+    text-decoration: none;
+    background-color: #7c5b43;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.button-container a:hover {
+    background-color: #473524;
+}
+
     </style>
 </head>
 <body>
@@ -253,7 +322,7 @@
               $(".about-content h3").css("color", "#664f3e");    
           });
       </script>
-      
+    
     </section>
     <div class="container_index1">
       <div class="overlay-text">
@@ -273,6 +342,17 @@
         <source src="audios/audio1.mp3" type="audio/mp3">
       </audio>
     </div>
+    <section class="product-section">
+      <div class="text-container">
+          <div class="text-content">
+              <h1>Flokë të Shëndetshëm dhe Plot Shkëlqim</h1>
+              <h2><strong>Kerastase: Kujdesi që Flokët Tuaj e Meritojnë.</strong></h2>
+              <div class="button-container">
+                  <a href="Produktet.html">Blej Tani</a>
+              </div>
+          </div>
+      </div>
+  </section>
     <section class="container">
       <h2>SHËRBIMET TONA</h2>
       <div class="services">
@@ -295,7 +375,19 @@
   
     <section class="kontenti2">
       <div class="rezervimi">
-      <h1>Rezervo Online</h1>
+        <svg width="100%" height="100">
+          <text x="50%" y="50%" text-anchor="middle" fill="white" font-size="40" font-family="Arial">
+            <animate
+              attributeName="y"
+              begin="0s"
+              dur="4s"
+              from="50%"
+              to="30%"
+              repeatCount="indefinite"
+            />
+            Rezervo Online
+          </text>
+        </svg>
       <p>Terminin tuaj...</p>
       <a href="sherbimet.html" class="btn">Rezervo</a>
     </div>

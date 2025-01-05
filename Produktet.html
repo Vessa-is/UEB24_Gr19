@@ -18,80 +18,11 @@ body {
  
 }
 
-.product-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 0;
-    width: 100vw;
-    height: 60vh; 
-    background: linear-gradient(to right, #f7f7f7, #e3e3e3);
-}
-
-.text-container {
-    position: relative;
-    width: 100vw; 
-    height: 100%; 
-    background: url("images/produktebanner.webp") no-repeat center center;
-    background-size: cover;
-    display: flex;
-    justify-content: flex-end; 
-    align-items: center;
-    color: #473524;
-    padding:  20px; }
-
-.text-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center; 
-    align-items: center;
-    height: 100%; 
-    text-align: center; 
-    padding: 0 40px;
-    box-sizing: border-box;
-}
-
-.text-content h1, .text-content h2 {
-    margin: 0;
-    padding: 10px 0;
-}
-
-.text-content h1 {
-    font-size: 1.7em; 
-    font-weight: bold;
-}
-
-.text-content h2 {
-    font-size: 1.2em; 
-    margin-bottom: 10px;
-}
-
-.button-container {
-    margin-top: 20px 0;
-}
-
-.button-container a {
-    text-decoration: none;
-    background-color: #7c5b43;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 1em;
-    font-weight: bold;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-}
-
-.button-container a:hover {
-    background-color: #473524;
-}
-
     .product {
             background-color: white;
             border: 1px solid #ddd;
             border-radius: 10px;
-            width: 200px;
+            width:275px;
             padding: 15px;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -105,17 +36,19 @@ body {
         .product img {
             width: 100%;
             border-radius: 10px;
+            height: auto;
         }
 
         .details {
-            margin-top: 10px;
+            margin-top: 5px;
             font-size: 14px;
             color: #555;
+            padding: 10px;
         }
 
         .price {
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
         .buy-button {
@@ -125,6 +58,7 @@ body {
             color: white;
             text-decoration: none;
             border-radius: 5px;
+            margin-top: 10px;
             font-size: 14px;
     
         }
@@ -134,14 +68,24 @@ body {
 }
 
 .products {
-    display: flex;
-            flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
             justify-content: center;
             gap: 20px;
             padding: 20px;
             background-color:#f4e4d4;
+            margin-left: 80px;
 }
-
+video {
+  width: 100%;
+  max-width: 900px; 
+  height: auto; 
+  display: block; 
+  margin: 20px auto; 
+  border-radius: 10px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+  border: 5px double #473524;
+}
 </style>
 <body>
   <header>
@@ -170,24 +114,22 @@ body {
         </div>
       </nav>
     </header> 
-    <section class="product-section">
-      <div class="text-container">
-          <div class="text-content">
-              <h1>Flokë të Shëndetshëm dhe Plot Shkëlqim</h1>
-              <h2><strong>Kerastase: Kujdesi që Flokët Tuaj e Meritojnë.</strong></h2>
-              <div class="button-container">
-                  <a href="#">Blej Tani</a>
-              </div>
-          </div>
-      </div>
-  </section>
+
+    <video autoplay muted loop>
+        <source src="videos/produktetvideo.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
   
 <section class="products">
+
+   
+
   <div class="product">
     <img src="images/produkt3.webp" alt="Product 1">
     <div class="details">
+        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR.</b></div>
         <div class="price">$20.00</div>
-        <div>In Stock: 15</div>
+        <div>Ne stok: 15</div>
         <a href="product1-details.html" class="buy-button">Buy</a>
     </div>
 </div>
@@ -195,8 +137,9 @@ body {
 <div class="product">
     <img src="images/produkt2.webp" alt="Product 2">
     <div class="details">
+        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>DENSIFIQUE. THICKENING SHAMPOO FOR THINNING HAIR.</b></div>
         <div class="price">$35.00</div>
-        <div>In Stock: 8</div>
+        <div>Ne stok: 8</div>
         <a href="product2-details.html" class="buy-button">Buy</a>
     </div>
 </div>
@@ -204,8 +147,9 @@ body {
 <div class="product">
     <img src="images/produkt1.webp" alt="Product 3">
     <div class="details">
+        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.</b></div>
         <div class="price">$15.00</div>
-        <div>In Stock: 25</div>
+        <div>Ne stok: 25</div>
         <a href="product3-details.html" class="buy-button">Buy</a>
     </div>
 </div>
@@ -214,26 +158,77 @@ body {
 <div class="product">
     <img src="images/produkt4.webp" alt="Product 4">
     <div class="details">
+        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>CHRONOLOGISTE. ESSENTIAL REVITALIZING HAIR MASK</b></div>
         <div class="price">$15.00</div>
-        <div>In Stock: 25</div>
-        <a href="product3-details.html" class="buy-button">Buy</a>
+        <div>ne Stok: 25</div>
+        <a href="product4-details.html" class="buy-button">Buy</a>
     </div>
 </div>
 
 <div class="product">
     <img src="images/produkt5.webp" alt="Product 5">
     <div class="details">
+        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>GENESIS. FORTIFYING SERUM FOR WEAKENED HAIR.</b></div>
         <div class="price">$15.00</div>
-        <div>In Stock: 25</div>
-        <a href="product3-details.html" class="buy-button">Buy</a>
+        <div>Ne Stok: 25</div>
+        <a href="product5-details.html" class="buy-button">Buy</a>
+    </div>
+</div>
+
+
+<div class="product">
+    <img src="images/produkt6.webp" alt="Product 6">
+    <div class="details">
+        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.</b></div>
+        <div class="price">$15.00</div>
+        <div>Ne stok: 25</div>
+        <a href="product6-details.html" class="buy-button">Buy</a>
     </div>
 </div>
 
 
 
 
+
 </section>
 
+<canvas id="waveCanvas"></canvas>
+<script>
+  const canvas = document.getElementById("waveCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = 100;
+
+  let waveOffset = 0;
+
+  function drawWave() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, "#f3e5d9");
+    gradient.addColorStop(0.5, "#d9c9b9");
+    gradient.addColorStop(1, "#fff8f0");
+
+    ctx.fillStyle = gradient;
+
+    ctx.beginPath();
+    for (let x = 0; x < canvas.width; x++) {
+      const y =
+        30 + Math.sin((x + waveOffset) * 0.03) * 10 +
+        Math.sin((x + waveOffset) * 0.01) * 5;
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.lineTo(0, canvas.height);
+    ctx.closePath();
+    ctx.fill();
+
+    waveOffset += 2;
+    requestAnimationFrame(drawWave);
+  }
+
+  drawWave();
+</script>
 
       
           <footer>

@@ -690,7 +690,14 @@ font-size: 25px;
   
 }
 
-
+#waveCanvas {
+  display: block;
+  margin: 0 auto;
+  background-color: #fff8f0;
+  width: 100%;
+  height: 100px;
+  max-height: 150px;
+}
 
 
 

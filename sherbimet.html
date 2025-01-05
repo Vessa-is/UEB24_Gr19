@@ -491,6 +491,31 @@
           alert("Ju lutem plotësoni të gjitha fushat.");
         }
       }
+
+
+      function openModal(service,callback) {
+  document.getElementById("serviceName").textContent = `Shërbimi: ${service}`;
+  const modal = document.getElementById("bookingModal");
+  modal.style.display = "block";
+
+  setTimeout(() => {
+    modal.style.display = "none";
+    if (callback && typeof callback === "function") {
+      callback();
+    }
+  }, 100000);
+}
+function onModalClose() {
+  console.log("Modal u mbyll. Rezervimi u mbyll me sukses!");
+  alert("Shërbimi u rezervua me sukses! Ju mirëpresim.");
+}
+document.querySelectorAll(".rezervo-btn").forEach(button => {
+  button.addEventListener("click", () => {
+    const serviceName = button.getAttribute("data-service-name");
+    openModal(serviceName, onModalClose);
+  });
+});
+
     </script>
   </body>
 </html>

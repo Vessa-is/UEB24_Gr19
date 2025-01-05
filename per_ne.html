@@ -10,7 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
 
 
@@ -358,6 +358,31 @@
             <a href="produktet.html" class="button">Shiko Produktet</a>
         </article>
     </section>
+    <script>
+      $(document).ready(function() {
+    $(".button").click(function(event) {
+        
+        var currentText = $(this).text();
+        console.log("Teksti i tanishëm: " + currentText);
+
+        
+        $(this).text("Po të dërgojmë tek Produktet...");
+
+        
+        $(this).addClass("highlight");
+
+        
+        setTimeout(function() {
+            
+            $("button").removeClass("highlight");
+
+            
+            $(".button").text(currentText);
+        }, 1000);
+    });
+});
+
+    </script>
     <div class="team-section">
       <h2>Stafi Ynë</h2>
       <div class="team-container">
