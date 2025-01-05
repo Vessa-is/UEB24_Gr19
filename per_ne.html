@@ -95,9 +95,7 @@
           padding: 20px 10%;
       }
       
-      p, h2 {
-          text-align: justify;
-      }
+     
       
       
       
@@ -208,6 +206,80 @@
 .button:hover {
     background-color: #943c43; 
 }
+.team-section {
+  max-width: 800px;
+  margin: 50px auto;
+  text-align: center;
+}
+
+.team-section h2 {
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #ad6159;
+  text-align: center;
+}
+
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dy kolona */
+  gap: 20px;
+}
+
+.team-member {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+
+}
+
+.team-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 20px;
+  border: 1px solid #523f31;
+}
+
+.team-info {
+  text-align: left;
+  flex: 1;
+}
+
+.team-info h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.team-info p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.details {
+  display: none;
+  font-size: 0.9rem;
+  color: #777;
+  margin-top: 10px;
+}
+
+.details-toggle {
+  background-color: #523f31;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.details-toggle:hover {
+  background-color: #664f3e;
+}
+
       </style>
 </head>
 <body id="aboutuspagebody">
@@ -243,7 +315,7 @@
         <img src="images/rotatinglogo.png" alt="Rotating Logo" />
     </div>
     <div class="about-us-text">
-      <h2>About Us</h2>
+      <h2>Rreth nesh</h2>
   </div>
 
       <section class="history-section">
