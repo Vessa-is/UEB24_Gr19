@@ -302,6 +302,83 @@
           <img src="images/a2.jpg" alt="Interior 3">
       </div>
   </div>
+  <div class="team">
+
+
+    <div class="team-section">
+      <h2>Stafi Ynë</h2>
+      <div class="team-container">
+          
+          <div class="team-member">
+              <img src="images/stafi1.jpg" alt="Adelina Kastrati" class="team-image">
+              <div class="team-info">
+                  <h3>Adelina Kastrati</h3>
+                  <p>Parukiere e talentuar me përvojë të madhe në stilimin dhe ngjyrosjen e flokëve.</p>
+                  <button class="details-toggle">Më shumë</button>
+                  <div class="details">
+                    Adelina është eksperte në stilimin modern dhe ngjyrosjen e flokëve, duke përdorur teknika inovative për rezultatet më të mira.
+                  </div>
+              </div>
+          </div>
+  
+        
+          <div class="team-member">
+              <img src="images/stafi2 (2).jpg" alt="Omar Aksoy" class="team-image">
+              <div class="team-info">
+                  <h3>Drita Murati</h3>
+                  <p>Eksperte për Kujdesin dhe Modelimin e Qerpikëve</p>
+                  <button class="details-toggle">Më shumë</button>
+                  <div class="details">
+                    Drita është e njohur për aftësinë e saj për të krijuar pamje natyrale dhe elegante. Ajo përdor teknika të avancuara për rritjen dhe forcimin e qerpikëve të klientëve.
+                  </div>
+              </div>
+          </div>
+  
+         
+          <div class="team-member">
+              <img src="images/stafi3 (2).jpg" alt="Quisha Johnson" class="team-image">
+              <div class="team-info">
+                  <h3>Sofija Kelmendi</h3>
+                  <p>Eksperte për trajtimet e vetullave</p>
+                  <button class="details-toggle">Më shumë</button>
+                  <div class="details">
+                    Sofija përdor teknika precize për të krijuar formën perfekte të vetullave. Ajo është gjithashtu e specializuar në ngjyrosjen dhe modelimin e tyre sipas tipareve të fytyrës.
+                  </div>
+              </div>
+          </div>
+  
+  
+          <div class="team-member">
+              <img src="images/stafi4 (2).jpeg" alt="Rita Haderxhonaj" class="team-image">
+              <div class="team-info">
+                  <h3>Ardita Berisha</h3>
+                  <p>Specialistja e produkteve për kujdesin e flokëve dhe bukurinë</p>
+                  <button class="details-toggle">Më shumë</button>
+                  <div class="details">
+                    Ardita ofron këshilla profesionale dhe rekomandime për përdorimin e produkteve të duhur për çdo lloj flokësh, si dhe për kujdesin e përditshëm të flokëve dhe trupit.
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+      $(document).ready(function(){
+    $(".details-toggle").click(function(){
+      var details = $(this).siblings(".details");
+      
+      if (details.is(":visible")) {
+        details.hide(500); 
+        $(this).text("Më shumë"); 
+      } else {
+        details.show(500); 
+        $(this).text("Më pak"); 
+      }
+    });
+  });
+  
+  </script>
 
 
       <footer>
