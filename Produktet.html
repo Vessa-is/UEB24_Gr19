@@ -179,6 +179,43 @@ body {
 
 </section>
 
+<canvas id="waveCanvas"></canvas>
+<script>
+  const canvas = document.getElementById("waveCanvas");
+  const ctx = canvas.getContext("2d");
+  canvas.width = window.innerWidth;
+  canvas.height = 100;
+
+  let waveOffset = 0;
+
+  function drawWave() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, "#f3e5d9");
+    gradient.addColorStop(0.5, "#d9c9b9");
+    gradient.addColorStop(1, "#fff8f0");
+
+    ctx.fillStyle = gradient;
+
+    ctx.beginPath();
+    for (let x = 0; x < canvas.width; x++) {
+      const y =
+        30 + Math.sin((x + waveOffset) * 0.03) * 10 +
+        Math.sin((x + waveOffset) * 0.01) * 5;
+      ctx.lineTo(x, y);
+    }
+    ctx.lineTo(canvas.width, canvas.height);
+    ctx.lineTo(0, canvas.height);
+    ctx.closePath();
+    ctx.fill();
+
+    waveOffset += 2;
+    requestAnimationFrame(drawWave);
+  }
+
+  drawWave();
+</script>
 
       
           <footer>
