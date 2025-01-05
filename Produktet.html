@@ -77,14 +77,12 @@ body {
             margin-left: 80px;
 }
 video {
-  width: 100%;
-  max-width: 900px; 
-  height: auto; 
-  display: block; 
-  margin: 20px auto; 
-  border-radius: 10px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
-  border: 5px double #473524;
+  width: 100%; /* Fill the entire width of the page */
+  max-height: 600px; /* Limit the height to prevent it from being too large */
+  object-fit: fill; /* Stretch the video without preserving the aspect ratio */
+  display: block; /* Remove extra inline spacing */
+  margin: 0; /* Remove margins for seamless appearance */
+  background-color: black; /* Add a background to fill empty spaces if aspect ratio differs */
 }
 </style>
 <body>
@@ -120,6 +118,11 @@ video {
         Your browser does not support the video tag.
       </video>
   
+      <div class="audio-container">
+        <audio controls autoplay loop muted>
+          <source src="audios/audio2.mp3" type="audio/mp3">
+        </audio>
+      </div>
 <section class="products">
 
    
