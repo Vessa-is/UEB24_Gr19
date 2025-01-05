@@ -436,6 +436,16 @@
           alert("Ju lutem plotësoni të gjitha fushat.");
         }
       }
+      function openModal(service) {
+  document.getElementById("serviceName").textContent = `Shërbimi: ${service}`;
+  const modal = document.getElementById("bookingModal");
+  modal.style.display = "block";
+
+  setTimeout(() => {
+    modal.style.display = "none";
+  }, 10000);
+}
+
     </script>
   </body>
 </html>
