@@ -9,13 +9,209 @@
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-</head>
-<body id="aboutusbody">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+
+
+      .text-section {
+        flex: 1 1 50%;
+        padding: 15px; 
+      }
+      
+      .text-section h1 {
+        font-size: 28px;
+        font-family: 'Playfair Display', serif; 
+        font-weight: 700;
+        margin-bottom: 15px;
+        color: #333; 
+      }
+      
+      .text-section p {
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        line-height: 1.8;
+        color: #555; 
+        margin-bottom: 15px;
+      }
+      
+      
+      .image-section {
+        flex: 1 1 50%;
+        padding: 15px; 
+        text-align: center;
+      }
+      
+      .interior-image {
+        width: 85%; 
+        border-radius: 12px;
+        border: 2px solid #eaeaea; 
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+      }
+      .interior-image:hover {
+        transform: scale(1.02); 
+        transition: transform 0.3s ease;
+      }
+      
+      @media (max-width: 768px) {
+        .about-us {
+          flex-direction: column;
+          align-items: center;
+        }
+      
+        .text-section, .image-section {
+          flex: 1 1 100%;
+          text-align: center;
+        }
+      
+        .interior-image {
+          width: 90%; 
+        }
+      }
+      
+      .history-section {
+          width: 100%;
+          margin: 20px 0;
+          padding: 0 10%;
+          color: #333;
+      }
+      
+      .content-block p,
+      .subsection p {
+          font-size: 16px;
+          line-height: 1.8;
+          margin: 20px 0;
+      }
+      
+      .subsection h2 {
+          font-size: 20px;
+          font-family: 'Playfair Display', serif;
+          color: #444;
+          margin-top: 30px;
+      }
+      
+      .history-section {
+          background-color: transparent;
+          padding: 20px 10%;
+      }
+      
+      p, h2 {
+          text-align: justify;
+      }
+      
+      
+      
+      .photo-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr); 
+          grid-template-rows: auto; 
+          gap: 12px; 
+          max-width: 1000px; 
+          width: 90%;
+          margin: 0 auto; 
+         padding-bottom: 50px;
+      }
+      
+      .photo {
+          overflow: hidden;
+          border-radius: 8px;
+          aspect-ratio: 4 / 3; 
+      }
+      
+      .photo img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover; 
+      }
+      
+      .photo.large {
+          grid-column: span 3; 
+          aspect-ratio: 16 / 9; 
+      }
+      
+      .photo.medium {
+          grid-column: span 1; 
+      }
+      .rotating-logo {
+        padding-top: 20px;
+          width: 150px; 
+          height: 150px;
+          margin: 20px auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      
+      .rotating-logo img {
+          width: 100%; 
+          height: 100%;
+          animation: rotate 10s linear infinite; 
+          border-radius: 50%; 
+      }
+      
+      @keyframes rotate {
+          from {
+              transform: rotate(0deg);
+          }
+          to {
+              transform: rotate(360deg);
+          }
+      }
+      .about-us-text {
+          margin: 20px 0; 
+      }
+      
+      .about-us-text h2 {
+        text-align: center; 
+          font-family: 'Playfair Display', serif; 
+          font-size: 50px; 
+          color: #ad6159; 
+          text-transform: uppercase; 
+          letter-spacing: 2px; 
+          margin: 0; 
+      }
+      
+      .qellimet {
+    padding-left: 20px; 
+    font-family: Arial, sans-serif; 
+    font-style: normal; 
+    font-size: 16px; 
+    color: #555; 
+    line-height: 1.8; 
+}
+
+.qellimet li {
+    font-style: normal; 
+    margin-bottom: 10px; 
+}
+
+.qellimet-inner {
+    list-style-type: square; 
+    padding-left: 20px; 
+    font-family: Arial, sans-serif;
+    font-style: normal; 
+    font-size: 16px; 
+    color: #555; 
+    line-height: 1.8; 
+}
+.button {
+    display: inline-block; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    color: #fff; 
+    background-color: #ad6159; 
+    text-decoration: none; 
+    border-radius: 5px; 
+    transition: background-color 0.3s; 
+}
+
+.button:hover {
+    background-color: #943c43; 
+}
+      </style>
 </head>
 <body id="aboutuspagebody">
-<style>
-</style>
+
     <header>
         <nav>
           <div class="logo-cont">
@@ -43,156 +239,69 @@
         </nav>
       </header> 
 
-
-      <div id="aboutuspage">
-        <div class="aboutussection">
-          <h1 id="aboutusheader">Rreth nesh</h1>
-          <div class="flexcontainer">
-            <div class="contentsection">
-              <h3 class="aboutustitle">Historia jone</h3>
-            <p id="aboutusgreeting"></p>
-              <p class="aboutusparagraph">Radiant Touch eshte nje sallon i bukurise i themeluar ne vitin 2020, i krijuar me pasion per te ofruar sherbime te jashtzakonshme dhe nje pervoje relaksuese per klientet tane. Qellimi yne ka qene gjithmone te nxjerrim ne pah bukurine dhe vetebesimin e cdo personi qe viziton sallonin tone. Me nje staf te dedikuar dhe me pervoje, Radiant Touch ofron sherbime moderne te kujdesit per floket, lekuren dhe trupin, duke perdorur produkte te cilesise me te larte dhe teknika inovative. Historia jone reflekton perkushtimin tone per ekselence dhe deshiren per te krijuar nje ambient te ngrohte dhe mikprites ku klientet tane ndihen te vecante dhe te vleresuar</p>
-              <br>
-             
-            </div>
-
-            <div class="imagesection">
-              <img src="images/rez2.jpg" alt="About Us Image">
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-      
-
-      <div class="qellimetcontainer">
-
-   <p id="qellimet"> <b> Qellimet tona</b></p>
-      
-      <ol class="ulaboutus">
-        <li>Ofroje nje eksperience relaksuese dhe te kendshme për klientet tane.
-          <ol class="ulaboutus">
-            <li>Krijimi i nje atmosfere te qete dhe te rehatshme.</li>
-            <li>Sigurimi i sherbimeve profesionale per çdo lloj kerkese.</li>
-          </ol>
-        </li>
-        <li>Siguroje sherbime të cilesise së larte per kujdesin e trupit dhe lekures.
-          <ol clas="ulaboutus">
-            <li>Perdorimi i produkteve natyrale dhe te certifikuara.</li>
-            <li>Pershtatja e trajtimeve sipas nevojave të individeve.</li>
-        
-          </ol>
-
-        </li>
-      
-      </div>
-  
-
-<h3 id="h3lokacioni"> Përshkrimi i Vendndodhjes</h3>
-<p id="aboutuslokacioni"> Salloni "Radiant Touch" ndodhet ne zemer te qytetit,ne <abbr title="Prishtine" >PR</abbr>, ne nje zone lehtesisht te arritshme dhe te rrethuar nga ambiente moderne. Adresa jone eshte vetem disa hapa larg pikave kyce te transportit publik, duke e bere te thjeshte per kedo qe te na vizitoje. Lokacionin e sakte te sallonit mund ta shikoni ne kete link <a href="https://www.google.com/maps/place/Cathedral+of+Saint+Mother+Teresa/@42.6562723,21.1576201,17z/data=!4m6!3m5!1s0x13549ee8ab4ab551:0xc5bceaec65d0ab0e!8m2!3d42.6562802!4d21.1593528!16s%2Fm%2F04n1jnj?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" id="linkulokacionit"> Lokacioni </a></p>
-
-
-
-
-
-<div class="produktettona">
-
-<h3> Produktet tona</h3>
-<p> 
-  Radiant Touch ofron produkte cilesore per kujdesin e flokeve dhe bukurine. Ne krenohemi me Hair Gummies, qe ndihmojne rritjen e shpejte dhe te shendetshme te flokeve, Lash Oil per qerpike te gjate e te forte, maska ushqyese per floke, dhe ngjyra te shendetshme qe ruajne shkelqimin natyral te flokeve. Radiant Touch sjell nje eksperience unike, duke u perkushtuar qe cdo produkt te jete i sigurt dhe efektiv per pamjen tuaj me te mire</p>
-</div>
-
-
-<div class="team">
-
-
-<div class="ourteamcontainer">
-  <div class="teamrow"><h3>Stafi yne</h3>
-    <p>Ne Radiant Touch, ekipi yne i talentuar dhe i perkushtuar i parukiereve eshte ketu per te realizuar vizionin tuaj. Me pasion per kreativitetin dhe perkushtim ndaj persosmerise, sigurojme qe cdo klient te largohet duke u ndjere i sigurt, i fresket dhe rrezatues. Na lini t’i japim flokeve tuaj nje pamje te vecante, te krijuar posacerisht per ju!</p>
-  </div>
-  <div class="teamrow mgt50px">
-    <div class="teamcolumn">
-      <div class="imgbox">
-        <img src="images/staf3.jpg">
-      </div>
-      
-        <div class="imgdetails">
-          <h3>Adelina Kastrati</h3>
-                
-          <ul>
-            <li><a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a> Adelina_K</li>
-            <li><a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a> Adelina_K</li>
-            <li><a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a> Adelina_K</li>
-          </ul>
-        
-      </div>
+      <div class="rotating-logo">
+        <img src="images/rotatinglogo.png" alt="Rotating Logo" />
     </div>
-    <div class="teamcolumn">
-      <div class="imgbox">
-        <img src="images/staf7.jpg">
-      </div>
-        <div class="imgdetails">
-          <h3>Omar Aksoy</h3>
-
-          <ul>
-            <li><a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a> O_hair</li>
-            <li><a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a> O_hair</li>
-            <li><a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a> Omar_A</li>
-          </ul>
-        
-      </div>
-    </div>
-    <div class="teamcolumn">
-      <div class="imgbox">
-        <img src="images/staf2.jpg">
-      </div>
-        <div class="imgdetails">
-          <h3>Quisha Johnson</h3>
-
-          <ul>
-            <li><a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a> Quisha_J</li>
-            <li><a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i> </a>Q_lashes</li>
-            <li><a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a> Quisha_J</li>
-          </ul>
-        
-      </div>
-    </div>
-
-    <div class="teamcolumn">
-      <div class="imgbox">
-        <img src="images/staf4.jpg">
-      </div>
-        <div class="imgdetails">
-          <h3>Rita Haderxhonaj</h3>
-
-          <ul>
-            <li><a href="#" class="icon"  aria-label="Facebook"><i class="fab fa-facebook-f"></i></a> Ritahair</li>
-            <li><a href="#" class="icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a> Ritahair</li>
-            <li><a href="#" class="icon" aria-label="Twitter" ><i class="fab fa-twitter"></i></a> Ritahair</li>
-          </ul>
-        
-      </div>
-    </div>
-
-  </div>
+    <div class="about-us-text">
+      <h2>About Us</h2>
   </div>
 
- 
-
-
-
-
-
-
-
-
-
+      <section class="history-section">
+        <article class="subsection">
+            <h2>Historia jonë</h2>
+            <p>
+                Radiant Touch është një sallon i bukurisë i themeluar në vitin 2020, i krijuar me pasion për të ofruar shërbime të jashtëzakonshme dhe një përvojë relaksuese për klientët tanë. Qëllimi ynë ka qenë gjithmonë të nxjerrim në pah bukurinë dhe vetëbesimin e çdo personi që viziton sallonin tonë. Me një staf të dedikuar dhe me përvojë, Radiant Touch ofron shërbime moderne të kujdesit për flokët, lëkurën dhe trupin, duke përdorur produkte të cilësisë më të lartë dhe teknika inovative. Historia jonë reflekton përkushtimin tonë për ekselencë dhe dëshirën për të krijuar një ambient të ngrohtë dhe mikpritës ku klientët tanë ndihen të veçantë dhe të vlerësuar.
+            </p>
+        </article>
    
-
-
-
       
+        <article class="subsection">
+          <h2>Qellimet tona</h2>
+          <p>
+            <ol class="qellimet">
+              <li>Ofrojme nje eksperience relaksuese dhe te kendshme për klientet tane.
+                  <ol class="qellimet-inner">
+                      <li>Krijimi i nje atmosfere te qete dhe te rehatshme.</li>
+                      <li>Sigurimi i sherbimeve profesionale per çdo lloj kerkese.</li>
+                  </ol>
+              </li>
+              <li>Sigurojme sherbime të cilesise së larte per kujdesin e trupit dhe lekures.
+                  <ol class="qellimet-inner">
+                      <li>Perdorimi i produkteve natyrale dhe te certifikuara.</li>
+                      <li>Pershtatja e trajtimeve sipas nevojave të individeve.</li>
+                  </ol>
+              </li>
+          </ol>
+          
+          </p>
+      </article>
+      
+
+
+        <article class="subsection">
+            <h2>Produktet tona</h2>
+            <p>
+                Radiant Touch ofron produkte cilesore per kujdesin e flokeve dhe bukurine. Ne krenohemi me produktet Kerastase, qe ndihmojne rritjen e shpejte dhe te shendetshme te flokeve, maska ushqyese per floke, dhe ngjyra te shendetshme qe ruajne shkelqimin natyral te flokeve. Radiant Touch sjell nje eksperience unike, duke u perkushtuar qe cdo produkt te jete i sigurt dhe efektiv per pamjen tuaj me te mire.
+            </p>
+            <a href="produktet.html" class="button">Shiko Produktet</a>
+        </article>
+    </section>
+
+       
+    <div class="photo-grid">
+      <div class="photo large">
+          <img src="images/a4.jpg" alt="interior">
+      </div>
+      <div class="photo medium">
+          <img src="images/a1.jpg" alt="Interior 1">
+      </div>
+      <div class="photo medium">
+          <img src="images/a3.jpg" alt="Interior 2">
+      </div>
+      <div class="photo medium">
+          <img src="images/a2.jpg" alt="Interior 3">
+      </div>
+  </div>
 
 
       <footer>
