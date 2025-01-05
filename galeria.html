@@ -20,6 +20,22 @@
     background-attachment: fixed, scroll; 
     background-position: center center, top left; 
   }
+  section {
+    background-image: url('images/background.jpg'), url('images/overlay.png');
+    background-size: cover, contain;
+    background-position: center center, top left;
+    background-attachment: fixed, scroll;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow to the whole section */
+}
+
+.gallery-item img {
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); /* Add shadow to each image */
+}
+
+#galleryheading {
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* Add text shadow to the title */
+}
+
 </style>
 <body>
     <header>
