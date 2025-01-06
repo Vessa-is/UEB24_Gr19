@@ -7,7 +7,7 @@
     <link rel="icon" href="images/logo1.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script src="javascript.js"></script>
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 </head>
@@ -279,7 +279,7 @@ cursor: pointer;
               </a>
             </div>
             <div class="login">
-                <a href="login.html"><button id="loginBtn" >
+                <a href="login.html"><button id="loginBtn" style="background:none;" >
                     <i class="fa fa-user"></i>
                   </button></a>
               </div>
@@ -354,7 +354,7 @@ cursor: pointer;
             <p><strong>Prishtinë:</strong> Rruga B,Royal Mall</p>
              <a href="https://www.google.com/maps/place/Royal+Mall/@42.6538179,21.1747672,17z/data=!4m14!1m7!3m6!1s0x13549edaa73c5815:0x8ce096f362fa06bb!2sRoyal+Mall!8m2!3d42.6538179!4d21.1773421!16s%2Fg%2F11g9g_n6b1!3m5!1s0x13549edaa73c5815:0x8ce096f362fa06bb!8m2!3d42.6538179!4d21.1773421!16s%2Fg%2F11g9g_n6b1?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
-              
+            <button class="toggle-orari">Shfaq Orarin</button>
             <div class="Orari">
                 <h3>Orari i Punës</h3>
                 <ul>
@@ -369,7 +369,7 @@ cursor: pointer;
             <span class="location-number">2</span>
             <p><strong>Prizren:</strong> ABI Carshia, Nr. 10</p><a href="https://www.google.com/maps/place/ABI+%C3%87arshia/@42.2180145,20.7242061,17.35z/data=!4m6!3m5!1s0x1353957e9046af55:0x9b12caa8bed3c878!8m2!3d42.2173705!4d20.7256931!16s%2Fg%2F11gtyt8zy2?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
-            
+            <button class="toggle-orari">Shfaq Orarin</button>
             <div class="Orari">
                 <h3>Orari i Punës</h3>
                 <ul>
@@ -385,6 +385,7 @@ cursor: pointer;
             <p><strong>Ferizaj:</strong> Ferizaj Mall</p>
             <a href="https://www.google.com/maps/place/Ferizaj+Mall/@42.3842742,21.1675289,17z/data=!3m1!4b1!4m6!3m5!1s0x13547fbefc06e153:0x2a5ab8e4815e007e!8m2!3d42.3842742!4d21.1675289!16s%2Fg%2F11vqpd2347?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
+            <button class="toggle-orari">Shfaq Orarin</button>
             <div class="Orari">
                 <h3>Orari i Punës</h3>
                 <ul>
@@ -400,6 +401,7 @@ cursor: pointer;
             <p><strong>Mitrovicë:</strong> Rruga Adem Jashari, Nr. 20</p>
             <a href="https://www.google.com/maps/place/Adem+Jashari/@42.8882602,20.8671181,17z/data=!3m1!4b1!4m6!3m5!1s0x13534512ddeaaaab:0x5f90836c8070656c!8m2!3d42.8882602!4d20.869693!16s%2Fg%2F11sskrf43v?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
+            <button class="toggle-orari">Shfaq Orarin</button>
             <div class="Orari">
                 <h3>Orari i Punës</h3>
                 <ul>
@@ -475,7 +477,7 @@ cursor: pointer;
                 </div>
                 
                 <div class="footer-bottom">
-                    &copy; 2024 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
+                    &copy; 2025 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
     
                 </div>        
         </footer>
@@ -632,5 +634,26 @@ $(document).ready(function() {
       });
     });
   });
+
+  $(document).ready(function() {
+    
+    $('.Orari').hide(); 
+
+    $('.toggle-orari').click(function() {
+        var orariDiv = $(this).siblings('.Orari');
+        
+        
+        if (orariDiv.is(':visible')) {
+            orariDiv.slideUp(500); 
+            $(this).text('Shfaq Orarin'); 
+        } else {
+            orariDiv.slideDown(500); 
+            $(this).text('Fshih Orarin'); 
+        }
+    });
+});
+
+
+
 
       </script>

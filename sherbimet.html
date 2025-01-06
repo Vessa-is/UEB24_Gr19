@@ -10,6 +10,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
       body,
@@ -185,7 +186,7 @@
       <nav>
         <div class="logo-cont">
           <div class="logo">
-            <a href="#">
+            <a href="index.html">
               <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
             </a>
           </div>
@@ -474,7 +475,7 @@
       </div>
 
       <div class="footer-bottom">
-        &copy; 2024 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të
+        &copy; 2025 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të
         rezervuara.
       </div>
     </footer>
@@ -561,6 +562,23 @@ document.querySelectorAll(".rezervo-btn").forEach(button => {
     openModal(serviceName, onModalClose);
   });
 });
+function openModal(serviceName) {
+  
+  document.getElementById('serviceName').innerText = "Shërbimi: " + serviceName;
+
+  $('#bookingModal').slideDown();
+}
+
+function closeModal() {
+  
+  $('#bookingModal').slideUp();
+}
+
+function confirmBooking() {
+  alert("Rezervimi është konfirmuar!");
+  closeModal();
+}
+
 
     </script>
   </body>
