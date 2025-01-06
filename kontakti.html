@@ -575,4 +575,34 @@ cursor: pointer;
         warning.style.marginTop = "5px";
         field.parentNode.insertBefore(warning, field.nextSibling);
     }
+    const socialMediaDropdown = document.getElementById("social-media");
+socialMediaDropdown.addEventListener("change", () => {
+    const selectedOption = socialMediaDropdown.value;
+    console.log(`Si ke dëgjuar për ne: ${selectedOption}`);
+});
+function getSelectedVisitOption() {
+    const visitOptions = document.querySelectorAll('input[name="visit-again"]');
+    let selectedOption = null;
+    visitOptions.forEach((option) => {
+        if (option.checked) {
+            selectedOption = option.value;
+        }
+    });
+    return selectedOption;
+}
+const visitOptions = document.querySelectorAll('input[name="visit-again"]');
+visitOptions.forEach((option) => {
+    option.addEventListener("change", () => {
+        const selectedOption = getSelectedVisitOption();
+        console.log(`A do të vizitonit përsëri: ${selectedOption}`);
+    });
+});
+function collectFeedback() {
+    const socialMediaSelection = socialMediaDropdown.value;
+    const visitAgainSelection = getSelectedVisitOption();
+
+    console.log("Feedback i mbledhur:");
+    console.log(`Si ke dëgjuar për ne: ${socialMediaSelection}`);
+    console.log(`A do të vizitonit përsëri: ${visitAgainSelection}`);
+}
       </script>
