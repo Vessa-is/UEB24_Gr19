@@ -10,59 +10,72 @@
 
 <style>
     body {
-        font-family: Arial, sans-serif;
-        margin: 0px;
-      }
-      .container {
-        display: flex;
-        align-items: flex-start;
-        margin: 20px;
-      }
-      .product-image {
-        max-width: 500px;
-        border-radius: 8px;
-      }
-      .details {
-        margin-left: 20px;
-      }
-      form {
-        margin-top: 20px;
-      }
-      .form-group {
-        margin-bottom: 10px;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        text-align: left;
-        font-weight: bold;
-      }
-      .form-group input, select {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
-      .warning {
-        color: red;
-        display: none;
-      }
-      .success {
-        color: green;
-        display: none;
-      }
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            display: flex;                       
+            justify-content: space-between;        
+            gap: 10px;                             
+            margin: 100px;                          
+        }
+        .product-image, .details {
+            flex: 1;                               
+            max-width: 45%;                        
+            height: auto;                         
+        }
+
+        .product-image {
+            width: 100%;                           
+            object-fit: cover;                     
+            border-radius: 8px;
+        }
+
+        .details {
+            padding: 15px;                         
+            background: none;                   
+            border-radius: 8px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        .form-group {
+            margin-bottom: 10px;
+            text-align: left;
+            color: #ad6159;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #6d4c3d;
+        }
+        .form-group input, select {
+            width: 100%;
+            padding: 6px;                         
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;                     
+        }
+        button {
+            padding: 8px 15px;
+            background-color: #6d4c3d;
+            color: white;
+            font-size: 14px;                      
+            border-radius: 4px;
+            border: none;
+            cursor: pointer;
+        }
+        .warning {
+            color: red;
+            display: none;
+        }
+        .success {
+            color: green;
+            display: none;
+        }
     </style>
-
-
-
-
-
-
-
-
-
-
-
 </head>
 <body>
 <header>
@@ -127,7 +140,7 @@
           </div>
           <div class="form-group">
             <label for="quantity">Sasia</label>
-            <input type="number" id="quantity" name="quantity" min="1" required>
+            <input type="number" id="quantity" name="quantity" max="25" required>
           </div>
           <button type="submit" style=" padding: 5px; background-color: #6d4c3d; color:white; margin-top: 10px;">Porosit</button>
         </form>
