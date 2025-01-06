@@ -10,7 +10,7 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-</head>
+
 
 <style>
     body {
@@ -53,8 +53,8 @@ justify-content: center;
 margin-left: 20px;
 text-align: center;
 padding: 20px;
-padding-bottom: 50px;
-}.contact-text h2 {
+}
+.contact-text h2 {
 color: #6d4c3d;
 font-family: 'Georgia', serif;
 font-style: italic;
@@ -269,6 +269,7 @@ color: #6d4c3d;
 cursor: pointer;
 }
 </style>
+</head>
 <body>
     <header>
         <nav>
@@ -320,18 +321,18 @@ cursor: pointer;
                 <button type="submit">Dergo mesazhin</button>
             </form>
         </div></div>
-        </div>
         <div class="feedback-section">
             <h3>Si ke dëgjuar për ne?</h3>
             <div class="social-media-dropdown">
                 <label for="social-media">Zgjedh një opsion:</label>
-                <select id="social-media" name="social-media">
-                    <option value="google">Google</option>
-                    <option value="facebook">Facebook</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="friend" selected>Shoqe/Familjarë</option>
-                    <option value="other">Tjetër</option>
-                </select>
+                <input list="social-options" id="social-media" name="social-media" placeholder="Zgjidhni ose shkruani një opsion">
+                <datalist id="social-options">                  
+                    <option value="Google">
+                    <option value="Facebook">
+                    <option value="Instagram">
+                    <option value="Shoqe/Familjarë">
+                    <option value="Tjetër">
+                </datalist>
             </div>
         
             <h3>A do të vizitonit përsëri?</h3>
@@ -344,7 +345,6 @@ cursor: pointer;
             <button type="submit">Dergo Feedback</button>
         
             </div>
-        </div>
 <div class="lokacioni-dyqanit">
     <h2>Vendndodhjet e Dyqaneve Tona</h2>
     <div class="locations-wrapper">
@@ -432,6 +432,11 @@ cursor: pointer;
                    dhe për t'ju siguruar një eksperiencë relaksuese dhe profesionale. 
                    Bukuria juaj është prioriteti ynë!</p>
         </div>
+
+        <div class="keygen-container">
+            <p id="key"></p>
+            <button onclick="document.getElementById('key').innerText = generateKey();">&Ccedil;el&euml;si</button>
+          </div>
         <footer>
         
             <div class="footer-container">
@@ -481,8 +486,9 @@ cursor: pointer;
     
                 </div>        
         </footer>
-    </body>
-    </html>
+
+        <script src="javascript.js"></script>
+    
     <script>
     document.getElementById("contactForm").addEventListener("submit", function (event) {
         event.preventDefault(); 
@@ -652,8 +658,6 @@ $(document).ready(function() {
         }
     });
 });
-
-
-
-
-      </script>
+</script>
+</body>
+</html>
