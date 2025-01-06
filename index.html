@@ -446,6 +446,21 @@
     
                     </div>
                 </form>
+                <script>
+                  
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        const email = document.querySelector('input[type="email"]').value;
+
+        if (email) {
+            alert('Faleminderit për abonimin');
+        } else {
+            alert('Ju lutem, shkruani një email të vlefshëm.');
+        }
+    });
+</script>
+
+                
             </div>
             
             <div class="footer-bottom">
