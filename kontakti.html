@@ -590,4 +590,11 @@ function getSelectedVisitOption() {
     });
     return selectedOption;
 }
+const visitOptions = document.querySelectorAll('input[name="visit-again"]');
+visitOptions.forEach((option) => {
+    option.addEventListener("change", () => {
+        const selectedOption = getSelectedVisitOption();
+        console.log(`A do të vizitonit përsëri: ${selectedOption}`);
+    });
+});
       </script>
