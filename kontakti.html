@@ -619,5 +619,23 @@ function collectFeedback() {
         \n- A do të vizitonit përsëri: ${visitAgainSelection}`
     );
 }
+$(document).ready(function() {
+    
+    $('#contactForm').on('submit', function(event) {
+      event.preventDefault(); 
+      $(this).fadeOut(500, function() {
+        alert('Faleminderit që na kontaktuat! Ne do t’ju përgjigjemi së shpejti.');
+        $(this).fadeIn(500);
+      });
+    });
+
+    
+    $('.feedback-section button').on('click', function() {
+      $('.feedback-section').fadeOut(500, function() {
+        alert('Faleminderit për feedback-un tuaj!');
+        $(this).fadeIn(500);
+      });
+    });
+  });
 
       </script>
