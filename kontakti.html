@@ -598,6 +598,11 @@ visitOptions.forEach((option) => {
         console.log(`A do të vizitonit përsëri: ${selectedOption}`);
     });
 });
+const submitButton = document.querySelector('.feedback-section button');
+    submitButton.addEventListener("click", (event) => {
+        event.preventDefault(); 
+        collectFeedback();
+    });
 function collectFeedback() {
     const socialMediaSelection = socialMediaDropdown.value;
     const visitAgainSelection = getSelectedVisitOption();
