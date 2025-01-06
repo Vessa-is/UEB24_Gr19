@@ -85,6 +85,7 @@ video {
   margin: 0; 
   background-color: black; 
 }
+
 </style>
 </head>
 <body>
@@ -192,14 +193,23 @@ video {
 </div>
 
 <section class="cart">
-  <h2>Shto ne Shport</h2>
-  <ul id="cartItems"></ul>
-  <div class="total">Totali: $<span id="totalPrice">0</span></div>
+  <h2>Shto në Shport</h2>
+  <ul id="cartItems">
+  </ul>
+  <div class="total">
+    Totali: $<span id="totalPrice">0</span>
+  </div>
+
+
+
+  <button id="clearCart">Pastro Shportën</button>
+
+  
+</section>
 </section>
 
 
 
-</section>
 
 <canvas id="waveCanvas"></canvas>
 <script>
