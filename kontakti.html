@@ -325,13 +325,14 @@ cursor: pointer;
             <h3>Si ke dëgjuar për ne?</h3>
             <div class="social-media-dropdown">
                 <label for="social-media">Zgjedh një opsion:</label>
-                <select id="social-media" name="social-media">
-                    <option value="google">Google</option>
-                    <option value="facebook">Facebook</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="friend" selected>Shoqe/Familjarë</option>
-                    <option value="other">Tjetër</option>
-                </select>
+                <input list="social-options" id="social-media" name="social-media" placeholder="Zgjidhni ose shkruani një opsion">
+                <datalist id="social-options">                  
+                    <option value="Google">
+                    <option value="Facebook">
+                    <option value="Instagram">
+                    <option value="Shoqe/Familjarë">
+                    <option value="Tjetër">
+                </datalist>
             </div>
         
             <h3>A do të vizitonit përsëri?</h3>
