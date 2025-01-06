@@ -10,6 +10,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
       body,
@@ -561,6 +562,23 @@ document.querySelectorAll(".rezervo-btn").forEach(button => {
     openModal(serviceName, onModalClose);
   });
 });
+function openModal(serviceName) {
+  
+  document.getElementById('serviceName').innerText = "Shërbimi: " + serviceName;
+
+  $('#bookingModal').slideDown();
+}
+
+function closeModal() {
+  
+  $('#bookingModal').slideUp();
+}
+
+function confirmBooking() {
+  alert("Rezervimi është konfirmuar!");
+  closeModal();
+}
+
 
     </script>
   </body>
