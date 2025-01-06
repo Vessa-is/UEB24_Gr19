@@ -36,3 +36,18 @@ console.log("JavaScript is working!");
 
 
 
+function generateKey() {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let key = '';
+    
+    for (let i = 0; i < 4; i++) {
+        let section = '';
+        for (let j = 0; j < 4; j++) {
+            section += characters.charAt(Math.floor(Math.random() * characters.length));
+        }
+        key += section;
+        if (i < 3) key += '-'; 
+    }
+    
+    return key;
+}
