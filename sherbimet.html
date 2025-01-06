@@ -241,7 +241,94 @@
     visibility: visible;
     opacity: 1;
 }
+.video-ad {
+        position: relative;
+        height: 400px;
+        background: url('path-to-placeholder.jpg') center center / cover no-repeat;
+        background-attachment: fixed;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        color: white;
+      }
+    
+     
+    
+      .video-ad video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        min-width: 100%;
+        min-height: 100%;
+        z-index: -2;
+        object-fit: cover;
+        filter: brightness(0.7);
+      }
+    
+   
+      .ad-content h2 {
+        font-size: 36px;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+      }
+    
+      .ad-content p {
+        font-size: 20px;
+        margin-bottom: 20px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+      }
+    
+      .ad-content button {
+        padding: 10px 20px;
+        font-size: 18px;
+        color: white;
+        background-color: #6d4c3d;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+    
+      .ad-content button:hover {
+        background-color: #8b5e4c;
+      }
+      #calendar {
+    max-width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
+#calendar h2 {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    padding: 10px;
+    background-color: #f4f4f4;
+    text-align: center;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.day:hover {
+    background-color: #3498db;
+    color: white;
+}
 
 
     </style>
@@ -410,100 +497,7 @@
         
         </tbody>
       </table>
-    </section>
-    <style>
-     .video-ad {
-        position: relative;
-        height: 400px;
-        background: url('path-to-placeholder.jpg') center center / cover no-repeat;
-        background-attachment: fixed;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        color: white;
-      }
-    
-     
-    
-      .video-ad video {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        min-width: 100%;
-        min-height: 100%;
-        z-index: -2;
-        object-fit: cover;
-        filter: brightness(0.7);
-      }
-    
-   
-      .ad-content h2 {
-        font-size: 36px;
-        margin-bottom: 10px;
-        text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
-      }
-    
-      .ad-content p {
-        font-size: 20px;
-        margin-bottom: 20px;
-        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
-      }
-    
-      .ad-content button {
-        padding: 10px 20px;
-        font-size: 18px;
-        color: white;
-        background-color: #6d4c3d;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-      }
-    
-      .ad-content button:hover {
-        background-color: #8b5e4c;
-      }
-      #calendar {
-    max-width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-#calendar h2 {
-    text-align: center;
-    font-size: 22px;
-    margin-bottom: 15px;
-}
-
-.days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-}
-
-.day {
-    padding: 10px;
-    background-color: #f4f4f4;
-    text-align: center;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.day:hover {
-    background-color: #3498db;
-    color: white;
-}
-
-      
-    </style>
-    
+    </section>   
     <div id="bookingModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">Rezervimi i Shërbimit</div>
