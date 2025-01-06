@@ -335,11 +335,13 @@ video {
         document.getElementById('clearCart').addEventListener('click', function() {
       const cartItems = document.getElementById('cartItems');
       const totalPrice = document.getElementById('totalPrice');
-
+      const notification = document.getElementById('notification');
       cartItems.innerHTML = '';
       totalPrice.textContent = '0';
-
-      alert('Shporta u pastrua!');
+      notification.style.display = 'block';
+      setTimeout(() => {
+        notification.style.display = 'none';
+      }, 3000);
     });
     </script>
 </body>
