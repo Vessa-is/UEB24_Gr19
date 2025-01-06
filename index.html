@@ -432,7 +432,7 @@
             <hr style="width: 90%;  margin: 10px auto; ">
             <div class="footer-section newsletter">
                 <h3>Abonohuni</h3>
-                <form action="#" method="POST">
+                <form id="abonimform" method="POST">
                     <div class="newsletter-input">
                         <i class="fas fa-envelope"></i>
                         <input type="email" placeholder="Shkruani email-in tuaj" required>
@@ -447,9 +447,9 @@
                 </form>
                 <script>
                   
-    document.querySelector('form').addEventListener('submit', function(event) {
+    document.querySelector('#abonimform').addEventListener('submit', function(event) {
         event.preventDefault(); 
-        const email = document.querySelector('input[type="email"]').value;
+        const email = document.querySelector('#abonimform input[type="email"]').value;
 
         if (email) {
             alert('Faleminderit për abonimin');

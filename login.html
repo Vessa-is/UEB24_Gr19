@@ -225,7 +225,7 @@ function validateLoginFields(email, password) {
       <hr style="width: 90%;  margin: 10px auto; ">
       <div class="footer-section newsletter">
         <h3>Abonohuni</h3>
-        <form action="#" method="POST">
+        <form id="abonimform" method="POST">
           <div class="newsletter-input">
             <i class="fas fa-envelope"></i>
             <input type="email" placeholder="Shkruani email-in tuaj" required />
@@ -233,6 +233,19 @@ function validateLoginFields(email, password) {
               <i class="fas fa-paper-plane"></i>
             </button>
           </div>
+          <script>
+                  
+            document.querySelector('#abonimform').addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                const email = document.querySelector('#abonimform input[type="email"]').value;
+        
+                if (email) {
+                    alert('Faleminderit për abonimin');
+                } else {
+                    alert('Ju lutem, shkruani një email të vlefshëm.');
+                }
+            });
+        </script>   
           <div class="icons">
             <a href="https://www.facebook.com" class="icon"  aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com" class="icon" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
