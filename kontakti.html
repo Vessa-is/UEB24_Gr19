@@ -541,7 +541,7 @@ cursor: pointer;
 }
 
       
-        if (!phoneField.value.trim() || !/^\+?\d{9,15}$/.test(phoneField.value)) {
+        if (!phoneField.value.trim() || !/^\+\d{9,15}$/.test(phoneField.value)) {
           displayWarning(phoneField, warnings.phone);
           valid = false;
         }
