@@ -530,24 +530,17 @@
     }
   }
 
+function openModal() {
+  const modal = document.getElementById("reservationModal");
+  modal.style.display = "block"; // E hapim modalin
 
-  function openModal(service, callback) {
-  document.getElementById("serviceName").textContent = `Shërbimi: ${service}`;
-  const modal = document.getElementById("bookingModal");
-  modal.style.display = "block";  
-
-  setTimeout(() => {
-    modal.style.display = "none";  
-    if (callback && typeof callback === "function") {
-      callback();  
-    }
-  }, 100000);
+ 
+  setTimeout(function() {
+    modal.style.display = "none"; 
+  }, 100000); 
 }
 
-
-openModal('Prerje e flokëve', function() {
-  console.log("Modal u mbyll pas 100 sekondash.");
-});
+document.getElementById("openModalButton").addEventListener("click", openModal);
 function onModalClose() {
   console.log("Modal u mbyll. Rezervimi u mbyll me sukses!");
   alert("Shërbimi u rezervua me sukses! Ju mirëpresim.");
