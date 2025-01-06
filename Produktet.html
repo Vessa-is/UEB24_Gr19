@@ -332,7 +332,15 @@ video {
                 totalPriceEl.textContent = totalPrice.toFixed(2);
             }
         });
-        
+        document.getElementById('clearCart').addEventListener('click', function() {
+      const cartItems = document.getElementById('cartItems');
+      const totalPrice = document.getElementById('totalPrice');
+
+      cartItems.innerHTML = '';
+      totalPrice.textContent = '0';
+
+      alert('Shporta u pastrua!');
+    });
     </script>
 </body>
 
