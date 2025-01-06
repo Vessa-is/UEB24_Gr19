@@ -597,4 +597,12 @@ visitOptions.forEach((option) => {
         console.log(`A do të vizitonit përsëri: ${selectedOption}`);
     });
 });
+function collectFeedback() {
+    const socialMediaSelection = socialMediaDropdown.value;
+    const visitAgainSelection = getSelectedVisitOption();
+
+    console.log("Feedback i mbledhur:");
+    console.log(`Si ke dëgjuar për ne: ${socialMediaSelection}`);
+    console.log(`A do të vizitonit përsëri: ${visitAgainSelection}`);
+}
       </script>
