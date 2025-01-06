@@ -11,14 +11,15 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        margin: 20px;
+        margin: 0px;
       }
       .container {
         display: flex;
         align-items: flex-start;
+        margin: 20px;
       }
       .product-image {
-        max-width: 300px;
+        max-width: 500px;
         border-radius: 8px;
       }
       .details {
@@ -33,6 +34,8 @@
       .form-group label {
         display: block;
         margin-bottom: 5px;
+        text-align: left;
+        color: #6d4c3d;
       }
       .form-group input, select {
         width: 100%;
@@ -93,9 +96,9 @@
     <div class="container">
       <img src="images/produkt3.webp" alt="Product Image" class="product-image">
       <div class="details">
-        <h1>DENSIFIQUE. THICKENING SHAMPOO FOR THINNING HAIR.</h1>
-        <p>Cmimi: $35</p>
-        <p>Ne Stok: <span id="stock">8</span></p>
+        <h1>ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.</h1>
+        <p>Cmimi: $15</p>
+        <p>Ne Stok: <span id="stock">25</span></p>
   
         <form id="purchase-form">
           <div class="form-group">
@@ -116,21 +119,21 @@
           </div>
           <div class="form-group">
             <label for="address">Adresa</label>
-            <input type="text" id="address" name="address" required>
+            <input type="text" id="address" name="address"placeholder ="Adresa" required>
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="email" placeholder="Email"  required>
           </div>
           <div class="form-group">
             <label for="quantity">Sasia</label>
             <input type="number" id="quantity" name="quantity" min="1" required>
           </div>
-          <button type="submit">Submit</button>
+          <button type="submit" style="padding: 10px; background-color: #6d4c3d; color: #fff; margin-top: 10px;">Submit</button>
         </form>
         
         <p class="warning" id="warning">Nuk ka mjaftueshem ne stok!</p>
-        <p class="success" id="success">Porosia juaj do arrij per 5-7 dite.</p>
+        <p class="success" id="success">Faleminderit per Porosine tuaj! Produkti juaj do arrij per 5-7 dite.</p>
       </div>
     </div>
 
