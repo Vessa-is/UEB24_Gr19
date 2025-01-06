@@ -53,8 +53,8 @@ justify-content: center;
 margin-left: 20px;
 text-align: center;
 padding: 20px;
-padding-bottom: 50px;
-}.contact-text h2 {
+}
+.contact-text h2 {
 color: #6d4c3d;
 font-family: 'Georgia', serif;
 font-style: italic;
@@ -432,6 +432,11 @@ cursor: pointer;
                    dhe për t'ju siguruar një eksperiencë relaksuese dhe profesionale. 
                    Bukuria juaj është prioriteti ynë!</p>
         </div>
+
+        <div class="keygen-container">
+            <p id="key"></p>
+            <button onclick="document.getElementById('key').innerText = generateKey();">&Ccedil;el&euml;si</button>
+          </div>
         <footer>
         
             <div class="footer-container">
@@ -481,6 +486,8 @@ cursor: pointer;
     
                 </div>        
         </footer>
+
+        <script src="javascript.js"></script>
     
     <script>
     document.getElementById("contactForm").addEventListener("submit", function (event) {
