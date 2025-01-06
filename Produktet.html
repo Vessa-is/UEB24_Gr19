@@ -188,7 +188,7 @@ video {
 </div>
 
 <section class="cart">
-  <h2>Shporta e Blerjeve</h2>
+  <h2>Shto ne Shport</h2>
   <ul id="cartItems"></ul>
   <div class="total">Totali: $<span id="totalPrice">0</span></div>
 </section>
@@ -238,7 +238,7 @@ video {
         const totalPriceEl = document.getElementById('totalPrice');
         let totalPrice = 0;
 
-        // Drag and Drop functionality
+      
         products.forEach(product => {
             product.addEventListener('dragstart', () => {
                 product.classList.add('dragging');
