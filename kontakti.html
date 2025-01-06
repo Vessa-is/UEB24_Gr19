@@ -338,6 +338,7 @@ cursor: pointer;
                 <label><input type="radio" name="visit-again" value="Maybe"> Ndoshta</label>
             </div>
         
+            <button type="submit">Dergo Feedback</button>
         
             </div>
         </div>
@@ -601,8 +602,17 @@ function collectFeedback() {
     const socialMediaSelection = socialMediaDropdown.value;
     const visitAgainSelection = getSelectedVisitOption();
 
+    if (!visitAgainSelection) {
+        alert("Ju lutemi zgjidhni një opsion për 'A do të vizitonit përsëri?'.");
+        return;
+    }
     console.log("Feedback i mbledhur:");
     console.log(`Si ke dëgjuar për ne: ${socialMediaSelection}`);
     console.log(`A do të vizitonit përsëri: ${visitAgainSelection}`);
+    alert(
+        `Feedback i juaj është dërguar:\n- Si ke dëgjuar për ne: ${socialMediaSelection}
+        \n- A do të vizitonit përsëri: ${visitAgainSelection}`
+    );
 }
+
       </script>
