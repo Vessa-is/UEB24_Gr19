@@ -13,7 +13,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
 
-
       .text-section {
         flex: 1 1 50%;
         padding: 15px; 
@@ -221,7 +220,7 @@
 
 .team-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Dy kolona */
+  grid-template-columns: repeat(2, 1fr); 
   gap: 20px;
 }
 
@@ -288,7 +287,7 @@
         <nav>
           <div class="logo-cont">
             <div class="logo">
-              <a href="#">
+              <a href="index.html">
                 <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
               </a>
             </div>
@@ -345,7 +344,6 @@
                   </ol>
               </li>
           </ol>
-          
           </p>
       </article>
       
@@ -402,8 +400,8 @@
   
         
           <div class="team-member">
-              <img src="images/stafi2 (2).jpg" alt="Omar Aksoy" class="team-image">
-              <div class="team-info">
+              <img src="images/stafi2 (2).jpg" alt="Drita Murati" class="team-image">
+              <div class="team-info"> 
                   <h3>Drita Murati</h3>
                   <p>Eksperte për Kujdesin dhe Modelimin e Qerpikëve</p>
                   <button class="details-toggle">Më shumë</button>
@@ -415,7 +413,7 @@
   
          
           <div class="team-member">
-              <img src="images/stafi3 (2).jpg" alt="Quisha Johnson" class="team-image">
+              <img src="images/stafi3 (2).jpg" alt="Sofija Kelmendi" class="team-image">
               <div class="team-info">
                   <h3>Sofija Kelmendi</h3>
                   <p>Eksperte për trajtimet e vetullave</p>
@@ -428,7 +426,7 @@
   
   
           <div class="team-member">
-              <img src="images/stafi4 (2).jpeg" alt="Rita Haderxhonaj" class="team-image">
+              <img src="images/stafi4 (2).jpeg" alt="Ardita Berisha" class="team-image">
               <div class="team-info">
                   <h3>Ardita Berisha</h3>
                   <p>Specialistja e produkteve për kujdesin e flokëve dhe bukurinë</p>
@@ -474,9 +472,6 @@
           <img src="images/a2.jpg" alt="Interior 3">
       </div>
   </div>
-  <div class="team">
-
-
 
       <footer>
         
@@ -523,9 +518,14 @@
             </div>
             
             <div class="footer-bottom">
-                &copy; 2024 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
+                &copy; 2025 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.<br>
 
             </div>
+
+           <div class="keygen-container">
+            <p id="key"></p>
+            <button onclick="document.getElementById('key').innerText = generateKey();">Celesi</button>
+          </div>
     </footer>
 
 

@@ -32,31 +32,31 @@
         padding: 20px;
       }
       .content h1 {
-        font-size: 4rem;
+        font-size: 64px;
         line-height: 1.2;
         margin-top: 20px;
         margin-bottom: 20px;
         font-family: "Georgia", serif;
         font-style: italic;
         position: absolute;
-      top: 20%;
-      left: 5%;
-      max-width: 600px;
-      text-shadow: 3px 3px 10px #F2E8DE;
+        top: 20%;
+        left: 5%;
+        max-width: 600px;
+        text-shadow: 3px 3px 10px #F2E8DE;
       }
       .content p {
-        font-size: 1.2rem;
+        font-size: 19px;
         margin-bottom: 50px;
         line-height: 1.6;
         position: absolute;
-      bottom: 10%;
-      right: 10%;
-      text-align: right;
-      max-width: 400px;
+        bottom: 10%;
+        right: 10%;
+        text-align: right;
+        max-width: 400px;
       }
       .content button {
         padding: 15px 30px;
-        font-size: 1rem;
+        font-size: 16px;
         color: #fff;
         background-color: #96887d;
         border: none;
@@ -95,13 +95,13 @@
       color: white;
        }
        .rezervimi h1{
-        font-size: 2.5rem;
+        font-size: 40px;
       font-weight: 300;
       margin: 10px 0;
       line-height: 1.5;
        }
        .rezervimi p{
-        font-size: 1.2rem;
+        font-size: 19px;
       font-weight: 400;
       margin: 10px 0;
        }
@@ -113,7 +113,7 @@
       background-color: #7c5b43; 
       color: white;
       text-decoration: none;
-      font-size: 1rem;
+      font-size: 16px;
       font-weight: bold;
       border-radius: 20px;
       transition: background-color 0.3s ease;
@@ -156,7 +156,7 @@
 }
 
 .overlay-text h1 {
-  font-size: 2rem; 
+  font-size: 32px; 
   font-weight: bold;
   letter-spacing: 1px;
   margin-bottom: 10px;
@@ -165,7 +165,7 @@
 }
 
 .overlay-text p {
-  font-size: 1rem; 
+  font-size: 16px; 
   font-weight: 300;
   letter-spacing: 0.5px;
 }
@@ -222,12 +222,12 @@
 }
 
 .text-content h1 {
-    font-size: 1.7em; 
+    font-size: 27px; 
     font-weight: bold;
 }
 
 .text-content h2 {
-    font-size: 1.2em; 
+    font-size: 19px; 
     margin-bottom: 10px;
 }
 
@@ -241,7 +241,7 @@
     color: #fff;
     padding: 10px 20px;
     border-radius: 5px;
-    font-size: 1em;
+    font-size: 16px;
     font-weight: bold;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease;
@@ -260,7 +260,7 @@
         <nav>
           <div class="logo-cont">
             <div class="logo">
-              <a href="#home">
+              <a href="index.html">
                 <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
               </a>
             </div>
@@ -291,7 +291,7 @@
           <div class="content">
             <h1>
               Where beauty <br />
-              meets confidence </span>
+              meets confidence 
             </h1>
             <div class="description">
             <p>
@@ -359,7 +359,7 @@
       <h2>SHËRBIMET TONA</h2>
       <div class="services">
           <div class="service-item">
-              <img src="images/sherbimiflok.jpeg" alt="Stilim dhe trajtime për flokë">
+              <img src="images/indexx2.jpg" alt="Stilim dhe trajtime për flokë">
               <p>STILIM DHE TRAJTIME PËR FLOKË</p>
           </div>
           <div class="service-item">
@@ -367,7 +367,7 @@
               <p>APLIKIM QERPIKËSH</p>
           </div>
           <div class="service-item">
-              <img src="images/kontakti.jpg" alt="Stilim dhe laminim i vetullave">
+              <img src="images/indexx.jpg" alt="Stilim dhe laminim i vetullave">
               <p>STILIM DHE LAMINIM I VETULLAVE</p>
           </div>
       </div>
@@ -446,10 +446,25 @@
     
                     </div>
                 </form>
+                <script>
+                  
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        const email = document.querySelector('input[type="email"]').value;
+
+        if (email) {
+            alert('Faleminderit për abonimin');
+        } else {
+            alert('Ju lutem, shkruani një email të vlefshëm.');
+        }
+    });
+</script>
+
+                
             </div>
             
             <div class="footer-bottom">
-                &copy; 2024 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
+                &copy; 2025 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
 
             </div>
             <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>

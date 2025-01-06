@@ -7,7 +7,10 @@
     <link rel="icon" href="images/logo1.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-</head>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
 
 <style>
     body {
@@ -266,6 +269,7 @@ color: #6d4c3d;
 cursor: pointer;
 }
 </style>
+</head>
 <body>
     <header>
         <nav>
@@ -276,7 +280,7 @@ cursor: pointer;
               </a>
             </div>
             <div class="login">
-                <a href="login.html"><button id="loginBtn" >
+                <a href="login.html"><button id="loginBtn" style="background:none;" >
                     <i class="fa fa-user"></i>
                   </button></a>
               </div>
@@ -317,18 +321,18 @@ cursor: pointer;
                 <button type="submit">Dergo mesazhin</button>
             </form>
         </div></div>
-        </div>
         <div class="feedback-section">
             <h3>Si ke dëgjuar për ne?</h3>
             <div class="social-media-dropdown">
                 <label for="social-media">Zgjedh një opsion:</label>
-                <select id="social-media" name="social-media">
-                    <option value="google">Google</option>
-                    <option value="facebook">Facebook</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="friend" selected>Shoqe/Familjarë</option>
-                    <option value="other">Tjetër</option>
-                </select>
+                <input list="social-options" id="social-media" name="social-media" placeholder="Zgjidhni ose shkruani një opsion">
+                <datalist id="social-options">                  
+                    <option value="Google">
+                    <option value="Facebook">
+                    <option value="Instagram">
+                    <option value="Shoqe/Familjarë">
+                    <option value="Tjetër">
+                </datalist>
             </div>
         
             <h3>A do të vizitonit përsëri?</h3>
@@ -338,9 +342,9 @@ cursor: pointer;
                 <label><input type="radio" name="visit-again" value="Maybe"> Ndoshta</label>
             </div>
         
+            <button type="submit">Dergo Feedback</button>
         
             </div>
-        </div>
 <div class="lokacioni-dyqanit">
     <h2>Vendndodhjet e Dyqaneve Tona</h2>
     <div class="locations-wrapper">
@@ -350,7 +354,7 @@ cursor: pointer;
             <p><strong>Prishtinë:</strong> Rruga B,Royal Mall</p>
              <a href="https://www.google.com/maps/place/Royal+Mall/@42.6538179,21.1747672,17z/data=!4m14!1m7!3m6!1s0x13549edaa73c5815:0x8ce096f362fa06bb!2sRoyal+Mall!8m2!3d42.6538179!4d21.1773421!16s%2Fg%2F11g9g_n6b1!3m5!1s0x13549edaa73c5815:0x8ce096f362fa06bb!8m2!3d42.6538179!4d21.1773421!16s%2Fg%2F11g9g_n6b1?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
-              
+            <button class="toggle-orari">Shfaq Orarin</button>
             <div class="Orari">
                 <h3>Orari i Punës</h3>
                 <ul>
@@ -365,7 +369,7 @@ cursor: pointer;
             <span class="location-number">2</span>
             <p><strong>Prizren:</strong> ABI Carshia, Nr. 10</p><a href="https://www.google.com/maps/place/ABI+%C3%87arshia/@42.2180145,20.7242061,17.35z/data=!4m6!3m5!1s0x1353957e9046af55:0x9b12caa8bed3c878!8m2!3d42.2173705!4d20.7256931!16s%2Fg%2F11gtyt8zy2?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
-            
+            <button class="toggle-orari">Shfaq Orarin</button>
             <div class="Orari">
                 <h3>Orari i Punës</h3>
                 <ul>
@@ -381,6 +385,7 @@ cursor: pointer;
             <p><strong>Ferizaj:</strong> Ferizaj Mall</p>
             <a href="https://www.google.com/maps/place/Ferizaj+Mall/@42.3842742,21.1675289,17z/data=!3m1!4b1!4m6!3m5!1s0x13547fbefc06e153:0x2a5ab8e4815e007e!8m2!3d42.3842742!4d21.1675289!16s%2Fg%2F11vqpd2347?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
+            <button class="toggle-orari">Shfaq Orarin</button>
             <div class="Orari">
                 <h3>Orari i Punës</h3>
                 <ul>
@@ -396,6 +401,7 @@ cursor: pointer;
             <p><strong>Mitrovicë:</strong> Rruga Adem Jashari, Nr. 20</p>
             <a href="https://www.google.com/maps/place/Adem+Jashari/@42.8882602,20.8671181,17z/data=!3m1!4b1!4m6!3m5!1s0x13534512ddeaaaab:0x5f90836c8070656c!8m2!3d42.8882602!4d20.869693!16s%2Fg%2F11sskrf43v?entry=ttu&g_ep=EgoyMDI0MTIxMS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="map-link">Shiko në hartë</a>
             </address>
+            <button class="toggle-orari">Shfaq Orarin</button>
             <div class="Orari">
                 <h3>Orari i Punës</h3>
                 <ul>
@@ -471,12 +477,11 @@ cursor: pointer;
                 </div>
                 
                 <div class="footer-bottom">
-                    &copy; 2024 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
+                    &copy; 2025 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
     
                 </div>        
         </footer>
-    </body>
-    </html>
+    
     <script>
     document.getElementById("contactForm").addEventListener("submit", function (event) {
         event.preventDefault(); 
@@ -575,4 +580,77 @@ cursor: pointer;
         warning.style.marginTop = "5px";
         field.parentNode.insertBefore(warning, field.nextSibling);
     }
-      </script>
+    const socialMediaDropdown = document.getElementById("social-media");
+socialMediaDropdown.addEventListener("change", () => {
+    const selectedOption = socialMediaDropdown.value;
+    console.log(`Si ke dëgjuar për ne: ${selectedOption}`);
+});
+function getSelectedVisitOption() {
+    const visitOptions = document.querySelectorAll('input[name="visit-again"]');
+    let selectedOption = null;
+    visitOptions.forEach((option) => {
+        if (option.checked) {
+            selectedOption = option.value;
+        }
+    });
+    return selectedOption;
+}
+const visitOptions = document.querySelectorAll('input[name="visit-again"]');
+visitOptions.forEach((option) => {
+    option.addEventListener("change", () => {
+        const selectedOption = getSelectedVisitOption();
+        console.log(`A do të vizitonit përsëri: ${selectedOption}`);
+    });
+});
+const submitButton = document.querySelector('.feedback-section button');
+    submitButton.addEventListener("click", (event) => {
+        event.preventDefault(); 
+        collectFeedback();
+    });
+function collectFeedback() {
+    const socialMediaSelection = socialMediaDropdown.value;
+    const visitAgainSelection = getSelectedVisitOption();
+
+    if (!visitAgainSelection) {
+        alert("Ju lutemi zgjidhni një opsion për 'A do të vizitonit përsëri?'.");
+        return;
+    }
+    console.log("Feedback i mbledhur:");
+    console.log(`Si ke dëgjuar për ne: ${socialMediaSelection}`);
+    console.log(`A do të vizitonit përsëri: ${visitAgainSelection}`);
+    alert(
+        `Feedback i juaj është dërguar:\n- Si ke dëgjuar për ne: ${socialMediaSelection}
+        \n- A do të vizitonit përsëri: ${visitAgainSelection}`
+    );
+}
+$(document).ready(function() {
+   
+    
+    $('.feedback-section button').on('click', function() {
+      $('.feedback-section').fadeOut(500, function() {
+        alert('Faleminderit për feedback-un tuaj!');
+        $(this).fadeIn(500);
+      });
+    });
+  });
+
+  $(document).ready(function() {
+    
+    $('.Orari').hide(); 
+
+    $('.toggle-orari').click(function() {
+        var orariDiv = $(this).siblings('.Orari');
+        
+        
+        if (orariDiv.is(':visible')) {
+            orariDiv.slideUp(500); 
+            $(this).text('Shfaq Orarin'); 
+        } else {
+            orariDiv.slideDown(500); 
+            $(this).text('Fshih Orarin'); 
+        }
+    });
+});
+</script>
+</body>
+</html>

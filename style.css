@@ -476,7 +476,6 @@ section {
 
 }
 
-
 .galeria {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -696,10 +695,28 @@ font-size: 25px;
   max-height: 150px;
 }
 
+.keygen-container {
+  margin-top: 30px;
+  display: block;
+  margin-left: 500px;
+
+}
+ .keygen-container button{
+background-color: #decfbc;
+padding: 10px;
+margin-top: 30px;
+border-radius: 8px;
 
 
 
 
+
+}
+
+
+.keygen-container button:hover {
+  background-color: #664f3e;
+}
 
 
 
