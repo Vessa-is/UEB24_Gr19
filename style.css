@@ -50,6 +50,10 @@
   nav {
     width: 100%;
     background-color: #decfbc;
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-around; 
+    align-items: center; 
   }
   nav ul {
     display: flex;
@@ -72,6 +76,7 @@
     transition: all 0.3s;
     text-align: center;
     font-style: normal;
+    white-space: nowrap;
   }
   nav ul li a:hover {
     color: #fff;

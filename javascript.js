@@ -6,7 +6,7 @@ switch (true) {
 
     case(currentHour >= 5 && currentHour < 12 ) :
 
-    greeting.textContent = " Mirmengjesi! ";
+    greeting.textContent = " Mirëmëngjes! ";
     break;
 
 
@@ -14,18 +14,18 @@ switch (true) {
     case(currentHour >= 12 && currentHour < 18 ) :
 
 
-    greeting.textContent = " Miredita! ";
+    greeting.textContent = " Mirëdita! ";
     break;
 
 
     case(currentHour >= 18 && currentHour < 24 ) :
 
 
-    greeting.textContent = " Mirembrema! ";
+    greeting.textContent = " Mirëmbrëma! ";
     break;
  
     default :
-    greeting.textContent = "Ckemi";
+    greeting.textContent = "Çkemi";
     break;
 
 }
