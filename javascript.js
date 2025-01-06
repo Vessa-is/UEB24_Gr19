@@ -36,3 +36,38 @@ console.log("JavaScript is working!");
 
 
 
+$(document).ready(function() {
+    $(".about-content h3").css("color", "#664f3e");    
+});
+
+$(document).ready(function() {
+    $(".btn").hover(function() {
+        $(this).css("background-color", "#6f6154");  
+    }, function() {
+        $(this).css("background-color", "#96887d");  
+    });
+});
+
+document.querySelector('form').addEventListener('submit', function(event) {
+    event.preventDefault(); 
+    const email = document.querySelector('input[type="email"]').value;
+
+    if (email) {
+        alert('Faleminderit për abonimin');
+    } else {
+        alert('Ju lutem, shkruani një email të vlefshëm.');
+    }
+});
+
+$(document).ready(function() {
+    $(window).scroll(function() {
+        if ($(this).scrollTop() > 600) {
+            $("#scrollToTop").fadeIn(); 
+        } else {
+            $("#scrollToTop").fadeOut(); 
+        }
+    });
+    $("#scrollToTop").click(function() {
+        $("html, body").animate({ scrollTop: 0 }, 600); 
+    });
+});
