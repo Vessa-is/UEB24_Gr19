@@ -245,6 +245,20 @@
 </body>
 </html>
 
+<?php
+require_once("scripts/classes/Product.php");
+
+$product = new Product("BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR.", 20, 15);
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $quantity = $_POST["quantity"];
+    if ($product->reduceStock($quantity)) {
+        $success = true;
+    } else {
+        $error = "Nuk ka mjaftueshëm në stok.";
+    }
+}
+?>
 
 
 
