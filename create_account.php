@@ -89,24 +89,24 @@
       <nav>
         <div class="logo-cont">
           <div class="logo">
-            <a href="index.html">
+            <a href="index.php">
               <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
             </a>
           </div>
           <div class="login">
-            <a href="login.html"><button id="loginBtn" aria-label="Login" >
+            <a href="login.php"><button id="loginBtn" aria-label="Login" >
                 <i class="fa fa-user"></i>
               </button></a>
           </div>
         </div>
         <div id="navi">
           <ul>
-            <li><a href="index.html">Ballina</a></li>
-            <li><a href="sherbimet.html">Shërbimet</a></li>
-            <li><a href="galeria.html">Galeria</a></li>
-            <li><a href="Produktet.html">Produktet</a></li>
-            <li><a href="per_ne.html">Rreth nesh</a></li>
-            <li><a href="kontakti.html">Kontakti</a></li>
+            <li><a href="index.php">Ballina</a></li>
+            <li><a href="sherbimet.php">Shërbimet</a></li>
+            <li><a href="galeria.php">Galeria</a></li>
+            <li><a href="Produktet.php">Produktet</a></li>
+            <li><a href="per_ne.php">Rreth nesh</a></li>
+            <li><a href="kontakti.php">Kontakti</a></li>
           </ul>
         </div>
       </nav>
@@ -133,7 +133,7 @@
             <button type="submit">Create New Account</button>
         </form>
         <div class="back-link">
-            <a href="login.html">Return to Login</a>
+            <a href="login.php">Return to Login</a>
         </div>
     </div>
     
@@ -152,7 +152,7 @@
     validateFields(firstName, lastName, email, password);
     const account = createAccount(firstName, lastName, email, password);
     alert(`Llogaria u krijua me sukses më: ${account.creationDate.toLocaleString()}`);
-    window.location.href = "login.html";
+    window.location.href = "login.php";
   } catch (error) {
     alert(`Gabim: ${error.message}`);
   }
@@ -203,12 +203,12 @@ function createAccount(firstName, lastName, email, password) {
         <div class="footer-section">
           <h3>Kategorit&euml;</h3>
           <ul>
-            <li><a href="index.html">BALLINA</a></li>
-            <li><a href="sherbimet.html">SHERBIMET</a></li>
-            <li><a href="galeria.html">GALERIA</a></li>
-            <li><a href="Produktet.html">PRODUKTET</a></li>
-            <li><a href="per_ne.html">RRETH NESH</a></li>
-            <li><a href="kontakti.html">KONTAKTI</a></li>
+            <li><a href="index.php">BALLINA</a></li>
+            <li><a href="sherbimet.php">SHERBIMET</a></li>
+            <li><a href="galeria.php">GALERIA</a></li>
+            <li><a href="Produktet.php">PRODUKTET</a></li>
+            <li><a href="per_ne.php">RRETH NESH</a></li>
+            <li><a href="kontakti.php">KONTAKTI</a></li>
           </ul>
         </div>
         <div class="footer-section">
@@ -263,7 +263,7 @@ function createAccount(firstName, lastName, email, password) {
       </div>
 
       <div class="footer-bottom">
-        &copy; 2025 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të
+        &copy; 2025 <a href="index.php" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të
         rezervuara.
       </div>
     </footer>

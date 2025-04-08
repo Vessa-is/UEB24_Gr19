@@ -143,24 +143,24 @@ video {
       <nav>
         <div class="logo-cont">
           <div class="logo">
-            <a href="index.html">
+            <a href="index.php">
               <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
             </a>
           </div>
           <div class="login">
-              <a href="login.html"><button id="loginBtn" >
+              <a href="login.php"><button id="loginBtn" >
                   <i class="fa fa-user"></i>
                 </button></a>
               </div>
         </div>
         <div id="navi">
           <ul>
-            <li><a href="index.html">Ballina</a></li>
-            <li><a href="sherbimet.html">Shërbimet</a></li>
-            <li><a href="galeria.html">Galeria</a></li>
-            <li><a href="Produktet.html">Produktet</a></li>
-            <li><a href="per_ne.html">Rreth nesh</a></li>
-            <li><a href="kontakti.html">Kontakti</a></li>
+            <li><a href="index.php">Ballina</a></li>
+            <li><a href="sherbimet.php">Shërbimet</a></li>
+            <li><a href="galeria.php">Galeria</a></li>
+            <li><a href="Produktet.php">Produktet</a></li>
+            <li><a href="per_ne.php">Rreth nesh</a></li>
+            <li><a href="kontakti.php">Kontakti</a></li>
           </ul>
         </div>
       </nav>
@@ -187,7 +187,7 @@ video {
         <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR.</b></div>
         <div class="price">$20.00</div>
         <div>Në stok: 15</div>
-        <a href="product1-details.html" class="buy-button">Blej</a>
+        <a href="product1-details.php" class="buy-button">Blej</a>
     </div>
 </div>
 
@@ -197,7 +197,7 @@ video {
         <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>DENSIFIQUE. THICKENING SHAMPOO FOR THINNING HAIR.</b></div>
         <div class="price">$35.00</div>
         <div>Në stok: 8</div>
-        <a href="product2-details.html" class="buy-button">Blej</a>
+        <a href="product2-details.php" class="buy-button">Blej</a>
     </div>
 </div>
 
@@ -207,7 +207,7 @@ video {
         <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.</b></div>
         <div class="price">$15.00</div>
         <div>Në stok: 25</div>
-        <a href="product3-details.html" class="buy-button">Blej</a>
+        <a href="product3-details.php" class="buy-button">Blej</a>
     </div>
 </div>
 
@@ -218,7 +218,7 @@ video {
         <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>CHRONOLOGISTE. ESSENTIAL REVITALIZING HAIR MASK</b></div>
         <div class="price">$15.00</div>
         <div>Në stok: 25</div>
-        <a href="product4-details.html" class="buy-button">Blej</a>
+        <a href="product4-details.php" class="buy-button">Blej</a>
     </div>
 </div>
 
@@ -228,7 +228,7 @@ video {
         <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>GENESIS. FORTIFYING SERUM FOR WEAKENED HAIR.</b></div>
         <div class="price">$15.00</div>
         <div>Në stok: 25</div>
-        <a href="product5-details.html" class="buy-button">Blej</a>
+        <a href="product5-details.php" class="buy-button">Blej</a>
     </div>
 </div>
 
@@ -239,7 +239,7 @@ video {
         <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.</b></div>
         <div class="price">$15.00</div>
         <div>Në stok: 25</div>
-        <a href="product6-details.html" class="buy-button">Blej</a>
+        <a href="product6-details.php" class="buy-button">Blej</a>
     </div>
 </div>
 
@@ -359,12 +359,12 @@ video {
                 <div class="footer-section">
                     <h3>Kategorit&euml;</h3>
                     <ul>
-                        <li><a href="index.html">BALLINA</a></li>
-                        <li><a href="sherbimet.html">SHERBIMET</a></li>
-                        <li><a href="galeria.html">GALERIA</a></li>
-                        <li><a href="Produktet.html">PRODUKTET</a></li>
-                        <li><a href="per_ne.html">RRETH NESH</a></li>
-                        <li><a href="kontakti.html">KONTAKTI</a></li>
+                        <li><a href="index.php">BALLINA</a></li>
+                        <li><a href="sherbimet.php">SHERBIMET</a></li>
+                        <li><a href="galeria.php">GALERIA</a></li>
+                        <li><a href="Produktet.php">PRODUKTET</a></li>
+                        <li><a href="per_ne.php">RRETH NESH</a></li>
+                        <li><a href="kontakti.php">KONTAKTI</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -407,7 +407,7 @@ video {
                 </div>
                 
                 <div class="footer-bottom">
-                    &copy; 2025 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
+                    &copy; 2025 <a href="index.php" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
     
                 </div>        
         </footer>

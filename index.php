@@ -259,12 +259,12 @@
         <nav>
           <div class="logo-cont">
             <div class="logo">
-              <a href="index.html">
+              <a href="index.php">
                 <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
               </a>
             </div>
             <div class="login">
-              <a href="login.html"><button id="loginBtn" >
+              <a href="login.php"><button id="loginBtn" >
                 <i class="fa fa-user"></i>
               </button></a>
             </div>
@@ -272,12 +272,12 @@
           </div>
           <div id="navi">
             <ul>
-              <li><a href="index.html">Ballina</a></li>
-              <li><a href="sherbimet.html">Shërbimet</a></li>
-              <li><a href="galeria.html">Galeria</a></li>
-              <li><a href="Produktet.html">Produktet</a></li>
-              <li><a href="per_ne.html">Rreth nesh</a></li>
-              <li><a href="kontakti.html">Kontakti</a></li>
+              <li><a href="index.php">Ballina</a></li>
+              <li><a href="sherbimet.php">Shërbimet</a></li>
+              <li><a href="galeria.php">Galeria</a></li>
+              <li><a href="Produktet.php">Produktet</a></li>
+              <li><a href="per_ne.php">Rreth nesh</a></li>
+              <li><a href="kontakti.php">Kontakti</a></li>
             </ul>
           </div>
           
@@ -296,7 +296,7 @@
             <p>
               Përjetoni kujdes profesional dhe trajtime që theksojnë shkëlqimin tuaj natyral.
             </p>
-            <button onclick="location.href='sherbimet.html';">Rezervo Online</button>
+            <button onclick="location.href='sherbimet.php';">Rezervo Online</button>
           </div>
         </div>
       </section>
@@ -315,7 +315,7 @@
             <p>
               Radiant Touch është një sallon bukurie që ofron shërbime të specializuara për kujdesin e flokëve, qerpikëve dhe vetullave. Me një ekip profesionistësh të përkushtuar dhe produkte të cilësisë së lartë, ne synojmë të nxjerrim në pah bukurinë tuaj natyrale dhe t'ju ofrojmë një përvojë relaksuese e luksoze. Vizitoni sallonin tonë dhe përjetoni kujdesin e merituar!
             </p>
-            <a href="per_ne.html" class="about-button">Lexo më shumë</a>
+            <a href="per_ne.php" class="about-button">Lexo më shumë</a>
           </div>
         </div>
         <script>
@@ -349,7 +349,7 @@
               <h1>Flokë të Shëndetshëm dhe Plot Shkëlqim</h1>
               <h2><strong>Kerastase: Kujdesi që Flokët Tuaj e Meritojnë.</strong></h2>
               <div class="button-container">
-                  <a href="Produktet.html">Blej Tani</a>
+                  <a href="Produktet.php">Blej Tani</a>
               </div>
           </div>
       </div>
@@ -370,7 +370,7 @@
               <p>STILIM DHE LAMINIM I VETULLAVE</p>
           </div>
       </div>
-      <a href="galeria.html" class="main-btn">Shiko Galerinë <i class="fas fa-arrow-right"></i></a>
+      <a href="galeria.php" class="main-btn">Shiko Galerinë <i class="fas fa-arrow-right"></i></a>
   </section>
   
   
@@ -390,7 +390,7 @@
           </text>
         </svg>
       <p>Terminin tuaj...</p>
-      <a href="sherbimet.html" class="btn">Rezervo</a>
+      <a href="sherbimet.php" class="btn">Rezervo</a>
     </div>
 </section>
 <script>
@@ -412,12 +412,12 @@
             <div class="footer-section">
                 <h3>Kategorit&euml;</h3>
                 <ul class="footer-list hidden">
-                    <li><a href="index.html">BALLINA</a></li>
-                    <li><a href="sherbimet.html">SHERBIMET</a></li>
-                    <li><a href="galeria.html">GALERIA</a></li>
-                    <li><a href="Produktet.html">PRODUKTET</a></li>
-                    <li><a href="per_ne.html">RRETH NESH</a></li>
-                    <li><a href="kontakti.html">KONTAKTI</a></li>
+                    <li><a href="index.php">BALLINA</a></li>
+                    <li><a href="sherbimet.php">SHERBIMET</a></li>
+                    <li><a href="galeria.php">GALERIA</a></li>
+                    <li><a href="Produktet.php">PRODUKTET</a></li>
+                    <li><a href="per_ne.php">RRETH NESH</a></li>
+                    <li><a href="kontakti.php">KONTAKTI</a></li>
                 </ul>
             </div>
             <div class="footer-section">
@@ -461,7 +461,7 @@
             </div>
             
             <div class="footer-bottom">
-                &copy; 2025 <a href="index.html" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
+                &copy; 2025 <a href="index.php" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të rezervuara.
 
             </div>
             <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
