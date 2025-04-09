@@ -13,7 +13,7 @@ class Product {
     }
 
     public function __destruct() {
-        // Optional: Cleanup code here if needed
+      
     }
 
     public function getName() { return $this->name; }
