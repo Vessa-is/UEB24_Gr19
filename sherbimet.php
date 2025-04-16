@@ -304,10 +304,70 @@
     color: white;
 }
 
+.sorting-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 10px;
+  font-family: inherit;
+  flex-wrap: wrap; 
+  max-width: 100%;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+
+.sorting-label {
+    font-weight: bold;
+    color: #5C4438;
+    font-size: 16px;
+}
+
+.sorting-select {
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fdf6f0;
+    color: #5C4438;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.sorting-select:hover {
+    border-color: #bfa48a;
+}
+
+.sorting-button {
+    padding: 6px 14px;
+    border: none;
+    border-radius: 8px;
+    background-color: #5C4438;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.sorting-button:hover {
+    background-color: #7b5c4a;
+}
+
+#sherbimet-page {
+    overflow: hidden; 
+}
 
     </style>
   </head>
-  <body>
+  <body id="sherbimet-page">
     <header>
       <nav>
         <div class="logo-cont">
@@ -335,143 +395,128 @@
       </nav>
     </header>
 
-    <section class="sherbimet">
-      <h1>Shërbimet tona</h1>
-      <table class="services-table" style="border: 3px solid #6d4c3d">
-        <thead>
-          <tr>
-            <th>SHËRBIMI</th>
-            <th>KOHA</th>
-            <th>ÇMIMI</th>
-            <th>REZERVO</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Prerje e flokëve</td>
-            <td>30 min. <i class="fas fa-clock"></i></td>
-            <td>6 €</td>
-            <td><button onclick="openModal('Prerje e flokëve')">Rezervo Tani</button></td>
-          </tr>
-          <tr>
-            <td>Fenirim i flokëve</td>
-            <td>15 min. <i class="fas fa-clock"></i></td>
-            <td>5 €</td>
-            <td><button onclick="openModal('Fenirim i flokëve')">Rezervo Tani</button></td>
-          </tr>
-          <tr>
-          <td>Shatir i flokëve</td>
-          <td>180 min. <i class="fas fa-clock"></i></td>
-          <td>15 €-200 €</td>
-          <td><button onclick="openModal('Prerje e flokëve')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Larje e flokëve</td>
-          <td>10 min. <i class="fas fa-clock"></i></td>
-          <td>2 €</td>
-          <td><button onclick="openModal('Larje e flokëve')">Rezervo Tani</button></td>
-        </tr>
-       
-        <tr>
-          <td>Rregullimi i vetullave</td>
-          <td>15 min. <i class="fas fa-clock"></i></td>
-          <td>3 €</td>
-          <td><button onclick="openModal('Rregullimi i vetullave')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Çerpikë Volume</td>
-          <td>90 min.</td>
-          <td>35 €</td>
-          <td><button onclick="openModal('Çerpikë Volume')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Tattoo me fije japoneze / microblading (2 seanca)</td>
-          <td>120 min.<i class="fas fa-clock"></i></td>
-            <td>99 €</td>
-            <td><button onclick="openModal('Tattoo me fije japoneze / microblading (2 seanca)')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-            <td>Depilim të fytyrës</td>
-            <td>15 min.<i class="fas fa-clock"></i></td>
-            <td>4 €</td>
-            <td><button onclick="openModal('Depilim të fytyrës')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-            <td>Frizura për femra</td>
-            <td>30 min.<i class="fas fa-clock"></i></td>
-            <td>15 €-30 €</td>
-            <td><button onclick="openModal('Frizura për femra')">Rezervo Tani</button></td>
-        </tr>
-        <tr>`
-            <td>Rregullim për nuse</td>
-            <td>120 min.<i class="fas fa-clock"></i></td>
-            <td>75 €</td>
-            <td><button onclick="openModal('Rregullim për nuse')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Trajtim me argjilë për fytyrë</td>
-          <td>30 min.<i class="fas fa-clock"></i></td>
-          <td>20 €</td>
-          <td><button onclick="openModal('Trajtim me argjilë për fytyrë')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Ekstension flokësh (me radhë)</td>
-          <td>120 min.<i class="fas fa-clock"></i></td>
-          <td>100 €</td>
-          <td><button onclick="openModal('Ekstension flokësh (me radhë)')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Trajtim SPA për duar</td>
-          <td>40 min.<i class="fas fa-clock"></i></td>
-          <td>15 €</td>
-          <td><button onclick="openModal('Trajtim SPA për duar')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Peeling trupor (eksfolim)</td>
-          <td>60 min.<i class="fas fa-clock"></i></td>
-          <td>30 €</td>
-          <td><button onclick="openModal('Peeling trupor (eksfolim)')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Hidratim intensiv për flokë</td>
-          <td>45 min.<i class="fas fa-clock"></i></td>
-          <td>25 €</td>
-          <td><button onclick="openModal('Hidratim intensiv për flokë')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Trajtim anti-akne për fytyrë</td>
-          <td>80 min.<i class="fas fa-clock"></i></td>
-          <td>40 €</td>
-          <td><button onclick="openModal('Trajtim anti-akne për fytyrë')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Laminim i vetullave</td>
-          <td>30 min.<i class="fas fa-clock"></i></td>
-          <td>10 €</td>
-          <td><button onclick="openModal('Laminim i vetullave')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Balayage për flokë</td>
-          <td>150 min.<i class="fas fa-clock"></i></td>
-          <td>120 €</td>
-          <td><button onclick="openModal('Balayage për flokë')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Masazh për kokën </td>
-          <td>150 min.<i class="fas fa-clock"></i></td>
-          <td>50 €</td>
-          <td><button onclick="openModal('Masazh për kokën ')">Rezervo Tani</button></td>
-        </tr>
-        <tr>
-          <td>Përkujdesje për flokët e thatë dhe të dëmtuar </td>
-          <td>120 min.<i class="fas fa-clock"></i></td>
-          <td>80 €</td>
-          <td><button onclick="openModal('Përkujdesje për flokët e thatë dhe të dëmzuar ')">Rezervo Tani</button></td>
-        </tr>
-        
-        </tbody>
-      </table>
-    </section>   
+    <?php
+
+$services = [
+    ["name" => "Prerje e flokëve", "time" => "30 min.", "price" => 10],
+    ["name" => "Fenirim i flokëve", "time" => "15 min.", "price" => 5],
+    ["name" => "Shatir i flokëve", "time" => "180 min.", "price" => 50],
+    ["name" => "Larje e flokëve", "time" => "10 min.", "price" => 2],
+    ["name" => "Rregullimi i vetullave", "time" => "15 min.", "price" => 3],
+    ["name" => "Qerpikë Volume", "time" => "90 min.", "price" => 35],
+    ["name" => "Tattoo me fije japoneze", "time" => "120 min.", "price" => 99],
+    ["name" => "Depilim të fytyrës", "time" => "15 min.", "price" => 4],
+    ["name" => "Frizura për femra", "time" => "30 min.", "price" => 30],
+    ["name" => "Rregullim për nuse", "time" => "120 min.", "price" => 75],
+    ["name" => "Trajtim me argjilë për fytyrë", "time" => "30 min.", "price" => 20],
+    ["name" => "Ekstension flokësh", "time" => "120 min.", "price" => 100],
+    ["name" => "Trajtim SPA për duar", "time" => "40 min.", "price" => 15],
+    ["name" => "Peeling trupor", "time" => "60 min.", "price" => 30],
+    ["name" => "Hidratim intensiv për flokë", "time" => "45 min.", "price" => 25],
+    ["name" => "Trajtim anti-akne për fytyrë", "time" => "80 min.", "price" => 40],
+    ["name" => "Laminim i vetullave", "time" => "30 min.", "price" => 10],
+    ["name" => "Balayage për flokë", "time" => "150 min.", "price" => 120],
+    ["name" => "Masazh për kokën", "time" => "150 min.", "price" => 50],
+    ["name" => "Përkujdesje për flokët e thatë dhe të dëmtuar", "time" => "120 min.", "price" => 80]
+];
+
+if (isset($_GET['sort_by'])) {
+    $sort_by = $_GET['sort_by'];
+
+    switch ($sort_by) {
+        case 'price_asc':
+            $prices = array_column($services, 'price');
+            asort($prices);
+            $services = array_map(function($key) use ($services) {
+                return $services[$key];
+            }, array_keys($prices));
+            break;
+
+        case 'price_desc':
+            $prices = array_column($services, 'price');
+            arsort($prices);
+            $services = array_map(function($key) use ($services) {
+                return $services[$key];
+            }, array_keys($prices));
+            break;
+
+        case 'name_asc':
+            $services_by_name = [];
+            foreach ($services as $service) {
+                $services_by_name[$service['name']] = $service;
+            }
+            ksort($services_by_name); 
+            $services = array_values($services_by_name); 
+            break;
+
+        case 'name_desc':
+            $services_by_name = [];
+            foreach ($services as $service) {
+                $services_by_name[$service['name']] = $service;
+            }
+            krsort($services_by_name); 
+            $services = array_values($services_by_name); 
+            break;
+
+        case 'time_asc':
+            usort($services, function($a, $b) {
+                $time_a = (int)filter_var($a['time'], FILTER_SANITIZE_NUMBER_INT);
+                $time_b = (int)filter_var($b['time'], FILTER_SANITIZE_NUMBER_INT);
+                return $time_a - $time_b;
+            });
+            break;
+
+        case 'time_desc':
+            usort($services, function($a, $b) {
+                $time_a = (int)filter_var($a['time'], FILTER_SANITIZE_NUMBER_INT);
+                $time_b = (int)filter_var($b['time'], FILTER_SANITIZE_NUMBER_INT);
+                return $time_b - $time_a;
+            });
+            break;
+    }
+}
+?>
+
+<section class="sherbimet">
+    <h1>Shërbimet tona</h1>
+
+    <form method="get" class="sorting-form">
+        <label for="sort_by" class="sorting-label">Rendit sipas:</label>
+        <select name="sort_by" id="sort_by" class="sorting-select">
+            <option value="price_asc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_asc' ? 'selected' : ''; ?>>Çmimi (Rritës)</option>
+            <option value="price_desc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_desc' ? 'selected' : ''; ?>>Çmimi (Zbritës)</option>
+            <option value="name_asc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'name_asc' ? 'selected' : ''; ?>>Emri (A-Z)</option>
+            <option value="name_desc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'name_desc' ? 'selected' : ''; ?>>Emri (Z-A)</option>
+            <option value="time_asc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'time_asc' ? 'selected' : ''; ?>>Koha (Rritës)</option>
+            <option value="time_desc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'time_desc' ? 'selected' : ''; ?>>Koha (Zbritës)</option>
+        </select>
+        <button type="submit" class="sorting-button">Rendit</button>
+    </form>
+
+    <div class="table-wrapper">
+        <table class="services-table" style="border: 3px solid #6d4c3d">
+            <thead>
+                <tr>
+                <th style="width: 50%;">SHËRBIMI</th>
+        <th style="width: 15%;">KOHA</th>
+        <th style="width: 15%;">ÇMIMI</th>
+        <th style="width: 25%;">REZERVO</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($services as $service): ?>
+                <tr>
+                    <td><?php echo $service['name']; ?></td>
+                    <td><?php echo $service['time']; ?></td>
+                    <td><?php echo $service['price']; ?>€</td>
+                    <td><button class="book-btn">Rezervo</button></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</section>
+ 
     <div id="bookingModal" class="modal">
       <div class="modal-content">
         <div class="modal-header">Rezervimi i Shërbimit</div>
