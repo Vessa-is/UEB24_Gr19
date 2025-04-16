@@ -209,7 +209,7 @@ function validateLoginFields(email, password) {
   }
 }
 
-
+    
 
       </script>
     <footer>
