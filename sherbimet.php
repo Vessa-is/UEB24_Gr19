@@ -509,7 +509,7 @@ if (isset($_GET['sort_by'])) {
                     <td><?php echo $service['name']; ?></td>
                     <td><?php echo $service['time']; ?></td>
                     <td><?php echo $service['price']; ?>€</td>
-                    <td><button class="book-btn">Rezervo</button></td>
+                    <td><button class="book-btn" onclick="openModal('<?php echo addslashes($service['name']); ?>')">Rezervo</button></td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
