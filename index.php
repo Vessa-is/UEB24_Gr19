@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['user'])) {
+    header("Location: login.php");
+    exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -267,7 +276,20 @@
               <a href="login.php"><button id="loginBtn" >
                 <i class="fa fa-user"></i>
               </button></a>
+              
+              <?php if (isset($_SESSION['user'])): ?>
+                <a href="logout.php"><button id="logoutBtn" title="Dil">
+                  <i class="fas fa-sign-out-alt"></i>
+                </button></a>
+              <?php else: ?>
+                <a href="login.php"><button id="loginBtn" title="Kyçu">
+                  <i class="fa fa-user"></i>
+                </button></a>
+              <?php endif; ?>
+
+
             </div>
+
             
           </div>
           <div id="navi">

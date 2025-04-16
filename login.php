@@ -1,3 +1,28 @@
+<?php
+session_start();
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
+
+    $valid_email = "admin@gmail.com";
+    $valid_password = "sekret123";
+
+    if ($email === $valid_email && $password === $valid_password) {
+        $_SESSION['user'] = [
+            'email' => $email,
+            'role' => 'admin'
+        ];
+        header("Location: index.php");
+        exit();
+    } else {
+        $error = "Email ose fjalëkalim i pasaktë!";
+    }
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -133,37 +158,41 @@
     </header>
     <div class="container">
         <h1>Login</h1>
-        <form id="login-form" action="#" method="post">
+        <?php if (!empty($error)) : ?>
+  <p style="color:red; text-align:center;"><?php echo $error; ?></p>
+      <?php endif; ?>
+
+        <form id="login-form" action="" method="POST">
           <div class="form-group">
             <label for="email">Your Email </label>
-            <input type="email" id="email" placeholder="Email-i" required>
+            <input name="email" type="email" id="email" placeholder="Email-i" required>
           </div>
           <div class="form-group">
             <label for="password">Your Password </label>
-            <input type="password" id="password" placeholder="Password" required>
+            <input name="password" type="password" id="password" placeholder="Password" required>
           </div>
           <div class="form-group">
             <a href="forgot_password.php">Forgot your password?</a>
           </div>
-          <button type="submit" class="btn">Login In</button>
+          <button type="submit" class="btn">Log In</button>
         </form>
         <div class="or">or</div>
         <a href="create_account.php" class="create-account">Create account</a>
       </div>
       <script>
-          document.getElementById('login-form').addEventListener('submit', function (e) {
-  e.preventDefault();
+//           document.getElementById('login-form').addEventListener('submit', function (e) {
+//   e.preventDefault();
 
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
+//   const email = document.getElementById('email').value.trim();
+//   const password = document.getElementById('password').value.trim();
 
-  try {
-    validateLoginFields(email, password);
-    alert('Llogaria u hap me sukses!');
-  } catch (error) {
-    alert(`Gabim: ${error.message}`);
-  }
-});
+//   // try {
+//   //   validateLoginFields(email, password);
+//   //   alert('Llogaria u hap me sukses!');
+//   // } catch (error) {
+//   //   alert(`Gabim: ${error.message}`);
+//   // }
+// });
 
 function validateLoginFields(email, password) {
   if (!email || !password) {
@@ -180,7 +209,7 @@ function validateLoginFields(email, password) {
   }
 }
 
-
+    
 
       </script>
     <footer>
