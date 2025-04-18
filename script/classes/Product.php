@@ -13,6 +13,12 @@ class Product{
         $this->price = $price;
         $this->stock = $stock;
     }
+    public function __destruct(){
+        public function getId(){
+            return $this->id;
+        }
+    
+    
     
     function getId(){
         return $this->id;
@@ -50,7 +56,9 @@ class Product{
         return $this->stock;
     }
 
-
+function setSttock($stock){
+    $this->stock = $stock;
+}
 
 }
 
