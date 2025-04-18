@@ -22,6 +22,11 @@ class DigitalProduct extends Product {
     public function setDownloadLink($downloadLink) {  
         $this->downloadLink = $downloadLink;
     }
+    public function displayInfo() {
+        parent::displayInfo();  
+        echo "File Size: " . $this->fileSize . " MB<br>";
+        echo "Download Link: " . $this->downloadLink . "<br>";
+    }
 }
 ?>
 
