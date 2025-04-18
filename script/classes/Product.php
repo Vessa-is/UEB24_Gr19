@@ -17,7 +17,7 @@ class Product{
         public function getId(){
             return $this->id;
         }
-    
+    }
     
     
     function getId(){
@@ -60,6 +60,12 @@ function setSttock($stock){
     $this->stock = $stock;
 }
 
+public function displayInfo() {
+    echo "ID: " . $this->id . "<br>";
+    echo "Name: " . $this->name . "<br>";
+    echo "Price: $" . $this->price . "<br>";
+    echo "Stock: " . $this->stock . "<br>";
+    echo "Image URL: " . $this->imgurl . "<br>";
 }
 }
 ?>
