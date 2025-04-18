@@ -61,5 +61,5 @@ function setSttock($stock){
 }
 
 }
-
+}
 ?>
