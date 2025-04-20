@@ -1,5 +1,5 @@
 <?php
-$currentHour = date("G"); // kushtezimeettt
+$currentHour = date("G"); // kushtezimeettt, operatoret 
 $greeting = "";
 
 if ($currentHour >= 5 && $currentHour < 12) {
