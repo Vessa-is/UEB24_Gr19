@@ -10,7 +10,72 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
-       
+       body {
+             font-family: Arial, sans-serif;
+             margin: 0;
+             padding: 0;
+         }
+         .container {
+             display: flex;                       
+             justify-content: space-between;        
+             gap: 10px;                             
+             margin: 100px;                          
+         }
+         .product-image, .details {
+             flex: 1;                               
+             max-width: 45%;                        
+             height: auto;                         
+         }
+ 
+         .product-image {
+             width: 100%;                           
+             object-fit: cover;                     
+             border-radius: 8px;
+         }
+ 
+         .details {
+             padding: 15px;                         
+             background: none;                   
+             border-radius: 8px;
+         }
+         form {
+             margin-top: 20px;
+         }
+         .form-group {
+             margin-bottom: 10px;
+             text-align: left;
+             color: #ad6159;
+         }
+         .form-group label {
+             display: block;
+             margin-bottom: 5px;
+             font-weight: bold;
+             color: #6d4c3d;
+         }
+         .form-group input, select {
+             width: 100%;
+             padding: 6px;                         
+             border: 1px solid #ccc;
+             border-radius: 4px;
+             font-size: 14px;                     
+         }
+         button {
+             padding: 8px 15px;
+             background-color: #6d4c3d;
+             color: white;
+             font-size: 14px;                      
+             border-radius: 4px;
+             border: none;
+             cursor: pointer;
+         }
+         .warning {
+             color: red;
+             display: none;
+         }
+         .success {
+             color: green;
+             display: none;
+         }
     </style>
 </head>
 <body>
