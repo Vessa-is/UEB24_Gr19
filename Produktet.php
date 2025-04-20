@@ -1,247 +1,99 @@
+<?php
+// KONSTANTE
+define("SITE_NAME", "Radiant Touch");
+
+// VARIABLA GLOBALE
+$globalDiscount = 0.10; // 10% zbritje
+
+// FUNKSION PER LLOGARITJE CMIMI ME ZBRITJE DHE STRING FUNKSIONE
+function calculateDiscountedPrice($price, $productName) {
+    global $globalDiscount; // qasje në variabël globale
+
+    // Funksione për string: strtoupper dhe strlen
+    $uppercaseName = strtoupper($productName);
+    $nameLength = strlen($productName);
+
+    // Operator: arithmetic
+    $discountedPrice = $price - ($price * $globalDiscount);
+
+    // var_dump  debug
+    echo "<pre>";
+    var_dump([
+        'Product Name (upper)' => $uppercaseName,
+        'Name Length' => $nameLength,
+        'Original Price' => $price,
+        'Discount' => $globalDiscount * 100 . "%",
+        'Discounted Price' => $discountedPrice,
+    ]);
+    echo "</pre>";
+
+    return $discountedPrice;
+}
+
+// Shembull perdorimi
+$productName = "Elixir Ultime";
+$originalPrice = 25;
+$finalPrice = calculateDiscountedPrice($originalPrice, $productName);
+
+// Operatore 
+$nameLength = strlen($productName);
+$isExpensive = $finalPrice > 20 && $nameLength > 5 ? "Yes" : "No";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produktet-Radiant Touch</title>
-    <link rel="icon" href="images/logo1.png">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <title><?php echo SITE_NAME; ?> - Hair Products</title>
     <link rel="stylesheet" href="style.css">
-<style>
-body {
-    font-family: Arial, sans-serif;
-    background-color:#f4e4d4;
- 
-}
-
-    .product {
-            background-color: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            width:275px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-
-        .product:hover {
-            transform: scale(1.05);
-        }
-
-        .product img {
-            width: 100%;
-            border-radius: 10px;
-            height: auto;
-        }
-
-        .details {
-            margin-top: 5px;
-            font-size: 14px;
-            color: #555;
-            padding: 10px;
-        }
-
-        .price {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .buy-button {
-            display: inline-block;
-            padding: 10px 20px;
-          background-color: #7c5b43;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-            font-size: 14px;
-    
-        }
-
-        .buy-button:hover {
-            background-color: #473524;
-}
-
-.products {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
-            background-color:#f4e4d4;
-            margin-left: 55px;
-}
-video {
-  width: 100%; 
-  max-height: 600px; 
-  object-fit: fill; 
-  display: block; 
-  margin: 0; 
-  background-color: black; 
-}
-.cart {
-  background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    padding: 20px;
-    width: 350px;
-    text-align: center;
-    font-family: 'Georgia', serif;
-    color: #4d3a2d;
-    position: relative; 
-    margin: 0 auto; 
-    margin-top: 20px;
-    margin-bottom: 50px;
-    }
-
-    .cart h2 {
-      font-size: 1.5em;
-      margin-bottom: 15px;
-      color: #4d3a2d;
-    }
-
-    #cartItems {
-      list-style-type: none;
-      padding: 0;
-      margin: 20px 0;
-    }
-
-    #cartItems li {
-      padding: 10px;
-      background: #f0e7db;
-      margin-bottom: 10px;
-      border-radius: 6px;
-      border: 1px solid #d6c6b8;
-    }
-
-    .total {
-      font-size: 1.2em;
-      margin: 20px 0;
-      color: #4d3a2d;
-    }
-
-    #clearCart {
-      background-color:#7c5b43;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1em;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-    }
-
-    #clearCart:hover {
-      background-color:#473524;
-    }
-</style>
 </head>
 <body>
-  <header>
-      <nav>
-        <div class="logo-cont">
-          <div class="logo">
-            <a href="index.php">
-              <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
-            </a>
-          </div>
-          <div class="login">
-              <a href="login.php"><button id="loginBtn" >
-                  <i class="fa fa-user"></i>
-                </button></a>
-              </div>
-        </div>
-        <div id="navi">
-          <ul>
-            <li><a href="index.php">Ballina</a></li>
-            <li><a href="sherbimet.php">Shërbimet</a></li>
-            <li><a href="galeria.php">Galeria</a></li>
-            <li><a href="Produktet.php">Produktet</a></li>
-            <li><a href="per_ne.php">Rreth nesh</a></li>
-            <li><a href="kontakti.php">Kontakti</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header> 
 
-    <video autoplay muted loop>
-        <source src="videos/produktetvideo.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-  
-      <div class="audio-container">
-        <audio controls autoplay loop muted>
-          <source src="audios/audio2.mp3" type="audio/mp3">
-        </audio>
-      </div>
-    
-      <section class="products">
+<header>
+    <h1>Welcome to <?php echo SITE_NAME; ?>!</h1>
+    <p>Your destination for premium hair care</p>
+</header>
 
-<?php
-$products = [
-  [
-    "name" => "BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR.",
-    "price" => 20,
-    "stock" => 15,
-    "image" => "images/produkt3.webp",
-    "link" => "product1-details.php"
-  ],
-  [
-    "name" => "DENSIFIQUE. THICKENING SHAMPOO FOR THINNING HAIR.",
-    "price" => 35,
-    "stock" => 8,
-    "image" => "images/produkt2.webp",
-    "link" => "product2-details.php"
-  ],
-  [
-    "name" => "ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.",
-    "price" => 15,
-    "stock" => 25,
-    "image" => "images/produkt1.webp",
-    "link" => "product3-details.php"
-  ],
-  [
-    "name" => "CHRONOLOGISTE. ESSENTIAL REVITALIZING HAIR MASK",
-    "price" => 15,
-    "stock" => 25,
-    "image" => "images/produkt4.webp",
-    "link" => "product4-details.php"
-  ],
-  [
-    "name" => "GENESIS. FORTIFYING SERUM FOR WEAKENED HAIR.",
-    "price" => 15,
-    "stock" => 25,
-    "image" => "images/produkt5.webp",
-    "link" => "product5-details.php"
-  ],
-  [
-    "name" => "ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.",
-    "price" => 15,
-    "stock" => 25,
-    "image" => "images/produkt6.webp",
-    "link" => "product6-details.php"
-  ]
-];
+<video autoplay loop muted plays-inline class="back-video">
+    <source src="images/video.mp4" type="video/mp4">
+</video>
 
-foreach ($products as $product):
-  if ($product['stock'] > 0): ?>
-    <div class="product" draggable="true" data-name="<?= $product['name'] ?>" data-price="<?= $product['price'] ?>">
-      <img src="<?= $product['image'] ?>" alt="<?= $product['name'] ?>">
-      <div class="details">
-        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;">
-          <b><?= $product['name'] ?></b>
-        </div>
-        <div class="price">$<?= number_format($product['price'], 2) ?></div>
-        <div>Në stok: <?= $product['stock'] ?></div>
-        <a href="<?= $product['link'] ?>" class="buy-button">Blej</a>
-      </div>
+<div style="padding:20px; background-color:#fff7ec; text-align:center; font-family:Georgia;">
+  <h2>Produkti testues: <strong><?php echo $productName; ?></strong></h2>
+  <p>Çmimi origjinal: $<?php echo $originalPrice; ?></p>
+  <p>Çmimi me zbritje (10%): <strong>$<?php echo $finalPrice; ?></strong></p>
+  <p>A është produkti i shtrenjtë dhe ka emër të gjatë? <strong><?php echo $isExpensive; ?></strong></p>
+</div>
+
+<section class="products">
+    <h2>Our Products</h2>
+    <div class="product">
+        <img src="images/kerastase1.jpg" alt="Kérastase Elixir Ultime">
+        <h3>Kérastase Elixir Ultime</h3>
+        <p>Versatile beautifying oil for all hair types</p>
+        <p class="price">$25</p>
     </div>
-<?php
-  endif;
-endforeach;
-?>
+    <div class="product">
+        <img src="images/kerastase2.jpg" alt="Kérastase Nutritive Bain Satin 2">
+        <h3>Kérastase Nutritive Bain Satin 2</h3>
+        <p>Exceptional hair nutrition shampoo for dry, sensitized hair</p>
+        <p class="price">$30</p>
+    </div>
+    <div class="product">
+        <img src="images/kerastase3.jpg" alt="Kérastase Discipline Maskeratine">
+        <h3>Kérastase Discipline Maskeratine</h3>
+        <p>Smoothing treatment for frizzy, unruly hair</p>
+        <p class="price">$40</p>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2025 <?php echo SITE_NAME; ?>. All rights reserved.</p>
+</footer>
+
+</body>
+</html>
+
 
 </section>
 
