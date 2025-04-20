@@ -117,11 +117,11 @@ if ($order == 'asc') {
 <body>
     <header>
         <h1><?= SALON_NAME ?></h1>
-        <h2>Demonstrim i Veçorive të PHP</h2>
+        <h2>Developers view</h2>
     </header>
 
     <div class="feature-box">
-        <h3>Përshëndetje dhe Statusi i Salonit</h3>
+        <h3>Përshëndetje!</h3>
         <p><?= $welcomeMessage ?></p>
         <p>Gjatësia e mesazhit: <?= $messageLength ?> karaktere</p>
         
