@@ -125,7 +125,7 @@ $product = [
     <h1><?php echo $product['name']; ?></h1>
     <p>Cmimi: $<?php echo number_format($product['price'], 2); ?></p>
     <p>Ne Stok: <span id="stock"><?php echo $product['stock']; ?></span></p>
-  
+    </div>
         <form id="purchase-form">
           <div class="form-group">
             <label for="card-type">Kartela</label>

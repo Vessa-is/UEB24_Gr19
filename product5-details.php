@@ -112,12 +112,20 @@
 </div>
 
     <div class="container">
-      <img src="images/produkt5.jpg" alt="Product Image" class="product-image">
-      <div class="details">
-        <h1>GENESIS. FORTIFYING SERUM FOR WEAKENED HAIR.</h1>
-        <p>Cmimi: $15</p>
-        <p>Ne Stok: <span id="stock">25</span></p>
-  
+    <?php
+$product = [
+    "name" => "GENESIS. FORTIFYING SERUM FOR WEAKENED HAIR.",
+    "price" => 15,
+    "stock" => 25,
+    "image" => "images/produkt5.jpg"
+];
+?>
+<img src="<?php echo $product['image']; ?>" alt="Product Image" class="product-image">
+<div class="details">
+    <h1><?php echo $product['name']; ?></h1>
+    <p>Cmimi: $<?php echo number_format($product['price'], 2); ?></p>
+    <p>Ne Stok: <span id="stock"><?php echo $product['stock']; ?></span></p>
+    </div>
         <form id="purchase-form">
           <div class="form-group">
             <label for="card-type">Kartela</label>
