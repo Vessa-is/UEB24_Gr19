@@ -416,6 +416,7 @@ cursor: pointer;
 
  <div class="contact-text">
             <h2>Na Kontaktoni</h2>
+            <p id="kontaktgreeting"> </p>
             <p>Për të rezervuar një termin apo për të mësuar më shumë rreth gamës së 
                 shërbimeve tona të ofruara, ne jemi këtu për t'ju ndihmuar të arrini 
                 pamjen që dëshironi. Ofruesit tanë të trajnuar me përvojë janë të 
