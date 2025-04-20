@@ -1,13 +1,12 @@
 <?php
-require_once 'script/classes/Product.php'; // Adjust path if needed
+require_once 'script/classes/Product.php'; 
 
-// Initialize product
 $product = new Product(
     1,                             // Product ID
     "images/produkt1.jpg",          // Image URL
     "BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR", 
     20,                             // Price
-    15                              // Stock (mixed)
+    15                              // Stock 
 );
 
 $warning = '';
