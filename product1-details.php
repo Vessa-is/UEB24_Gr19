@@ -63,7 +63,9 @@
             </div>
             <button type="submit" style="padding: 5px; background-color: #6d4c3d; color:white; margin-top: 10px;">Porosit</button>
         </form>
-
+        <?php else: ?>
+            <button type="button" disabled style="padding: 5px; background-color: grey; color:white; margin-top: 10px;">Nuk ka në stok</button>
+        <?php endif; ?>
         <?php if ($warning): ?>
             <p class="warning"><?php echo $warning; ?></p>
         <?php endif; ?>
