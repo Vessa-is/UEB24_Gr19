@@ -53,7 +53,15 @@ $averagePrice = $totalValue / $totalProducts;
 $isWeekend = ($today == 'Saturday' || $today == 'Sunday');
 $discount = $isWeekend ? 0.15 : 0; // 15% zbritje në fundjavë
 
-// 6.  I var_dump() PER DEBUG
+// 6. Përdorimi i `sort()` dhe `rsort()`
+$order = $_GET['order'] ?? 'asc'; // Merr renditjen nga URL (ose default 'asc')
+if ($order == 'asc') {
+    sort($services); 
+} else {
+    rsort($services); 
+}
+
+// 7.  I var_dump() PER DEBUG
 // var_dump($popularProducts); 
 
 ?>
@@ -153,6 +161,18 @@ $discount = $isWeekend ? 0.15 : 0; // 15% zbritje në fundjavë
 
     <div class="feature-box">
         <h3>Shërbimet Tona</h3>
+
+        <div>
+        <!-- Formulari për zgjedhjen e renditjes -->
+        <form method="get">
+            <label for="order">Renditja:</label>
+            <select name="order" id="order" onchange="this.form.submit()">
+                <option value="asc" <?= isset($_GET['order']) && $_GET['order'] == 'asc' ? 'selected' : '' ?>>A - Z</option>
+                <option value="desc" <?= isset($_GET['order']) && $_GET['order'] == 'desc' ? 'selected' : '' ?>>Z - A</option>
+            </select>
+        </form>
+    </div>
+
         <ul>
             <?php foreach ($services as $service): ?>
                 <li><?= strtoupper($service) ?></li>
