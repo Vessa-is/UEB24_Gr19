@@ -111,11 +111,21 @@
       </a>
   </div>
     <div class="container">
-      <img src="images/produkt2.jpg" alt="Product Image" class="product-image">
-      <div class="details">
-        <h1>DENSIFIQUE. THICKENING SHAMPOO FOR THINNING HAIR.</h1>
-        <p>Cmimi: $35</p>
-        <p>Ne Stok: <span id="stock">8</span></p>
+    <?php
+$product = [
+    "name" => "DENSIFIQUE. THICKENING SHAMPOO FOR THINNING HAIR.",
+    "price" => 35,
+    "stock" => 8,
+    "image" => "images/produkt2.jpg"
+];
+?>
+
+<img src="<?php echo $product['image']; ?>" alt="Product Image" class="product-image">
+<div class="details">
+  <h1><?php echo $product['name']; ?></h1>
+  <p>Cmimi: $<?php echo number_format($product['price'], 2); ?></p>
+  <p>Ne Stok: <span id="stock"><?php echo $product['stock']; ?></span></p>
+
   
         <form id="purchase-form">
           <div class="form-group">

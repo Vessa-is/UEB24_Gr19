@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,14 +57,13 @@
                 <input type="email" id="email" name="email" required placeholder="Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
             </div>
             <div class="form-group">
-                <label for="quantity">Sasia</label>
-                <input type="number" id="quantity" name="quantity" max="<?php echo $product->getStock(); ?>" min="1" required>
-            </div>
-            <button type="submit" style="padding: 5px; background-color: #6d4c3d; color:white; margin-top: 10px;">Porosit</button>
-            <?php else: ?>
-            <button type="button" disabled style="padding: 5px; background-color: grey; color:white; margin-top: 10px;">Nuk ka në stok</button>
-        <?php endif; ?>
-        </form>
+    <label for="quantity">Sasia</label>
+    <input type="number" id="quantity" name="quantity" max="<?php echo $product->getStock(); ?>" min="1" required>
+</div>
+
+    <button type="submit" style="padding: 5px; background-color: #6d4c3d; color:white; margin-top: 10px;">Porosit</button>
+
+
         <?php if ($warning): ?>
             <p class="warning"><?php echo $warning; ?></p>
         <?php endif; ?>
