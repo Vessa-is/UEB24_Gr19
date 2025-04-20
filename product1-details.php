@@ -1,3 +1,28 @@
+<?php
+require_once 'script/classes/Product.php'; // Adjust path if needed
+
+// Initialize product
+$product = new Product(
+    1,                             // Product ID
+    "images/produkt1.jpg",          // Image URL
+    "BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR", 
+    20,                             // Price
+    15                              // Stock (mixed)
+);
+
+$warning = '';
+$success = '';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $quantity = (int) $_POST['quantity'];
+
+    if ($quantity > $product->getStock()) {
+        $warning = "Nuk ka mjaftueshëm në stok!";
+    } else {
+        $success = "Faleminderit për porosinë tuaj! Produkti do arrijë për 5-7 ditë.";
+    }
+}
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -90,7 +115,7 @@
 </div>
 
 <div class="container">
-    <img src="<?php echo $product->getImage(); ?>" alt="Product Image" class="product-image">
+    <img src="<?php echo $product->getImgUrl(); ?>" alt="Product Image" class="product-image">
     <div class="details">
         <h1><?php echo $product->getName(); ?></h1>
         <p>Cmimi: $<?php echo number_format($product->getPrice(), 2); ?></p>

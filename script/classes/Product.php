@@ -14,10 +14,16 @@ class Product{
         $this->stock = $stock;
     }
     public function __destruct(){
-        public function getId(){
-            return $this->id;
+
         }
-    }
+        public function decreaseStock($quantity) {
+            if ($quantity <= $this->stock) {
+                $this->stock -= $quantity; 
+                return true;
+            }
+            return false; 
+        }
+    
     
     
     function getId(){
