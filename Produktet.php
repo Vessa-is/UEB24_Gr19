@@ -166,6 +166,17 @@ video {
       </nav>
     </header> 
 
+    <?php
+    $products = [
+        ["name" => "BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR.", "price" => 20, "stock" => 15, "image" => "produkt3.webp", "details" => "product1-details.php"],
+        ["name" => "DENSIFIQUE. THICKENING SHAMPOO FOR THINNING HAIR.", "price" => 35, "stock" => 8, "image" => "produkt2.webp", "details" => "product2-details.php"],
+        ["name" => "ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.", "price" => 15, "stock" => 25, "image" => "produkt1.webp", "details" => "product3-details.php"],
+        ["name" => "CHRONOLOGISTE. ESSENTIAL REVITALIZING HAIR MASK", "price" => 15, "stock" => 25, "image" => "produkt4.webp", "details" => "product4-details.php"],
+        ["name" => "GENESIS. FORTIFYING SERUM FOR WEAKENED HAIR.", "price" => 15, "stock" => 25, "image" => "produkt5.webp", "details" => "product5-details.php"],
+        ["name" => "ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.", "price" => 15, "stock" => 25, "image" => "produkt6.webp", "details" => "product6-details.php"],
+    ];
+  ?>
+
     <video autoplay muted loop>
         <source src="videos/produktetvideo.mp4" type="video/mp4" />
         Your browser does not support the video tag.
@@ -177,74 +188,25 @@ video {
         </audio>
       </div>
     
-<section class="products">
-
-   
-
-  <div class="product"  draggable="true"  data-name="BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR."data-price="20">
-    <img src="images/produkt3.webp" alt="Product 1">
-    <div class="details">
-        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR.</b></div>
-        <div class="price">$20.00</div>
-        <div>Në stok: 15</div>
-        <a href="product1-details.php" class="buy-button">Blej</a>
-    </div>
-</div>
-
-<div class="product" draggable="true" data-name="DENSIFIQUE. THICKENING SHAMPOO FOR THINNING HAIR."data-price="35">
-    <img src="images/produkt2.webp" alt="Product 2">
-    <div class="details">
-        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>DENSIFIQUE. THICKENING SHAMPOO FOR THINNING HAIR.</b></div>
-        <div class="price">$35.00</div>
-        <div>Në stok: 8</div>
-        <a href="product2-details.php" class="buy-button">Blej</a>
-    </div>
-</div>
-
-<div class="product" draggable="true" data-name="ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES."data-price="25">
-    <img src="images/produkt1.webp" alt="Product 3">
-    <div class="details">
-        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.</b></div>
-        <div class="price">$15.00</div>
-        <div>Në stok: 25</div>
-        <a href="product3-details.php" class="buy-button">Blej</a>
-    </div>
-</div>
+      <section class="products">
+  
+    <?php foreach ($products as $product): ?>
+      <div class="product" draggable="true" data-name="<?= htmlspecialchars($product['name']) ?>" data-price="<?= htmlspecialchars($product['price']) ?>">
+        <img src="images/<?= htmlspecialchars($product['image']) ?>" alt="Product image">
+        <div class="details">
+          <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;">
+            <b><?= htmlspecialchars($product['name']) ?></b>
+          </div>
+          <div class="price">$<?= htmlspecialchars($product['price']) ?>.00</div>
+          <div>Në stok: <?= htmlspecialchars($product['stock']) ?></div>
+          <a href="<?= htmlspecialchars($product['details']) ?>" class="buy-button">Blej</a>
+        </div>
+      </div>
+    <?php endforeach; ?>
+  </section>
 
 
-<div class="product" draggable="true" data-name="CHRONOLOGISTE. ESSENTIAL REVITALIZING HAIR MASK"data-price="25">
-    <img src="images/produkt4.webp" alt="Product 4">
-    <div class="details">
-        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>CHRONOLOGISTE. ESSENTIAL REVITALIZING HAIR MASK</b></div>
-        <div class="price">$15.00</div>
-        <div>Në stok: 25</div>
-        <a href="product4-details.php" class="buy-button">Blej</a>
-    </div>
-</div>
 
-<div class="product" draggable="true" data-name="GENESIS. FORTIFYING SERUM FOR WEAKENED HAIR." data-price="15">
-    <img src="images/produkt5.webp" alt="Product 5">
-    <div class="details">
-        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>GENESIS. FORTIFYING SERUM FOR WEAKENED HAIR.</b></div>
-        <div class="price">$15.00</div>
-        <div>Në stok: 25</div>
-        <a href="product5-details.php" class="buy-button">Blej</a>
-    </div>
-</div>
-
-
-<div class="product" draggable="true" data-name="ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES."data-price="15">
-    <img src="images/produkt6.webp" alt="Product 6">
-    <div class="details">
-        <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;"><b>ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.</b></div>
-        <div class="price">$15.00</div>
-        <div>Në stok: 25</div>
-        <a href="product6-details.php" class="buy-button">Blej</a>
-    </div>
-</div>
-
-
-</section>
 <section class="cart">
   <h2><i class="fas fa-shopping-cart"></i>  Shto në Shportë</h2>
   <ul id="cartItems">
