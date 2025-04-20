@@ -532,22 +532,9 @@ cursor: pointer;
     valid = false;
 } else {
     let email = emailField.value.trim();
-    let atFound = false;
-    let dotFound = false;
+    let emailRegex = /^[\w.-]+@[\w.-]+\.\w{2,}$/;
 
-    
-    for (let i = 0; i < email.length; i++) {
-        let char = email[i];
-
-        if (char === '@') {
-            atFound = true;
-        } else if (atFound && char === '.') {
-            dotFound = true;
-            break;
-        }
-    }
-
-    if (!atFound || !dotFound) {
+    if (!emailRegex.test(email)) {
         displayWarning(emailField, warnings.email);
         valid = false;
     }
