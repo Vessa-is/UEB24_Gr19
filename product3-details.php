@@ -112,11 +112,19 @@
 </div>
 
     <div class="container">
-      <img src="images/produkt3.jpg" alt="Product Image" class="product-image">
-      <div class="details">
-        <h1>ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.</h1>
-        <p>Cmimi: $15</p>
-        <p>Ne Stok: <span id="stock">25</span></p>
+    <?php
+$product = [
+    "name" => "ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES.",
+    "price" => 15,
+    "stock" => 25,
+    "image" => "images/produkt3.jpg"
+];
+?>
+<img src="<?php echo $product['image']; ?>" alt="Product Image" class="product-image">
+<div class="details">
+    <h1><?php echo $product['name']; ?></h1>
+    <p>Cmimi: $<?php echo number_format($product['price'], 2); ?></p>
+    <p>Ne Stok: <span id="stock"><?php echo $product['stock']; ?></span></p>
   
         <form id="purchase-form">
           <div class="form-group">
