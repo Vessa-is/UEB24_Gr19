@@ -62,10 +62,10 @@
                 <input type="number" id="quantity" name="quantity" max="<?php echo $product->getStock(); ?>" min="1" required>
             </div>
             <button type="submit" style="padding: 5px; background-color: #6d4c3d; color:white; margin-top: 10px;">Porosit</button>
-        </form>
-        <?php else: ?>
+            <?php else: ?>
             <button type="button" disabled style="padding: 5px; background-color: grey; color:white; margin-top: 10px;">Nuk ka në stok</button>
         <?php endif; ?>
+        </form>
         <?php if ($warning): ?>
             <p class="warning"><?php echo $warning; ?></p>
         <?php endif; ?>
