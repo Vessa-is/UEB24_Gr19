@@ -1,3 +1,94 @@
+<?php
+$formData = [
+    'first-name' => '',
+    'last-name' => '',
+    'email' => '',
+    'password' => '',
+    'confirm-password' => '',
+    'data-e-lindjes' => '',
+    'nr-personal' => ''
+];
+
+$errors = [];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $formData['first-name'] = sanitizeInput($_POST['first-name'] ?? '');
+    $formData['last-name'] = sanitizeInput($_POST['last-name'] ?? '');
+    $formData['email'] = sanitizeInput($_POST['email'] ?? '');
+    $formData['password'] = $_POST['password'] ?? '';
+    $formData['confirm-password'] = $_POST['confirm-password'] ?? '';
+    $formData['data-e-lindjes'] = sanitizeInput($_POST['data-e-lindjes'] ?? '');
+    $formData['nr-personal'] = sanitizeInput($_POST['nr-personal'] ?? '');
+
+    if (empty($formData['first-name'])) {
+        $errors['first-name'] = 'First name is required';
+    } elseif (!preg_match('/^[a-zA-Z\s]+$/', $formData['first-name'])) {
+        $errors['first-name'] = 'First name should contain only letters';
+    }
+
+    if (empty($formData['last-name'])) {
+        $errors['last-name'] = 'Last name is required';
+    } elseif (!preg_match('/^[a-zA-Z\s]+$/', $formData['last-name'])) {
+        $errors['last-name'] = 'Last name should contain only letters';
+    }
+
+    if (empty($formData['email'])) {
+        $errors['email'] = 'Email is required';
+    } elseif (!filter_var($formData['email'], FILTER_VALIDATE_EMAIL)) {
+        $errors['email'] = 'Please enter a valid email address';
+    }
+
+    if (empty($formData['password'])) {
+        $errors['password'] = 'Password is required';
+    } elseif (strlen($formData['password']) < 6) {
+        $errors['password'] = 'Password must be at least 6 characters';
+    }
+
+    if (empty($formData['confirm-password'])) {
+        $errors['confirm-password'] = 'Please confirm your password';
+    } elseif ($formData['password'] !== $formData['confirm-password']) {
+        $errors['confirm-password'] = 'Passwords do not match';
+    }
+
+    if (empty($formData['data-e-lindjes'])) {
+        $errors['data-e-lindjes'] = 'Birthdate is required';
+    } elseif (!preg_match('/^\d{2}\-\d{2}\-\d{4}$/', $formData['data-e-lindjes'])) {
+        $errors['data-e-lindjes'] = 'Birthdate should be in DD/MM/YYYY format';
+    }
+
+    if (empty($formData['nr-personal'])) {
+        $errors['nr-personal'] = 'Personal number is required';
+    } elseif (!preg_match('/^\d{10}$/', $formData['nr-personal'])) {
+        $errors['nr-personal'] = 'Personal number should be 10 digits';
+    }
+
+    if (empty($errors)) {
+
+        header('Location: login.php');
+        exit();
+    }
+}
+
+function sanitizeInput($data) {
+    return htmlspecialchars(stripslashes(trim($data)));
+}
+
+if (empty($errors)) {
+  $requiredFields = ['first-name', 'last-name', 'email', 'password', 'confirm-password', 'data-e-lindjes', 'nr-personal'];
+  foreach ($requiredFields as $field) {
+      if (empty($formData[$field])) {
+          $errors[$field] = 'This field is required';
+      }
+  }
+  
+  if (empty($errors)) {
+      header('Location: login.php');
+      exit();
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -81,6 +172,14 @@
       text-decoration: underline;
     }
 
+    .error {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: block;
+} 
+
     
     </style>
   </head>
@@ -113,21 +212,50 @@
     </header>
     <div class="container">
         <h1>Create Account</h1>
-        <form id="create-account-form" novalidate>
+        <form id="create-account-form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <label for="first-name">First Name</label>
-            <input type="text" id="first-name" name="first-name" placeholder="First Name" >
+            <input type="text" id="first-name" name="first-name" placeholder="First Name" value="<?php echo $formData['first-name']; ?>">
+            <?php if (isset($errors['first-name'])): ?>
+              <span class="error"><?php echo $errors['first-name']; ?></span>
+            <?php endif; ?>
             
     
             <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" name="last-name" placeholder="Last Name" >
-            
-    
+            <input type="text" id="last-name" name="last-name" placeholder="Last Name" value="<?php echo $formData['last-name']; ?>">
+            <?php if (isset($errors['last-name'])): ?>
+              <span class="error"><?php echo $errors['last-name']; ?></span>
+            <?php endif; ?>
+
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Email" >
+            <input type="email" id="email" name="email" placeholder="Email" value="<?php echo $formData['email']; ?>">
+            <?php if (isset($errors['email'])): ?>
+              <span class="error"><?php echo $errors['email']; ?></span>
+            <?php endif; ?>
             
     
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Password" >
+            <input type="password" id="password" name="password" placeholder="Password" value="<?php echo $formData['password']; ?>">
+            <?php if (isset($errors['password'])): ?>
+              <span class="error"><?php echo $errors['password']; ?></span>
+            <?php endif; ?>
+
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" value="<?php echo $formData['confirm-password']; ?>">
+            <?php if (isset($errors['confirm-password'])): ?>
+              <span class="error"><?php echo $errors['confirm-password']; ?></span>
+            <?php endif; ?>
+
+            <label for="data-e-lindjes">Birthdate</label>
+            <input type="text" id="data-e-lindjes" name="data-e-lindjes" placeholder="Birthdate" value="<?php echo $formData['data-e-lindjes']; ?>">
+            <?php if (isset($errors['data-e-lindjes'])): ?>
+              <span class="error"><?php echo $errors['data-e-lindjes']; ?></span>
+            <?php endif; ?>
+
+            <label for="nr-personal">Numri personal</label>
+            <input type="text" id="nr-personal" name="nr-personal" placeholder="nr-personal" value="<?php echo $formData['nr-personal']; ?>">
+            <?php if (isset($errors['nr-personal'])): ?>
+              <span class="error"><?php echo $errors['nr-personal']; ?></span>
+            <?php endif; ?>
             
     
             <button type="submit">Create New Account</button>
@@ -136,10 +264,11 @@
             <a href="login.php">Return to Login</a>
         </div>
     </div>
+
     
    
     
-    <script>
+    <!-- <script>
         document.getElementById('create-account-form').addEventListener('submit', function (e) {
   e.preventDefault(); 
 
@@ -188,7 +317,7 @@ function createAccount(firstName, lastName, email, password) {
   };
 }
 
-      </script>
+      </script> -->
       
    
     <footer>
@@ -241,7 +370,7 @@ function createAccount(firstName, lastName, email, password) {
               <i class="fas fa-paper-plane"></i>
             </button>
           </div>
-          <script>
+          <!-- <script>
                   
             document.querySelector('#abonimform').addEventListener('submit', function(event) {
                 event.preventDefault(); 
@@ -253,7 +382,20 @@ function createAccount(firstName, lastName, email, password) {
                     alert('Ju lutem, shkruani një email të vlefshëm.');
                 }
             });
-        </script>   
+        </script>    -->
+
+        <!-- <script>
+document.getElementById('create-account-form').addEventListener('submit', function(e) {
+
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    
+    if (password !== confirmPassword) {
+        e.preventDefault();
+        alert('Passwords do not match');
+    }
+});
+        </script> -->
           <div class="icons">
             <a href="https://www.facebook.com" class="icon"  aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com" class="icon" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
