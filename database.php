@@ -2,10 +2,10 @@
     $server="localhost";
     $username="root";
     $password="";
-    $database = "";
+    $database = "sherbimet";
 
 
-    $conn = mysqli_connect($servername, $username, $password, $dbname);
+    $conn = mysqli_connect($server, $username, $password, $database);
 
     if(!$conn){
         echo "Error connecting to the Database!";

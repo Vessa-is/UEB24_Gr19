@@ -420,6 +420,10 @@ $services = [
     ["name" => "Përkujdesje për flokët e thatë dhe të dëmtuar", "time" => "120 min.", "price" => 80]
 ];
 
+if($services[count($services)-1]){
+
+}
+
 if (isset($_GET['sort_by'])) {
     $sort_by = $_GET['sort_by'];
 
@@ -512,6 +516,10 @@ if (isset($_GET['sort_by'])) {
                     <td><button class="book-btn" onclick="openModal('<?php echo addslashes($service['name']); ?>')">Rezervo</button></td>
                 </tr>
                 <?php endforeach; ?>
+
+              <tr>
+                <td colspan = "4"><a href = "insert_sherbime.php">Inserto sherbime</a></td>
+              </tr>
             </tbody>
         </table>
     </div>
