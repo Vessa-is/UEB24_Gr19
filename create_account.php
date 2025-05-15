@@ -73,19 +73,36 @@ function sanitizeInput($data) {
     return htmlspecialchars(stripslashes(trim($data)));
 }
 
-if (empty($errors)) {
-  $requiredFields = ['first-name', 'last-name', 'email', 'password', 'confirm-password', 'data-e-lindjes', 'nr-personal'];
-  foreach ($requiredFields as $field) {
-      if (empty($formData[$field])) {
-          $errors[$field] = 'This field is required';
-      }
-  }
-  
-  if (empty($errors)) {
-      header('Location: login.php');
-      exit();
-  }
-}
+// if (empty($errors)) {
+//   $requiredFields = ['first-name', 'last-name', 'email', 'password', 'confirm-password', 'data-e-lindjes', 'nr-personal'];
+//   foreach ($requiredFields as $field) {
+//       if (empty($formData[$field])) {
+//           $errors[$field] = 'This field is required';
+//       }
+//   }
+//         header(header: 'Location: index.php');
+//       exit();
+// }
+
+
+
+
+
+// if(isset($_POST['signupbutton'])){
+//     if(empty($_POST['first-name']) || empty($_POST['password']) || empty($_POST['name'])){
+//         echo "Fill all fields!";
+//     }else{
+//         $email = $_POST['signupemail'];
+//         $password = $_POST['signuppassword'];
+//         $name = $_POST['signupname'];
+//         $id = $name.rand(100,999);
+
+//         $user  = new User($id, $email, $password, $name);
+//         $userRepository = new UserRepository();
+
+//         $userRepository->insertUser($user);
+//     }
+// }
 
 ?>
 
@@ -258,8 +275,27 @@ if (empty($errors)) {
             <?php endif; ?>
             
     
-            <button type="submit">Create New Account</button>
+            <button type="submit" name="signupbutton">Create New Account</button>
         </form>
+        <?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
+    include_once '../UEB24_Gr19/script/classes/UserRepository.php';
+
+    $firstname = $_POST['first-name'];
+    $lastname = $_POST['last-name'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $personalnr = $_POST['nr-personal'];
+
+    insertUser($firstname, $lastname, $email, $password, $personalnr);
+
+    header('Location: login.php');
+    exit();
+}
+
+
+
+?>
         <div class="back-link">
             <a href="login.php">Return to Login</a>
         </div>

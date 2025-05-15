@@ -2,7 +2,7 @@
     $server="localhost";
     $username="root";
     $password="";
-    $database = "sherbimet";
+    $database = "radiant";
 
 
     $conn = mysqli_connect($server, $username, $password, $database);

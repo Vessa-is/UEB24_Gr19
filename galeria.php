@@ -83,26 +83,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
     </style>
 </head>
 <body>
-    <?php include 'header.php'; ?>
+    <!-- <?php include 'header.php'; ?> -->
 
-    <section>
-        <h1 id="galleryheading">Galeria</h1>
-        <div class="galeria">
-            <?php foreach ($gallery_images as $image): ?>
-                <div class="gallery-item">
-                    <img src="<?php echo htmlspecialchars($image['src']); ?>" alt="<?php echo htmlspecialchars($image['alt']); ?>">
-                </div>
-            <?php endforeach; ?>
-        </div>
-    </section>
-
-    <?php include 'footer.php'; ?>
-</body>
-</html>
-<?php
-global $nav_links;
-?>
-<header>
+        <header>
     <nav>
         <div class="logo-cont">
             <div class="logo">
@@ -127,6 +110,25 @@ global $nav_links;
         </div>
     </nav>
 </header>
+
+    <section>
+        <h1 id="galleryheading">Galeria</h1>
+        <div class="galeria">
+            <?php foreach ($gallery_images as $image): ?>
+                <div class="gallery-item">
+                    <img src="<?php echo htmlspecialchars($image['src']); ?>" alt="<?php echo htmlspecialchars($image['alt']); ?>">
+                </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
+
+    <!-- <?php include 'footer.php'; ?> -->
+</body>
+</html>
+<?php
+global $nav_links;
+?>
+
 <?php
 global $nav_links;
 global $newsletter_message;

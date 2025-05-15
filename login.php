@@ -18,6 +18,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $error = "Email ose fjalëkalim i pasaktë!";
     }
+
+        if ($email === $email && $password === $password) {
+        $_SESSION['user'] = [
+            'email' => $email,
+            'role' => 'admin'
+        ];
+        header("Location: index.php");
+        exit();
+    } else {
+        $error = "Email ose fjalëkalim i pasaktë!";
+    }
+
 }
 ?>
 

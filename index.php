@@ -1,9 +1,11 @@
 <?php
-session_start();
-if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
-    exit();
-}
+// session_start();
+// if (!isset($_SESSION['user'])) {
+//     header("Location: login.php");
+//     exit();
+// }
+
+include 'greeting.php';
 
 $nav_links = [
     'Ballina' => 'index.php',
@@ -13,6 +15,8 @@ $nav_links = [
     'Rreth nesh' => 'per_ne.php',
     'Kontakti' => 'kontakti.php'
 ];
+
+
 
 $newsletter_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) {
@@ -265,7 +269,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
     </style>
 </head>
 <body>
-    <?php include 'header.php'; ?>
+    <!-- <?php include 'header.php'; ?> -->
+
+    <header>
+    <nav>
+        <div class="logo-cont">
+            <div class="logo">
+                <a href="index.php">
+                    <img src="images/logoo2.png" alt="Radiant Touch Logo" title="Radiant Touch">
+                </a>
+            </div>
+            <div class="login">
+                <?php if (isset($_SESSION['user'])): ?>
+                    <a href="logout.php"><button id="logoutBtn" title="Dil">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button></a>
+                <?php else: ?>
+                    <a href="login.php"><button id="loginBtn" title="Kyçu">
+                        <i class="fa fa-user"></i>
+                    </button></a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div id="navi">
+            <ul>
+                <?php foreach ($nav_links as $name => $url): ?>
+                    <li><a href="<?php echo htmlspecialchars($url); ?>"><?php echo htmlspecialchars($name); ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </nav>
+</header>
 
     <section>
         <div class="section">
@@ -383,7 +417,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
         });
     </script>
 
-    <?php include 'footer.php'; ?>
+    <!-- <?php include 'footer.php'; ?> -->
 
     <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
     <script>
@@ -400,45 +434,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
             });
         });
     </script>
-</body>
-</html>
-<?php
-global $nav_links;
-?>
-<header>
-    <nav>
-        <div class="logo-cont">
-            <div class="logo">
-                <a href="index.php">
-                    <img src="images/logoo2.png" alt="Radiant Touch Logo" title="Radiant Touch">
-                </a>
-            </div>
-            <div class="login">
-                <?php if (isset($_SESSION['user'])): ?>
-                    <a href="logout.php"><button id="logoutBtn" title="Dil">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button></a>
-                <?php else: ?>
-                    <a href="login.php"><button id="loginBtn" title="Kyçu">
-                        <i class="fa fa-user"></i>
-                    </button></a>
-                <?php endif; ?>
-            </div>
-        </div>
-        <div id="navi">
-            <ul>
-                <?php foreach ($nav_links as $name => $url): ?>
-                    <li><a href="<?php echo htmlspecialchars($url); ?>"><?php echo htmlspecialchars($name); ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </nav>
-</header>
-<?php
-global $nav_links;
-global $newsletter_message;
-?>
-<footer>
+
+    <footer>
     <div class="footer-container">
         <div class="footer-section">
             <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo">
@@ -497,3 +494,13 @@ global $newsletter_message;
         © <?php echo date('Y'); ?> <a href="index.php" style="text-decoration: none;"><span>Radiant Touch</span></a>. Të gjitha të drejtat janë të rezervuara.
     </div>
 </footer>
+</body>
+</html>
+<?php
+global $nav_links;
+?>
+
+<?php
+global $nav_links;
+global $newsletter_message;
+?>
