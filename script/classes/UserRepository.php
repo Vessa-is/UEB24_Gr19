@@ -1,25 +1,76 @@
 <?php 
+    include '../UEB24_Gr19/DatabaseConnection.php';
 
-    function insertUser($firstName, $lastName, $email, $password, $personalNr){
-    include '../UEB24_Gr19/database.php';
+class UserRepository{
+    private $conn;
 
-    if(isset($_POST['submit'])){
-
-    $firstName = mysqli_real_escape_string($conn, $firstName);
-    $lastName = mysqli_real_escape_string($conn, $lastName);
-    $email = mysqli_real_escape_string($conn, $email);
-    $password = mysqli_real_escape_string($conn, $password);
-    $personalNr = mysqli_real_escape_string($conn, $personalNr);
-
-        $query = "INSERT INTO user(name, lastname, email, password, personalnr) VALUES ('$firstName', '$lastName', '$email', '$password', '$personalNr')";
-
-    if (!mysqli_query($conn, $query)) {
-    echo "Error: " . mysqli_error($conn);
-}
-
-
-}
+    function __construct(){
+        $conn = new DatabaseConnection;
+        $this->conn = $conn->startConnection();
     }
 
 
+    function insertUser($user){
+
+        $conn = $this->conn;
+
+        $firstName = $user->getName();
+        $lastName = $user->getLastName();
+        $email = $user->getEmail();
+        $password = $user->getPassword();
+        $personalNr = $user->getPersonalNr();
+
+        $sql = "INSERT INTO user (name, lastname, email, password, personalnr) VALUES (?,?,?,?,?)";
+
+        $statement = $conn->prepare($sql);
+
+        $statement->execute([$firstName, $lastName, $email, $password, $personalNr]);
+
+        echo "<script> alert('User has been inserted successfuly!'); </script>";
+
+    }
+
+    function getAllUsers(){
+        $conn = $this->conn;
+
+        $sql = "SELECT * FROM user";
+
+        $statement = $conn->query($sql);
+        $users = $statement->fetchAll();
+
+        return $users;
+    }
+
+    function getUserByPersonalNr($personalNr){
+        $conn = $this->conn;
+
+        $sql = "SELECT * FROM user WHERE personalnr=?";
+        $statement = $conn->prepare($sql);
+        $statement->execute([$personalNr]);
+        $user = $statement->fetch();
+
+        return $user;
+    }
+
+    function updateUser($personalNr, $name, $lastName, $email, $password){
+        $conn = $this->conn;
+
+        $sql = "UPDATE user SET name=?, lastname=?, email=?, password=? WHERE personalnr=?";
+        $statement = $conn->prepare($sql);
+        $statement->execute([$name, $lastName, $email, $password, $personalNr]);
+
+        echo "<script>alert('update was successful');</script>";
+    }
+
+
+    function deleteUser($personalNr){
+        $conn = $this->conn;
+
+        $sql = "DELETE FROM user WHERE personalnr=?";
+        $statement = $conn->prepare($sql);
+        $statement->execute([$personalNr]);
+
+        echo "<script>alert('delete was successful');</script>";
+    }
+}
 ?>

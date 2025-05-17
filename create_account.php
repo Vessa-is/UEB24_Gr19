@@ -62,11 +62,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['nr-personal'] = 'Personal number should be 10 digits';
     }
 
-    if (empty($errors)) {
+    // if (empty($errors)) {
 
-        header('Location: login.php');
-        exit();
-    }
+    //     header('Location: login.php');
+    //     exit();
+    // }
 }
 
 function sanitizeInput($data) {
@@ -279,6 +279,7 @@ function sanitizeInput($data) {
         </form>
         <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
+    include_once '../UEB24_Gr19/script/classes/User.php';
     include_once '../UEB24_Gr19/script/classes/UserRepository.php';
 
     $firstname = $_POST['first-name'];
@@ -287,13 +288,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
     $password = $_POST['password'];
     $personalnr = $_POST['nr-personal'];
 
-    insertUser($firstname, $lastname, $email, $password, $personalnr);
+    $user = new User($firstname, $lastname, $email, $password, $personalnr);
+    $userRepo = new UserRepository();
+    $userRepo->insertUser($user);
 
-    header('Location: login.php');
+    // header("Location: login.php");
     exit();
 }
-
-
 
 ?>
         <div class="back-link">
