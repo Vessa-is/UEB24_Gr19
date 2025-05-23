@@ -72,5 +72,14 @@ class UserRepository{
 
         echo "<script>alert('delete was successful');</script>";
     }
+
+    function userExistsByEmail($email){
+        $conn = $this->conn;
+        $sql = "SELECT * FROM user WHERE email = ?";
+        $statement = $conn->prepare($sql);
+        $statement->execute([$email]);
+        return $statement->fetch() !== false;
+    }
+
 }
 ?>

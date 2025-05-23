@@ -13,25 +13,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             'email' => $email,
             'role' => 'admin'
         ];
+
+        setcookie("user_email", $email, time() + (7 * 24 * 60 * 60), "/");
+
         header("Location: index.php");
         exit();
     } else {
         $error = "Email ose fjalëkalim i pasaktë!";
     }
-
-        if ($email === $email && $password === $password) {
-        $_SESSION['user'] = [
-            'email' => $email,
-            'role' => 'admin'
-        ];
-        header("Location: index.php");
-        exit();
-    } else {
-        $error = "Email ose fjalëkalim i pasaktë!";
-    }
-
 }
 ?>
+
+
 
 
 

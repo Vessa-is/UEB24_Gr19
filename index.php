@@ -1,9 +1,9 @@
 <?php
-// session_start();
-// if (!isset($_SESSION['user'])) {
-//     header("Location: login.php");
-//     exit();
-// }
+session_start();
+
+if (!isset($_SESSION['user']) && isset($_COOKIE['user_email'])) {
+    echo "Mirë se u ktheve, " . htmlspecialchars($_COOKIE['user_email']);
+}
 
 include 'greeting.php';
 
@@ -16,11 +16,10 @@ $nav_links = [
     'Kontakti' => 'kontakti.php'
 ];
 
-
-
 $newsletter_message = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) {
     $newsletter_email = trim($_POST['newsletter-email']);
+
     if (empty($newsletter_email)) {
         $newsletter_message = 'Ju lutem, shkruani një email të vlefshëm.';
     } elseif (!filter_var($newsletter_email, FILTER_VALIDATE_EMAIL)) {
@@ -30,6 +29,53 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+    <meta charset="UTF-8">
+    <title>Ballina - Radiant Touch</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.php"><img src="images/logoo2.png" alt="Radiant Touch" /></a>
+            </div>
+            <ul>
+                <?php foreach ($nav_links as $name => $url): ?>
+                    <li><a href="<?= htmlspecialchars($url) ?>"><?= htmlspecialchars($name) ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+            <div class="login">
+                <?php if (isset($_SESSION['user'])): ?>
+                    <span><?= htmlspecialchars($_SESSION['user']['email']) ?></span>
+                    <a href="logout.php"><button>Çkyçu</button></a>
+                <?php else: ?>
+                    <a href="login.php"><button>Hyr</button></a>
+                <?php endif; ?>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Mirë se vini në Radiant Touch!</h1>
+        <p>Shërbimet më profesionale për bukurinë tuaj.</p>
+    </main>
+
+    <footer>
+        <h3>Abonohu në Newsletter</h3>
+        <form method="POST" action="">
+            <input type="email" name="newsletter-email" placeholder="Shkruani email-in tuaj" required>
+            <button type="submit">Abonohu</button>
+        </form>
+        <?php if (!empty($newsletter_message)): ?>
+            <p><?= htmlspecialchars($newsletter_message) ?></p>
+        <?php endif; ?>
+    </footer>
+</body>
+</html>
+
 
 <!DOCTYPE html>
 <html lang="en">
