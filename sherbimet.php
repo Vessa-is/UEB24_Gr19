@@ -2,7 +2,7 @@
 
 
 <!DOCTYPE html>
-<html lang="en">
+< lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -421,7 +421,8 @@ table {
     </nav>
 </header>
 
-    <?php
+     <?php
+
 $services = [
     ["name" => "Prerje e flokëve", "time" => "30 min.", "price" => 10],
     ["name" => "Fenirim i flokëve", "time" => "15 min.", "price" => 5],
@@ -445,9 +446,6 @@ $services = [
     ["name" => "Përkujdesje për flokët e thatë dhe të dëmtuar", "time" => "120 min.", "price" => 80]
 ];
 
-if($services[count($services)-1]){
-
-}
 
 if (isset($_GET['sort_by'])) {
     $sort_by = $_GET['sort_by'];
@@ -504,68 +502,54 @@ if (isset($_GET['sort_by'])) {
             break;
     }
 }
-?>
 
+?>
 <section class="sherbimet">
     <h1>Shërbimet tona</h1>
 
-    <form method="get" class="sorting-form">
-        <label for="sort_by" class="sorting-label">Rendit sipas:</label>
-        <select name="sort_by" id="sort_by" class="sorting-select">
-            <option value="price_asc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_asc' ? 'selected' : ''; ?>>Çmimi (Rritës)</option>
-            <option value="price_desc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'price_desc' ? 'selected' : ''; ?>>Çmimi (Zbritës)</option>
-            <option value="name_asc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'name_asc' ? 'selected' : ''; ?>>Emri (A-Z)</option>
-            <option value="name_desc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'name_desc' ? 'selected' : ''; ?>>Emri (Z-A)</option>
-            <option value="time_asc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'time_asc' ? 'selected' : ''; ?>>Koha (Rritës)</option>
-            <option value="time_desc" <?php echo isset($_GET['sort_by']) && $_GET['sort_by'] == 'time_desc' ? 'selected' : ''; ?>>Koha (Zbritës)</option>
-        </select>
-        <button type="submit" class="sorting-button">Rendit</button>
+    <form method="GET" class="sorting-form">
+      <label class="sorting-label" for="sort_by">Rendit sipas:</label>
+      <select name="sort_by" class="sorting-select" id="sort_by">
+        <option value="name_asc" <?= (isset($_GET['sort_by']) && $_GET['sort_by'] === 'name_asc') ? 'selected' : '' ?>>Emri (A-Z)</option>
+        <option value="name_desc" <?= (isset($_GET['sort_by']) && $_GET['sort_by'] === 'name_desc') ? 'selected' : '' ?>>Emri (Z-A)</option>
+        <option value="price_asc" <?= (isset($_GET['sort_by']) && $_GET['sort_by'] === 'price_asc') ? 'selected' : '' ?>>Çmimi (Rritës)</option>
+        <option value="price_desc" <?= (isset($_GET['sort_by']) && $_GET['sort_by'] === 'price_desc') ? 'selected' : '' ?>>Çmimi (Zbritës)</option>
+        <option value="time_asc" <?= (isset($_GET['sort_by']) && $_GET['sort_by'] === 'time_asc') ? 'selected' : '' ?>>Koha (Rritës)</option>
+        <option value="time_desc" <?= (isset($_GET['sort_by']) && $_GET['sort_by'] === 'time_desc') ? 'selected' : '' ?>>Koha (Zbritës)</option>
+      </select>
+      <button type="submit" class="sorting-button">Rendit</button>
     </form>
 
-    <div class="table-wrapper">
-        <table class="services-table" style="border: 3px solid #6d4c3d">
-            <thead>
-                <tr>
-                <th style="width: 50%;">SHËRBIMI</th>
-        <th style="width: 15%;">KOHA</th>
-        <th style="width: 15%;">ÇMIMI</th>
-        <th style="width: 25%;">REZERVO</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($services as $service): ?>
-                <tr>
-                    <td><?php echo $service['name']; ?></td>
-                    <td><?php echo $service['time']; ?></td>
-                    <td><?php echo $service['price']; ?>€</td>
-                    <td><button class="book-btn" onclick="openModal('<?php echo addslashes($service['name']); ?>')">Rezervo</button></td>
-                </tr>
-                <?php endforeach; ?>
+    <table class="services-table">
+        <thead>
+            <tr>
+                <th>Emri</th>
+                <th>Koha</th>
+                <th>Çmimi (€)</th>
+                <th>Rezervo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($services as $service): ?>
+            <tr>
+                <td><?= htmlspecialchars($service['name']) ?></td>
+                <td><?= htmlspecialchars($service['time']) ?> min.</td>
+                <td><?= htmlspecialchars($service['price']) ?> €</td>
+                <td>
+                    <form method="POST">
+                        <!-- Remove service_id if you don’t have IDs -->
+                        <button type="submit" name="book_service" class="book-btn">Rezervo</button>
+                    </form>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 
-              <tr>
-                <td colspan = "4"><a href = "insert_sherbime.php">Inserto sherbime</a></td>
-              </tr>
-            </tbody>
-        </table>
-    </div>
+    
 </section>
- 
-    <div id="bookingModal" class="modal">
-      <div class="modal-content">
-        <div class="modal-header">Rezervimi i Shërbimit</div>
-        <div class="modal-body">
-          <p id="serviceName"></p>
-          <label for="date">Zgjidhni Datën:</label>
-          <input type="date" id="date" required /><br /><br />
-          <label for="time">Zgjidhni Orën:</label>
-          <input type="time" id="time" required />
-        </div>
-        <div class="modal-footer">
-          <button onclick="confirmBooking()">Konfirmo</button>
-          <button onclick="closeModal()">Mbyll</button>
-        </div>
-      </div>
-    </div>
+  </body>
+  
 
     <footer>
       <div class="footer-container">
