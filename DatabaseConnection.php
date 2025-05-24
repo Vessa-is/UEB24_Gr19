@@ -1,25 +1,11 @@
 <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "sallon_db";
 
-class DatabaseConnection {
-    private $server = "metro.proxy.rlwy.net";
-    private $port = "42104";
-    private $username = "postgres";
-    private $password = "hYvQCxIaVYdbTJJdqhPWdWfJbjVxaSTe";
-    private $database = "railway";
-
-    public function startConnection() {
-        try {
-            $conn = new PDO("pgsql:host=$this->server;port=$this->port;dbname=$this->database", $this->username, $this->password);
-            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $conn;
-        } catch (PDOException $e) {
-            echo "Database Connection Failed: " . $e->getMessage();
-            return null;
-        }
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
-}
-
-$db = new DatabaseConnection();
-$conn = $db->startConnection();
-
 ?>
