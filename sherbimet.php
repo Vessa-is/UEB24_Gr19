@@ -1,8 +1,79 @@
+<?php
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+include 'greeting.php';
+
+include 'DatabaseConnection.php';
+
+if (!isset($_SESSION['user']) && isset($_COOKIE['user_email'])) {
+    echo "Mirë se u ktheve, " . htmlspecialchars($_COOKIE['user_email']);
+}
+
+$nav_links = [
+  'BALLINA' => 'index.php',
+  'SHERBIMET' => 'sherbimet.php',
+  'GALERIA' => 'galeria.php',
+  'PRODUKTET' => 'produktet.php',
+  'RRETH NESH' => 'per_ne.php',
+  'KONTAKTI' => 'kontakti.php'
+];
+
+
+$newsletter_message = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) {
+    $newsletter_email = trim($_POST['newsletter-email']);
+    if (empty($newsletter_email)) {
+        $newsletter_message = 'Ju lutem, shkruani një email të vlefshëm.';
+    } elseif (!filter_var($newsletter_email, FILTER_VALIDATE_EMAIL)) {
+        $newsletter_message = 'Ju lutem, shkruani një email të vlefshëm.';
+    } else {
+        $newsletter_message = 'Faleminderit për abonimin!';
+    }
+}
+
+// Create an instance and get the PDO connection
+$db = new DatabaseConnection();
+$conn = $db->startConnection();
+
+if (!$conn) {
+    die("Failed to connect to the database");
+}
+
+$sort_by = $_GET['sort_by'] ?? 'name_asc'; 
+$order_query = "";
+
+switch ($sort_by) {
+    case 'price_asc':
+        $order_query = "ORDER BY price ASC";
+        break;
+    case 'price_desc':
+        $order_query = "ORDER BY price DESC";
+        break;
+    case 'name_asc':
+        $order_query = "ORDER BY name ASC";
+        break;
+    case 'name_desc':
+        $order_query = "ORDER BY name DESC";
+        break;
+    case 'time_asc':
+        $order_query = "ORDER BY time ASC";
+        break;
+    case 'time_desc':
+        $order_query = "ORDER BY time DESC";
+        break;
+    default:
+        $order_query = "ORDER BY name ASC";
+}
+
+?>
 
 
 
 <!DOCTYPE html>
-< lang="en">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -628,128 +699,4 @@ if (isset($_GET['sort_by'])) {
         rezervuara.
       </div>
     </footer>
-
-    <script>
-  function checkNumber() {
-    let number = 1.7976931348623157e+308; 
-    let invalidNumber = "text" / 2;  
-
-    console.log("MAX_VALUE: ", number);
-    console.log("NaN Example: ", invalidNumber);
-
-    
-    if (isNaN(invalidNumber)) {
-      alert("Vlera nuk është një numër të vlefshëm!");
-    }
-  }
-  let finiteNumber = 12345;
-  console.log(Number.isFinite(finiteNumber));
-  
-  function formatNumber() {
-    let num = 12345.6789;
-    console.log("Numri në format eksponencial: " + num.toExponential(2));
-    console.log("Numri si string: " + num.toString()); 
-  }
-
- 
-  function manipulateString() {
-    let text = "Rezervoni shërbimin tuaj tani!";
-    
-   
-    let matched = text.match(/shërbimin/);
-    console.log("Fjala e gjetur me match():", matched ? matched[0] : "Nuk u gjet.");
-
-   
-    let newText = text.replace("tani", "sot");
-    console.log("Teksti i përditësuar: " + newText);
-  }
-
-  
-  function openModal(service) {
-    document.getElementById("serviceName").textContent = `Shërbimi: ${service}`;
-    document.getElementById("bookingModal").style.display = "block";
-    checkNumber();  
-    formatNumber();  
-    manipulateString(); 
-  }
-
-  function closeModal() {
-    document.getElementById("bookingModal").style.display = "none";
-  }
-
-  function confirmBooking() {
-    const date = document.getElementById("date").value;
-    const time = document.getElementById("time").value;
-    if (date && time) {
-      alert(`Termini u rezervua me sukses për datën ${date} në orën ${time}`);
-      closeModal();
-    } else {
-      alert("Ju lutem plotësoni të gjitha fushat.");
-    }
-  }
-
-function openModal() {
-  const modal = document.getElementById("reservationModal");
-  modal.style.display = "block"; // E hapim modalin
-
- 
-  setTimeout(function() {
-    modal.style.display = "none"; 
-  }, 100000); 
-}
-
-document.getElementById("openModalButton").addEventListener("click", openModal);
-function onModalClose() {
-  console.log("Modal u mbyll. Rezervimi u mbyll me sukses!");
-  alert("Shërbimi u rezervua me sukses! Ju mirëpresim.");
-}
-document.querySelectorAll(".rezervo-btn").forEach(button => {
-  button.addEventListener("click", () => {
-    const serviceName = button.getAttribute("data-service-name");
-    openModal(serviceName, onModalClose);
-  });
-});
-function openModal(serviceName) {
-  
-  document.getElementById('serviceName').innerText = "Shërbimi: " + serviceName;
-
-  $('#bookingModal').slideDown();
-}
-
-function closeModal() {
-  
-  $('#bookingModal').slideUp();
-}
-
-function confirmBooking() {
-  alert("Rezervimi është konfirmuar!");
-  closeModal();
-}
-
-const calendar = document.getElementById('calendar');
-
-function renderCalendar() {
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth();
-    const currentYear = currentDate.getFullYear();
-    
-    
-    const monthNames = ["Janar", "Shkurt", "Mars", "Prill", "Maj", "Qershor", "Korrik", "Gusht", "Shtator", "Tetor", "Nëntor", "Dhjetor"];
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    
-    let calendarHTML = `<h2>${monthNames[currentMonth]} ${currentYear}</h2>`;
-    calendarHTML += '<div class="days">';
-    
-   
-    for (let i = 1; i <= daysInMonth; i++) {
-        calendarHTML += `<div class="day">${i}</div>`;
-    }
-    
-    calendarHTML += '</div>';
-    calendar.innerHTML = calendarHTML;
-}
-
-renderCalendar();
-    </script>
-  </body>
 </html>
