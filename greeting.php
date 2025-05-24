@@ -1,11 +1,9 @@
 <?php
 
-$currentHour = date("G"); // kushtezimeettt, operatoret 
+$currentHour = date("G");
 $greeting = "";
 
-if (!isset($_SESSION)) {
-    session_start();
-}
+session_start();
 
 if (!isset($_SESSION['vizita'])) {
     $_SESSION['vizita'] = 1;
@@ -13,15 +11,6 @@ if (!isset($_SESSION['vizita'])) {
     $_SESSION['vizita']++;
 }
 
-// if ($currentHour >= 5 && $currentHour < 12) {
-//     $greeting = "Mirëmëngjes!";
-// } elseif ($currentHour >= 12 && $currentHour < 18) {
-//     $greeting = "Mirëdita!";
-// } elseif ($currentHour >= 18 && $currentHour < 24) {
-//     $greeting = "Mirëmbrëma!";
-// } else {
-//     $greeting = "Çkemi";
-// }
 
 
 if (isset($_SESSION['user']['email'])) {

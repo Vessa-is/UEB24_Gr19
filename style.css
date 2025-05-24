@@ -747,6 +747,82 @@ font-size: 25px;
   background-color: #8d5f50; 
 }
 
+body.create-page {
+    font-family: Arial, sans-serif;
+    background-color: #f4e4d4;
+    margin: 0;
+    padding: 0;
+}
 
+.register-container {
+    max-width: 700px;
+    margin: 50px auto;
+    background-color: #f9f4eb;
+    padding: 20px;
+    border: 2px solid #7a6c59;
+    border: 1px solid #dcdcdc;
+}
+
+.register-title {
+    font-size: 30px;
+    text-align: center;
+    color: #664f3e;
+    margin-bottom: 20px;
+}
+
+#create-account-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-label {
+    font-size: 15px;
+    margin-bottom: 5px;
+    color: #7a6c59;
+}
+
+.form-input {
+    padding: 10px;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    background-color: #f9f4eb;
+}
+
+.submit-button {
+    padding: 10px;
+    font-size: 1rem;
+    background-color: #664f3e;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background-color: #5a4332;
+}
+
+.back-link {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.back-link a {
+    color: #7a6c59;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.back-link a:hover {
+    text-decoration: underline;
+}
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+    display: block;
+}
 
 

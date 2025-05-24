@@ -61,49 +61,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!preg_match('/^\d{10}$/', $formData['nr-personal'])) {
         $errors['nr-personal'] = 'Personal number should be 10 digits';
     }
-
-    // if (empty($errors)) {
-
-    //     header('Location: login.php');
-    //     exit();
-    // }
 }
 
 function sanitizeInput($data) {
     return htmlspecialchars(stripslashes(trim($data)));
 }
-
-// if (empty($errors)) {
-//   $requiredFields = ['first-name', 'last-name', 'email', 'password', 'confirm-password', 'data-e-lindjes', 'nr-personal'];
-//   foreach ($requiredFields as $field) {
-//       if (empty($formData[$field])) {
-//           $errors[$field] = 'This field is required';
-//       }
-//   }
-//         header(header: 'Location: index.php');
-//       exit();
-// }
-
-
-
-
-
-// if(isset($_POST['signupbutton'])){
-//     if(empty($_POST['first-name']) || empty($_POST['password']) || empty($_POST['name'])){
-//         echo "Fill all fields!";
-//     }else{
-//         $email = $_POST['signupemail'];
-//         $password = $_POST['signuppassword'];
-//         $name = $_POST['signupname'];
-//         $id = $name.rand(100,999);
-
-//         $user  = new User($id, $email, $password, $name);
-//         $userRepository = new UserRepository();
-
-//         $userRepository->insertUser($user);
-//     }
-// }
-
 ?>
 
 <!DOCTYPE html>
@@ -117,90 +79,8 @@ function sanitizeInput($data) {
 
     <link rel="stylesheet" href="style.css" />
 
-    <style>
-       body {
-      font-family: Arial, sans-serif;
-      background-color:  #f4e4d4;
-      margin: 0;
-      padding: 0;
-     
-    }
-    .container {
-      max-width: 700px;
-      margin: 50px auto;
-      background-color:#f9f4eb;
-      padding: 20px;
-      border: 2px solid #7a6c59;
-      border: 1px solid #dcdcdc;
-    }
-
-    h1 {
-      font-size: 30px;
-      text-align: center;
-      color: #664f3e;
-      margin-bottom: 20px;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-
-    label {
-      font-size: 15px;
-      margin-bottom: 5px;
-      color: #7a6c59;
-    }
-
-    input {
-      padding: 10px;
-      font-size: 1rem;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      
-      background-color: #f9f4eb;
-    }
-
-    button {
-      padding: 10px;
-      font-size: 1rem;
-      background-color: #664f3e;
-      color: white;
-      border: none;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background-color: #664f3e;
-    }
-
-    .back-link {
-      text-align: center;
-      margin-top: 15px;
-    }
-
-    .back-link a {
-      color: #7a6c59;
-      text-decoration: none;
-      font-size: 0.9rem;
-    }
-
-    .back-link a:hover {
-      text-decoration: underline;
-    }
-
-    .error {
-    color: red;
-    font-size: 12px;
-    margin-top: -10px;
-    margin-bottom: 10px;
-    display: block;
-} 
-
-    
-    </style>
   </head>
-  <body>
+  <body class="create-page">
     <header>
       <nav>
         <div class="logo-cont">
@@ -227,55 +107,55 @@ function sanitizeInput($data) {
         </div>
       </nav>
     </header>
-    <div class="container">
-        <h1>Create Account</h1>
+    <div class="register-container"">
+        <h1 class="register-title">Create Account</h1>
         <form id="create-account-form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-            <label for="first-name">First Name</label>
-            <input type="text" id="first-name" name="first-name" placeholder="First Name" value="<?php echo $formData['first-name']; ?>">
+            <label for="first-name" class="form-label">First Name</label>
+            <input class="form-input" type="text" id="first-name" name="first-name" placeholder="First Name" value="<?php echo $formData['first-name']; ?>">
             <?php if (isset($errors['first-name'])): ?>
-              <span class="error"><?php echo $errors['first-name']; ?></span>
+              <span class="error-message"><?php echo $errors['first-name']; ?></span>
             <?php endif; ?>
             
     
-            <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" name="last-name" placeholder="Last Name" value="<?php echo $formData['last-name']; ?>">
+            <label for="last-name" class="form-label">Last Name</label>
+            <input type="text" id="last-name" class="form-input" name="last-name" placeholder="Last Name" value="<?php echo $formData['last-name']; ?>">
             <?php if (isset($errors['last-name'])): ?>
-              <span class="error"><?php echo $errors['last-name']; ?></span>
+              <span class="error-message"><?php echo $errors['last-name']; ?></span>
             <?php endif; ?>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="Email" value="<?php echo $formData['email']; ?>">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email" class="form-input" name="email" placeholder="Email" value="<?php echo $formData['email']; ?>">
             <?php if (isset($errors['email'])): ?>
-              <span class="error"><?php echo $errors['email']; ?></span>
+              <span class="error-message"><?php echo $errors['email']; ?></span>
             <?php endif; ?>
             
     
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Password" value="<?php echo $formData['password']; ?>">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" class="form-input" name="password" placeholder="Password" value="<?php echo $formData['password']; ?>">
             <?php if (isset($errors['password'])): ?>
-              <span class="error"><?php echo $errors['password']; ?></span>
+              <span class="error-message"><?php echo $errors['password']; ?></span>
             <?php endif; ?>
 
-            <label for="confirm-password">Confirm Password</label>
-            <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" value="<?php echo $formData['confirm-password']; ?>">
+            <label for="confirm-password" class="form-label">Confirm Password</label>
+            <input type="password" id="confirm-password" class="form-input" name="confirm-password" placeholder="Confirm password" value="<?php echo $formData['confirm-password']; ?>">
             <?php if (isset($errors['confirm-password'])): ?>
-              <span class="error"><?php echo $errors['confirm-password']; ?></span>
+              <span class="error-message"><?php echo $errors['confirm-password']; ?></span>
             <?php endif; ?>
 
-            <label for="data-e-lindjes">Birthdate</label>
-            <input type="text" id="data-e-lindjes" name="data-e-lindjes" placeholder="Birthdate" value="<?php echo $formData['data-e-lindjes']; ?>">
+            <label for="data-e-lindjes" class="form-label">Birthdate</label>
+            <input type="text" id="data-e-lindjes" class="form-input" name="data-e-lindjes" placeholder="Birthdate" value="<?php echo $formData['data-e-lindjes']; ?>">
             <?php if (isset($errors['data-e-lindjes'])): ?>
-              <span class="error"><?php echo $errors['data-e-lindjes']; ?></span>
+              <span class="error-message"><?php echo $errors['data-e-lindjes']; ?></span>
             <?php endif; ?>
 
-            <label for="nr-personal">Numri personal</label>
-            <input type="text" id="nr-personal" name="nr-personal" placeholder="nr-personal" value="<?php echo $formData['nr-personal']; ?>">
+            <label for="nr-personal" class="form-label">Numri personal</label>
+            <input type="text" id="nr-personal" class="form-input" name="nr-personal" placeholder="nr-personal" value="<?php echo $formData['nr-personal']; ?>">
             <?php if (isset($errors['nr-personal'])): ?>
-              <span class="error"><?php echo $errors['nr-personal']; ?></span>
+              <span class="error-message"><?php echo $errors['nr-personal']; ?></span>
             <?php endif; ?>
             
     
-            <button type="submit" name="signupbutton">Create New Account</button>
+            <button type="submit" name="signupbutton" class="submit-button">Create New Account</button>
         </form>
         <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
@@ -292,7 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
     $userRepo = new UserRepository();
     $userRepo->insertUser($user);
 
-    // header("Location: login.php");
+  
     exit();
 }
 
@@ -302,59 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
         </div>
     </div>
 
-    
-   
-    
-    <!-- <script>
-        document.getElementById('create-account-form').addEventListener('submit', function (e) {
-  e.preventDefault(); 
 
-  const firstName = document.getElementById('first-name').value.trim();
-  const lastName = document.getElementById('last-name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value.trim();
-
-  try {
-    validateFields(firstName, lastName, email, password);
-    const account = createAccount(firstName, lastName, email, password);
-    alert(`Llogaria u krijua me sukses më: ${account.creationDate.toLocaleString()}`);
-    window.location.href = "login.php";
-  } catch (error) {
-    alert(`Gabim: ${error.message}`);
-  }
-});
-
-function validateFields(firstName, lastName, email, password) {
-  if (!firstName || !lastName || !email || !password) {
-    throw new Error('Të gjitha fushat janë të detyrueshme.');
-  }
-
-  if (!/^[a-zA-Z\s]+$/.test(firstName) || !/^[a-zA-Z\s]+$/.test(lastName)) {
-    throw new Error('Emri dhe mbiemri duhet të përmbajnë vetëm shkronja.');
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    throw new Error('Ju lutem jepni një adresë email-i të vlefshme.');
-  }
-
-  if (password.length < 6) {
-    throw new Error('Fjalëkalimi duhet të jetë të paktën 6 karaktere.');
-  }
-}
-
-function createAccount(firstName, lastName, email, password) {
-  const creationDate = new Date();
-  return {
-    firstName,
-    lastName,
-    email,
-    password, 
-    creationDate,
-  };
-}
-
-      </script> -->
       
    
     <footer>
@@ -407,32 +235,7 @@ function createAccount(firstName, lastName, email, password) {
               <i class="fas fa-paper-plane"></i>
             </button>
           </div>
-          <!-- <script>
-                  
-            document.querySelector('#abonimform').addEventListener('submit', function(event) {
-                event.preventDefault(); 
-                const email = document.querySelector('#abonimform input[type="email"]').value;
-        
-                if (email) {
-                    alert('Faleminderit për abonimin');
-                } else {
-                    alert('Ju lutem, shkruani një email të vlefshëm.');
-                }
-            });
-        </script>    -->
-
-        <!-- <script>
-document.getElementById('create-account-form').addEventListener('submit', function(e) {
-
-    const password = document.getElementById('password').value;
-    const confirmPassword = document.getElementById('confirm-password').value;
-    
-    if (password !== confirmPassword) {
-        e.preventDefault();
-        alert('Passwords do not match');
-    }
-});
-        </script> -->
+          
           <div class="icons">
             <a href="https://www.facebook.com" class="icon"  aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
             <a href="https://www.instagram.com" class="icon" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>

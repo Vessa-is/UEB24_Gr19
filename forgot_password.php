@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['reset-email'])) {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = 'Please enter a valid email address.';
     } else {
-        // Simulate sending reset link (in a real app, integrate with email service)
+        
         $message = 'A reset link has been sent to your email.';
     }
 }
@@ -33,7 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
     } elseif (!filter_var($newsletter_email, FILTER_VALIDATE_EMAIL)) {
         $newsletter_message = 'Ju lutem, shkruani një email të vlefshëm.';
     } else {
-        // Simulate subscription (in a real app, save to database or email service)
+
         $newsletter_message = 'Faleminderit për abonimin!';
     }
 }
