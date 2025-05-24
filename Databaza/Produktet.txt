@@ -1,0 +1,41 @@
+CREATE TABLE products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price DECIMAL(10, 2) NOT NULL,
+    stock INT NOT NULL,
+    image_url VARCHAR(255) NOT NULL
+);
+
+INSERT INTO products (name, price, stock, image_url) VALUES
+('BLOND ABSOLU. CONDITIONER FOR BLONDE HAIR', 20.00, 15, 'images/produkt3.webp'),
+('DENSIFIQUE. THICKENING SHAMPOO FOR THINNING HAIR', 35.00, 8, 'images/produkt2.webp'),
+('ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES', 15.00, 25, 'images/produkt1.webp'),
+('CHRONOLOGISTE. ESSENTIAL REVITALIZING HAIR MASK', 15.00, 25, 'images/produkt4.webp'),
+('GENESIS. FORTIFYING SERUM FOR WEAKENED HAIR', 15.00, 25, 'images/produkt5.webp'),
+('ELIXIR ULTIME. NOURISHING HAIR OIL FOR ALL HAIR TYPES', 15.00, 25, 'images/produkt6.webp');
+
+ALTER TABLE products ADD description TEXT NOT NULL;
+ALTER TABLE products ADD ingredients TEXT NOT NULL;
+
+
+
+UPDATE products
+SET 
+    description = CASE id
+        WHEN 1 THEN 'Një kondicioner ushqyes i krijuar për flokë bionde, që ndihmon në ruajtjen e shkëlqimit dhe butësisë. Forcon fijet e flokëve dhe parandalon dëmtimet nga ngjyrosja.'
+        WHEN 2 THEN 'Shampo që rrit volumin dhe trashësinë e flokëve të hollë, duke i dhënë një pamje më të plotë dhe të shëndetshme. Pastron butësisht dhe ushqen skalpin.'
+        WHEN 3 THEN 'Vaj luksoz për flokë që ofron ushqyerje të thellë dhe shkëlqim të jashtëzakonshëm. Ideal për të gjitha llojet e flokëve, duke i lënë ato të buta dhe të menaxhueshme.'
+        WHEN 4 THEN 'Maskë premium që rigjeneron dhe rinovon flokët e dëmtuar. Ofron hidratim intensiv dhe mbron nga faktorët e jashtëm.'
+        WHEN 5 THEN 'Serum i fuqishëm që forcon flokët e dobët dhe parandalon rënien e tyre. Stimulon skalpin për rritje të shëndetshme të flokëve.'
+        WHEN 6 THEN 'Vaj i gjithanshëm për flokë që ushqen dhe mbron, duke dhënë një prekje të butë dhe shkëlqim natyral. Perfect për përdorim të përditshëm.'
+    END,
+    ingredients = CASE id
+        WHEN 1 THEN 'Ujë, Alkool Cetearyl, Klorur Behentrimonium, Ester Cetyl, Fosfat Hidroksipropil i Amidonit, Izopropanolaminë, Metilparaben, Diglukonat Klorheksidine, Guar Hidroksipropil, Linalool, Cinnamal Heksil, Kumarinë, Parfum.'
+        WHEN 2 THEN 'Ujë, Sullfat Laureth Natriumi, Kokamidopropil Betainë, Klorur Natriumi, Polikuaternium-10, Acid Citrik, Hidroksid Natriumi, Hialuronat Natriumi, Linalool, Limonen, Parfum.'
+        WHEN 3 THEN 'Vaj Farash Rrushi, Vaj Argan, Vaj Kokosi, Tocoferol, Ekstrakt Lule Dielli, Linalool, Kumarinë, Parfum.'
+        WHEN 4 THEN 'Ujë, Alkool Cetearyl, Klorur Behentrimonium, Glicerinë, Keratinë e Hidrolizuar, Pantenol, Acid Hialuronik, Metilparaben, Propilparaben, Linalool, Parfum.'
+        WHEN 5 THEN 'Ujë, Alkool Denat, Ekstrakt Xhensen, Biotinë, Kofeinë, Niacinamid, Polikuaternium-11, Acid Citrik, Linalool, Kumarinë, Parfum.'
+        WHEN 6 THEN 'Vaj Farash Rrushi, Vaj Argan, Vaj Jojoba, Tocoferol, Ekstrakt Kamomili, Limonen, Linalool, Parfum.'
+    END
+WHERE id IN (1, 2, 3, 4, 5, 6);
+

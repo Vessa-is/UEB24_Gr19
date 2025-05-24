@@ -1,15 +1,5 @@
 <?php
 
-if (!isset($_SESSION)) {
-    session_start();
-}
-
-if (!isset($_SESSION['user']) && isset($_COOKIE['user_email'])) {
-    echo "Mirë se u ktheve, " . htmlspecialchars($_COOKIE['user_email']);
-}
-
-include 'greeting.php';
-
 $nav_links = [
     'Ballina' => 'index.php',
     'Shërbimet' => 'sherbimet.php',
@@ -19,66 +9,8 @@ $nav_links = [
     'Kontakti' => 'kontakti.php'
 ];
 
-$newsletter_message = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) {
-    $newsletter_email = trim($_POST['newsletter-email']);
 
-    if (empty($newsletter_email)) {
-        $newsletter_message = 'Ju lutem, shkruani një email të vlefshëm.';
-    } elseif (!filter_var($newsletter_email, FILTER_VALIDATE_EMAIL)) {
-        $newsletter_message = 'Ju lutem, shkruani një email të vlefshëm.';
-    } else {
-        $newsletter_message = 'Faleminderit për abonimin!';
-    }
-}
 ?>
-<!DOCTYPE html>
-<html lang="sq">
-<head>
-    <meta charset="UTF-8">
-    <title>Ballina - Radiant Touch</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">
-                <a href="index.php"><img src="images/logoo2.png" alt="Radiant Touch" /></a>
-            </div>
-            <ul>
-                <?php foreach ($nav_links as $name => $url): ?>
-                    <li><a href="<?= htmlspecialchars($url) ?>"><?= htmlspecialchars($name) ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-            <div class="login">
-                <?php if (isset($_SESSION['user'])): ?>
-                    <span><?= htmlspecialchars($_SESSION['user']['email']) ?></span>
-                    <a href="logout.php"><button>Çkyçu</button></a>
-                <?php else: ?>
-                    <a href="login.php"><button>Hyr</button></a>
-                <?php endif; ?>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <h1>Mirë se vini në Radiant Touch!</h1>
-        <p>Shërbimet më profesionale për bukurinë tuaj.</p>
-    </main>
-
-    <footer>
-        <h3>Abonohu në Newsletter</h3>
-        <form method="POST" action="">
-            <input type="email" name="newsletter-email" placeholder="Shkruani email-in tuaj" required>
-            <button type="submit">Abonohu</button>
-        </form>
-        <?php if (!empty($newsletter_message)): ?>
-            <p><?= htmlspecialchars($newsletter_message) ?></p>
-        <?php endif; ?>
-    </footer>
-</body>
-</html>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -318,37 +250,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
     </style>
 </head>
 <body>
-    <!-- <?php include 'header.php'; ?> -->
+    
+   <?php include 'header.php'; ?> 
 
-    <header>
-    <nav>
-        <div class="logo-cont">
-            <div class="logo">
-                <a href="index.php">
-                    <img src="images/logoo2.png" alt="Radiant Touch Logo" title="Radiant Touch">
-                </a>
-            </div>
-            <div class="login">
-                <?php if (isset($_SESSION['user'])): ?>
-                    <a href="logout.php"><button id="logoutBtn" title="Dil">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button></a>
-                <?php else: ?>
-                    <a href="login.php"><button id="loginBtn" title="Kyçu">
-                        <i class="fa fa-user"></i>
-                    </button></a>
-                <?php endif; ?>
-            </div>
-        </div>
-        <div id="navi">
-            <ul>
-                <?php foreach ($nav_links as $name => $url): ?>
-                    <li><a href="<?php echo htmlspecialchars($url); ?>"><?php echo htmlspecialchars($name); ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </nav>
-</header>
 
     <section>
         <div class="section">
@@ -361,7 +265,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
                     <p>
                         Përjetoni kujdes profesional dhe trajtime që theksojnë shkëlqimin tuaj natyral.
                     </p>
-                    <button onclick="location.href='sherbimet.php';">Rezervo Online</button>
+                    <button onclick="location.href ='sherbimet.php';">Rezervo Online</button>
                 </div>
             </div>
         </div>
@@ -484,72 +388,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
         });
     </script>
 
-    <footer>
-    <div class="footer-container">
-        <div class="footer-section">
-            <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo">
-            <p>
-                Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur çdo ditë.
-            </p>
-        </div>
-        <div class="footer-section">
-            <h3>Kategoritë</h3>
-            <ul class="footer-list hidden">
-                <?php foreach ($nav_links as $name => $url): ?>
-                    <li><a href="<?php echo htmlspecialchars($url); ?>"><?php echo htmlspecialchars($name); ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Kontakti</h3>
-            <p>
-                <i class="fas fa-map-marker-alt"></i>
-                <a href="https://www.google.com/maps?q=Prishtine+Kosove" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;">
-                    <abbr style="text-decoration: none;" title="Republic of Kosovo">Prishtine, Kosovë</abbr>
-                </a>
-            </p>
-            <p>
-                <i class="fas fa-phone"></i>
-                <a href="tel:+38344222222" style="color: #fff; text-decoration: none;">+383 44 222 222</a>
-            </p>
-            <p>
-                <i class="fas fa-envelope"></i>
-                <a href="mailto:info@radianttouch.com" style="color: #fff; text-decoration: none;">info@radianttouch.com</a>
-            </p>
-        </div>
-    </div>
-    <hr style="width: 90%; margin: 10px auto;">
-    <div class="footer-section newsletter">
-        <h3>Abonohuni</h3>
-        <form method="POST" action="">
-            <div class="newsletter-input">
-                <i class="fas fa-envelope"></i>
-                <input type="email" name="newsletter-email" placeholder="Shkruani email-in tuaj" required>
-                <button type="submit" aria-label="Dërgo email">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
-        </form>
-        <?php if ($newsletter_message): ?>
-            <p class="message"><?php echo htmlspecialchars($newsletter_message); ?></p>
-        <?php endif; ?>
-        <div class="icons">
-            <a href="https://www.facebook.com" class="icon" aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com" class="icon" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.twitter.com" class="icon" aria-label="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        © <?php echo date('Y'); ?> <a href="index.php" style="text-decoration: none;"><span>Radiant Touch</span></a>. Të gjitha të drejtat janë të rezervuara.
-    </div>
-</footer>
+          <script>
+
+function validateLoginFields(email, password) {
+  if (!email || !password) {
+    throw new Error('Të gjitha fushat janë të detyrueshme.');
+  }
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    throw new Error('Ju lutem jepni një adresë email-i të vlefshme.');
+  }
+
+  if (password.length < 6) {
+    throw new Error('Fjalëkalimi duhet të jetë të paktën 6 karaktere.');
+  }
+}
+
+    
+
+      </script>
+    
+          <script>
+                  
+            document.querySelector('#abonimform').addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                const email = document.querySelector('#abonimform input[type="email"]').value;
+        
+                if (email) {
+                    alert('Faleminderit për abonimin');
+                } else {
+                    alert('Ju lutem, shkruani një email të vlefshëm.');
+                }
+            });
+        </script>   
+
+    <?php include 'footer.php'; ?>
 </body>
 </html>
-<?php
-global $nav_links;
-?>
-
-<?php
-global $nav_links;
-global $newsletter_message;
-?>
