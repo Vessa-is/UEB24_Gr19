@@ -1,6 +1,8 @@
 <?php
-session_start();
 
+if (!isset($_SESSION)) {
+    session_start();
+}
 $nav_links = [
     'Ballina' => 'index.php',
     'Shërbimet' => 'sherbimet.php',

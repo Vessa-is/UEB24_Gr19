@@ -1,5 +1,8 @@
 <?php
-session_start();
+
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 if (!isset($_SESSION['user']) && isset($_COOKIE['user_email'])) {
     echo "Mirë se u ktheve, " . htmlspecialchars($_COOKIE['user_email']);

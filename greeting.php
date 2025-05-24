@@ -3,7 +3,9 @@
 $currentHour = date("G"); // kushtezimeettt, operatoret 
 $greeting = "";
 
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 if (!isset($_SESSION['vizita'])) {
     $_SESSION['vizita'] = 1;
