@@ -1,27 +1,43 @@
 <?php
-session_start();
+if (!isset($_SESSION)) {
+    session_start();
+}
+require_once 'DatabaseConnection.php';
+$db = new DatabaseConnection();
+$conn = $db->startConnection();
+
+$error = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'] ?? '';
-    $password = $_POST['password'] ?? '';
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
 
-    $valid_email = "admin@gmail.com";
-    $valid_password = "sekret123";
-
-    if ($email === $valid_email && $password === $valid_password) {
-        $_SESSION['user'] = [
-            'email' => $email,
-            'role' => 'admin'
-        ];
-
-        setcookie("user_email", $email, time() + (7 * 24 * 60 * 60), "/");
-
-        header("Location: index.php");
-        exit();
+    if (!$email || !$password) {
+        $error = "Ju lutem plotësoni të gjitha fushat.";
     } else {
-        $error = "Email ose fjalëkalim i pasaktë!";
+        $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && $password == $user['password']) { 
+            $_SESSION['user'] = [
+                'id' => $user['id'],
+                'email' => $user['email'],
+                'name' => $user['name']
+            ];
+            $_SESSION['user_id'] = $user['id'];
+
+            setcookie('user_email', $user['email'], time() + (86400 * 30), "/");
+
+            header("Location: index.php"); 
+            exit();
+        } else {
+            $error = "Email ose fjalëkalim i pasaktë.";
+        }
     }
 }
+
 ?>
 
 <!DOCTYPE html>

@@ -9,7 +9,16 @@ $formData = [
     'nr-personal' => ''
 ];
 
+
+include 'script/classes/UserRepository.php';
+require_once 'script/classes/User.php';
+
+
 $errors = [];
+
+function sanitizeInput($data) {
+    return htmlspecialchars(stripslashes(trim($data)));
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $formData['first-name'] = sanitizeInput($_POST['first-name'] ?? '');
@@ -61,10 +70,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (!preg_match('/^\d{10}$/', $formData['nr-personal'])) {
         $errors['nr-personal'] = 'Personal number should be 10 digits';
     }
+
+         // Nese nuk ka errora
+  if (empty($errors)) {
+        $userRepository = new UserRepository();$personalnr = $formData['nr-personal'];
+$email = $formData['email'];
+$name = $formData['first-name'];
+$lastname = $formData['last-name'];
+$hashedPassword = password_hash($formData['password'], PASSWORD_DEFAULT); // gjithmonë hash password!
+
+if ($userRepository->personalNrExists($personalnr)) {
+    echo "<script>alert('Ky numër personal ekziston tashmë!');</script>";
+} elseif ($userRepository->userExistsByEmail($email)) {
+    echo "<script>alert('Ky email është përdorur tashmë!');</script>";
+} else {
+    $user = new User($name, $lastname, $email, $hashedPassword, $personalnr);
+    $userRepository->insertUser($user);
+    header("Location: login.php");
+    exit();
 }
 
-function sanitizeInput($data) {
-    return htmlspecialchars(stripslashes(trim($data)));
+}
 }
 ?>
 

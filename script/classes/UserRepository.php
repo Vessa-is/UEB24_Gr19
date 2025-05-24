@@ -81,5 +81,14 @@ class UserRepository{
         return $statement->fetch() !== false;
     }
 
+        function personalNrExists($personalNr) {
+    $conn = $this->conn;
+    $sql = "SELECT * FROM users WHERE personal_nr = ?";
+    $statement = $conn->prepare($sql);
+    $statement->execute([$personalNr]);
+    return $statement->fetch() !== false;
+    }
+
+    
 }
 ?>
