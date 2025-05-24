@@ -635,24 +635,8 @@ table {
 
 
     </style>
-  </head>
+ </head>
   <body id="sherbimet-page">
-
-
-  <body>
-  <?php if (isset($_POST['book_service'])): ?>
-    <div class="modal-content">
-      <div class="modal-header">Konfirmim</div>
-      <div class="modal-body">Shërbimi u rezervua me sukses!</div>
-      <div class="modal-footer">
-        <a href="sherbimet.php"><button>OK</button></a>
-      </div>
-    </div>
-  <?php endif; ?>
-  </body>
-  <!-- <h1>Lista e Shërbimeve</h1>
-  rest of your service list here -->
-
 
  <!-- <?php include 'header.php'; ?> -->
 
@@ -681,32 +665,21 @@ table {
         </div>
     </nav>
 </header>
+<?php if ($reservation_success): ?>
+  <div class="modal">
+    <div class="modal-content">
+      <div class="modal-header">Konfirmim</div>
+      <div class="modal-body">Shërbimi u rezervua me sukses!</div>
+      <div class="modal-footer">
+        <a href="sherbimet.php"><button>OK</button></a>
+      </div>
+    </div>
+  </div>
+<?php elseif ($reservation_error && !$show_booking_form): ?>
+  <p style="color:red;"><?= htmlspecialchars($reservation_error) ?></p>
+<?php endif; ?>
 
-     <?php
-
-$services = [
-    ["name" => "Prerje e flokëve", "time" => "30 min.", "price" => 10],
-    ["name" => "Fenirim i flokëve", "time" => "15 min.", "price" => 5],
-    ["name" => "Shatir i flokëve", "time" => "180 min.", "price" => 50],
-    ["name" => "Larje e flokëve", "time" => "10 min.", "price" => 2],
-    ["name" => "Rregullimi i vetullave", "time" => "15 min.", "price" => 3],
-    ["name" => "Qerpikë Volume", "time" => "90 min.", "price" => 35],
-    ["name" => "Tattoo me fije japoneze", "time" => "120 min.", "price" => 99],
-    ["name" => "Depilim të fytyrës", "time" => "15 min.", "price" => 4],
-    ["name" => "Frizura për femra", "time" => "30 min.", "price" => 30],
-    ["name" => "Rregullim për nuse", "time" => "120 min.", "price" => 75],
-    ["name" => "Trajtim me argjilë për fytyrë", "time" => "30 min.", "price" => 20],
-    ["name" => "Ekstension flokësh", "time" => "120 min.", "price" => 100],
-    ["name" => "Trajtim SPA për duar", "time" => "40 min.", "price" => 15],
-    ["name" => "Peeling trupor", "time" => "60 min.", "price" => 30],
-    ["name" => "Hidratim intensiv për flokë", "time" => "45 min.", "price" => 25],
-    ["name" => "Trajtim anti-akne për fytyrë", "time" => "80 min.", "price" => 40],
-    ["name" => "Laminim i vetullave", "time" => "30 min.", "price" => 10],
-    ["name" => "Balayage për flokë", "time" => "150 min.", "price" => 120],
-    ["name" => "Masazh për kokën", "time" => "150 min.", "price" => 50],
-    ["name" => "Përkujdesje për flokët e thatë dhe të dëmtuar", "time" => "120 min.", "price" => 80]
-];
-
+    <?php
 
 if (isset($_GET['sort_by'])) {
     $sort_by = $_GET['sort_by'];
@@ -765,6 +738,7 @@ if (isset($_GET['sort_by'])) {
 }
 
 ?>
+
 <section class="sherbimet">
     <h1>Shërbimet tona</h1>
 
@@ -781,36 +755,100 @@ if (isset($_GET['sort_by'])) {
       <button type="submit" class="sorting-button">Rendit</button>
     </form>
 
-    <table class="services-table">
-        <thead>
-            <tr>
-                <th>Emri</th>
-                <th>Koha</th>
-                <th>Çmimi (€)</th>
-                <th>Rezervo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($services as $service): ?>
-            <tr>
-                <td><?= htmlspecialchars($service['name']) ?></td>
-                <td><?= htmlspecialchars($service['time']) ?> min.</td>
-                <td><?= htmlspecialchars($service['price']) ?> €</td>
-                <td>
-                    <form method="POST">
-                        <!-- Remove service_id if you don’t have IDs -->
-                        <button type="submit" name="book_service" class="book-btn">Rezervo</button>
-                    </form>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
 
     
+<table class="services-table">
+    <thead>
+        <tr>
+            <th>Emri</th>
+            <th>Koha</th>
+            <th>Çmimi (€)</th>
+            <th>Rezervo</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($services as $service): ?>
+        <tr>
+            <td><?= htmlspecialchars($service['name'] ?? '') ?></td>
+            <td><?= htmlspecialchars($service['time'] ?? '') ?></td>
+            <td><?= htmlspecialchars($service['price'] ?? '') ?> €</td>
+            <td>
+                <form method="POST">
+                    <input type="hidden" name="book_service" value="1">
+                    <input type="hidden" name="sherbim_id" value="<?= htmlspecialchars($service['id'] ?? '') ?>">
+                    <button type="submit" class="book-btn">Rezervo</button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>
+
+<!-- Modalet -->
+<?php if ($show_booking_form && $selected_service !== null): ?>
+    <!-- Overlay për klikime jashtë -->
+    <form method="POST" action="sherbimet.php" class="modal-overlay">
+        <input type="hidden" name="click_outside" value="1">
+    </form>
+
+    <!-- Modali i rezervimit -->
+    <div class="modal">
+        <div class="modal-content">
+            <!-- Butoni X -->
+            <form method="POST" class="close-modal-form">
+                <input type="hidden" name="close_modal" value="1">
+                <button type="submit" class="close-modal-btn">&times;</button>
+            </form>
+            
+            <div class="modal-header">Rezervoni <?= htmlspecialchars($selected_service['name'] ?? 'N/A') ?></div>
+            <div class="modal-body">
+                <form class="booking-form" method="POST">
+                    <input type="hidden" name="confirm_booking" value="1">
+                    <input type="hidden" name="sherbim_id" value="<?= htmlspecialchars($selected_service['id'] ?? '') ?>">
+                    
+                    <div class="form-group">
+                        <label for="booking-date">Data e Rezervimit</label>
+                        <input type="date" id="booking-date" name="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="booking-time">Orari</label>
+                        <input type="time" id="booking-time" name="time" required>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Konfirmo Rezervimin</button>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php elseif ($reservation_success): ?>
+    <!-- Overlay për klikime jashtë -->
+    <form method="POST" action="sherbimet.php" class="modal-overlay">
+        <input type="hidden" name="click_outside" value="1">
+    </form>
+
+    <!-- Modali i konfirmimit -->
+    <div class="modal">
+        <div class="modal-content">
+            <!-- Butoni X -->
+            <a href="sherbimet.php" class="close-modal-btn">&times;</a>
+            
+            <div class="modal-header">Rezervimi u Konfirmua</div>
+            <div class="modal-body">
+                <p class="success-message">Rezervimi juaj u pranua me sukses!</p>
+                <p><strong>Shërbimi:</strong> <?= htmlspecialchars($selected_service['name'] ?? '') ?></p>
+            </div>
+            <div class="modal-footer">
+                <a href="sherbimet.php" class="ok-btn">OK</a>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>
+
 </section>
-  </body>
-  
+</body>
+</html>
+
 
     <footer>
       <div class="footer-container">
