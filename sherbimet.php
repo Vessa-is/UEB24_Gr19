@@ -1,4 +1,9 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 
 if (!isset($_SESSION)) {
     session_start();
@@ -8,9 +13,17 @@ include 'greeting.php';
 
 include 'DatabaseConnection.php';
 
-if (!isset($_SESSION['user']) && isset($_COOKIE['user_email'])) {
-    echo "Mirë se u ktheve, " . htmlspecialchars($_COOKIE['user_email']);
+$db = new DatabaseConnection();
+$conn = $db->startConnection();
+
+require_once 'ServiceRepository.php';
+$serviceRepo = new ServiceRepository($conn);
+
+
+if (!$conn) {
+    die("Failed to connect to the database");
 }
+
 
 $nav_links = [
   'BALLINA' => 'index.php',
@@ -20,52 +33,14 @@ $nav_links = [
   'RRETH NESH' => 'per_ne.php',
   'KONTAKTI' => 'kontakti.php'
 ];
+$reservation_success = false;
+$reservation_error = '';
+$show_booking_form = false;
+$selected_service = null;
 
-
-$newsletter_message = '';
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) {
-    $newsletter_email = trim($_POST['newsletter-email']);
-    if (empty($newsletter_email)) {
-        $newsletter_message = 'Ju lutem, shkruani një email të vlefshëm.';
-    } elseif (!filter_var($newsletter_email, FILTER_VALIDATE_EMAIL)) {
-        $newsletter_message = 'Ju lutem, shkruani një email të vlefshëm.';
-    } else {
-        $newsletter_message = 'Faleminderit për abonimin!';
-    }
-}
-
-$db = new DatabaseConnection();
-$conn = $db->startConnection();
-
-if (!$conn) {
-    die("Failed to connect to the database");
-}
 
 $sort_by = $_GET['sort_by'] ?? 'name_asc'; 
 $order_query = "";
-
-switch ($sort_by) {
-    case 'price_asc':
-        $order_query = "ORDER BY price ASC";
-        break;
-    case 'price_desc':
-        $order_query = "ORDER BY price DESC";
-        break;
-    case 'name_asc':
-        $order_query = "ORDER BY name ASC";
-        break;
-    case 'name_desc':
-        $order_query = "ORDER BY name DESC";
-        break;
-    case 'time_asc':
-        $order_query = "ORDER BY time ASC";
-        break;
-    case 'time_desc':
-        $order_query = "ORDER BY time DESC";
-        break;
-    default:
-        $order_query = "ORDER BY name ASC";
-}
 
 $sort_options = [
     'name_asc' => 'name ASC',
@@ -76,21 +51,72 @@ $sort_options = [
     'time_desc' => 'time DESC',
 ];
 
+// If the received sort_by is valid, use it; otherwise default.  Set ORDER BY clause safely
 $order_by = $sort_options[$sort_by] ?? $sort_options['name_asc'];
 
-$sql = "SELECT * FROM sherbimet $order_query";
+$order_query = "ORDER BY " . $order_by;
 
-$stmt = $conn->prepare($sql);
-$stmt->execute();
 
-$services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$services = $serviceRepo->getAll($order_by);
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
 
+
+// Procesimi i POST kërkesave (një bllok i vetëm)
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['close_modal']) || isset($_POST['click_outside'])) {
+        $show_booking_form = false;
+        $reservation_success = false;
+        header("Location: sherbimet.php");
+        exit();
+    }
+    
+    if (isset($_POST['book_service'])) {
+        $sherbim_id = filter_var($_POST['sherbim_id'], FILTER_VALIDATE_INT);
+        if ($sherbim_id) {
+            foreach ($services as $srv) {
+                if ($srv['id'] == $sherbim_id) {
+                    $selected_service = $srv;
+                    $show_booking_form = true;
+                    break;
+                }
+            }
+            if (!$selected_service) {
+                $reservation_error = "Shërbimi nuk u gjet.";
+            }
+        } else {
+            $reservation_error = "ID e shërbimit nuk është valide.";
+        }
+    } elseif (isset($_POST['confirm_booking'])) {
+        if (!isset($_SESSION['user_id'])) {
+            $reservation_error = "Ju lutem kyçuni për të bërë rezervimin.";
+        } else {
+            $user_id = $_SESSION['user_id'];
+            $sherbim_id = filter_var($_POST['sherbim_id'], FILTER_VALIDATE_INT);
+            $date = $_POST['date'] ?? null;
+            $time = $_POST['time'] ?? null;
+
+            if (!$sherbim_id || !$date || !$time) {
+                $reservation_error = "Ju lutem plotësoni datën dhe orën.";
+            } else {
+                $data_rezervimit = $date . ' ' . $time . ':00';
+                if (strtotime($data_rezervimit) < time()) {
+                    $reservation_error = "Nuk mund të rezervoni për një kohë të kaluar.";
+                } else {
+                    $stmt = $conn->prepare("INSERT INTO rezervimet (user_id, sherbim_id, data_rezervimit) VALUES (?, ?, ?)");
+                    if ($stmt->execute([$user_id, $sherbim_id, $data_rezervimit])) {
+                        $reservation_success = true;
+                        $show_booking_form = false;
+                    } else {
+                        $reservation_error = "Dështoi rezervimi. Ju lutem provoni përsëri.";
+                    }
+                }
+            }
+        }
+    }
+}
 
 ?>
+
 
 
 
@@ -201,115 +227,256 @@ error_reporting(E_ALL);
         background-color: #f4e4d4;
       }
 
-      .modal {
-        display: none;
-        position: fixed;
-        z-index: 1000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-      }
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+  animation: fadeIn 0.3s ease-out;
+    pointer-events: none;
 
-      .modal-content {
-        background-color: #fff;
-        margin: 15% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 50%;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 10px;
-      }
-
-      .modal-header,
-      .modal-footer {
-        padding: 10px;
-        color: white;
-        background-color: #6d4c3d;
-        text-align: center;
-        border-radius: 10px 10px 0 0;
-      }
-
-      .modal-body {
-        margin: 20px 0;
-        text-align: center;
-      }
-
-      .modal-footer {
-        border-radius: 0 0 10px 10px;
-      }
-
-      .modal-footer button {
-        padding: 10px 15px;
-        margin: 5px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        background-color: #6d4c3d;
-        color: #fff;
-        font-size: 14px;
-        font-weight: bold;
-      }
-
-      .modal-footer button:hover {
-        background-color: #8b5e4c;
-      }
-
-      button.book-btn {
-        background-color: #6d4c3d;
-        color: white;
-        padding: 5px 10px;
-        border: none;
-        cursor: pointer;
-      }
-
-      button.book-btn:hover {
-        background-color: #9e765d;
-      }
-      .content {
-      background: url('content-background.jpg') center center / cover no-repeat;
-      padding: 50px;
-      text-align: center;
-      background-attachment: scroll;
-    }
-    .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
-    animation: fadeIn 0.4s ease;
 }
-
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
 
 .modal-content {
-    background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    animation: slideIn 0.5s ease;
+  position: relative; /* Shtoni këtë */
+  background-color: #fff;
+  width: 90%;
+  max-width: 450px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  animation: scaleIn 0.35s ease-out;
+  z-index: 1001; /* Shtoni këtë */
+    pointer-events: auto;
+
+}
+
+/* Header i stilizuar mirë */
+.modal-header {
+  background: linear-gradient(135deg, #6d4c3d 0%, #5a3921 100%);
+  color: #fff;
+  padding: 20px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+/* Trupi i modalit - rregullime profesionale */
+.modal-body {
+  padding: 25px 30px;
+  color: #444;
+}
+/* Overlay për klikime jashtë */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+/* Stilizimi i formës */
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 500;
+  color: #333;
+  font-size: 0.95rem;
+  margin-left: 2px;
+}
+
+.form-group input {
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: #f9f9f9;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #6d4c3d;
+  box-shadow: 0 0 0 2px rgba(109, 76, 61, 0.2);
+  background-color: #fff;
+}
+
+/* Butoni i konfirmimit - më modern */
+.submit-btn {
+  background: linear-gradient(135deg, #6d4c3d 0%, #5a3921 100%);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(109, 76, 61, 0.3);
+}
+
+/* Footer për mesazhin e suksesit */
+.modal-footer {
+  background-color: #f8f8f8;
+  padding: 18px 20px;
+  text-align: center;
+  border-top: 1px solid #eee;
+}
+
+.success-message {
+  color: #2e7d32;
+  font-weight: 500;
+  margin-bottom: 12px;
+  font-size: 1.1rem;
+}
+
+.ok-btn {
+  background: linear-gradient(135deg, #6d4c3d 0%, #5a3921 100%);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.ok-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(109, 76, 61, 0.2);
+}
+
+/* Animacionet e reja */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { 
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to { 
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Butoni i rezervimit në tabelë - versioni origjinal */
+button.book-btn {
+  background-color: #6d4c3d;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /* Hiq të gjitha vetitë e reja që shtuam më parë */
+  box-shadow: none;
+  transform: none;
+  font-weight: normal;
+  letter-spacing: normal;
+}
+
+button.book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(109, 76, 61, 0.3);
+}
+
+/* Butoni i mbylljes (X) */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.close-btn:hover {
+  color: #f1f1f1;
 }
 
 
-@keyframes slideIn {
-    from { transform: translateY(-50%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+/* Butoni X */
+.close-modal-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+  padding: 0 12px;
+  line-height: 1;
+  transition: all 0.3s ease;
+  display: block;
+}
+/* Forma për butonin e mbylljes */
+.close-modal-form {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 1002;
+  margin: 0;
 }
 
+.close-modal-btn:hover {
+  color: #f1f1f1;
+  transform: scale(1.1);
+}
+
+/* Responsive design */
+@media (max-width: 576px) {
+  .modal-content {
+    width: 95%;
+    max-width: none;
+  }
+  
+  .modal-body {
+    padding: 20px 15px;
+  }
+  
+  .form-group input {
+    padding: 10px 12px;
+  }
+  
+  .submit-btn {
+    padding: 12px;
+  }
+}
 .video-ad {
         position: relative;
         height: 400px;
@@ -465,6 +632,7 @@ table {
    margin-top: 10px;
    font-weight: bold;
 }
+
 
     </style>
   </head>
