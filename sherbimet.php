@@ -34,7 +34,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
     }
 }
 
-// Create an instance and get the PDO connection
 $db = new DatabaseConnection();
 $conn = $db->startConnection();
 
@@ -67,6 +66,29 @@ switch ($sort_by) {
     default:
         $order_query = "ORDER BY name ASC";
 }
+
+$sort_options = [
+    'name_asc' => 'name ASC',
+    'name_desc' => 'name DESC',
+    'price_asc' => 'price ASC',
+    'price_desc' => 'price DESC',
+    'time_asc' => 'time ASC',
+    'time_desc' => 'time DESC',
+];
+
+$order_by = $sort_options[$sort_by] ?? $sort_options['name_asc'];
+
+$sql = "SELECT * FROM sherbimet $order_query";
+
+$stmt = $conn->prepare($sql);
+$stmt->execute();
+
+$services = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 ?>
 
