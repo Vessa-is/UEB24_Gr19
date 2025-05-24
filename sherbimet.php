@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -10,7 +13,6 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
       body,
@@ -188,8 +190,8 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0,0,0); /* 0.4 për errësim */
-    background-color: rgba(0,0,0,0.4); /* Fusha me errësirë */
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
     animation: fadeIn 0.4s ease;
 }
 
@@ -365,38 +367,61 @@ table {
     overflow: hidden; 
 }
 
+.message {
+   color: #4caf50;  
+   margin-top: 10px;
+   font-weight: bold;
+}
+
     </style>
   </head>
   <body id="sherbimet-page">
-    <header>
-      <nav>
+
+
+  <body>
+  <?php if (isset($_POST['book_service'])): ?>
+    <div class="modal-content">
+      <div class="modal-header">Konfirmim</div>
+      <div class="modal-body">Shërbimi u rezervua me sukses!</div>
+      <div class="modal-footer">
+        <a href="sherbimet.php"><button>OK</button></a>
+      </div>
+    </div>
+  <?php endif; ?>
+  </body>
+  <!-- <h1>Lista e Shërbimeve</h1>
+  rest of your service list here -->
+
+
+ <!-- <?php include 'header.php'; ?> -->
+
+        <header>
+    <nav>
         <div class="logo-cont">
-          <div class="logo">
-            <a href="index.php">
-              <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
-            </a>
-          </div>
-          <div class="login">
-            <a href="login.php"><button id="loginBtn" >
-              <i class="fa fa-user"></i>
-            </button></a>
-          </div>
+            <div class="logo">
+                <a href="index.php">
+                    <img src="images/logoo2.png" alt="Radiant Touch Logo" title="Radiant Touch">
+                </a>
+            </div>
+            <div class="login">
+                <a href="login.php">
+                    <button id="loginBtn">
+                        <i class="fa fa-user"></i>
+                    </button>
+                </a>
+            </div>
         </div>
         <div id="navi">
-          <ul>
-            <li><a href="index.php">Ballina</a></li>
-            <li><a href="sherbimet.php">Shërbimet</a></li>
-            <li><a href="galeria.php">Galeria</a></li>
-            <li><a href="Produktet.php">Produktet</a></li>
-            <li><a href="per_ne.php">Rreth nesh</a></li>
-            <li><a href="kontakti.php">Kontakti</a></li>
-          </ul>
+            <ul>
+                <?php foreach ($nav_links as $name => $url): ?>
+                    <li><a href="<?php echo htmlspecialchars($url); ?>"><?php echo htmlspecialchars($name); ?></a></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
-      </nav>
-    </header>
+    </nav>
+</header>
 
     <?php
-
 $services = [
     ["name" => "Prerje e flokëve", "time" => "30 min.", "price" => 10],
     ["name" => "Fenirim i flokëve", "time" => "15 min.", "price" => 5],
