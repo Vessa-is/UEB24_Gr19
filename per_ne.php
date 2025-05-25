@@ -1,3 +1,13 @@
+<?php
+
+if (!isset($_SESSION)) {
+    session_start();
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -283,7 +293,8 @@
 </head>
 <body id="aboutuspagebody">
 
-    <?php include 'header.php'; ?>
+       <?php include 'header.php'; ?>
+
 
       <div class="rotating-logo">
         <img src="images/rotatinglogo.png" alt="Rotating Logo" />
