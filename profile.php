@@ -7,6 +7,18 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cookie_consent'])) {
+    $consent = $_POST['cookie_consent'] === 'accept' ? 'accepted' : 'declined';
+    setcookie('cookie_consent', $consent, time() + (365 * 24 * 60 * 60), '/', '', true, true); // Secure, HttpOnly
+    if ($consent === 'accepted') {
+        setcookie('user_preference', 'default_theme', time() + (365 * 24 * 60 * 60), '/', '', true, true);
+    }
+    header("Location: profile.php");
+    exit;
+}
+
+$show_cookie_popup = !isset($_COOKIE['cookie_consent']);
+
 $db = new DatabaseConnection();
 $conn = $db->startConnection();
 
@@ -25,7 +37,6 @@ try {
     if (!$user) {
         $_SESSION['error'] = "Përdoruesi nuk u gjet.";
     } else {
-        // Fetch reservation history
         $stmt = $conn->prepare("
             SELECT r.id, s.name AS sherbimi, s.description, s.price, s.time, r.data_rezervimit
             FROM rezervimet r
@@ -46,6 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['anulo_rezervimin'])) 
     $rezervim_id = filter_input(INPUT_POST, 'rezervim_id', FILTER_VALIDATE_INT);
     if ($rezervim_id) {
         try {
+            error_log(date('Y-m-d H:i:s') . " | Attempting to delete reservation ID: $rezervim_id for user ID: $user_id\n", 3, 'logs/debug.log');
+            
             $stmt = $conn->prepare("
                 DELETE FROM rezervimet 
                 WHERE id = :id AND user_id = :user_id
@@ -56,8 +69,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['anulo_rezervimin'])) 
 
             if ($stmt->rowCount() > 0) {
                 $_SESSION['success'] = "Rezervimi u anulua me sukses!";
+                error_log(date('Y-m-d H:i:s') . " | Reservation ID: $rezervim_id deleted successfully\n", 3, 'logs/debug.log');
             } else {
                 $_SESSION['error'] = "Rezervimi nuk u gjet ose nuk mund të anulohej.";
+                error_log(date('Y-m-d H:i:s') . " | No rows affected for reservation ID: $rezervim_id\n", 3, 'logs/debug.log');
             }
             header("Location: profile.php");
             exit;
@@ -69,6 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['anulo_rezervimin'])) 
         }
     } else {
         $_SESSION['error'] = "ID e rezervimit nuk është e vlefshme.";
+        error_log(date('Y-m-d H:i:s') . " | Invalid reservation ID: " . print_r($_POST, true) . "\n", 3, 'logs/debug.log');
         header("Location: profile.php");
         exit;
     }
@@ -195,6 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
     <link rel="icon" href="images/logo1.png" />
     <title>Profili i Përdoruesit - Radiant Touch</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style.css" />
     <style>
         body {
@@ -337,13 +354,88 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
         .update-form button:hover {
             background-color: #3a5a34;
         }
+        /* Cookie Consent Popup Styles */
+        .cookie-popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f9f4eb;
+            border: 1px solid #dcdcdc;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .cookie-popup p {
+            font-size: 16px;
+            color: #473524;
+            margin-bottom: 20px;
+        }
+        .cookie-popup button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .cookie-popup .accept-btn {
+            background-color: #664f3e;
+            color: white;
+        }
+        .cookie-popup .accept-btn:hover {
+            background-color: #523f31;
+        }
+        .cookie-popup .decline-btn {
+            background-color: #a94442;
+            color: white;
+        }
+        .cookie-popup .decline-btn:hover {
+            background-color: #8b3a38;
+        }
+        .cookie-popup a {
+            color: #664f3e;
+            text-decoration: underline;
+        }
+        .cookie-popup a:hover {
+            color: #523f31;
+        }
+        .cookie-settings {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .cookie-settings a {
+            color: #664f3e;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .cookie-settings a:hover {
+            color: #523f31;
+        }
     </style>
     <script>
         function confirmDelete(rezervimId) {
             if (confirm("Jeni të sigurt që dëshironi të fshini këtë rezervim?")) {
+                console.log("Submitting delete form for ID: " + rezervimId); 
                 document.getElementById('delete-form-' + rezervimId).submit();
             }
         }
+
+        $(document).ready(function() {
+            <?php if ($show_cookie_popup): ?>
+                $("#cookiePopup").fadeIn();
+            <?php endif; ?>
+
+            window.showCookiePopup = function() {
+                $("#cookiePopup").fadeIn();
+            };
+        });
     </script>
 </head>
 <body>
@@ -425,6 +517,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
                                     </form>
                                     <form id="delete-form-<?php echo htmlspecialchars($rezervim['id']); ?>" method="POST" action="" style="display:inline;">
                                         <input type="hidden" name="rezervim_id" value="<?php echo htmlspecialchars($rezervim['id']); ?>">
+                                        <input type="hidden" name="anulo_rezervimin" value="1">
                                         <button type="button" onclick="confirmDelete(<?php echo htmlspecialchars($rezervim['id']); ?>)" class="btn action-btn delete-btn">Anulo</button>
                                     </form>
                                 </td>
@@ -436,6 +529,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
 
             <a href="logout.php" class="btn">Dil</a>
         <?php endif; ?>
+
+        <!-- Cookie Consent Popup -->
+        <div class="cookie-popup" id="cookiePopup">
+            <p>
+                Ne përdorim cookies për të përmirësuar përvojën tuaj në faqen tonë. 
+                Duke vazhduar, ju pranoni përdorimin e cookies. 
+                <a href="privacy.php">Mëso më shumë</a>.
+            </p>
+            <form method="POST" action="">
+                <input type="hidden" name="cookie_consent" value="accept">
+                <button type="submit" class="accept-btn">Prano</button>
+            </form>
+            <form method="POST" action="">
+                <input type="hidden" name="cookie_consent" value="decline">
+                <button type="submit" class="decline-btn">Refuzo</button>
+            </form>
+        </div>
+
+        <div class="cookie-settings">
+            <a onclick="showCookiePopup()">Përditëso Preferencat e Cookies</a>
+        </div>
     </div>
     <?php include 'footer.php'; ?>
 </body>
