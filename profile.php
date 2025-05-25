@@ -76,7 +76,7 @@ try {
             font-size: 1rem;
             color: #333;
             flex: 1; /* Span takes remaining space */
-            text-align: left; /* Left-align span, adjust if needed */
+            text-align: center; /* Center-align second column */
         }
         .btn {
             width: 100%;
