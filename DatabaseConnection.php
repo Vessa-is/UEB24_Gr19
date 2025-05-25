@@ -53,5 +53,23 @@ class DatabaseConnection {
             echo "Gabim gjatë krijimit të tabelës. Ju lutemi kontaktoni administratorin.";
         }
     }
+
+public function &getConnectionReference() {
+    $this->startConnection();
+    return $this->conn; 
+}
+
+public function getServiceByIdRef(&$id) {
+    try {
+        $stmt = $this->conn->prepare("SELECT * FROM sherbimet WHERE id = ?");
+        $stmt->execute([$id]);
+        $service = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $service; 
+    } catch(PDOException $e) {
+        error_log("Gabim: " . $e->getMessage(), 3, "error.log");
+        return null;
+    }
+}
+
 }
 ?>

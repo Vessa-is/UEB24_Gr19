@@ -51,7 +51,6 @@ $sort_options = [
     'time_desc' => 'time DESC',
 ];
 
-// If the received sort_by is valid, use it; otherwise default.  Set ORDER BY clause safely
 $order_by = $sort_options[$sort_by] ?? $sort_options['name_asc'];
 
 $order_query = "ORDER BY " . $order_by;
@@ -61,24 +60,24 @@ $services = $serviceRepo->getAll($order_by);
 
 
 
-// Procesimi i POST kërkesave (një bllok i vetëm)
- if (isset($_POST['book_service'])) {
-        $sherbim_id = filter_var($_POST['sherbim_id'], FILTER_VALIDATE_INT);
-        if ($sherbim_id) {
-            foreach ($services as $srv) {
-                if ($srv['id'] == $sherbim_id) {
-                    $selected_service = $srv;
-                    $show_booking_form = true;
-                    break;
-                }
+if (isset($_POST['book_service'])) {
+    $sherbim_id = filter_var($_POST['sherbim_id'], FILTER_VALIDATE_INT);
+    if ($sherbim_id) {
+        foreach ($services as &$srv) { 
+            if ($srv['id'] == $sherbim_id) {
+                $selected_service = &$srv; 
+                $show_booking_form = true;
+                break;
             }
-            if (!$selected_service) {
-                $reservation_error = "Shërbimi nuk u gjet.";
-            }
-        } else {
-            $reservation_error = "ID e shërbimit nuk është valide.";
         }
-    } elseif (isset($_POST['confirm_booking'])) {
+        unset($srv); 
+        if (!$selected_service) {
+            $reservation_error = "Shërbimi nuk u gjet.";
+        }
+    } else {
+        $reservation_error = "ID e shërbimit nuk është valide.";
+    }
+} elseif (isset($_POST['confirm_booking'])) {
        if (!isset($_SESSION['user']) || !isset($_SESSION['user']['id'])) {
              $reservation_error = "Ju lutem kyçuni për të bërë rezervimin.";
         } else {
@@ -94,12 +93,10 @@ $services = $serviceRepo->getAll($order_by);
                       if (strtotime($data_rezervimit) < time()) {
             $reservation_error = "Nuk mund të rezervoni për një kohë të kaluar.";
         } else {
-            // Kontrolli për orarin e punës
             $ora = (int)date('H', strtotime($data_rezervimit));
             if ($ora < 8 || $ora >= 16) {
                 $reservation_error = "Orari i rezervimeve është nga ora 08:00 deri në 16:00.";
             } else {
-                // Kontrolli nëse ekziston një rezervim në të njëjtën datë/orë për të njëjtin shërbim
                 $stmt_check = $conn->prepare("SELECT COUNT(*) FROM rezervimet WHERE sherbim_id = ? AND data_rezervimit = ?");
                 $stmt_check->execute([$sherbim_id, $data_rezervimit]);
                 $exists = $stmt_check->fetchColumn();
@@ -107,14 +104,15 @@ $services = $serviceRepo->getAll($order_by);
                 if ($exists > 0) {
                     $reservation_error = "Ky orar është i zënë. Ju lutem provoni një orar tjetër.";
                 } else {
-                    // Krijimi i rezervimit
                     $stmt = $conn->prepare("INSERT INTO rezervimet (user_id, sherbim_id, data_rezervimit) VALUES (?, ?, ?)");
-                    if ($stmt->execute([$user_id, $sherbim_id, $data_rezervimit])) {
-                        $reservation_success = true;
-                        $show_booking_form = false;
-                    } else {
-                        $reservation_error = "Dështoi rezervimi. Ju lutem provoni përsëri.";
-                    }
+                                  if ($stmt->execute([$user_id, $sherbim_id, $data_rezervimit])) {
+                    $selected_service = $serviceRepo->findById($sherbim_id);
+                    $reservation_success = true;
+                    $show_booking_form = false;
+                } else {
+                    $reservation_error = "Dështoi rezervimi. Ju lutem provoni përsëri.";
+                }
+
                 }
               } 
             }
@@ -642,6 +640,61 @@ table {
    font-weight: bold;
 }
 
+.price-cell {
+  display: flex;
+  flex-direction: column; /* nëse dëshiron sipër e poshtë */
+  /* flex-direction: row; për rreshtim horizontal me hapësirë */
+  align-items: center;
+  gap: 4px; /* hapësirë mes linjave */
+}
+
+.new-price {
+  font-weight: 600;
+  color: #27ae60;
+  font-size: 1.1em;
+}
+
+.original-price {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 0.9em;
+}
+
+/* Discount Banner */
+.discount-banner {
+  display: inline-flex;
+  align-items: center;
+  padding: 12px 20px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #ff9a9e 0%, #fad0c4 100%);
+  color: #5d2120;
+  font-size: 1.05rem;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Ikona në banner */
+.discount-banner i.fa-tag,
+.discount-banner svg {
+  margin-right: 12px;
+  font-size: 1.4rem;
+}
+
+/* Tekst i theksuar për fjalët kyçe */
+.discount-banner span.highlight {
+  color: #c72c41;
+  text-transform: uppercase;
+  margin: 0 4px;
+}
+
+/* Animacion fade-in */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 
     </style>
  </head>
@@ -677,15 +730,18 @@ table {
 <?php if ($reservation_success): ?>
   <div class="modal">
     <div class="modal-content">
-      <div class="modal-header">Konfirmim</div>
-      <div class="modal-body">Shërbimi u rezervua me sukses!</div>
+      <div class="modal-header">Rezervimi u Konfirmua</div>
+      <div class="modal-body">
+        <p>Rezervimi juaj u pranua me sukses!</p>
+        <p><strong>Shërbimi:</strong>
+          <?= htmlspecialchars($selected_service['name'] ?? '—') ?>
+        </p>
+      </div>
       <div class="modal-footer">
         <a href="sherbimet.php"><button>OK</button></a>
       </div>
     </div>
   </div>
-<?php elseif ($reservation_error && !$show_booking_form): ?>
-  <p style="color:red;"><?= htmlspecialchars($reservation_error) ?></p>
 <?php endif; ?>
 
     <?php
@@ -697,7 +753,7 @@ if (isset($_GET['sort_by'])) {
         case 'price_asc':
             $prices = array_column($services, 'price');
             asort($prices);
-            $services = array_map(function($key) use ($services) {
+            $services = array_map(function($key) use (&$services) {
                 return $services[$key];
             }, array_keys($prices));
             break;
@@ -705,31 +761,33 @@ if (isset($_GET['sort_by'])) {
         case 'price_desc':
             $prices = array_column($services, 'price');
             arsort($prices);
-            $services = array_map(function($key) use ($services) {
+            $services = array_map(function($key) use (&$services) { 
                 return $services[$key];
             }, array_keys($prices));
             break;
 
         case 'name_asc':
             $services_by_name = [];
-            foreach ($services as $service) {
-                $services_by_name[$service['name']] = $service;
+            foreach ($services as &$service) { 
+                $services_by_name[$service['name']] = &$service;
             }
+            unset($service); 
             ksort($services_by_name); 
             $services = array_values($services_by_name); 
             break;
 
         case 'name_desc':
             $services_by_name = [];
-            foreach ($services as $service) {
-                $services_by_name[$service['name']] = $service;
+            foreach ($services as &$service) { 
+                $services_by_name[$service['name']] = &$service;
             }
+            unset($service); 
             krsort($services_by_name); 
             $services = array_values($services_by_name); 
             break;
 
         case 'time_asc':
-            usort($services, function($a, $b) {
+            usort($services, function(&$a, &$b) {
                 $time_a = (int)filter_var($a['time'], FILTER_SANITIZE_NUMBER_INT);
                 $time_b = (int)filter_var($b['time'], FILTER_SANITIZE_NUMBER_INT);
                 return $time_a - $time_b;
@@ -737,7 +795,7 @@ if (isset($_GET['sort_by'])) {
             break;
 
         case 'time_desc':
-            usort($services, function($a, $b) {
+            usort($services, function(&$a, &$b) { 
                 $time_a = (int)filter_var($a['time'], FILTER_SANITIZE_NUMBER_INT);
                 $time_b = (int)filter_var($b['time'], FILTER_SANITIZE_NUMBER_INT);
                 return $time_b - $time_a;
@@ -750,6 +808,14 @@ if (isset($_GET['sort_by'])) {
 
 <section class="sherbimet">
     <h1>Shërbimet tona</h1>
+
+    <?php if (!empty($discountMessageText)): ?>
+  <div class="discount-banner">
+    <i class="fas fa-tag"></i>
+    <?= htmlspecialchars($discountMessageText) ?>
+  </div>
+<?php endif; ?>
+
 
     <form method="GET" class="sorting-form">
       <label class="sorting-label" for="sort_by">Rendit sipas:</label>
@@ -764,34 +830,85 @@ if (isset($_GET['sort_by'])) {
       <button type="submit" class="sorting-button">Rendit</button>
     </form>
 
+<?php
+$isWeekend = (date('N') >= 6); 
 
+if ($isWeekend) {
+    foreach ($services as &$service) {
+        if (!isset($service['original_price'])) {
+            $service['original_price'] = $service['price'];
+        }
+        
+        $service['price'] = $service['original_price'] * 0.9;
+        
+        $service['display_price'] = number_format($service['price'], 2) . ' €';
+        $service['original_display_price'] = number_format($service['original_price'], 2) . ' €';
+    }
+    unset($service); 
+    
+    
+    $discountMessage = "<div class='discount-banner'>Fundjavë Speciale! Zbritje 10% për të gjitha shërbimet!</div>";
+} else {
+    foreach ($services as &$service) {
+        if (isset($service['original_price'])) {
+            $service['price'] = $service['original_price'];
+        }
+        $service['display_price'] = number_format($service['price'], 2) . ' €';
+    }
+    unset($service);
+        $discountMessageText = "";
+
+}
+?>
+
+<?php if (!empty($discountMessage)): ?>
+    <?= $discountMessage ?>
+<?php endif; ?>
     
 <table class="services-table">
-    <thead>
-        <tr>
-            <th>Emri</th>
-            <th>Koha</th>
-            <th>Çmimi (€)</th>
-            <th>Rezervo</th>
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($services as $service): ?>
-        <tr>
-            <td><?= htmlspecialchars($service['name'] ?? '') ?></td>
-            <td><?= htmlspecialchars($service['time'] ?? '') ?></td>
-            <td><?= htmlspecialchars($service['price'] ?? '') ?> €</td>
-            <td>
-                <form method="POST">
-                    <input type="hidden" name="book_service" value="1">
-                    <input type="hidden" name="sherbim_id" value="<?= htmlspecialchars($service['id'] ?? '') ?>">
-                    <button type="submit" class="book-btn">Rezervo</button>
-                </form>
-            </td>
-        </tr>
-        <?php endforeach; ?>
-    </tbody>
+  <thead>
+    <tr>
+      <th>Emri</th>
+      <th>Koha</th>
+      <th>Çmimi (€)</th>
+      <th>Rezervo</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($services as $service): ?>
+      <tr>
+        <td><?= htmlspecialchars($service['name'] ?? '') ?></td>
+        <td><?= htmlspecialchars($service['time'] ?? '') ?> minuta</td>
+      <td>
+  <div class="price-cell">
+    <?php if (isset($service['original_price'])): ?>
+      <span class="original-price">
+        <?= htmlspecialchars($service['original_display_price']) ?>
+      </span>
+      <span class="new-price">
+        <?= htmlspecialchars($service['display_price']) ?>
+      </span>
+    <?php else: ?>
+      <span class="new-price">
+        <?= number_format($service['price'], 2) ?> €
+      </span>
+    <?php endif; ?>
+  </div>
+</td>
+
+
+        <td>
+          <form method="POST">
+            <input type="hidden" name="book_service" value="1">
+            <input type="hidden" name="sherbim_id" value="<?= htmlspecialchars($service['id'] ?? '') ?>">
+            <button type="submit" class="book-btn">Rezervo</button>
+          </form>
+        </td>
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
 </table>
+
 
 <!-- Modalet -->
 <?php if ($show_booking_form && $selected_service !== null): ?>
