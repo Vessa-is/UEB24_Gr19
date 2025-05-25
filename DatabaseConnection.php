@@ -1,4 +1,9 @@
 <?php
+function myErrorHandler($errno, $errstr, $errfile, $errline) {
+    error_log("Gabim [$errno]: $errstr në $errfile në linjën $errline", 3, "error.log");
+    echo "Ndodhi një gabim. Ju lutemi kontaktoni administratorin.";
+}
+set_error_handler("myErrorHandler");
 
 class DatabaseConnection {
     private $server = "localhost";
@@ -9,22 +14,27 @@ class DatabaseConnection {
 
     public function startConnection() {
         try {
-            $this->conn = new PDO(
-                "mysql:host=$this->server;dbname=$this->database",
-                $this->username,
-                $this->password
-            );
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            if (!$this->conn) {
+                $this->conn = new PDO(
+                    "mysql:host=$this->server;dbname=$this->database",
+                    $this->username,
+                    $this->password
+                );
+                $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            }
             return $this->conn;
         } catch(PDOException $e) {
-            echo "Database Connection Failed: " . $e->getMessage();
+            error_log("Gabim lidhjeje: " . $e->getMessage(), 3, "error.log");
+            echo "Database Connection Failed. Ju lutemi kontrolloni konfigurimin.";
             return null;
         }
     }
 
-        public function createUsersTable() {
+    public function createUsersTable() {
+        $this->startConnection();
         if (!$this->conn) {
-            $this->startConnection();
+            echo "Nuk mund të krijohet tabela sepse lidhja me databazën dështoi.";
+            return;
         }
 
         try {
@@ -39,7 +49,8 @@ class DatabaseConnection {
             $this->conn->exec($sql);
             echo "Tabela 'users' u krijua me sukses!";
         } catch (PDOException $e) {
-            echo "Gabim gjatë krijimit të tabelës: " . $e->getMessage();
+            error_log("Gabim gjatë krijimit të tabelës: " . $e->getMessage(), 3, "error.log");
+            echo "Gabim gjatë krijimit të tabelës. Ju lutemi kontaktoni administratorin.";
         }
     }
 }

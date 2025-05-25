@@ -1,6 +1,6 @@
 <?php
-include_once '../UEB24_Gr19/script/classes/UserRepository.php';
-include_once '../UEB24_Gr19/script/classes/User.php';
+require_once '../UEB24_Gr19/script/classes/UserRepository.php';
+require_once '../UEB24_Gr19/script/classes/User.php';
 
 if (isset($_POST['submitbutton'])) {
     $firstname = $_POST['first-name'] ?? '';
@@ -24,18 +24,29 @@ if (isset($_POST['submitbutton'])) {
         return;
     }
 
-    $userRepository = new UserRepository();
+    try {
+        $userRepository = new UserRepository();
 
-    if ($userRepository->userExistsByEmail($email)) {
-        echo "Ky email është përdorur tashmë!";
-        return;
+        if ($userRepository->userExistsByEmail($email)) {
+            echo "Ky email është përdorur tashmë!";
+            return;
+        }
+
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $user = new User($firstname, $lastname, $email, $hashedPassword, $personalnr);
+
+        $success = $userRepository->insertUser($user);
+
+        if ($success) {
+            header("Location: login.php?registered=1");
+            exit();
+        } else {
+            echo "Gabim gjatë regjistrimit. Ju lutemi kontaktoni administratorin.";
+        }
+    } catch (Exception $e) {
+        error_log("Gabim gjatë regjistrimit: " . $e->getMessage(), 3, "error.log");
+        echo "Ndodhi një gabim i papritur. Ju lutemi kontaktoni administratorin.";
     }
-
-    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-    $user = new User($firstname, $lastname, $email, $hashedPassword, $personalnr);
-    $userRepository->insertUser($user);
-
-    header("Location: login.php?registered=1");
-    exit();
 }
 ?>
+

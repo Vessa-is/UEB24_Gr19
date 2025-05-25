@@ -1,10 +1,9 @@
 <?php
 session_start();
-require 'DatabaseConnection.php';
+require_once 'DatabaseConnection.php';
 
 $db = new DatabaseConnection();
-$db->startConnection();
-$conn = $db->conn;
+$conn = $db->startConnection();
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
@@ -12,6 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+$rezervimet = [];
 
 try {
     $stmt = $conn->prepare("
@@ -25,27 +25,39 @@ try {
     $stmt->execute();
     $rezervimet = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    $_SESSION['error'] = "Gabim gjatë marrjes së rezervimeve: " . $e->getMessage();
-    $rezervimet = [];
+    error_log("Gabim gjatë marrjes së rezervimeve: " . $e->getMessage(), 3, "logs/errors.log");
+    $_SESSION['error'] = "Ndodhi një gabim gjatë ngarkimit të rezervimeve. Ju lutemi kontaktoni administratorin.";
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['anulo_rezervimin'])) {
-    try {
-        $stmt = $conn->prepare("
-            DELETE FROM rezervimet 
-            WHERE id = :id AND user_id = :user_id
-        ");
-        $stmt->bindParam(':id', $_POST['rezervim_id'], PDO::PARAM_INT);
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
-        $stmt->execute();
-        
-        if ($stmt->rowCount() > 0) {
-            $_SESSION['success'] = "Rezervimi u anulua me sukses!";
+    $rezervim_id = filter_input(INPUT_POST, 'rezervim_id', FILTER_VALIDATE_INT);
+    if ($rezervim_id) {
+        try {
+            $stmt = $conn->prepare("
+                DELETE FROM rezervimet 
+                WHERE id = :id AND user_id = :user_id
+            ");
+            $stmt->bindParam(':id', $rezervim_id, PDO::PARAM_INT);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            
+            if ($stmt->rowCount() > 0) {
+                $_SESSION['success'] = "Rezervimi u anulua me sukses!";
+            } else {
+                $_SESSION['error'] = "Rezervimi nuk u gjet ose nuk mund të anulohej.";
+            }
+            header("Location: rezervimet.php");
+            exit;
+        } catch (PDOException $e) {
+            error_log("Gabim gjatë anulimit: " . $e->getMessage(), 3, "logs/errors.log");
+            $_SESSION['error'] = "Ndodhi një gabim gjatë anulimit. Ju lutemi kontaktoni administratorin.";
             header("Location: rezervimet.php");
             exit;
         }
-    } catch (PDOException $e) {
-        $_SESSION['error'] = "Gabim gjatë anulimit: " . $e->getMessage();
+    } else {
+        $_SESSION['error'] = "ID e rezervimit nuk është e vlefshme.";
+        header("Location: rezervimet.php");
+        exit;
     }
 }
 ?>

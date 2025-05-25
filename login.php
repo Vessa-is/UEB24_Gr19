@@ -2,6 +2,7 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+
 require_once 'DatabaseConnection.php';
 $db = new DatabaseConnection();
 $conn = $db->startConnection();
@@ -14,6 +15,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!$email || !$password) {
         $error = "Ju lutem plotësoni të gjitha fushat.";
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        $error = "Ju lutem jepni një email të vlefshëm.";
     } else {
         try {
             $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
@@ -36,13 +39,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             } else {
                 $error = "Email ose fjalëkalim i pasaktë.";
             }
-        } catch (Exception $e) {
-            $error = "Login failed: " . $e->getMessage();
-            $handle = fopen('logs/errors.log', 'a');
-            if ($handle) {
-                fwrite($handle, date('Y-m-d H:i:s') . " | Login Error: " . $e->getMessage() . "\n");
-                fclose($handle);
-            }
+        } catch (PDOException $e) {
+            error_log(date('Y-m-d H:i:s') . " | Login Error: " . $e->getMessage() . "\n", 3, 'logs/errors.log');
+            $error = "Ndodhi një gabim gjatë kyçjes. Ju lutemi kontaktoni administratorin.";
         }
     }
 }

@@ -5,48 +5,56 @@ require_once 'DatabaseConnection.php';  // lidhja me DB
 $error = '';
 $success = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = trim($_POST['name']);
-    $lastname = trim($_POST['lastname']);
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $password_confirm = $_POST['password_confirm'];
-    $personalnr = trim($_POST['personalnr']);
+try {
+    $db = new DatabaseConnection();
+    $conn = $db->startConnection();
 
-    // Kontrollime bazike
-    if (!$name || !$lastname || !$email || !$password || !$password_confirm || !$personalnr) {
-        $error = "Të gjitha fushat janë të detyrueshme.";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Email i pavlefshëm.";
-    } elseif ($password !== $password_confirm) {
-        $error = "Fjalëkalimet nuk përputhen.";
-    } else {
-        // Kontrollojmë nëse email-i ekziston
-        $stmt = $conn->prepare("SELECT id FROM users WHERE email = :email");
-        $stmt->bindParam(':email', $email);
-        $stmt->execute();
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $name = trim($_POST['name']);
+        $lastname = trim($_POST['lastname']);
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
+        $password_confirm = $_POST['password_confirm'];
+        $personalnr = trim($_POST['personalnr']);
 
-        if ($stmt->rowCount() > 0) {
-            $error = "Ky email është përdorur më parë.";
+        // Kontrollime bazike
+        if (!$name || !$lastname || !$email || !$password || !$password_confirm || !$personalnr) {
+            $error = "Të gjitha fushat janë të detyrueshme.";
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = "Email i pavlefshëm.";
+        } elseif ($password !== $password_confirm) {
+            $error = "Fjalëkalimet nuk përputhen.";
         } else {
-            // Nuk kriptojmë fjalëkalimin (ruajmë në plaintext)
-            $password_plain = $password;
-
-            // Futim në DB
-            $stmt = $conn->prepare("INSERT INTO users (name, lastname, email, password, personalnr) VALUES (:name, :lastname, :email, :password, :personalnr)");
-            $stmt->bindParam(':name', $name);
-            $stmt->bindParam(':lastname', $lastname);
+            // Kontrollojmë nëse email-i ekziston
+            $stmt = $conn->prepare("SELECT id FROM users WHERE email = :email");
             $stmt->bindParam(':email', $email);
-            $stmt->bindParam(':password', $password_plain); // Dërgohet password-i i plaintext
-            $stmt->bindParam(':personalnr', $personalnr);
+            $stmt->execute();
 
-            if ($stmt->execute()) {
-                $success = "Regjistrimi u krye me sukses. Ju lutem kyquni.";
+            if ($stmt->rowCount() > 0) {
+                $error = "Ky email është përdorur më parë.";
             } else {
-                $error = "Gabim gjatë regjistrimit.";
+                // Kriptojmë fjalëkalimin
+                $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+                // Futim në DB
+                $stmt = $conn->prepare("INSERT INTO users (name, lastname, email, password, personalnr) VALUES (:name, :lastname, :email, :password, :personalnr)");
+                $stmt->bindParam(':name', $name);
+                $stmt->bindParam(':lastname', $lastname);
+                $stmt->bindParam(':email', $email);
+                $stmt->bindParam(':password', $hashedPassword);
+                $stmt->bindParam(':personalnr', $personalnr);
+
+                if ($stmt->execute()) {
+                    $success = "Regjistrimi u krye me sukses. Ju lutemi kyquni.";
+                } else {
+                    $error = "Gabim gjatë regjistrimit.";
+                }
             }
         }
     }
+} catch (PDOException $e) {
+    error_log("Gabim gjatë regjistrimit: " . $e->getMessage(), 3, "error.log");
+    $error = "Ndodhi një gabim i papritur. Ju lutemi kontaktoni administratorin.";
 }
 ?>
 
