@@ -62,15 +62,7 @@ $services = $serviceRepo->getAll($order_by);
 
 
 // Procesimi i POST kërkesave (një bllok i vetëm)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['close_modal']) || isset($_POST['click_outside'])) {
-        $show_booking_form = false;
-        $reservation_success = false;
-        header("Location: sherbimet.php");
-        exit();
-    }
-    
-    if (isset($_POST['book_service'])) {
+ if (isset($_POST['book_service'])) {
         $sherbim_id = filter_var($_POST['sherbim_id'], FILTER_VALIDATE_INT);
         if ($sherbim_id) {
             foreach ($services as $srv) {
@@ -87,10 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $reservation_error = "ID e shërbimit nuk është valide.";
         }
     } elseif (isset($_POST['confirm_booking'])) {
-        if (!isset($_SESSION['user_id'])) {
-            $reservation_error = "Ju lutem kyçuni për të bërë rezervimin.";
+       if (!isset($_SESSION['user']) || !isset($_SESSION['user']['id'])) {
+             $reservation_error = "Ju lutem kyçuni për të bërë rezervimin.";
         } else {
-            $user_id = $_SESSION['user_id'];
+            $user_id = $_SESSION['user']['id'];
             $sherbim_id = filter_var($_POST['sherbim_id'], FILTER_VALIDATE_INT);
             $date = $_POST['date'] ?? null;
             $time = $_POST['time'] ?? null;
@@ -99,9 +91,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $reservation_error = "Ju lutem plotësoni datën dhe orën.";
             } else {
                 $data_rezervimit = $date . ' ' . $time . ':00';
-                if (strtotime($data_rezervimit) < time()) {
-                    $reservation_error = "Nuk mund të rezervoni për një kohë të kaluar.";
+                      if (strtotime($data_rezervimit) < time()) {
+            $reservation_error = "Nuk mund të rezervoni për një kohë të kaluar.";
+        } else {
+            // Kontrolli për orarin e punës
+            $ora = (int)date('H', strtotime($data_rezervimit));
+            if ($ora < 8 || $ora >= 16) {
+                $reservation_error = "Orari i rezervimeve është nga ora 08:00 deri në 16:00.";
+            } else {
+                // Kontrolli nëse ekziston një rezervim në të njëjtën datë/orë për të njëjtin shërbim
+                $stmt_check = $conn->prepare("SELECT COUNT(*) FROM rezervimet WHERE sherbim_id = ? AND data_rezervimit = ?");
+                $stmt_check->execute([$sherbim_id, $data_rezervimit]);
+                $exists = $stmt_check->fetchColumn();
+
+                if ($exists > 0) {
+                    $reservation_error = "Ky orar është i zënë. Ju lutem provoni një orar tjetër.";
                 } else {
+                    // Krijimi i rezervimit
                     $stmt = $conn->prepare("INSERT INTO rezervimet (user_id, sherbim_id, data_rezervimit) VALUES (?, ?, ?)");
                     if ($stmt->execute([$user_id, $sherbim_id, $data_rezervimit])) {
                         $reservation_success = true;
@@ -110,10 +116,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $reservation_error = "Dështoi rezervimi. Ju lutem provoni përsëri.";
                     }
                 }
+              } 
+            }
+
             }
         }
     }
-}
+
 
 ?>
 
@@ -786,7 +795,6 @@ if (isset($_GET['sort_by'])) {
 
 <!-- Modalet -->
 <?php if ($show_booking_form && $selected_service !== null): ?>
-    <!-- Overlay për klikime jashtë -->
     <form method="POST" action="sherbimet.php" class="modal-overlay">
         <input type="hidden" name="click_outside" value="1">
     </form>
@@ -794,7 +802,6 @@ if (isset($_GET['sort_by'])) {
     <!-- Modali i rezervimit -->
     <div class="modal">
         <div class="modal-content">
-            <!-- Butoni X -->
             <form method="POST" class="close-modal-form">
                 <input type="hidden" name="close_modal" value="1">
                 <button type="submit" class="close-modal-btn">&times;</button>
@@ -822,15 +829,12 @@ if (isset($_GET['sort_by'])) {
         </div>
     </div>
 <?php elseif ($reservation_success): ?>
-    <!-- Overlay për klikime jashtë -->
     <form method="POST" action="sherbimet.php" class="modal-overlay">
         <input type="hidden" name="click_outside" value="1">
     </form>
 
-    <!-- Modali i konfirmimit -->
     <div class="modal">
         <div class="modal-content">
-            <!-- Butoni X -->
             <a href="sherbimet.php" class="close-modal-btn">&times;</a>
             
             <div class="modal-header">Rezervimi u Konfirmua</div>
