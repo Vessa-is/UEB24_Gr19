@@ -1,3 +1,4 @@
 2025-05-25 17:33:42 | Stock Fetch Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
 2025-05-25 17:34:21 | Stock Fetch Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
 2025-05-25 17:36:52 | Stock Fetch Error: SQLSTATE[42S22]: Column not found: 1054 Unknown column 'image' in 'field list'
+2025-05-25 20:53:14 | User Profile Error: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'radiant.user_sherbimet' doesn't exist
