@@ -159,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <button type="submit" class="btn">Log In</button>
         </form>
         <div class="or">or</div>
-        <a href="create.php" class="create-account">Create account</a>
+        <a href="create_account.php" class="create-account">Create account</a>
     </div>
     <script>
         function validateLoginFields(email, password) {
