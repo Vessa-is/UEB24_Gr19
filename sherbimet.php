@@ -700,33 +700,9 @@ table {
  </head>
   <body id="sherbimet-page">
 
- <!-- <?php include 'header.php'; ?> -->
+ <?php include 'header.php'; ?>
 
-        <header>
-    <nav>
-        <div class="logo-cont">
-            <div class="logo">
-                <a href="index.php">
-                    <img src="images/logoo2.png" alt="Radiant Touch Logo" title="Radiant Touch">
-                </a>
-            </div>
-            <div class="login">
-                <a href="login.php">
-                    <button id="loginBtn">
-                        <i class="fa fa-user"></i>
-                    </button>
-                </a>
-            </div>
-        </div>
-        <div id="navi">
-            <ul>
-                <?php foreach ($nav_links as $name => $url): ?>
-                    <li><a href="<?php echo htmlspecialchars($url); ?>"><?php echo htmlspecialchars($name); ?></a></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-    </nav>
-</header>
+
 <?php if ($reservation_success): ?>
   <div class="modal">
     <div class="modal-content">
