@@ -150,9 +150,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="password">Fjalëkalimi</label>
                 <input name="password" type="password" id="password" placeholder="Password" required>
             </div>
-            <div class="form-group">
-                <a href="forgot_password.php">Keni Harruar Fjalëkalimin?</a>
-            </div>
+        
             <button type="submit" class="btn">Log In</button>
         </form>
         <div class="or">or</div>
