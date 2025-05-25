@@ -1,48 +1,43 @@
 <?php
 class User {
     private $name;
-    private $lastname;
+    private $lastName;
     private $email;
     private $password;
-    private $personalnr;
-    private $role;
+    private $personalNr;
+    private $birthdate;
 
-    function __construct($name, $lastname, $email, $password, $personalnr, $role = 'user') {
+    public function __construct($name, $lastName, $email, $password, $personalNr, $birthdate = null) {
         $this->name = $name;
-        $this->lastname = $lastname;
+        $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $password;
-        $this->personalnr = $personalnr;
-        $this->role = $role;
+        $this->personalNr = $personalNr;
+        $this->birthdate = $birthdate;
     }
 
-    function getName() {
+    public function getName() {
         return $this->name;
     }
 
-    function getLastName() {
-        return $this->lastname;
+    public function getLastName() {
+        return $this->lastName;
     }
 
-    function getEmail() {
+    public function getEmail() {
         return $this->email;
     }
 
-    function getPassword() {
+    public function getPassword() {
         return $this->password;
     }
 
-    function getPersonalNr() {
-        return $this->personalnr;
+    public function getPersonalNr() {
+        return $this->personalNr;
     }
 
-    function getRole() {
-        return $this->role;
-    }
-
-    function setRole($role) {
-        $this->role = $role;
+    public function getBirthdate() {
+        return $this->birthdate;
     }
 }
-
 ?>

@@ -2,12 +2,17 @@
 require_once 'DatabaseConnection.php';
 
 $products = [];
-$result = $conn->query("SELECT * FROM products");
-if ($result) {
-    while ($row = $result->fetch_assoc()) {
-        $products[] = $row;
+try {
+    $db = new DatabaseConnection();
+    $conn = $db->startConnection();
+    if ($conn) {
+        $stmt = $conn->query("SELECT * FROM products");
+        $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } else {
+        echo "<p style='color: red; text-align: center;'>Lidhja me databazën dështoi.</p>";
     }
-    $result->free();
+} catch (PDOException $e) {
+    echo "<p style='color: red; text-align: center;'>Gabim gjatë marrjes së produkteve: " . $e->getMessage() . "</p>";
 }
 ?>
 
@@ -132,7 +137,6 @@ if ($result) {
         #cartItems li {
             padding: 10px;
             background: #f0e7db;
- ANIMATED_WAVE_CSS
             margin-bottom: 10px;
             border-radius: 6px;
             border: 1px solid #d6c6b8;
@@ -180,10 +184,11 @@ if ($result) {
                     <div class="productname" style="padding: 15px; background-color: #fff5eb; border-radius: 20px; margin-bottom: 5px;">
                         <b><?php echo htmlspecialchars($product['name']); ?></b>
                     </div>
-                    <div class="price">$<?php echo htmlspecialchars($product['price']); ?>.00</div>
+                    <div class="price">$<?php echo htmlspecialchars($product['price']); ?></div>
                     <div>Në stok: <?php echo htmlspecialchars($product['stock']); ?></div>
                     <div class="description"><?php echo htmlspecialchars($product['description'] ?? 'Nuk ka përshkrim të disponueshëm.'); ?></div>
-                    <a href="product-details.php?product_id=<?php echo $product['id']; ?>" class="buy-button">Perberesit</a>
+                
+                    <a href="product-details.php?product_id=<?php echo $product['id']; ?>" class="buy-button">Përberësit</a>
                     <span class="add-to-cart">+</span>
                 </div>
             </div>
@@ -202,7 +207,7 @@ if ($result) {
 
     <canvas id="waveCanvas"></canvas>
     <script>
-       
+      
         const canvas = document.getElementById("waveCanvas");
         const ctx = canvas.getContext("2d");
         canvas.width = window.innerWidth;
@@ -231,7 +236,7 @@ if ($result) {
         }
         drawWave();
 
-    
+       
         const cartItems = document.getElementById('cartItems');
         const totalPriceEl = document.getElementById('totalPrice');
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
@@ -273,6 +278,7 @@ if ($result) {
             }
         });
 
+        
         updateCartDisplay();
     </script>
 

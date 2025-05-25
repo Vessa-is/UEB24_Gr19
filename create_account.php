@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $formData = [
     'first-name' => '',
     'last-name' => '',
@@ -9,12 +11,11 @@ $formData = [
     'nr-personal' => ''
 ];
 
-
 include 'script/classes/UserRepository.php';
 require_once 'script/classes/User.php';
 
-
 $errors = [];
+$success = false;
 
 function sanitizeInput($data) {
     return htmlspecialchars(stripslashes(trim($data)));
@@ -62,7 +63,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (empty($formData['data-e-lindjes'])) {
         $errors['data-e-lindjes'] = 'Birthdate is required';
     } elseif (!preg_match('/^\d{2}\-\d{2}\-\d{4}$/', $formData['data-e-lindjes'])) {
-        $errors['data-e-lindjes'] = 'Birthdate should be in DD/MM/YYYY format';
+        $errors['data-e-lindjes'] = 'Birthdate should be in DD-MM-YYYY format';
+    } else {
+        $date_parts = explode('-', $formData['data-e-lindjes']);
+        if (count($date_parts) === 3 && !checkdate($date_parts[1], $date_parts[0], $date_parts[2])) {
+            $errors['data-e-lindjes'] = 'Invalid birthdate';
+        } else {
+            $birthdate = DateTime::createFromFormat('d-m-Y', $formData['data-e-lindjes']);
+            $today = new DateTime();
+            $age = $today->diff($birthdate)->y;
+            if ($age < 13) {
+                $errors['data-e-lindjes'] = 'You must be at least 13 years old';
+            }
+        }
     }
 
     if (empty($formData['nr-personal'])) {
@@ -71,212 +84,200 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['nr-personal'] = 'Personal number should be 10 digits';
     }
 
-  if (empty($errors)) {
-        $userRepository = new UserRepository();$personalnr = $formData['nr-personal'];
-$email = $formData['email'];
-$name = $formData['first-name'];
-$lastname = $formData['last-name'];
-$hashedPassword = password_hash($formData['password'], PASSWORD_DEFAULT);
+    if (empty($errors)) {
+        try {
+            $userRepository = new UserRepository();
+            $personalNr = $formData['nr-personal'];
+            $email = $formData['email'];
+            $name = $formData['first-name'];
+            $lastname = $formData['last-name'];
+            $hashedPassword = password_hash($formData['password'], PASSWORD_DEFAULT);
+            $birthdate = $formData['data-e-lindjes'];
 
-if ($userRepository->personalNrExists($personalnr)) {
-    echo "<script>alert('Ky numër personal ekziston tashmë!');</script>";
-} elseif ($userRepository->userExistsByEmail($email)) {
-    echo "<script>alert('Ky email është përdorur tashmë!');</script>";
-} else {
-    $user = new User($name, $lastname, $email, $hashedPassword, $personalnr);
-    $userRepository->insertUser($user);
-    header("Location: login.php");
-    exit();
-}
+            if ($userRepository->personalNrExists($personalNr)) {
+                $errors['nr-personal'] = 'Ky numër personal ekziston tashmë!';
+            } elseif ($userRepository->userExistsByEmail($email)) {
+                $errors['email'] = 'Ky email është përdorur tashmë!';
+            } else {
+                $user = new User($name, $lastname, $email, $hashedPassword, $personalNr, $birthdate);
+                $userRepository->insertUser($user);
 
-}
+                // Log registration
+                $log_file = 'logs/registrations.log';
+                if (!file_exists('logs')) {
+                    mkdir('logs', 0755, true);
+                }
+                $handle = fopen($log_file, 'a');
+                if ($handle) {
+                    $log_entry = date('Y-m-d H:i:s') . " | User Registered: $name $lastname | Email: $email | PersonalNr: $personalNr\n";
+                    fwrite($handle, $log_entry);
+                    fclose($handle);
+                }
 
-$roli = $user->getRole(); 
-setcookie("roli", $roli, time() + 3600, "/");
-
+                $success = true;
+            }
+        } catch (Exception $e) {
+            $errors['server'] = 'Registration failed: ' . $e->getMessage();
+            $handle = fopen('logs/errors.log', 'a');
+            if ($handle) {
+                fwrite($handle, date('Y-m-d H:i:s') . " | Error: " . $e->getMessage() . "\n");
+                fclose($handle);
+            }
+        }
+    }
 }
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="images/logo1.png" />
-    <title>Create-Radiant Touch</title>
+    <title>Create - Radiant Touch</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
-
     <link rel="stylesheet" href="style.css" />
-
-  </head>
-  <body class="create-page">
-    <header>
-      <nav>
-        <div class="logo-cont">
-          <div class="logo">
-            <a href="index.php">
-              <img src="images/logoo2.png" alt="logo" title="Radiant Touch" />
-            </a>
-          </div>
-          <div class="login">
-            <a href="login.php"><button id="loginBtn" aria-label="Login" >
-                <i class="fa fa-user"></i>
-              </button></a>
-          </div>
-        </div>
-        <div id="navi">
-          <ul>
-            <li><a href="index.php">Ballina</a></li>
-            <li><a href="sherbimet.php">Shërbimet</a></li>
-            <li><a href="galeria.php">Galeria</a></li>
-            <li><a href="Produktet.php">Produktet</a></li>
-            <li><a href="per_ne.php">Rreth nesh</a></li>
-            <li><a href="kontakti.php">Kontakti</a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
-    <div class="register-container"">
-        <h1 class="register-title">Create Account</h1>
+    <style>
+        .create-page {
+            background-color: #f4e4d4;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .register-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            color: #4d3a2d;
+        }
+        .register-title {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            color: #7c5b43;
+        }
+        #create-account-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .form-label {
+            font-size: 14px;
+            color: #4d3a2d;
+            margin-bottom: 5px;
+        }
+        .form-input {
+            padding: 10px;
+            border: 1px solid #d6c6b8;
+            border-radius: 5px;
+            font-size: 14px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            display: block;
+        }
+        .submit-button {
+            background-color: #7c5b43;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .submit-button:hover {
+            background-color: #473524;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #7c5b43;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        .server-error {
+            color: red;
+            text-align: center;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="create-page">
+    <?php include 'header.php'; ?>
+    <div class="register-container">
+        <h1 class="register-title">Regjistrohu</h1>
+        <?php if (isset($errors['server'])): ?>
+            <p class="server-error"><?php echo htmlspecialchars($errors['server']); ?></p>
+        <?php endif; ?>
         <form id="create-account-form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-            <label for="first-name" class="form-label">First Name</label>
-            <input class="form-input" type="text" id="first-name" name="first-name" placeholder="First Name" value="<?php echo $formData['first-name']; ?>">
+            <label for="first-name" class="form-label">Emri</label>
+            <input class="form-input" type="text" id="first-name" name="first-name" placeholder="First Name" value="<?php echo htmlspecialchars($formData['first-name']); ?>">
             <?php if (isset($errors['first-name'])): ?>
-              <span class="error-message"><?php echo $errors['first-name']; ?></span>
+                <span class="error-message"><?php echo $errors['first-name']; ?></span>
             <?php endif; ?>
-            
-    
-            <label for="last-name" class="form-label">Last Name</label>
-            <input type="text" id="last-name" class="form-input" name="last-name" placeholder="Last Name" value="<?php echo $formData['last-name']; ?>">
+
+            <label for="last-name" class="form-label">Mbiemri</label>
+            <input type="text" id="last-name" class="form-input" name="last-name" placeholder="Last Name" value="<?php echo htmlspecialchars($formData['last-name']); ?>">
             <?php if (isset($errors['last-name'])): ?>
-              <span class="error-message"><?php echo $errors['last-name']; ?></span>
+                <span class="error-message"><?php echo $errors['last-name']; ?></span>
             <?php endif; ?>
 
             <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" class="form-input" name="email" placeholder="Email" value="<?php echo $formData['email']; ?>">
+            <input type="email" id="email" class="form-input" name="email" placeholder="Email" value="<?php echo htmlspecialchars($formData['email']); ?>">
             <?php if (isset($errors['email'])): ?>
-              <span class="error-message"><?php echo $errors['email']; ?></span>
+                <span class="error-message"><?php echo $errors['email']; ?></span>
             <?php endif; ?>
-            
-    
+
             <label for="password" class="form-label">Password</label>
-            <input type="password" id="password" class="form-input" name="password" placeholder="Password" value="<?php echo $formData['password']; ?>">
+            <input type="password" id="password" class="form-input" name="password" placeholder="Password">
             <?php if (isset($errors['password'])): ?>
-              <span class="error-message"><?php echo $errors['password']; ?></span>
+                <span class="error-message"><?php echo $errors['password']; ?></span>
             <?php endif; ?>
 
-            <label for="confirm-password" class="form-label">Confirm Password</label>
-            <input type="password" id="confirm-password" class="form-input" name="confirm-password" placeholder="Confirm password" value="<?php echo $formData['confirm-password']; ?>">
+            <label for="confirm-password" class="form-label">Konfirmo Password</label>
+            <input type="password" id="confirm-password" class="form-input" name="confirm-password" placeholder="Confirm password">
             <?php if (isset($errors['confirm-password'])): ?>
-              <span class="error-message"><?php echo $errors['confirm-password']; ?></span>
+                <span class="error-message"><?php echo $errors['confirm-password']; ?></span>
             <?php endif; ?>
 
-            <label for="data-e-lindjes" class="form-label">Birthdate</label>
-            <input type="text" id="data-e-lindjes" class="form-input" name="data-e-lindjes" placeholder="Birthdate" value="<?php echo $formData['data-e-lindjes']; ?>">
+            <label for="data-e-lindjes" class="form-label">Data e Lindjes (DD-MM-YYYY)</label>
+            <input type="text" id="data-e-lindjes" class="form-input" name="data-e-lindjes" placeholder="DD-MM-YYYY" value="<?php echo htmlspecialchars($formData['data-e-lindjes']); ?>">
             <?php if (isset($errors['data-e-lindjes'])): ?>
-              <span class="error-message"><?php echo $errors['data-e-lindjes']; ?></span>
+                <span class="error-message"><?php echo $errors['data-e-lindjes']; ?></span>
             <?php endif; ?>
 
             <label for="nr-personal" class="form-label">Numri personal</label>
-            <input type="text" id="nr-personal" class="form-input" name="nr-personal" placeholder="nr-personal" value="<?php echo $formData['nr-personal']; ?>">
+            <input type="text" id="nr-personal" class="form-input" name="nr-personal" placeholder="10-digit personal number" value="<?php echo htmlspecialchars($formData['nr-personal']); ?>">
             <?php if (isset($errors['nr-personal'])): ?>
-              <span class="error-message"><?php echo $errors['nr-personal']; ?></span>
+                <span class="error-message"><?php echo $errors['nr-personal']; ?></span>
             <?php endif; ?>
-            
-    
-            <button type="submit" name="signupbutton" class="submit-button">Create New Account</button>
+
+            <button type="submit" name="signupbutton" class="submit-button">Krijo </button>
         </form>
-        <?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && empty($errors)) {
-    include_once '../UEB24_Gr19/script/classes/User.php';
-    include_once '../UEB24_Gr19/script/classes/UserRepository.php';
-
-    $firstname = $_POST['first-name'];
-    $lastname = $_POST['last-name'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $personalnr = $_POST['nr-personal'];
-
-    $user = new User($firstname, $lastname, $email, $password, $personalnr);
-    $userRepo = new UserRepository();
-    $userRepo->insertUser($user);
-
-  
-    exit();
-}
-
-?>
         <div class="back-link">
             <a href="login.php">Return to Login</a>
         </div>
     </div>
-
-
-      
-   
-    <footer>
-      <div class="footer-container">
-        <div class="footer-section">
-          <img src="images/logoo2.png" class="logo1" alt="Radiant Touch Logo" />
-          <p>
-            Radiant Touch ofron shërbime profesionale për flokët, qerpikët dhe
-            vetullat. Synojmë t’ju ndihmojmë të ndiheni të bukur çdo ditë.
-          </p>
-        </div>
-        <div class="footer-section">
-          <h3>Kategorit&euml;</h3>
-          <ul>
-            <li><a href="index.php">BALLINA</a></li>
-            <li><a href="sherbimet.php">SHERBIMET</a></li>
-            <li><a href="galeria.php">GALERIA</a></li>
-            <li><a href="Produktet.php">PRODUKTET</a></li>
-            <li><a href="per_ne.php">RRETH NESH</a></li>
-            <li><a href="kontakti.php">KONTAKTI</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Kontakti</h3>
-          <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps?q=Prishtine+Kosove" target="_blank" rel="noopener noreferrer" style="color: #fff; text-decoration: none;"><abbr style="text-decoration: none;" title="Republic of Kosovo">Prishtine,Kosovë</abbr></a></p>
-          <p>
-            <i class="fas fa-phone"></i>
-            <a href="tel:+38344222222" style="color: #fff; text-decoration: none"
-              >+383 44 222 222</a
-            >
-          </p>
-          <p>
-            <i class="fas fa-envelope"></i
-            ><a
-              href="mailto:info@radianttouch.com"
-              style="color: #fff; text-decoration: none"
-              >info@radianttouch.com</a
-            >
-          </p>
-        </div>
-      </div>
-      <hr style="width: 90%;  margin: 10px auto; ">
-      <div class="footer-section newsletter">
-        <h3>Abonohuni</h3>
-        <form id="abonimform" method="POST">
-          <div class="newsletter-input">
-            <i class="fas fa-envelope"></i>
-            <input type="email" placeholder="Shkruani email-in tuaj" required />
-            <button type="submit" aria-label="Dërgo email">
-              <i class="fas fa-paper-plane"></i>
-            </button>
-          </div>
-          
-          <div class="icons">
-            <a href="https://www.facebook.com" class="icon"  aria-label="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://www.instagram.com" class="icon" aria-label="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
-            <a href="https://www.twitter.com" class="icon" aria-label="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-          </div>
-        </form>
-      </div>
-
-      <div class="footer-bottom">
-        &copy; 2025 <a href="index.php" style="text-decoration: none;"><span> Radiant Touch </span></a>. Të gjitha të drejtat janë të
-        rezervuara.
-      </div>
-    </footer>
-  </body>
+    <?php if ($success): ?>
+        <script>
+            alert('Ju jeni regjistruar me sukses! Tani vazhdoni ne faqen login.');
+            window.location.href = 'login.php';
+        </script>
+    <?php endif; ?>
+    <?php include 'footer.php'; ?>
+</body>
 </html>

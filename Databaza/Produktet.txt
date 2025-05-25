@@ -47,9 +47,9 @@ CREATE TABLE users (
     lastname VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    personalnr VARCHAR(20) NOT NULL UNIQUE
+    personalNr VARCHAR(20) NOT NULL UNIQUE,
+    birthdate VARCHAR(10) NOT NULL
 );
-
 
 CREATE TABLE sherbimet (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -59,7 +59,6 @@ CREATE TABLE sherbimet (
     time INT NOT NULL
 );
 
--- Insert services with NULL descriptions
 INSERT INTO sherbimet (name, description, price, time) VALUES
 ('Prerje e flokëve', NULL, 10.00, 30),
 ('Fenirim i flokëve', NULL, 5.00, 15),
@@ -81,8 +80,6 @@ INSERT INTO sherbimet (name, description, price, time) VALUES
 ('Balayage për flokë', NULL, 120.00, 150),
 ('Masazh për kokën', NULL, 50.00, 150),
 ('Përkujdesje për flokët e thatë dhe të dëmtuar', NULL, 80.00, 120);
-
-
 
 CREATE TABLE rezervimet (
     id INT AUTO_INCREMENT PRIMARY KEY,
