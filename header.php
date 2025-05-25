@@ -1,3 +1,18 @@
+<?php
+if (isset($_COOKIE['roli'])) {
+    $roli = $_COOKIE['roli'];
+
+    if ($roli === 'admin') {
+        echo "<a href='admin_dashboard.php'>Paneli i Adminit</a>";
+    } elseif ($roli === 'user') {
+        echo "<a href='user_dashboard.php'>Profili</a>";
+    }
+}
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

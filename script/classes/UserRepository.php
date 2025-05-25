@@ -1,17 +1,15 @@
 <?php 
-    include '../UEB24_Gr19/DatabaseConnection.php';
+include '../UEB24_Gr19/DatabaseConnection.php';
 
-class UserRepository{
+class UserRepository {
     private $conn;
 
-    function __construct(){
+    function __construct() {
         $conn = new DatabaseConnection;
         $this->conn = $conn->startConnection();
     }
 
-
-    function insertUser($user){
-
+    function insertUser($user) {
         $conn = $this->conn;
 
         $firstName = $user->getName();
@@ -19,61 +17,48 @@ class UserRepository{
         $email = $user->getEmail();
         $password = $user->getPassword();
         $personalNr = $user->getPersonalNr();
+        $role = $user->getRole();
 
-        $sql = "INSERT INTO user (name, lastname, email, password, personalnr) VALUES (?,?,?,?,?)";
+        $sql = "INSERT INTO user (name, lastname, email, password, personalnr, role) VALUES (?, ?, ?, ?, ?, ?)";
 
         $statement = $conn->prepare($sql);
+        $statement->execute([$firstName, $lastName, $email, $password, $personalNr, $role]);
 
-        $statement->execute([$firstName, $lastName, $email, $password, $personalNr]);
-
-        echo "<script> alert('User has been inserted successfuly!'); </script>";
-
+        echo "<script> alert('User has been inserted successfully!'); </script>";
     }
 
-    function getAllUsers(){
+    function getAllUsers() {
         $conn = $this->conn;
-
         $sql = "SELECT * FROM user";
-
         $statement = $conn->query($sql);
-        $users = $statement->fetchAll();
-
-        return $users;
+        return $statement->fetchAll();
     }
 
-    function getUserByPersonalNr($personalNr){
+    function getUserByPersonalNr($personalNr) {
         $conn = $this->conn;
-
-        $sql = "SELECT * FROM user WHERE personalnr=?";
+        $sql = "SELECT * FROM user WHERE personalnr = ?";
         $statement = $conn->prepare($sql);
         $statement->execute([$personalNr]);
-        $user = $statement->fetch();
-
-        return $user;
+        return $statement->fetch();
     }
 
-    function updateUser($personalNr, $name, $lastName, $email, $password){
+    function updateUser($personalNr, $name, $lastName, $email, $password, $role) {
         $conn = $this->conn;
-
-        $sql = "UPDATE user SET name=?, lastname=?, email=?, password=? WHERE personalnr=?";
+        $sql = "UPDATE user SET name=?, lastname=?, email=?, password=?, role=? WHERE personalnr=?";
         $statement = $conn->prepare($sql);
-        $statement->execute([$name, $lastName, $email, $password, $personalNr]);
-
-        echo "<script>alert('update was successful');</script>";
+        $statement->execute([$name, $lastName, $email, $password, $role, $personalNr]);
+        echo "<script>alert('Update was successful');</script>";
     }
 
-
-    function deleteUser($personalNr){
+    function deleteUser($personalNr) {
         $conn = $this->conn;
-
-        $sql = "DELETE FROM user WHERE personalnr=?";
+        $sql = "DELETE FROM user WHERE personalnr = ?";
         $statement = $conn->prepare($sql);
         $statement->execute([$personalNr]);
-
-        echo "<script>alert('delete was successful');</script>";
+        echo "<script>alert('Delete was successful');</script>";
     }
 
-    function userExistsByEmail($email){
+    function userExistsByEmail($email) {
         $conn = $this->conn;
         $sql = "SELECT * FROM user WHERE email = ?";
         $statement = $conn->prepare($sql);
@@ -81,14 +66,12 @@ class UserRepository{
         return $statement->fetch() !== false;
     }
 
-        function personalNrExists($personalNr) {
-    $conn = $this->conn;
-    $sql = "SELECT * FROM users WHERE personal_nr = ?";
-    $statement = $conn->prepare($sql);
-    $statement->execute([$personalNr]);
-    return $statement->fetch() !== false;
+    function personalNrExists($personalNr) {
+        $conn = $this->conn;
+        $sql = "SELECT * FROM user WHERE personalnr = ?";
+        $statement = $conn->prepare($sql);
+        $statement->execute([$personalNr]);
+        return $statement->fetch() !== false;
     }
-
-    
 }
 ?>
