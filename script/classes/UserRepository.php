@@ -1,9 +1,9 @@
 <?php
-include_once "../UEB24_Gr20/DatabaseConnection.php";
-// function myErrorHandler($errno, $errstr, $errfile, $errline) {
-//     echo "Gabim [$errno]: $errstr në fajllin $errfile në linjën $errline<br>";
-// }
-// set_error_handler("myErrorHandler");
+
+function myErrorHandler($errno, $errstr, $errfile, $errline) {
+    echo "Gabim [$errno]: $errstr në fajllin $errfile në linjën $errline<br>";
+}
+set_error_handler("myErrorHandler");
 
 require_once 'DatabaseConnection.php';
 

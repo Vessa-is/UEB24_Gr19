@@ -1,25 +1,26 @@
 <?php
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$currentHour = date("G");
-$greeting = "";
-
-if (!isset($_SESSION['vizita'])) {
-    $_SESSION['vizita'] = 1;
-} else {
-    $_SESSION['vizita']++;
-}
-
-if (isset($_SESSION['user']['email'])) {
-    $email = $_SESSION['user']['email'];
-    if ($_SESSION['vizita'] > 1) {
-        $msg = "Mirë se vini përsëri, " . $email . "! " . $greeting;
+if (empty($_SESSION['has_greeted'])) {
+    $hour = (int) date("G");
+    if ($hour < 12) {
+        $greeting = "Mirëmëngjes";
+    } elseif ($hour < 18) {
+        $greeting = "Mirëdita";
     } else {
-        $msg = "Mirë se vini, " . $email . "! " . $greeting;
+        $greeting = "Mirëmbrëma";
     }
+
+    $email = $_SESSION['user']['email'] ?? 'Përdorues';
+
+    $msg = $_SESSION['has_visited_before']
+         ? "Mirë se vini përsëri, {$email}! {$greeting}!"
+         : "Mirë se vini, {$email}! {$greeting}!";
+
     echo "<script>alert('" . addslashes($msg) . "');</script>";
+
+    $_SESSION['has_greeted'] = true;
+    $_SESSION['has_visited_before'] = true;
 }
-?>

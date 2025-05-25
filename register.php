@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'DatabaseConnection.php';  // lidhja me DB
+require_once 'DatabaseConnection.php'; 
 
 $error = '';
 $success = '';
@@ -17,7 +17,6 @@ try {
         $password_confirm = $_POST['password_confirm'];
         $personalnr = trim($_POST['personalnr']);
 
-        // Kontrollime bazike
         if (!$name || !$lastname || !$email || !$password || !$password_confirm || !$personalnr) {
             $error = "Të gjitha fushat janë të detyrueshme.";
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -25,7 +24,6 @@ try {
         } elseif ($password !== $password_confirm) {
             $error = "Fjalëkalimet nuk përputhen.";
         } else {
-            // Kontrollojmë nëse email-i ekziston
             $stmt = $conn->prepare("SELECT id FROM users WHERE email = :email");
             $stmt->bindParam(':email', $email);
             $stmt->execute();
@@ -33,10 +31,8 @@ try {
             if ($stmt->rowCount() > 0) {
                 $error = "Ky email është përdorur më parë.";
             } else {
-                // Kriptojmë fjalëkalimin
                 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-                // Futim në DB
                 $stmt = $conn->prepare("INSERT INTO users (name, lastname, email, password, personalnr) VALUES (:name, :lastname, :email, :password, :personalnr)");
                 $stmt->bindParam(':name', $name);
                 $stmt->bindParam(':lastname', $lastname);
