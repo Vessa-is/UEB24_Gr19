@@ -22,7 +22,6 @@ if (!$conn) {
     die("Failed to connect to the database");
 }
 
-
 $nav_links = [
   'BALLINA' => 'index.php',
   'SHERBIMET' => 'sherbimet.php',
@@ -31,6 +30,7 @@ $nav_links = [
   'RRETH NESH' => 'per_ne.php',
   'KONTAKTI' => 'kontakti.php'
 ];
+
 $reservation_success = false;
 $reservation_error = '';
 $show_booking_form = false;
@@ -57,8 +57,11 @@ $order_query = "ORDER BY " . $order_by;
 $services = $serviceRepo->getAll($order_by);
 
 
-
-if (isset($_POST['book_service'])) {
+if (isset($_POST['click_outside'])) {
+    $show_booking_form = false;
+    $selected_service = null;
+}
+else if (isset($_POST['book_service'])) {
     $sherbim_id = filter_var($_POST['sherbim_id'], FILTER_VALIDATE_INT);
     if ($sherbim_id) {
         foreach ($services as &$srv) { 
@@ -119,11 +122,7 @@ if (isset($_POST['book_service'])) {
         }
     }
 
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -250,7 +249,7 @@ if (isset($_POST['book_service'])) {
 }
 
 .modal-content {
-  position: relative; /* Shtoni këtë */
+  position: relative; 
   background-color: #fff;
   width: 90%;
   max-width: 450px;
@@ -258,12 +257,11 @@ if (isset($_POST['book_service'])) {
   overflow: hidden;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   animation: scaleIn 0.35s ease-out;
-  z-index: 1001; /* Shtoni këtë */
+  z-index: 1001; 
     pointer-events: auto;
 
 }
 
-/* Header i stilizuar mirë */
 .modal-header {
   background: linear-gradient(135deg, #6d4c3d 0%, #5a3921 100%);
   color: #fff;
@@ -274,27 +272,39 @@ if (isset($_POST['book_service'])) {
   letter-spacing: 0.5px;
 }
 
-/* Trupi i modalit - rregullime profesionale */
 .modal-body {
   padding: 25px 30px;
   color: #444;
 }
-/* Overlay për klikime jashtë */
 .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4); 
+  z-index: 999;
+  cursor: pointer;
+}
+
+.modal-overlay-form {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 999;
-  opacity: 0;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-  border: none;
+  z-index: 1002; 
 }
 
-/* Stilizimi i formës */
+.modal-overlay-btn {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  cursor: default;
+}
+
+
 .booking-form {
   display: flex;
   flex-direction: column;
@@ -330,7 +340,6 @@ if (isset($_POST['book_service'])) {
   background-color: #fff;
 }
 
-/* Butoni i konfirmimit - më modern */
 .submit-btn {
   background: linear-gradient(135deg, #6d4c3d 0%, #5a3921 100%);
   color: white;
@@ -351,7 +360,6 @@ if (isset($_POST['book_service'])) {
   box-shadow: 0 5px 15px rgba(109, 76, 61, 0.3);
 }
 
-/* Footer për mesazhin e suksesit */
 .modal-footer {
   background-color: #f8f8f8;
   padding: 18px 20px;
@@ -382,11 +390,6 @@ if (isset($_POST['book_service'])) {
   box-shadow: 0 3px 10px rgba(109, 76, 61, 0.2);
 }
 
-/* Animacionet e reja */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
 
 @keyframes scaleIn {
   from { 
@@ -399,7 +402,6 @@ if (isset($_POST['book_service'])) {
   }
 }
 
-/* Butoni i rezervimit në tabelë - versioni origjinal */
 button.book-btn {
   background-color: #6d4c3d;
   color: white;
@@ -408,7 +410,6 @@ button.book-btn {
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  /* Hiq të gjitha vetitë e reja që shtuam më parë */
   box-shadow: none;
   transform: none;
   font-weight: normal;
@@ -420,7 +421,6 @@ button.book-btn:hover {
   box-shadow: 0 5px 15px rgba(109, 76, 61, 0.3);
 }
 
-/* Butoni i mbylljes (X) */
 .close-btn {
   position: absolute;
   top: 15px;
@@ -437,7 +437,6 @@ button.book-btn:hover {
 }
 
 
-/* Butoni X */
 .close-modal-btn {
   background: none;
   border: none;
@@ -449,7 +448,6 @@ button.book-btn:hover {
   transition: all 0.3s ease;
   display: block;
 }
-/* Forma për butonin e mbylljes */
 .close-modal-form {
   position: absolute;
   top: 0;
@@ -463,7 +461,6 @@ button.book-btn:hover {
   transform: scale(1.1);
 }
 
-/* Responsive design */
 @media (max-width: 576px) {
   .modal-content {
     width: 95%;
@@ -482,6 +479,7 @@ button.book-btn:hover {
     padding: 12px;
   }
 }
+
 .video-ad {
         position: relative;
         height: 400px;
@@ -640,10 +638,9 @@ table {
 
 .price-cell {
   display: flex;
-  flex-direction: column; /* nëse dëshiron sipër e poshtë */
-  /* flex-direction: row; për rreshtim horizontal me hapësirë */
+  flex-direction: column; 
   align-items: center;
-  gap: 4px; /* hapësirë mes linjave */
+  gap: 4px; 
 }
 
 .new-price {
@@ -658,7 +655,6 @@ table {
   font-size: 0.9em;
 }
 
-/* Discount Banner */
 .discount-banner {
   display: inline-flex;
   align-items: center;
@@ -673,21 +669,18 @@ table {
   animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Ikona në banner */
 .discount-banner i.fa-tag,
 .discount-banner svg {
   margin-right: 12px;
   font-size: 1.4rem;
 }
 
-/* Tekst i theksuar për fjalët kyçe */
 .discount-banner span.highlight {
   color: #c72c41;
   text-transform: uppercase;
   margin: 0 4px;
 }
 
-/* Animacion fade-in */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(-10px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -884,13 +877,10 @@ if ($isWeekend) {
 </table>
 
 
-<!-- Modalet -->
 <?php if ($show_booking_form && $selected_service !== null): ?>
-    <form method="POST" action="sherbimet.php" class="modal-overlay">
-        <input type="hidden" name="click_outside" value="1">
-    </form>
-
-    <!-- Modali i rezervimit -->
+  <form method="POST" class="modal-overlay-form">
+    <button type="submit" name="click_outside" value="1" class="modal-overlay-btn" aria-label="Mbyll modalin"></button>
+  </form>
     <div class="modal">
         <div class="modal-content">
             <form method="POST" class="close-modal-form">
@@ -920,9 +910,10 @@ if ($isWeekend) {
         </div>
     </div>
 <?php elseif ($reservation_success): ?>
-    <form method="POST" action="sherbimet.php" class="modal-overlay">
-        <input type="hidden" name="click_outside" value="1">
-    </form>
+    <form method="POST" class="modal-close-form">
+    <input type="hidden" name="click_outside" value="1">
+    <button type="submit" class="modal-overlay-btn">Anulo</button>
+</form>
 
     <div class="modal">
         <div class="modal-content">

@@ -102,7 +102,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $user = new User($name, $lastname, $email, $hashedPassword, $personalNr, $birthdate);
                 $userRepository->insertUser($user);
 
-                // Log registration
                 $log_file = 'logs/registrations.log';
                 if (!file_exists('logs')) {
                     mkdir('logs', 0755, true);
