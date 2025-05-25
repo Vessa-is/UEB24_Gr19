@@ -1,6 +1,4 @@
 <?php
-
-
 $nav_pages = [
     ['title' => 'Ballina', 'url' => 'index.php'],
     ['title' => 'Shërbimet', 'url' => 'sherbimet.php'],

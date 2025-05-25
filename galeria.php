@@ -71,7 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter-email'])) 
         </div>
     </section>
 
-    <!-- <?php include 'footer.php'; ?> -->
+    <?php include 'footer.php'; ?>
 </body>
 </html>
 <?php

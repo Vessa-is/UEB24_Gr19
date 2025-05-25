@@ -884,13 +884,11 @@ if ($isWeekend) {
 </table>
 
 
-<!-- Modalet -->
 <?php if ($show_booking_form && $selected_service !== null): ?>
     <form method="POST" action="sherbimet.php" class="modal-overlay">
         <input type="hidden" name="click_outside" value="1">
     </form>
 
-    <!-- Modali i rezervimit -->
     <div class="modal">
         <div class="modal-content">
             <form method="POST" class="close-modal-form">

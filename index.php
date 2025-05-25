@@ -458,19 +458,16 @@ $nav_links = [
 
     <script>
         $(document).ready(function() {
-            // Show cookie popup if not consented
             <?php if ($show_cookie_popup): ?>
                 $("#cookiePopup").fadeIn();
             <?php endif; ?>
 
-            // Hover effect for buttons
             $(".btn").hover(function() {
                 $(this).css("background-color", "#6f6154");
             }, function() {
                 $(this).css("background-color", "#96887d");
             });
 
-            // Scroll to top functionality
             $(window).scroll(function() {
                 if ($(this).scrollTop() > 600) {
                     $("#scrollToTop").fadeIn();
@@ -483,7 +480,6 @@ $nav_links = [
             });
         });
 
-        // Function to show cookie popup
         function showCookiePopup() {
             $("#cookiePopup").fadeIn();
         }

@@ -19,8 +19,6 @@ if (!isset($_SESSION)) {
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
-
 <style>
     body {
   font-family: Arial, sans-serif;

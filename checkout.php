@@ -1,10 +1,8 @@
 <?php
-// Start session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php?redirect=Checkout.php");
     exit();
@@ -13,14 +11,12 @@ if (!isset($_SESSION['user_id'])) {
 include 'greeting.php';
 require_once 'DatabaseConnection.php';
 
-// Define image mappings to match Produktet.php
 $product_images = [
     1 => 'images/shampoo.jpg',
     2 => 'images/krem.jpg',
     3 => 'images/maske.jpg'
 ];
 
-// Fetch product stock
 $products_stock = [];
 try {
     $db = new DatabaseConnection();
@@ -47,7 +43,6 @@ try {
     }
 }
 
-// Initialize form data and errors
 $form_data = [
     'street' => $_POST['street'] ?? '',
     'city' => $_POST['city'] ?? '',
@@ -57,9 +52,7 @@ $form_data = [
 ];
 $errors = [];
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
-    // Refresh stock before validation
     try {
         $stmt = $conn->query("SELECT id, stock FROM products");
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
@@ -69,28 +62,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
         $errors['server'] = "Gabim gjatë rifreskimit të stokut: " . $e->getMessage();
     }
 
-    // Server-side validation
     $street = trim($_POST['street'] ?? '');
     $city = trim($_POST['city'] ?? '');
     $postal_code = trim($_POST['postal_code'] ?? '');
     $country = $_POST['country'] ?? '';
     $payment = $_POST['payment'] ?? '';
 
-    // Street
     if (empty($street)) {
         $errors['street'] = 'Street is required';
     } elseif (!preg_match('/^[a-zA-Z0-9\s,.-]+$/', $street)) {
         $errors['street'] = 'Street should contain letters, numbers, spaces, commas, periods, or hyphens';
     }
 
-    // City
     if (empty($city)) {
         $errors['city'] = 'City is required';
     } elseif (!preg_match('/^[a-zA-Z\s\'-]+$/', $city)) {
         $errors['city'] = 'City should contain letters, spaces, hyphens, or apostrophes';
     }
 
-    // Postal code
     $postal_code_formats = [
         'XK' => '/^[0-9]{5}$/', // Kosovo
         'AL' => '/^[0-9]{4}$/', // Albania
@@ -106,23 +95,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
         $errors['postal_code'] = "Invalid postal code for $country";
     }
 
-    // Country
     $valid_countries = ['AL','AD','AM','AT','AZ','BY','BE','BA','BG','HR','CY','CZ','DK','EE','FI','FR','GE','DE','GR','HU','IS','IE','IT','KZ','XK','LV','LI','LT','LU','MT','MD','MC','ME','NL','MK','NO','PL','PT','RO','RU','SM','RS','SK','SI','ES','SE','CH','TR','UA','GB','VA','AX','FO','GI','GG','IM','JE','SJ','UM'];
     if (!in_array($country, $valid_countries)) {
         $errors['country'] = 'Please select a valid country';
     }
 
-    // Payment
     if (!in_array($payment, ['cash', 'card'])) {
         $errors['payment'] = 'Invalid payment method';
     }
 
-    // Cart
     $cart = json_decode($_POST['cart_json'] ?? '[]', true);
     if (empty($cart)) {
         $errors['cart'] = 'Shporta është bosh!';
     } else {
-        // Validate stock
         $grouped_cart = [];
         foreach ($cart as $item) {
             $id = (int)$item['id'];
@@ -156,14 +141,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
             try {
                 $conn->beginTransaction();
 
-                // Calculate total
                 $total = 0;
                 foreach ($cart as $item) {
                     $id = (int)$item['id'];
                     $total += (float)$item['price'];
                 }
 
-                // Insert order
                 $stmt = $conn->prepare("
                     INSERT INTO orders (user_id, street, city, postal_code, country, payment_method, total)
                     VALUES (?, ?, ?, ?, ?, ?, ?)
@@ -179,7 +162,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
                 ]);
                 $order_id = $conn->lastInsertId();
 
-                // Insert order items
                 $stmt = $conn->prepare("
                     INSERT INTO order_items (order_id, product_id, quantity, price)
                     VALUES (?, ?, ?, ?)
@@ -188,7 +170,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
                     $stmt->execute([$order_id, $id, $data['quantity'], $data['price']]);
                 }
 
-                // Update stock
                 $stmt = $conn->prepare("UPDATE products SET stock = stock - ? WHERE id = ?");
                 foreach ($grouped_cart as $id => $data) {
                     $stmt->execute([$data['quantity'], $id]);
@@ -196,7 +177,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
 
                 $conn->commit();
 
-                // Clear cart
                 $_SESSION['success_message'] = "Porosia u konfirmua me sukses!";
                 header("Location: Produktet.php");
                 exit();
@@ -595,7 +575,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
 
         updateCartDisplay();
 
-        // Client-side validation
         document.getElementById('Checkout-form').addEventListener('submit', function(event) {
             const street = document.getElementById('street').value.trim();
             const city = document.getElementById('city').value.trim();

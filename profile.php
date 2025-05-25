@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cookie_consent'])) {
     $consent = $_POST['cookie_consent'] === 'accept' ? 'accepted' : 'declined';
-    setcookie('cookie_consent', $consent, time() + (365 * 24 * 60 * 60), '/', '', true, true); // Secure, HttpOnly
+    setcookie('cookie_consent', $consent, time() + (365 * 24 * 60 * 60), '/', '', true, true);
     if ($consent === 'accepted') {
         setcookie('user_preference', 'default_theme', time() + (365 * 24 * 60 * 60), '/', '', true, true);
     }

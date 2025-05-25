@@ -12,3 +12,7 @@
 2025-05-25 22:44:04 | Reservation ID: 1 deleted successfully
 2025-05-25 22:44:04 | Fetching profile for user_id: 2
 2025-05-25 22:44:04 | Fetched 0 reservations for user_id: 2
+2025-05-25 23:07:01 | Email input: liza
+2025-05-25 23:07:01 | Email validation failed: Invalid format (liza)
+2025-05-25 23:07:19 | Email input: liza@
+2025-05-25 23:07:19 | Email validation failed: Invalid format (liza@)
