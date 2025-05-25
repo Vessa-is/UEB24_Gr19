@@ -7,7 +7,6 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
-// Handle cookie consent form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cookie_consent'])) {
     $consent = $_POST['cookie_consent'] === 'accept' ? 'accepted' : 'declined';
     setcookie('cookie_consent', $consent, time() + (365 * 24 * 60 * 60), '/', '', true, true); // Secure, HttpOnly
@@ -29,7 +28,6 @@ $rezervimet = [];
 $show_update_form = false;
 $update_rezervim = null;
 
-// Debug: Log user_id
 error_log(date('Y-m-d H:i:s') . " | Fetching profile for user_id: $user_id\n", 3, 'logs/debug.log');
 
 try {
@@ -42,7 +40,6 @@ try {
         $_SESSION['error'] = "Përdoruesi nuk u gjet.";
         error_log(date('Y-m-d H:i:s') . " | User not found for user_id: $user_id\n", 3, 'logs/debug.log');
     } else {
-        // Fetch reservation history with LEFT JOIN for debugging
         $stmt = $conn->prepare("
             SELECT r.id, s.name AS sherbimi, s.description, s.price, s.time, r.data_rezervimit
             FROM rezervimet r
