@@ -1,11 +1,11 @@
 <?php
+require_once 'DatabaseConnection.php';
 
-function myErrorHandler($errno, $errstr, $errfile, $errline) {
-    echo "Gabim [$errno]: $errstr në fajllin $errfile në linjën $errline<br>";
-}
+// function myErrorHandler($errno, $errstr, $errfile, $errline) {
+//     echo "Gabim [$errno]: $errstr në fajllin $errfile në linjën $errline<br>";
+// }
 set_error_handler("myErrorHandler");
 
-require_once 'DatabaseConnection.php';
 
 class UserRepository {
     private $conn;
