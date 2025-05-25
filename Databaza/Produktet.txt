@@ -39,3 +39,56 @@ SET
     END
 WHERE id IN (1, 2, 3, 4, 5, 6);
 
+
+
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    lastname VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    personalnr VARCHAR(20) NOT NULL UNIQUE
+);
+
+
+CREATE TABLE sherbimet (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+    price DECIMAL(10,2) NOT NULL,
+    time INT NOT NULL
+);
+
+-- Insert services with NULL descriptions
+INSERT INTO sherbimet (name, description, price, time) VALUES
+('Prerje e flokëve', NULL, 10.00, 30),
+('Fenirim i flokëve', NULL, 5.00, 15),
+('Shatir i flokëve', NULL, 50.00, 180),
+('Larje e flokëve', NULL, 2.00, 10),
+('Rregullimi i vetullave', NULL, 3.00, 15),
+('Qerpikë Volume', NULL, 35.00, 90),
+('Tattoo me fije japoneze', NULL, 99.00, 120),
+('Depilim të fytyrës', NULL, 4.00, 15),
+('Frizura për femra', NULL, 30.00, 30),
+('Rregullim për nuse', NULL, 75.00, 120),
+('Trajtim me argjilë për fytyrë', NULL, 20.00, 30),
+('Ekstension flokësh', NULL, 100.00, 120),
+('Trajtim SPA për duar', NULL, 15.00, 40),
+('Peeling trupor', NULL, 30.00, 60),
+('Hidratim intensiv për flokë', NULL, 25.00, 45),
+('Trajtim anti-akne për fytyrë', NULL, 40.00, 80),
+('Laminim i vetullave', NULL, 10.00, 30),
+('Balayage për flokë', NULL, 120.00, 150),
+('Masazh për kokën', NULL, 50.00, 150),
+('Përkujdesje për flokët e thatë dhe të dëmtuar', NULL, 80.00, 120);
+
+
+
+CREATE TABLE rezervimet (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    sherbim_id INT NOT NULL,
+    data_rezervimit DATETIME NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (sherbim_id) REFERENCES sherbimet(id)
+);
