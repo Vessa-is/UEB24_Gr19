@@ -6,16 +6,19 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Redirect if not logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php?redirect=checkout.php");
+    header("Location: login.php?redirect=Checkout.php");
     exit();
 }
 
 include 'greeting.php';
 require_once 'DatabaseConnection.php';
-require_once 'vendor/autoload.php'; // PHPMailer
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+// Define image mappings to match Produktet.php
+$product_images = [
+    1 => 'images/shampoo.jpg',
+    2 => 'images/krem.jpg',
+    3 => 'images/maske.jpg'
+];
 
 // Fetch product stock
 $products_stock = [];
@@ -26,9 +29,10 @@ try {
         $stmt = $conn->query("SELECT id, stock, name, price FROM products");
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
             $products_stock[$row['id']] = [
-                'stock' => $row['stock'],
+                'stock' => (int)$row['stock'],
                 'name' => $row['name'],
-                'price' => $row['price']
+                'price' => (float)$row['price'],
+                'image' => $product_images[$row['id']] ?? 'images/placeholder.jpg'
             ];
         }
     } else {
@@ -36,6 +40,11 @@ try {
     }
 } catch (PDOException $e) {
     $error_message = "Gabim gjatë marrjes së stokut: " . $e->getMessage();
+    $handle = fopen('logs/errors.log', 'a');
+    if ($handle) {
+        fwrite($handle, date('Y-m-d H:i:s') . " | Stock Fetch Error: " . $e->getMessage() . "\n");
+        fclose($handle);
+    }
 }
 
 // Initialize form data and errors
@@ -50,6 +59,16 @@ $errors = [];
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
+    // Refresh stock before validation
+    try {
+        $stmt = $conn->query("SELECT id, stock FROM products");
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $products_stock[$row['id']]['stock'] = (int)$row['stock'];
+        }
+    } catch (PDOException $e) {
+        $errors['server'] = "Gabim gjatë rifreskimit të stokut: " . $e->getMessage();
+    }
+
     // Server-side validation
     $street = trim($_POST['street'] ?? '');
     $city = trim($_POST['city'] ?? '');
@@ -106,122 +125,90 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
         // Validate stock
         $grouped_cart = [];
         foreach ($cart as $item) {
-            $id = $item['id'];
+            $id = (int)$item['id'];
             if (!isset($grouped_cart[$id])) {
-                $grouped_cart[$id] = ['quantity' => 0, 'price' => $item['price']];
+                $grouped_cart[$id] = ['quantity' => 0, 'price' => (float)$item['price'], 'image' => $item['image']];
             }
             $grouped_cart[$id]['quantity']++;
         }
+
+        $stock_log = fopen('logs/stock.log', 'a');
         foreach ($grouped_cart as $id => $data) {
-            if (!isset($products_stock[$id]) || $products_stock[$id]['stock'] < $data['quantity']) {
-                $errors['cart'] = "Nuk ka stok të mjaftueshëm për {$products_stock[$id]['name']}!";
-                break;
+            if (!isset($products_stock[$id])) {
+                $errors['cart'] = "Produkti me ID $id nuk ekziston!";
+                if ($stock_log) {
+                    fwrite($stock_log, date('Y-m-d H:i:s') . " | Product ID $id not found\n");
+                }
+            } elseif ($products_stock[$id]['stock'] < $data['quantity']) {
+                $errors['cart'] = "Nuk ka stok të mjaftueshëm për {$products_stock[$id]['name']} (Kërkuar: {$data['quantity']}, Në stok: {$products_stock[$id]['stock']})";
+                if ($stock_log) {
+                    fwrite($stock_log, date('Y-m-d H:i:s') . " | Stock Error for ID $id: Requested {$data['quantity']}, Available {$products_stock[$id]['stock']}\n");
+                }
+            } else {
+                if ($stock_log) {
+                    fwrite($stock_log, date('Y-m-d H:i:s') . " | Stock OK for ID $id: Requested {$data['quantity']}, Available {$products_stock[$id]['stock']}\n");
+                }
             }
         }
-    }
+        if ($stock_log) fclose($stock_log);
 
-    // Process order if no errors
-    if (empty($errors)) {
-        try {
-            $conn->beginTransaction();
+        if (empty($errors)) {
+            try {
+                $conn->beginTransaction();
 
-            // Calculate total
-            $total = array_sum(array_map(function($item) use ($grouped_cart) {
-                return $grouped_cart[$item['id']]['quantity'] * $item['price'];
-            }, $cart));
+                // Calculate total
+                $total = 0;
+                foreach ($cart as $item) {
+                    $id = (int)$item['id'];
+                    $total += (float)$item['price'];
+                }
 
-            // Insert order
-            $stmt = $conn->prepare("
-                INSERT INTO orders (user_id, street, city, postal_code, country, payment_method, total)
-                VALUES (?, ?, ?, ?, ?, ?, ?)
-            ");
-            $stmt->execute([
-                $_SESSION['user_id'],
-                $street,
-                $city,
-                $postal_code,
-                $country,
-                $payment,
-                $total
-            ]);
-            $order_id = $conn->lastInsertId();
+                // Insert order
+                $stmt = $conn->prepare("
+                    INSERT INTO orders (user_id, street, city, postal_code, country, payment_method, total)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                ");
+                $stmt->execute([
+                    $_SESSION['user_id'],
+                    $street,
+                    $city,
+                    $postal_code,
+                    $country,
+                    $payment,
+                    $total
+                ]);
+                $order_id = $conn->lastInsertId();
 
-            // Insert order items
-            $stmt = $conn->prepare("
-                INSERT INTO order_items (order_id, product_id, quantity, price)
-                VALUES (?, ?, ?, ?)
-            ");
-            foreach ($grouped_cart as $id => $data) {
-                $stmt->execute([$order_id, $id, $data['quantity'], $data['price']]);
+                // Insert order items
+                $stmt = $conn->prepare("
+                    INSERT INTO order_items (order_id, product_id, quantity, price)
+                    VALUES (?, ?, ?, ?)
+                ");
+                foreach ($grouped_cart as $id => $data) {
+                    $stmt->execute([$order_id, $id, $data['quantity'], $data['price']]);
+                }
+
+                // Update stock
+                $stmt = $conn->prepare("UPDATE products SET stock = stock - ? WHERE id = ?");
+                foreach ($grouped_cart as $id => $data) {
+                    $stmt->execute([$data['quantity'], $id]);
+                }
+
+                $conn->commit();
+
+                // Clear cart
+                $_SESSION['success_message'] = "Porosia u konfirmua me sukses!";
+                header("Location: Produktet.php");
+                exit();
+            } catch (PDOException $e) {
+                $conn->rollBack();
+                $errors['server'] = "Gabim gjatë procesimit të porosisë: " . $e->getMessage();
+                $handle = fopen('logs/errors.log', 'a');
+                if ($handle) {
+                    fwrite($handle, date('Y-m-d H:i:s') . " | Order Processing Error: " . $e->getMessage() . "\n");
+                    fclose($handle);
+                }
             }
-
-            // Update stock
-            $stmt = $conn->prepare("UPDATE products SET stock = stock - ? WHERE id = ?");
-            foreach ($grouped_cart as $id => $data) {
-                $stmt->execute([$data['quantity'], $id]);
-            }
-
-            // Send confirmation email
-            $user_email = $_SESSION['user_email'] ?? 'unknown@example.com';
-            $delivery_times = [
-                'AL' => '2-3 ditë', 'AD' => '4-6 ditë', 'AM' => '4-6 ditë', 'AT' => '3-5 ditë', 'AZ' => '4-6 ditë',
-                'BY' => '4-6 ditë', 'BE' => '3-5 ditë', 'BA' => '2-3 ditë', 'BG' => '2-3 ditë', 'HR' => '2-3 ditë',
-                'CY' => '4-6 ditë', 'CZ' => '3-5 ditë', 'DK' => '3-5 ditë', 'EE' => '4-6 ditë', 'FI' => '5-7 ditë',
-                'FR' => '3-5 ditë', 'GE' => '4-6 ditë', 'DE' => '3-5 ditë', 'GR' => '2-3 ditë', 'HU' => '3-5 ditë',
-                'IS' => '5-7 ditë', 'IE' => '3-5 ditë', 'IT' => '3-5 ditë', 'KZ' => '4-6 ditë', 'XK' => '2-3 ditë',
-                'LV' => '4-6 ditë', 'LI' => '3-5 ditë', 'LT' => '4-6 ditë', 'LU' => '3-5 ditë', 'MT' => '4-6 ditë',
-                'MD' => '4-6 ditë', 'MC' => '4-6 ditë', 'ME' => '2-3 ditë', 'NL' => '3-5 ditë', 'MK' => '2-3 ditë',
-                'NO' => '5-7 ditë', 'PL' => '3-5 ditë', 'PT' => '3-5 ditë', 'RO' => '2-3 ditë', 'RU' => '4-6 ditë',
-                'SM' => '4-6 ditë', 'RS' => '2-3 ditë', 'SK' => '3-5 ditë', 'SI' => '3-5 ditë', 'ES' => '3-5 ditë',
-                'SE' => '5-7 ditë', 'CH' => '3-5 ditë', 'TR' => '2-3 ditë', 'UA' => '4-6 ditë', 'GB' => '3-5 ditë',
-                'VA' => '4-6 ditë', 'AX' => '5-7 ditë', 'FO' => '5-7 ditë', 'GI' => '4-6 ditë', 'GG' => '4-6 ditë',
-                'IM' => '4-6 ditë', 'JE' => '4-6 ditë', 'SJ' => '5-7 ditë', 'UM' => '5-7 ditë'
-            ];
-            $delivery_time = $delivery_times[$country] ?? '3-7 ditë';
-
-            $mail = new PHPMailer(true);
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'radianttouch.salon@gmail.com'; // Replace with your Gmail
-            $mail->Password = 'abcd efgh ijkl mnop'; // Replace with App Password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
-
-            $mail->setFrom('radianttouch.salon@gmail.com', 'Radiant Touch');
-            $mail->addAddress($user_email);
-            $mail->isHTML(true);
-            $mail->Subject = 'Order Confirmation - Radiant Touch';
-            $items_html = '<ul>';
-            foreach ($grouped_cart as $id => $data) {
-                $items_html .= "<li>{$products_stock[$id]['name']} - Quantity: {$data['quantity']} - Price: €{$data['price']}</li>";
-            }
-            $items_html .= '</ul>';
-            $mail->Body = "
-                <h2>Thank You for Your Order!</h2>
-                <p>Order ID: $order_id</p>
-                <p>Address: $street, $city, $postal_code, $country</p>
-                <p>Payment Method: " . ($payment === 'cash' ? 'Cash' : 'Card') . "</p>
-                <p>Items: $items_html</p>
-                <p>Total: €" . number_format($total, 2) . "</p>
-                <p>Estimated Delivery: $delivery_time</p>
-                <p>Best regards,<br>Radiant Touch Team</p>
-            ";
-            $mail->AltBody = "Thank You for Your Order!\nOrder ID: $order_id\nAddress: $street, $city, $postal_code, $country\nPayment Method: " . ($payment === 'cash' ? 'Cash' : 'Card') . "\nTotal: €" . number_format($total, 2) . "\nEstimated Delivery: $delivery_time\nBest regards, Radiant Touch Team";
-            $mail->send();
-
-            $conn->commit();
-
-            // Clear cart
-            $_SESSION['success_message'] = "Porosia u konfirmua me sukses! Ju kemi dërguar një email konfirmimi.";
-            header("Location: Produktet.php");
-            exit();
-        } catch (PDOException $e) {
-            $conn->rollBack();
-            $errors['server'] = "Gabim gjatë procesimit të porosisë: " . $e->getMessage();
-        } catch (Exception $e) {
-            $conn->rollBack();
-            $errors['server'] = "Dështoi dërgimi i email-it: " . $e->getMessage();
         }
     }
 }
@@ -244,7 +231,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
             margin: 0;
             padding: 0;
         }
-        .checkout-container {
+        .Checkout-container {
             max-width: 900px;
             margin: 50px auto;
             padding: 20px;
@@ -253,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
             color: #4d3a2d;
         }
-        .checkout-container h2 {
+        .Checkout-container h2 {
             text-align: center;
             margin-bottom: 20px;
             font-size: 1.5em;
@@ -270,14 +257,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
             border-radius: 8px;
             border: 1px solid #d6c6b8;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            gap: 15px;
             transition: transform 0.2s, background-color 0.2s;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         #cartItems li:hover {
             transform: scale(1.02);
             background-color: #e8dfd3;
+        }
+        .cart-item-image {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .cart-item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
         .quantity-controls {
             display: flex;
@@ -296,11 +294,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
         .quantity-controls button:hover {
             background-color: #473524;
         }
+        .quantity-controls button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
         .stock-warning {
             color: red;
             font-size: 12px;
             margin-top: 5px;
-            display: none;
         }
         .total {
             font-size: 1.2em;
@@ -385,13 +386,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
             .address-section input, .country-select {
                 width: 100%;
             }
+            #cartItems li {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .cart-item-image {
+                margin-bottom: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <?php include 'header.php'; ?>
 
-    <div class="checkout-container">
+    <div class="Checkout-container">
         <h2><i class="fas fa-credit-card"></i> Pagesa</h2>
         <?php if (isset($error_message)): ?>
             <p class="server-error"><?php echo htmlspecialchars($error_message); ?></p>
@@ -407,7 +415,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
         <div class="total">
             Totali: €<span id="totalPrice">0</span>
         </div>
-        <form id="checkout-form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
+        <form id="Checkout-form" method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
             <input type="hidden" name="cart_json" id="cart_json">
             <div class="address-section">
                 <h3>Adresa e Dorëzimit</h3>
@@ -496,7 +504,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
             <div class="payment-method">
                 <h3>Zgjidh Metodën e Pagesës</h3>
                 <label><input type="radio" name="payment" value="cash" <?php echo $form_data['payment'] === 'cash' ? 'checked' : ''; ?>> Cash</label>
-                <label><input type="radio" name="payment" value="card" <?php echo $form_data['payment'] === 'card' ? 'checked' : ''; ?>> Kartë</label>
+                <label><input type="radio" name="payment" value="card" <?php echo $form_data['payment'] === 'card' ? 'checked' : ''; ?>> Card</label>
                 <?php if (isset($errors['payment'])): ?>
                     <span class="error-message"><?php echo $errors['payment']; ?></span>
                 <?php endif; ?>
@@ -517,65 +525,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
         const totalPriceEl = document.getElementById('totalPrice');
         const cartJsonInput = document.getElementById('cart_json');
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const productsStock = <?php echo json_encode(array_map(function($item) { return ['stock' => $item['stock'], 'name' => $item['name'], 'price' => $item['price']]; }, $products_stock)); ?>;
+        const productsStock = <?php echo json_encode($products_stock); ?>;
 
         function updateCartDisplay() {
             cartItems.innerHTML = '';
             let totalPrice = 0;
             const groupedCart = cart.reduce((acc, item) => {
-                if (!acc[item.id]) {
-                    acc[item.id] = { ...item, quantity: 0 };
+                const id = parseInt(item.id);
+                if (!acc[id]) {
+                    acc[id] = { ...item, quantity: 0, id: id };
                 }
-                acc[item.id].quantity += 1;
+                acc[id].quantity += 1;
                 return acc;
             }, {});
 
             Object.values(groupedCart).forEach(item => {
+                const stock = productsStock[item.id]?.stock ?? 0;
+                const isOutOfStock = item.quantity >= stock;
                 const listItem = document.createElement('li');
-                const stock = productsStock[item.id]?.stock || 0;
-                const isOutOfStock = item.quantity > stock;
                 listItem.innerHTML = `
-                    <span>${item.name} - €${(item.price * item.quantity).toFixed(2)} (Sasia: ${item.quantity})</span>
-                    <div class="quantity-controls">
-                        <button onclick="changeQuantity('${item.id}', -1)">-</button>
-                        <button onclick="changeQuantity('${item.id}', 1)">+</button>
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <span>${item.name} - €${(item.price * item.quantity).toFixed(2)}</span>
+                        <span>Sasia: ${item.quantity}</span>
+                        <div class="stock-warning" style="display: ${isOutOfStock ? 'block' : 'none'}">
+                            Nuk ka stok të mjaftueshëm! (Në stok: ${stock})
+                        </div>
                     </div>
-                    <div class="stock-warning" style="display: ${isOutOfStock ? 'block' : 'none'}">
-                        Nuk ka stok të mjaftueshëm! (Në stok: ${stock})
+                    <div class="quantity-controls">
+                        <button type="button" onclick="changeQuantity(${item.id}, -1)">−</button>
+                        <button type="button" onclick="changeQuantity(${item.id}, 1)" ${isOutOfStock ? 'disabled' : ''}>+</button>
                     </div>
                 `;
                 cartItems.appendChild(listItem);
                 totalPrice += item.price * item.quantity;
             });
+
             totalPriceEl.textContent = totalPrice.toFixed(2);
             localStorage.setItem('cart', JSON.stringify(cart));
             cartJsonInput.value = JSON.stringify(cart);
         }
 
         function changeQuantity(productId, change) {
+            productId = parseInt(productId);
             const stock = productsStock[productId]?.stock || 0;
-            const currentQuantity = cart.filter(item => item.id === productId).length;
+            const currentQuantity = cart.filter(item => parseInt(item.id) === productId).length;
+
             if (change > 0 && currentQuantity >= stock) {
-                alert('Nuk ka stok të mjaftueshëm për të shtuar më shumë!');
+                alert('Nuk mund të shtoni më shumë! Stoku i disponueshëm: ' + stock);
                 return;
             }
-            if (change < 0 && currentQuantity <= 1) {
-                cart = cart.filter(item => item.id !== productId);
-            } else if (change < 0) {
-                const index = cart.findIndex(item => item.id === productId);
-                if (index !== -1) cart.splice(index, 1);
-            } else {
-                const item = cart.find(item => item.id === productId);
-                if (item) cart.push({ ...item });
+
+            if (change < 0) {
+                if (currentQuantity <= 1) {
+                    cart = cart.filter(item => parseInt(item.id) !== productId);
+                } else {
+                    const index = cart.findIndex(item => parseInt(item.id) === productId);
+                    if (index !== -1) cart.splice(index, 1);
+                }
+            } else if (change > 0) {
+                const item = cart.find(item => parseInt(item.id) === productId);
+                if (item) {
+                    cart.push({ ...item, id: productId });
+                }
             }
+
             updateCartDisplay();
         }
 
-     
         updateCartDisplay();
 
-        // Client-side validation (optional, for UX)
-        document.getElementById('checkout-form').addEventListener('submit', function(event) {
+        // Client-side validation
+        document.getElementById('Checkout-form').addEventListener('submit', function(event) {
             const street = document.getElementById('street').value.trim();
             const city = document.getElementById('city').value.trim();
             const postalCode = document.getElementById('postal_code').value.trim();
