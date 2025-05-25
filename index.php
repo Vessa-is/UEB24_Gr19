@@ -1,4 +1,7 @@
 <?php
+if (!isset($_SESSION)) {
+    session_start();
+}
 
 include_once "DatabaseConnection.php";
 
@@ -10,8 +13,6 @@ $nav_links = [
     'Rreth nesh' => 'per_ne.php',
     'Kontakti' => 'kontakti.php'
 ];
-
-
 ?>
 
 <!DOCTYPE html>
@@ -19,11 +20,13 @@ $nav_links = [
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Radiant Touch</title>
     <link rel="icon" href="images/logo1.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
-    <script src="javascript.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style.css">
     <style>
@@ -252,9 +255,7 @@ $nav_links = [
     </style>
 </head>
 <body>
-    
-   <?php include 'header.php'; ?> 
-
+    <?php include 'header.php'; ?>
 
     <section>
         <div class="section">
@@ -372,8 +373,6 @@ $nav_links = [
         });
     </script>
 
-    <!-- <?php include 'footer.php'; ?> -->
-
     <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
     <script>
         $(document).ready(function() {
@@ -389,41 +388,6 @@ $nav_links = [
             });
         });
     </script>
-
-          <script>
-
-function validateLoginFields(email, password) {
-  if (!email || !password) {
-    throw new Error('Të gjitha fushat janë të detyrueshme.');
-  }
-
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(email)) {
-    throw new Error('Ju lutem jepni një adresë email-i të vlefshme.');
-  }
-
-  if (password.length < 6) {
-    throw new Error('Fjalëkalimi duhet të jetë të paktën 6 karaktere.');
-  }
-}
-
-    
-
-      </script>
-    
-          <script>
-                  
-            document.querySelector('#abonimform').addEventListener('submit', function(event) {
-                event.preventDefault(); 
-                const email = document.querySelector('#abonimform input[type="email"]').value;
-        
-                if (email) {
-                    alert('Faleminderit për abonimin');
-                } else {
-                    alert('Ju lutem, shkruani një email të vlefshëm.');
-                }
-            });
-        </script>   
 
     <?php include 'footer.php'; ?>
 </body>

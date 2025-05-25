@@ -25,15 +25,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['user'] = [
-                    'id' => $user['id'],
-                    'email' => $user['email'],
-                    'name' => $user['name']
-                ];
                 $_SESSION['user_id'] = $user['id'];
-
+                $_SESSION['user_name'] = $user['name']; // Match header.php variable
                 setcookie('user_email', $user['email'], time() + (86400 * 30), "/");
-
                 header("Location: index.php");
                 exit();
             } else {
@@ -52,6 +46,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <link rel="icon" href="images/logo1.png" />
     <title>Login - Radiant Touch</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet" />
@@ -174,15 +171,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 throw new Error('Fjalëkalimi duhet të jetë të paktën 6 karaktere.');
             }
         }
-    </script>
-    <script>
-        document.querySelector('#abonimform').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const email = document.querySelector('#abonimform input[type="email"]').value;
-            if (email) {
-                alert('Faleminderit për abonimin');
-            } else {
-                alert('Ju lutem, shkruani një email të vlefshëm.');
+
+        document.querySelector('#login-form').addEventListener('submit', function(event) {
+            const email = document.querySelector('#email').value;
+            const password = document.querySelector('#password').value;
+            try {
+                validateLoginFields(email, password);
+            } catch (error) {
+                event.preventDefault();
+                alert(error.message);
             }
         });
     </script>

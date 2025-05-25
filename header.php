@@ -33,25 +33,25 @@ $current_page = basename($_SERVER['PHP_SELF']);
                         <img src="images/logoo2.png" alt="Radiant Touch Logo" title="Radiant Touch" />
                     </a>
                 </div>
-                <div class="login">
-                    <?php if (isset($_SESSION['user_id'])): ?>
-                        <a href="profile.php" title="User Profile">
-                            <button id="loginBtn" aria-label="User Profile">
-                                <i class="fa fa-user"></i>
-                                <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'User'); ?>
-                            </button>
-                        </a>
-                        <a href="logout.php" title="Logout">
-                            <button aria-label="Logout">
-                                <i class="fa fa-sign-out-alt"></i>
-                            </button>
-                        </a>
-                    <?php else: ?>
-                        <a href="login.php"><button id="loginBtn" aria-label="Login">
-                            <i class="fa fa-user"></i>
-                        </button></a>
-                    <?php endif; ?>
-                </div>
+        <div class="login">
+            <?php if (isset($_SESSION['user_id'])): ?>
+                <a href="profile.php" title="User Profile">
+                    <button id="loginBtn" class="btn" aria-label="User Profile">
+                        <i class="fa fa-user"></i>
+                        <?php echo htmlspecialchars($_SESSION['user_name'] ?? 'User'); ?>
+                    </button>
+                </a>
+                <a href="logout.php" title="Logout">
+                    <button id="logoutBtn" class="btn" aria-label="Logout">
+                        <i class="fa fa-sign-out-alt"></i>
+                    </button>
+                </a>
+            <?php else: ?>
+                <a href="login.php"><button id="loginBtn" class="btn" aria-label="Login">
+                    <i class="fa fa-user"></i>
+                </button></a>
+            <?php endif; ?>
+        </div>
             </div>
             <div id="navi">
                 <ul>
