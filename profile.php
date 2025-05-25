@@ -61,18 +61,22 @@ try {
             margin-bottom: 20px;
         }
         .user-info {
+            display: flex; /* Use flexbox for consistent alignment */
+            align-items: center; /* Vertically align label and span */
             margin-bottom: 15px;
         }
         .user-info label {
-            display: inline-block;
             font-size: 15px;
-            margin-bottom: 5px;
             color: #7a6c59;
-            width: 150px;
+            width: 150px; /* Fixed width for the first column */
+            text-align: left !important; /* Explicitly left-align labels */
+            margin-right: 10px; /* Space between label and span */
         }
         .user-info span {
             font-size: 1rem;
             color: #333;
+            flex: 1; /* Span takes remaining space */
+            text-align: left; /* Left-align span, adjust if needed */
         }
         .btn {
             width: 100%;
