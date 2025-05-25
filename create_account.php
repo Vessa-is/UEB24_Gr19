@@ -119,7 +119,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['signupbutton'])) {
                 $user = new User($name, $lastname, $email, $hashedPassword, $personalNr, $birthdateFormatted);
                 $userRepository->insertUser($user);
 
-                // Log registration
                 $log_file = 'logs/registrations.log';
                 if (!file_exists('logs')) {
                     mkdir('logs', 0755, true);
