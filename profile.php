@@ -16,7 +16,6 @@ $rezervimet = [];
 $show_update_form = false;
 $update_rezervim = null;
 
-// Fetch user data
 try {
     $stmt = $conn->prepare("SELECT name, lastname, email, personalNr, birthdate FROM users WHERE id = :id");
     $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
@@ -43,7 +42,6 @@ try {
     $_SESSION['error'] = "Ndodhi një gabim gjatë marrjes së të dhënave. Ju lutemi kontaktoni administratorin.";
 }
 
-// Handle Delete Action
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['anulo_rezervimin'])) {
     $rezervim_id = filter_input(INPUT_POST, 'rezervim_id', FILTER_VALIDATE_INT);
     if ($rezervim_id) {
@@ -76,7 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['anulo_rezervimin'])) 
     }
 }
 
-// Handle Update Form Display
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_rezervim'])) {
     $rezervim_id = filter_input(INPUT_POST, 'rezervim_id', FILTER_VALIDATE_INT);
     if ($rezervim_id) {
@@ -112,7 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_rezervim'])) {
     }
 }
 
-// Handle Update Confirmation
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
     $rezervim_id = filter_input(INPUT_POST, 'rezervim_id', FILTER_VALIDATE_INT);
     $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
@@ -143,7 +139,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
             exit;
         }
 
-        // Check for conflicting reservations
         $stmt = $conn->prepare("
             SELECT COUNT(*) FROM rezervimet
             WHERE sherbim_id = (SELECT sherbim_id FROM rezervimet WHERE id = :id)
@@ -161,7 +156,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
             exit;
         }
 
-        // Verify the reservation belongs to the user
         $stmt = $conn->prepare("SELECT user_id FROM rezervimet WHERE id = :id");
         $stmt->bindParam(':id', $rezervim_id, PDO::PARAM_INT);
         $stmt->execute();

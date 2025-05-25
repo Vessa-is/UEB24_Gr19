@@ -2,7 +2,17 @@
 if (!isset($_SESSION)) {
     session_start();
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cookie_consent'])) {
+    $consent = $_POST['cookie_consent'] === 'accept' ? 'accepted' : 'declined';
+    setcookie('cookie_consent', $consent, time() + (365 * 24 * 60 * 60), '/', '', true, true); // Secure, HttpOnly
+    if ($consent === 'accepted') {
+        setcookie('user_preference', 'default_theme', time() + (365 * 24 * 60 * 60), '/', '', true, true);
+    }
+    header("Location: index.php");
+    exit;
+}
 
+$show_cookie_popup = !isset($_COOKIE['cookie_consent']);
 include_once "DatabaseConnection.php";
 
 $nav_links = [
@@ -252,6 +262,69 @@ $nav_links = [
         .button-container a:hover {
             background-color: #473524;
         }
+                .cookie-popup {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #f9f4eb;
+            border: 1px solid #dcdcdc;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            text-align: center;
+            border-radius: 10px;
+        }
+        .cookie-popup p {
+            font-size: 16px;
+            color: #473524;
+            margin-bottom: 20px;
+        }
+        .cookie-popup button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .cookie-popup .accept-btn {
+            background-color: #664f3e;
+            color: white;
+        }
+        .cookie-popup .accept-btn:hover {
+            background-color: #523f31;
+        }
+        .cookie-popup .decline-btn {
+            background-color: #a94442;
+            color: white;
+        }
+        .cookie-popup .decline-btn:hover {
+            background-color: #8b3a38;
+        }
+        .cookie-popup a {
+            color: #664f3e;
+            text-decoration: underline;
+        }
+        .cookie-popup a:hover {
+            color: #523f31;
+        }
+        .cookie-settings {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .cookie-settings a {
+            color: #664f3e;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .cookie-settings a:hover {
+            color: #523f31;
+        }
     </style>
 </head>
 <body>
@@ -362,6 +435,60 @@ $nav_links = [
             <a href="sherbimet.php" class="btn">Rezervo</a>
         </div>
     </section>
+
+        <div class="cookie-popup" id="cookiePopup">
+        <p>
+            Ne përdorim cookies për të përmirësuar përvojën tuaj në faqen tonë. 
+            Duke vazhduar, ju pranoni përdorimin e cookies. 
+            <a href="privacy.php">Mëso më shumë</a>.
+        </p>
+        <form method="POST" action="">
+            <input type="hidden" name="cookie_consent" value="accept">
+            <button type="submit" class="accept-btn">Prano</button>
+        </form>
+        <form method="POST" action="">
+            <input type="hidden" name="cookie_consent" value="decline">
+            <button type="submit" class="decline-btn">Refuzo</button>
+        </form>
+    </div>
+
+        <div class="cookie-settings">
+        <a onclick="showCookiePopup()">Përditëso Preferencat e Cookies</a>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Show cookie popup if not consented
+            <?php if ($show_cookie_popup): ?>
+                $("#cookiePopup").fadeIn();
+            <?php endif; ?>
+
+            // Hover effect for buttons
+            $(".btn").hover(function() {
+                $(this).css("background-color", "#6f6154");
+            }, function() {
+                $(this).css("background-color", "#96887d");
+            });
+
+            // Scroll to top functionality
+            $(window).scroll(function() {
+                if ($(this).scrollTop() > 600) {
+                    $("#scrollToTop").fadeIn();
+                } else {
+                    $("#scrollToTop").fadeOut();
+                }
+            });
+            $("#scrollToTop").click(function() {
+                $("html, body").animate({ scrollTop: 0 }, 600);
+            });
+        });
+
+        // Function to show cookie popup
+        function showCookiePopup() {
+            $("#cookiePopup").fadeIn();
+        }
+    </script>
+
 
     <script>
         $(document).ready(function() {
