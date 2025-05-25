@@ -1,13 +1,11 @@
 <?php
+    session_start();
+
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-
-
-if (!isset($_SESSION)) {
-    session_start();
-}
 
 include 'greeting.php';
 
@@ -763,7 +761,7 @@ if (isset($_GET['sort_by'])) {
             break;
 
         case 'time_asc':
-            usort($services, function(&$a, &$b) {
+            usort($services, function($a, $b) {
                 $time_a = (int)filter_var($a['time'], FILTER_SANITIZE_NUMBER_INT);
                 $time_b = (int)filter_var($b['time'], FILTER_SANITIZE_NUMBER_INT);
                 return $time_a - $time_b;
@@ -771,7 +769,7 @@ if (isset($_GET['sort_by'])) {
             break;
 
         case 'time_desc':
-            usort($services, function(&$a, &$b) { 
+            usort($services, function($a, $b) {
                 $time_a = (int)filter_var($a['time'], FILTER_SANITIZE_NUMBER_INT);
                 $time_b = (int)filter_var($b['time'], FILTER_SANITIZE_NUMBER_INT);
                 return $time_b - $time_a;
