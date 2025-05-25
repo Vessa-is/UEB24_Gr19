@@ -89,3 +89,20 @@ CREATE TABLE rezervimet (
     FOREIGN KEY (user_id) REFERENCES users(id),
     FOREIGN KEY (sherbim_id) REFERENCES sherbimet(id)
 );
+
+
+CREATE TABLE contacts (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255),
+    email VARCHAR(255),
+    phone VARCHAR(20),
+    message TEXT,
+    updates TINYINT(1),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+CREATE TABLE feedback (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    social_media VARCHAR(100),
+    visit_again ENUM('Yes', 'No', 'Maybe'),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
