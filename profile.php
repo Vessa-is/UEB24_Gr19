@@ -1,47 +1,192 @@
 <?php
-if (!isset($_SESSION)) {
-    session_start();
-}
-
+session_start();
 require_once 'DatabaseConnection.php';
 
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
-    exit();
+    exit;
 }
 
 $db = new DatabaseConnection();
 $conn = $db->startConnection();
 
-$error = '';
+$user_id = $_SESSION['user_id'];
 $user = null;
-$reservations = [];
+$rezervimet = [];
+$show_update_form = false;
+$update_rezervim = null;
 
+// Fetch user data
 try {
-    // Fetch user data
     $stmt = $conn->prepare("SELECT name, lastname, email, personalNr, birthdate FROM users WHERE id = :id");
-    $stmt->bindParam(':id', $_SESSION['user_id']);
+    $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if (!$user) {
-        $error = "Përdoruesi nuk u gjet.";
+        $_SESSION['error'] = "Përdoruesi nuk u gjet.";
     } else {
         // Fetch reservation history
         $stmt = $conn->prepare("
-            SELECT s.name AS service_name, s.description, s.price, s.time, r.data_rezervimit
+            SELECT r.id, s.name AS sherbimi, s.description, s.price, s.time, r.data_rezervimit
             FROM rezervimet r
             JOIN sherbimet s ON r.sherbim_id = s.id
             WHERE r.user_id = :user_id
             ORDER BY r.data_rezervimit DESC
         ");
-        $stmt->bindParam(':user_id', $_SESSION['user_id']);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
-        $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $rezervimet = $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 } catch (PDOException $e) {
     error_log(date('Y-m-d H:i:s') . " | User Profile Error: " . $e->getMessage() . "\n", 3, 'logs/errors.log');
-    $error = "Ndodhi një gabim gjatë marrjes së të dhënave. Ju lutemi kontaktoni administratorin.";
+    $_SESSION['error'] = "Ndodhi një gabim gjatë marrjes së të dhënave. Ju lutemi kontaktoni administratorin.";
+}
+
+// Handle Delete Action
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['anulo_rezervimin'])) {
+    $rezervim_id = filter_input(INPUT_POST, 'rezervim_id', FILTER_VALIDATE_INT);
+    if ($rezervim_id) {
+        try {
+            $stmt = $conn->prepare("
+                DELETE FROM rezervimet 
+                WHERE id = :id AND user_id = :user_id
+            ");
+            $stmt->bindParam(':id', $rezervim_id, PDO::PARAM_INT);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+
+            if ($stmt->rowCount() > 0) {
+                $_SESSION['success'] = "Rezervimi u anulua me sukses!";
+            } else {
+                $_SESSION['error'] = "Rezervimi nuk u gjet ose nuk mund të anulohej.";
+            }
+            header("Location: profile.php");
+            exit;
+        } catch (PDOException $e) {
+            error_log(date('Y-m-d H:i:s') . " | Delete Reservation Error: " . $e->getMessage() . "\n", 3, 'logs/errors.log');
+            $_SESSION['error'] = "Ndodhi një gabim gjatë anulimit. Ju lutemi kontaktoni administratorin.";
+            header("Location: profile.php");
+            exit;
+        }
+    } else {
+        $_SESSION['error'] = "ID e rezervimit nuk është e vlefshme.";
+        header("Location: profile.php");
+        exit;
+    }
+}
+
+// Handle Update Form Display
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_rezervim'])) {
+    $rezervim_id = filter_input(INPUT_POST, 'rezervim_id', FILTER_VALIDATE_INT);
+    if ($rezervim_id) {
+        try {
+            $stmt = $conn->prepare("
+                SELECT r.id, r.data_rezervimit, s.name AS sherbimi
+                FROM rezervimet r
+                JOIN sherbimet s ON r.sherbim_id = s.id
+                WHERE r.id = :id AND r.user_id = :user_id
+            ");
+            $stmt->bindParam(':id', $rezervim_id, PDO::PARAM_INT);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->execute();
+            $update_rezervim = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($update_rezervim) {
+                $show_update_form = true;
+            } else {
+                $_SESSION['error'] = "Rezervimi nuk u gjet ose nuk i përket përdoruesit.";
+                header("Location: profile.php");
+                exit;
+            }
+        } catch (PDOException $e) {
+            error_log(date('Y-m-d H:i:s') . " | Update Reservation Error: " . $e->getMessage() . "\n", 3, 'logs/errors.log');
+            $_SESSION['error'] = "Ndodhi një gabim gjatë marrjes së rezervimit. Ju lutemi kontaktoni administratorin.";
+            header("Location: profile.php");
+            exit;
+        }
+    } else {
+        $_SESSION['error'] = "ID e rezervimit nuk është e vlefshme.";
+        header("Location: profile.php");
+        exit;
+    }
+}
+
+// Handle Update Confirmation
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
+    $rezervim_id = filter_input(INPUT_POST, 'rezervim_id', FILTER_VALIDATE_INT);
+    $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
+    $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_STRING);
+
+    if (!$rezervim_id || !$date || !$time) {
+        $_SESSION['error'] = "Ju lutem plotësoni datën dhe orën.";
+        header("Location: profile.php");
+        exit;
+    } elseif (!preg_match('/^([0-1][0-9]|2[0-3]):[0-5][0-9]$/', $time)) {
+        $_SESSION['error'] = "Formati i orës nuk është i vlefshëm.";
+        header("Location: profile.php");
+        exit;
+    }
+
+    try {
+        $data_rezervimit = $date . ' ' . $time . ':00';
+        if (strtotime($data_rezervimit) < time()) {
+            $_SESSION['error'] = "Nuk mund të përditësoni për një kohë të kaluar.";
+            header("Location: profile.php");
+            exit;
+        }
+
+        $ora = (int)date('H', strtotime($data_rezervimit));
+        if ($ora < 8 || $ora >= 16) {
+            $_SESSION['error'] = "Orari i rezervimeve është nga ora 08:00 deri në 16:00.";
+            header("Location: profile.php");
+            exit;
+        }
+
+        // Check for conflicting reservations
+        $stmt = $conn->prepare("
+            SELECT COUNT(*) FROM rezervimet
+            WHERE sherbim_id = (SELECT sherbim_id FROM rezervimet WHERE id = :id)
+            AND data_rezervimit = :data_rezervimit
+            AND id != :id
+        ");
+        $stmt->bindParam(':id', $rezervim_id, PDO::PARAM_INT);
+        $stmt->bindParam(':data_rezervimit', $data_rezervimit);
+        $stmt->execute();
+        $exists = $stmt->fetchColumn();
+
+        if ($exists > 0) {
+            $_SESSION['error'] = "Ky orar është i zënë. Ju lutem zgjidhni një orar tjetër.";
+            header("Location: profile.php");
+            exit;
+        }
+
+        // Verify the reservation belongs to the user
+        $stmt = $conn->prepare("SELECT user_id FROM rezervimet WHERE id = :id");
+        $stmt->bindParam(':id', $rezervim_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $rezervim = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($rezervim && $rezervim['user_id'] == $user_id) {
+            $stmt = $conn->prepare("UPDATE rezervimet SET data_rezervimit = :data_rezervimit WHERE id = :id");
+            $stmt->bindParam(':data_rezervimit', $data_rezervimit);
+            $stmt->bindParam(':id', $rezervim_id, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                $_SESSION['success'] = "Rezervimi u përditësua me sukses.";
+            } else {
+                $_SESSION['error'] = "Dështoi përditësimi i rezervimit. Ju lutemi provoni përsëri.";
+            }
+        } else {
+            $_SESSION['error'] = "Rezervimi nuk u gjet ose nuk i përket përdoruesit.";
+        }
+        header("Location: profile.php");
+        exit;
+    } catch (PDOException $e) {
+        error_log(date('Y-m-d H:i:s') . " | Update Reservation Error: " . $e->getMessage() . "\n", 3, 'logs/errors.log');
+        $_SESSION['error'] = "Ndodhi një gabim gjatë përditësimit. Ju lutemi kontaktoni administratorin.";
+        header("Location: profile.php");
+        exit;
+    }
 }
 ?>
 
@@ -136,10 +281,32 @@ try {
         .btn:hover {
             background-color: #523f31;
         }
-        .error {
-            color: red;
+        .action-btn {
+            padding: 5px 10px;
+            font-size: 0.9rem;
+            margin: 0 5px;
+        }
+        .update-btn {
+            background-color: #4a7043;
+        }
+        .update-btn:hover {
+            background-color: #3a5a34;
+        }
+        .delete-btn {
+            background-color: #a94442;
+        }
+        .delete-btn:hover {
+            background-color: #8b3a38;
+        }
+        .error, .success {
             text-align: center;
             margin-bottom: 15px;
+        }
+        .error {
+            color: red;
+        }
+        .success {
+            color: green;
         }
         .no-reservations {
             text-align: center;
@@ -147,15 +314,59 @@ try {
             color: #7a6c59;
             margin-top: 20px;
         }
+        .update-form {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #dcdcdc;
+            background-color: #fff;
+        }
+        .update-form label {
+            display: block;
+            margin-bottom: 5px;
+            color: #7a6c59;
+        }
+        .update-form input {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #dcdcdc;
+            border-radius: 4px;
+        }
+        .update-form button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4a7043;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .update-form button:hover {
+            background-color: #3a5a34;
+        }
     </style>
+    <script>
+        function confirmDelete(rezervimId) {
+            if (confirm("Jeni të sigurt që dëshironi të fshini këtë rezervim?")) {
+                document.getElementById('delete-form-' + rezervimId).submit();
+            }
+        }
+    </script>
 </head>
 <body>
     <?php include 'header.php'; ?>
     <div class="container">
         <h1>Profili i Përdoruesit</h1>
-        <?php if (!empty($error)) : ?>
-            <p class="error"><?php echo htmlspecialchars($error); ?></p>
-        <?php elseif ($user) : ?>
+        <?php
+        if (isset($_SESSION['error'])) {
+            echo '<p class="error">' . htmlspecialchars($_SESSION['error']) . '</p>';
+            unset($_SESSION['error']);
+        }
+        if (isset($_SESSION['success'])) {
+            echo '<p class="success">' . htmlspecialchars($_SESSION['success']) . '</p>';
+            unset($_SESSION['success']);
+        }
+        ?>
+        <?php if ($user) : ?>
             <div class="user-info">
                 <label>Emri:</label>
                 <span><?php echo htmlspecialchars($user['name']); ?></span>
@@ -178,7 +389,20 @@ try {
             </div>
 
             <h2>Historiku i Rezervimeve</h2>
-            <?php if (empty($reservations)) : ?>
+            <?php if ($show_update_form && $update_rezervim) : ?>
+                <div class="update-form">
+                    <h3>Përditëso Rezervimin: <?php echo htmlspecialchars($update_rezervim['sherbimi']); ?></h3>
+                    <form method="POST" action="">
+                        <input type="hidden" name="rezervim_id" value="<?php echo htmlspecialchars($update_rezervim['id']); ?>">
+                        <label>Data:</label>
+                        <input type="date" name="date" value="<?php echo htmlspecialchars(date('Y-m-d', strtotime($update_rezervim['data_rezervimit']))); ?>" required>
+                        <label>Ora:</label>
+                        <input type="time" name="time" value="<?php echo htmlspecialchars(date('H:i', strtotime($update_rezervim['data_rezervimit']))); ?>" required>
+                        <button type="submit" name="confirm_update">Përditëso</button>
+                    </form>
+                </div>
+            <?php endif; ?>
+            <?php if (empty($rezervimet)) : ?>
                 <p class="no-reservations">Nuk ka rezervime të regjistruara.</p>
             <?php else : ?>
                 <table class="reservation-table">
@@ -189,16 +413,27 @@ try {
                             <th>Çmimi</th>
                             <th>Kohëzgjatja (min)</th>
                             <th>Data dhe Ora</th>
+                            <th>Veprime</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <?php foreach ($reservations as $reservation) : ?>
+                        <?php foreach ($rezervimet as $rezervim) : ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($reservation['service_name']); ?></td>
-                                <td><?php echo htmlspecialchars($reservation['description'] ?? 'Nuk ka përshkrim'); ?></td>
-                                <td><?php echo htmlspecialchars(number_format($reservation['price'], 2)); ?> €</td>
-                                <td><?php echo htmlspecialchars($reservation['time']); ?></td>
-                                <td><?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($reservation['data_rezervimit']))); ?></td>
+                                <td><?php echo htmlspecialchars($rezervim['sherbimi']); ?></td>
+                                <td><?php echo htmlspecialchars($rezervim['description'] ?? 'Nuk ka përshkrim'); ?></td>
+                                <td><?php echo htmlspecialchars(number_format($rezervim['price'], 2)); ?> €</td>
+                                <td><?php echo htmlspecialchars($rezervim['time']); ?></td>
+                                <td><?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($rezervim['data_rezervimit']))); ?></td>
+                                <td>
+                                    <form method="POST" action="" style="display:inline;">
+                                        <input type="hidden" name="rezervim_id" value="<?php echo htmlspecialchars($rezervim['id']); ?>">
+                                        <button type="submit" name="update_rezervim" class="btn action-btn update-btn">Përditëso</button>
+                                    </form>
+                                    <form id="delete-form-<?php echo htmlspecialchars($rezervim['id']); ?>" method="POST" action="" style="display:inline;">
+                                        <input type="hidden" name="rezervim_id" value="<?php echo htmlspecialchars($rezervim['id']); ?>">
+                                        <button type="button" onclick="confirmDelete(<?php echo htmlspecialchars($rezervim['id']); ?>)" class="btn action-btn delete-btn">Anulo</button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
