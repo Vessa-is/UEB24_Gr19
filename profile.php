@@ -7,6 +7,7 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+// Handle cookie consent form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cookie_consent'])) {
     $consent = $_POST['cookie_consent'] === 'accept' ? 'accepted' : 'declined';
     setcookie('cookie_consent', $consent, time() + (365 * 24 * 60 * 60), '/', '', true, true); // Secure, HttpOnly
@@ -28,6 +29,9 @@ $rezervimet = [];
 $show_update_form = false;
 $update_rezervim = null;
 
+// Debug: Log user_id
+error_log(date('Y-m-d H:i:s') . " | Fetching profile for user_id: $user_id\n", 3, 'logs/debug.log');
+
 try {
     $stmt = $conn->prepare("SELECT name, lastname, email, personalNr, birthdate FROM users WHERE id = :id");
     $stmt->bindParam(':id', $user_id, PDO::PARAM_INT);
@@ -36,17 +40,20 @@ try {
 
     if (!$user) {
         $_SESSION['error'] = "Përdoruesi nuk u gjet.";
+        error_log(date('Y-m-d H:i:s') . " | User not found for user_id: $user_id\n", 3, 'logs/debug.log');
     } else {
+        // Fetch reservation history with LEFT JOIN for debugging
         $stmt = $conn->prepare("
             SELECT r.id, s.name AS sherbimi, s.description, s.price, s.time, r.data_rezervimit
             FROM rezervimet r
-            JOIN sherbimet s ON r.sherbim_id = s.id
+            LEFT JOIN sherbimet s ON r.sherbim_id = s.id
             WHERE r.user_id = :user_id
             ORDER BY r.data_rezervimit DESC
         ");
         $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->execute();
         $rezervimet = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        error_log(date('Y-m-d H:i:s') . " | Fetched " . count($rezervimet) . " reservations for user_id: $user_id\n", 3, 'logs/debug.log');
     }
 } catch (PDOException $e) {
     error_log(date('Y-m-d H:i:s') . " | User Profile Error: " . $e->getMessage() . "\n", 3, 'logs/errors.log');
@@ -97,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_rezervim'])) {
             $stmt = $conn->prepare("
                 SELECT r.id, r.data_rezervimit, s.name AS sherbimi
                 FROM rezervimet r
-                JOIN sherbimet s ON r.sherbim_id = s.id
+                LEFT JOIN sherbimet s ON r.sherbim_id = s.id
                 WHERE r.id = :id AND r.user_id = :user_id
             ");
             $stmt->bindParam(':id', $rezervim_id, PDO::PARAM_INT);
@@ -354,7 +361,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
         .update-form button:hover {
             background-color: #3a5a34;
         }
-        /* Cookie Consent Popup Styles */
         .cookie-popup {
             display: none;
             position: fixed;
@@ -422,7 +428,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
     <script>
         function confirmDelete(rezervimId) {
             if (confirm("Jeni të sigurt që dëshironi të fshini këtë rezervim?")) {
-                console.log("Submitting delete form for ID: " + rezervimId); 
+                console.log("Submitting delete form for ID: " + rezervimId);
                 document.getElementById('delete-form-' + rezervimId).submit();
             }
         }
@@ -477,7 +483,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
             <h2>Historiku i Rezervimeve</h2>
             <?php if ($show_update_form && $update_rezervim) : ?>
                 <div class="update-form">
-                    <h3>Përditëso Rezervimin: <?php echo htmlspecialchars($update_rezervim['sherbimi']); ?></h3>
+                    <h3>Përditëso Rezervimin: <?php echo htmlspecialchars($update_rezervim['sherbimi'] ?? 'N/A'); ?></h3>
                     <form method="POST" action="">
                         <input type="hidden" name="rezervim_id" value="<?php echo htmlspecialchars($update_rezervim['id']); ?>">
                         <label>Data:</label>
@@ -505,10 +511,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
                     <tbody>
                         <?php foreach ($rezervimet as $rezervim) : ?>
                             <tr>
-                                <td><?php echo htmlspecialchars($rezervim['sherbimi']); ?></td>
+                                <td><?php echo htmlspecialchars($rezervim['sherbimi'] ?? 'N/A'); ?></td>
                                 <td><?php echo htmlspecialchars($rezervim['description'] ?? 'Nuk ka përshkrim'); ?></td>
-                                <td><?php echo htmlspecialchars(number_format($rezervim['price'], 2)); ?> €</td>
-                                <td><?php echo htmlspecialchars($rezervim['time']); ?></td>
+                                <td><?php echo htmlspecialchars(isset($rezervim['price']) ? number_format($rezervim['price'], 2) : 'N/A'); ?> €</td>
+                                <td><?php echo htmlspecialchars($rezervim['time'] ?? 'N/A'); ?></td>
                                 <td><?php echo htmlspecialchars(date('d/m/Y H:i', strtotime($rezervim['data_rezervimit']))); ?></td>
                                 <td>
                                     <form method="POST" action="" style="display:inline;">
@@ -528,9 +534,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
             <?php endif; ?>
 
             <a href="logout.php" class="btn">Dil</a>
+        <?php else : ?>
+            <p class="error">Përdoruesi nuk u gjet. Ju lutemi dilni dhe hyni përsëri.</p>
+            <a href="logout.php" class="btn">Dil</a>
         <?php endif; ?>
 
-        <!-- Cookie Consent Popup -->
         <div class="cookie-popup" id="cookiePopup">
             <p>
                 Ne përdorim cookies për të përmirësuar përvojën tuaj në faqen tonë. 

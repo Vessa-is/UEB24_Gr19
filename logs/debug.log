@@ -1,2 +1,14 @@
 2025-05-25 22:39:01 | Attempting to delete reservation ID: 1 for user ID: 1
 2025-05-25 22:39:01 | Reservation ID: 1 deleted successfully
+2025-05-25 22:43:41 | Fetching profile for user_id: 1
+2025-05-25 22:43:41 | Fetched 0 reservations for user_id: 1
+2025-05-25 22:43:45 | Fetching profile for user_id: 1
+2025-05-25 22:43:45 | Fetched 0 reservations for user_id: 1
+2025-05-25 22:44:00 | Fetching profile for user_id: 2
+2025-05-25 22:44:00 | Fetched 1 reservations for user_id: 2
+2025-05-25 22:44:04 | Fetching profile for user_id: 2
+2025-05-25 22:44:04 | Fetched 1 reservations for user_id: 2
+2025-05-25 22:44:04 | Attempting to delete reservation ID: 1 for user ID: 2
+2025-05-25 22:44:04 | Reservation ID: 1 deleted successfully
+2025-05-25 22:44:04 | Fetching profile for user_id: 2
+2025-05-25 22:44:04 | Fetched 0 reservations for user_id: 2
