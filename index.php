@@ -1,5 +1,7 @@
 <?php
 
+include_once "../UEB24_Gr19/DatabaseConnection.php";
+
 $nav_links = [
     'Ballina' => 'index.php',
     'Shërbimet' => 'sherbimet.php',

@@ -21,5 +21,26 @@ class DatabaseConnection {
             return null;
         }
     }
+
+        public function createUsersTable() {
+        if (!$this->conn) {
+            $this->startConnection();
+        }
+
+        try {
+            $sql = "CREATE TABLE IF NOT EXISTS users (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                emri VARCHAR(100) NOT NULL,
+                email VARCHAR(100) UNIQUE NOT NULL,
+                fjalekalimi VARCHAR(255) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )";
+
+            $this->conn->exec($sql);
+            echo "Tabela 'users' u krijua me sukses!";
+        } catch (PDOException $e) {
+            echo "Gabim gjatë krijimit të tabelës: " . $e->getMessage();
+        }
+    }
 }
 ?>
