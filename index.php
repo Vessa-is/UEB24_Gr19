@@ -1,10 +1,104 @@
+
 <?php
 if (!isset($_SESSION)) {
-    session_start();
+    if (!session_start()) {
+        error_log(date('Y-m-d H:i:s') . " | Session start failed\n", 3, "logs/api.log");
+    }
 }
+
+
+$logDir = 'logs';
+if (!is_dir($logDir)) {
+    mkdir($logDir, 0777, true);
+}
+
+
+function getRandomQuote() {
+   
+    if (isset($_SESSION['quote']) && isset($_SESSION['quote_expiry']) && time() < $_SESSION['quote_expiry']) {
+        return $_SESSION['quote'];
+    }
+
+    
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, 'https://zenquotes.io/api/random');
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 10); // Increased timeout
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    curl_setopt($ch, CURLOPT_USERAGENT, 'RadiantTouch/1.0 (http://yourdomain.com)'); // Add User-Agent
+
+ 
+    $maxRetries = 2;
+    $retryCount = 0;
+    $response = false;
+
+    while ($retryCount < $maxRetries && $response === false) {
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $error = curl_error($ch);
+
+        if ($response === false || $httpCode != 200) {
+            $retryCount++;
+            error_log(date('Y-m-d H:i:s') . " | ZenQuotes API Error (Attempt $retryCount): HTTP $httpCode, cURL Error: $error\n", 3, "logs/api.log");
+            if ($retryCount < $maxRetries) {
+                sleep(1); 
+                continue;
+            }
+           
+            error_log(date('Y-m-d H:i:s') . " | ZenQuotes API Raw Response: " . print_r($response, true) . "\n", 3, "logs/api.log");
+          
+            if (file_exists('logs/last_quote.json')) {
+                $fallback = json_decode(file_get_contents('logs/last_quote.json'), true);
+                if (isset($fallback['content']) && isset($fallback['author'])) {
+                    return $fallback;
+                }
+            }
+           
+            return [
+                'content' => 'Where beauty meets confidence',
+                'author' => 'Radiant Touch'
+            ];
+        }
+    }
+
+    curl_close($ch);
+
+    $data = json_decode($response, true);
+    if (isset($data[0]['q']) && isset($data[0]['a'])) {
+      
+        $_SESSION['quote'] = [
+            'content' => $data[0]['q'],
+            'author' => $data[0]['a']
+        ];
+        $_SESSION['quote_expiry'] = time() + 60;
+     
+        file_put_contents('logs/last_quote.json', json_encode($_SESSION['quote']));
+        return $_SESSION['quote'];
+    }
+
+   
+    error_log(date('Y-m-d H:i:s') . " | ZenQuotes API Invalid Response: " . print_r($data, true) . "\n", 3, "logs/api.log");
+   
+    if (file_exists('logs/last_quote.json')) {
+        $fallback = json_decode(file_get_contents('logs/last_quote.json'), true);
+        if (isset($fallback['content']) && isset($fallback['author'])) {
+            return $fallback;
+        }
+    }
+   
+    return [
+        'content' => 'Where beauty meets confidence',
+        'author' => 'Radiant Touch'
+    ];
+}
+
+
+$quote = getRandomQuote();
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cookie_consent'])) {
     $consent = $_POST['cookie_consent'] === 'accept' ? 'accepted' : 'declined';
-    setcookie('cookie_consent', $consent, time() + (365 * 24 * 60 * 60), '/', '', true, true); // Secure, HttpOnly
+    setcookie('cookie_consent', $consent, time() + (365 * 24 * 60 * 60), '/', '', true, true);
     if ($consent === 'accepted') {
         setcookie('user_preference', 'default_theme', time() + (365 * 24 * 60 * 60), '/', '', true, true);
     }
@@ -17,7 +111,7 @@ include_once "DatabaseConnection.php";
 
 $nav_links = [
     'Ballina' => 'index.php',
-    'Shërbimet' => 'sherbimet.php',
+    'ShÃ«rbimet' => 'sherbimet.php',
     'Galeria' => 'galeria.php',
     'Produktet' => 'Produktet.php',
     'Rreth nesh' => 'per_ne.php',
@@ -262,7 +356,7 @@ $nav_links = [
         .button-container a:hover {
             background-color: #473524;
         }
-                .cookie-popup {
+        .cookie-popup {
             display: none;
             position: fixed;
             bottom: 20px;
@@ -333,15 +427,10 @@ $nav_links = [
     <section>
         <div class="section">
             <div class="content">
-                <h1>
-                    Where beauty <br />
-                    meets confidence
-                </h1>
+                <h1><?php echo htmlspecialchars($quote['content']); ?></h1>
                 <div class="description">
-                    <p>
-                        Përjetoni kujdes profesional dhe trajtime që theksojnë shkëlqimin tuaj natyral.
-                    </p>
-                    <button onclick="location.href ='sherbimet.php';">Rezervo Online</button>
+                    <p class="author">- <?php echo htmlspecialchars($quote['author']); ?></p>
+                    <button onclick="location.href='sherbimet.php';">Rezervo Online</button>
                 </div>
             </div>
         </div>
@@ -351,15 +440,15 @@ $nav_links = [
         <h1 class="heading"><span>Rreth </span>nesh</h1>
         <div class="about-container">
             <div class="about-image">
-                <img src="images/about2.jpg" alt="Shërbim profesional për flokët">
+                <img src="images/about2.jpg" alt="ShÃ«rbim profesional pÃ«r flokÃ«t">
             </div>
             <div class="about-content">
                 <h3>Radiant Touch</h3>
                 <hr>
                 <p>
-                    Radiant Touch është një sallon bukurie që ofron shërbime të specializuara për kujdesin e flokëve, qerpikëve dhe vetullave. Me një ekip profesionistësh të përkushtuar dhe produkte të cilësisë së lartë, ne synojmë të nxjerrim në pah bukurinë tuaj natyrale dhe t'ju ofrojmë një përvojë relaksuese e luksoze. Vizitoni sallonin tonë dhe përjetoni kujdesin e merituar!
+                    Radiant Touch Ã«shtÃ« njÃ« sallon bukurie qÃ« ofron shÃ«rbime tÃ« specializuara pÃ«r kujdesin e flokÃ«ve, qerpikÃ«ve dhe vetullave. Me njÃ« ekip profesionistÃ«sh tÃ« pÃ«rkushtuar dhe produkte tÃ« cilÃ«sisÃ« sÃ« lartÃ«, ne synojmÃ« tÃ« nxjerrim nÃ« pah bukurinÃ« tuaj natyrale dhe t'ju ofrojmÃ« njÃ« pÃ«rvojÃ« relaksuese e luksoze. Vizitoni sallonin tonÃ« dhe pÃ«rjetoni kujdesin e merituar!
                 </p>
-                <a href="per_ne.php" class="about-button">Lexo më shumë</a>
+                <a href="per_ne.php" class="about-button">Lexo mÃ« shumÃ«</a>
             </div>
         </div>
         <script>
@@ -388,8 +477,8 @@ $nav_links = [
     <section class="product-section">
         <div class="text-container">
             <div class="text-content">
-                <h1>Flokë të Shëndetshëm dhe Plot Shkëlqim</h1>
-                <h2><strong>Kerastase: Kujdesi që Flokët Tuaj e Meritojnë.</strong></h2>
+                <h1>FlokÃ« tÃ« ShÃ«ndetshÃ«m dhe Plot ShkÃ«lqim</h1>
+                <h2><strong>Kerastase: Kujdesi qÃ« FlokÃ«t Tuaj e MeritojnÃ«.</strong></h2>
                 <div class="button-container">
                     <a href="Produktet.php">Blej Tani</a>
                 </div>
@@ -398,22 +487,22 @@ $nav_links = [
     </section>
 
     <section class="container">
-        <h2>SHËRBIMET TONA</h2>
+        <h2>SHÃ‹RBIMET TONA</h2>
         <div class="services">
             <div class="service-item">
-                <img src="images/indexx2.jpg" alt="Stilim dhe trajtime për flokë">
-                <p>STILIM DHE TRAJTIME PËR FLOKË</p>
+                <img src="images/indexx2.jpg" alt="Stilim dhe trajtime pÃ«r flokÃ«">
+                <p>STILIM DHE TRAJTIME PÃ‹R FLOKÃ‹</p>
             </div>
             <div class="service-item">
-                <img src="images/sherbim2.jpg" alt="Aplikim qerpikësh">
-                <p>APLIKIM QERPIKËSH</p>
+                <img src="images/sherbim2.jpg" alt="Aplikim qerpikÃ«sh">
+                <p>APLIKIM QERPIKÃ‹SH</p>
             </div>
             <div class="service-item">
                 <img src="images/indexx.jpg" alt="Stilim dhe laminim i vetullave">
                 <p>STILIM DHE LAMINIM I VETULLAVE</p>
             </div>
         </div>
-        <a href="galeria.php" class="main-btn">Shiko Galerinë <i class="fas fa-arrow-right"></i></a>
+        <a href="galeria.php" class="main-btn">Shiko GalerinÃ« <i class="fas fa-arrow-right"></i></a>
     </section>
 
     <section class="kontenti2">
@@ -436,11 +525,11 @@ $nav_links = [
         </div>
     </section>
 
-        <div class="cookie-popup" id="cookiePopup">
+    <div class="cookie-popup" id="cookiePopup">
         <p>
-            Ne përdorim cookies për të përmirësuar përvojën tuaj në faqen tonë. 
-            Duke vazhduar, ju pranoni përdorimin e cookies. 
-            <a href="privacy.php">Mëso më shumë</a>.
+            Ne pÃ«rdorim cookies pÃ«r tÃ« pÃ«rmirÃ«suar pÃ«rvojÃ«n tuaj nÃ« faqen tonÃ«. 
+            Duke vazhduar, ju pranoni pÃ«rdorimin e cookies. 
+            <a href="privacy.php">MÃ«so mÃ« shumÃ«</a>.
         </p>
         <form method="POST" action="">
             <input type="hidden" name="cookie_consent" value="accept">
@@ -452,9 +541,11 @@ $nav_links = [
         </form>
     </div>
 
-        <div class="cookie-settings">
-        <a onclick="showCookiePopup()">Përditëso Preferencat e Cookies</a>
+    <div class="cookie-settings">
+        <a onclick="showCookiePopup()">PÃ«rditÃ«so Preferencat e Cookies</a>
     </div>
+
+    <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
 
     <script>
         $(document).ready(function() {
@@ -463,9 +554,9 @@ $nav_links = [
             <?php endif; ?>
 
             $(".btn").hover(function() {
-                $(this).css("background-color", "#6f6154");
+                $(this).css("background-color", "#5c432c");
             }, function() {
-                $(this).css("background-color", "#96887d");
+                $(this).css("background-color", "#7c5b43");
             });
 
             $(window).scroll(function() {
@@ -475,40 +566,14 @@ $nav_links = [
                     $("#scrollToTop").fadeOut();
                 }
             });
+
             $("#scrollToTop").click(function() {
                 $("html, body").animate({ scrollTop: 0 }, 600);
             });
-        });
 
-        function showCookiePopup() {
-            $("#cookiePopup").fadeIn();
-        }
-    </script>
-
-
-    <script>
-        $(document).ready(function() {
-            $(".btn").hover(function() {
-                $(this).css("background-color", "#6f6154");
-            }, function() {
-                $(this).css("background-color", "#96887d");
-            });
-        });
-    </script>
-
-    <button id="scrollToTop" title="Kthehu lart"><i class="fas fa-arrow-up"></i></button>
-    <script>
-        $(document).ready(function() {
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 600) {
-                    $("#scrollToTop").fadeIn();
-                } else {
-                    $("#scrollToTop").fadeOut();
-                }
-            });
-            $("#scrollToTop").click(function() {
-                $("html, body").animate({ scrollTop: 0 }, 600);
-            });
+            function showCookiePopup() {
+                $("#cookiePopup").fadeIn();
+            }
         });
     </script>
 
