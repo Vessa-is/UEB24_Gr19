@@ -34,3 +34,11 @@ Session: Array
     [user_id] => 1
     [user_name] => Mjau
 )
+Session: Array
+(
+    [csrf_token] => 1f5abe449b5fb463c9a833536d0a365e4c63317711303a465b6364b0e50bbff3
+    [has_visited_before] => 1
+    [has_greeted] => 1
+    [user_id] => 1
+    [user_name] => Mjau
+)
