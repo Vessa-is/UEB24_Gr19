@@ -1,94 +1,8 @@
 <?php
-
-
-
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) {
-    $errors = [];
-
-  
-    if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
-        $errors['server'] = 'Sesioni i pavlefshëm. Ju lutemi provoni përsëri.';
-    } else {
-      
-        $email = filter_var(trim($_POST['newsletter_email']), FILTER_SANITIZE_EMAIL);
-        if (empty($email)) {
-            $errors['email'] = 'Email-i është i detyrueshëm.';
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors['email'] = 'Email-i është i pavlefshëm.';
-        }
-
-        try {
-            $db = new DatabaseConnection();
-            $conn = $db->startConnection();
-            if ($conn) {
-                $stmt = $conn->prepare("SELECT COUNT(*) FROM subscribers WHERE email = ?");
-                $stmt->execute([$email]);
-                if ($stmt->fetchColumn() > 0) {
-                    $errors['email'] = 'Ky email është tashmë i abonuar.';
-                }
-            } else {
-                $errors['server'] = 'Lidhja me databazën dështoi.';
-            }
-        } catch (PDOException $e) {
-            $errors['server'] = 'Gabim gjatë verifikimit të email-it: ' . $e->getMessage();
-            $handle = fopen('logs/errors.log', 'a');
-            if ($handle) {
-                fwrite($handle, date('Y-m-d H:i:s') . " | Subscriber Check Error: " . $e->getMessage() . "\n");
-                fclose($handle);
-            }
-        }
-
-        if (empty($errors)) {
-            try {
-              
-                $stmt = $conn->prepare("INSERT INTO subscribers (email) VALUES (?)");
-                $stmt->execute([$email]);
-
-              
-                $to = $email;
-                $subject = 'Faleminderit për Abonimin në Radiant Touch!';
-                $message = "Përshëndetje,\n\nFaleminderit që u abonuat në Radiant Touch! Tani jeni pjesë e komunitetit tonë. Do të merrni përditësime për ofertat dhe shërbimet e reja.\n\nVizitoni faqen tonë: https://radianttouch.com\n\nMe respekt,\nEkipi Radiant Touch";
-                $headers = "From: no-reply@radianttouch.com\r\n";
-                $headers .= "Reply-To: info@radianttouch.com\r\n";
-                $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-               
-                if (mail($to, $subject, $message, $headers)) {
-                    $_SESSION['success_message'] = 'Abonimi u krye me sukses! Ju kemi dërguar një email konfirmimi.';
-                } else {
-                    $errors['server'] = 'Email-i nuk mund të dërgohej. Ju lutemi provoni përsëri.';
-                    $handle = fopen('logs/errors.log', 'a');
-                    if ($handle) {
-                        fwrite($handle, date('Y-m-d H:i:s') . " | Email Send Error: Unable to send to $email\n");
-                        fclose($handle);
-                    }
-                }
-            } catch (PDOException $e) {
-                $errors['server'] = 'Gabim gjatë abonimit: ' . $e->getMessage();
-                $handle = fopen('logs/errors.log', 'a');
-                if ($handle) {
-                    fwrite($handle, date('Y-m-d H:i:s') . " | Subscriber Insert Error: " . $e->getMessage() . "\n");
-                    fclose($handle);
-                }
-            }
-        }
-    }
-
-    if (!empty($errors)) {
-        $_SESSION['errors'] = $errors;
-    }
-
-   
-    header("Location: " . htmlspecialchars($_SERVER['PHP_SELF']));
-    exit();
-}
 ?>
-
 <footer>
     <div class="footer-container">
         <div class="footer-section">
@@ -121,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
             </p>
             <p>
                 <i class="fas fa-envelope"></i>
-                <a href="mailto:info@radianttouch.com">info@radianttouch.com</a>
+                <a href="mailto:radiantsallon@gmail.com">radiantsallo@gmail.com</a>
             </p>
         </div>
     </div>
@@ -133,14 +47,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
             <?php unset($_SESSION['success_message']); ?>
         <?php endif; ?>
         <?php if (isset($_SESSION['errors'])): ?>
-            <p class="error-message"><?php echo htmlspecialchars($_SESSION['errors']['email'] ?? $_SESSION['errors']['server']); ?></p>
+            <p class="error-message"><?php echo htmlspecialchars($_SESSION['errors']['email'] ?? $_SESSION['errors']['server'] ?? 'Gabim i panjohur.'); ?></p>
             <?php unset($_SESSION['errors']); ?>
         <?php endif; ?>
-        <form id="abonimform" method="POST">
+        <form id="abonimform" method="POST" action="sendemail.php">
             <input type="hidden" name="csrf_token" value="<?php echo htmlspecialchars($_SESSION['csrf_token']); ?>">
             <div class="newsletter-input">
+                <i class="fas fa-user"></i>
+                <input type="text" name="user-name" placeholder="Shkruani emrin tuaj" required>
+            </div>
+            <div class="newsletter-input">
                 <i class="fas fa-envelope"></i>
-                <input type="email" name="newsletter_email" placeholder="Shkruani email-in tuaj" required>
+                <input type="email" name="user-email" placeholder="Shkruani email-in tuaj" required>
                 <button type="submit" aria-label="Dërgo email">
                     <i class="fas fa-paper-plane"></i>
                 </button>
@@ -155,4 +73,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['newsletter_email'])) 
     <div class="footer-bottom">
         © 2025 <a href="index.php">Radiant Touch</a>. Të gjitha të drejtat e rezervuara.
     </div>
+    <style>
+        .success-message {
+            color: #2e7d32;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        .error-message {
+            color: #d32f2f;
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+    </style>
 </footer>
