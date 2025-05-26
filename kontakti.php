@@ -367,8 +367,8 @@ $show_cookie_popup = !isset($_COOKIE['cookie_consent']);
                 <label for="message">Mesazhi:</label>
                 <textarea id="message" name="message" placeholder="Mesazhi"></textarea>
                 <div class="checkbox-container">
-                    <input type="checkbox" name="updates" id="up">
-                    <label for="up">Sign me up for email updates</label>
+                    
+                    
                 </div>
                 <button type="submit">Dërgo mesazhin</button>
             </form>

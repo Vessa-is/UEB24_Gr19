@@ -131,8 +131,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update_rezervim'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_update'])) {
     $rezervim_id = filter_input(INPUT_POST, 'rezervim_id', FILTER_VALIDATE_INT);
-    $date = filter_input(INPUT_POST, 'date', FILTER_SANITIZE_STRING);
-    $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_STRING);
+    $date = filter_input(INPUT_POST, 'date',FILTER_SANITIZE_SPECIAL_CHARS);
+    $time = filter_input(INPUT_POST, 'time', FILTER_SANITIZE_SPECIAL_CHARS);
 
     if (!$rezervim_id || !$date || !$time) {
         $_SESSION['error'] = "Ju lutem plotësoni datën dhe orën.";

@@ -178,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['confirm_order'])) {
                 $conn->commit();
 
                 $_SESSION['success_message'] = "Porosia u konfirmua me sukses!";
-                header("Location: Produktet.php");
+                header("Location: checkout.php");
                 exit();
             } catch (PDOException $e) {
                 $conn->rollBack();
